@@ -19,6 +19,7 @@
     "babel-eslint": "^10.1.0",
     "coveralls": "^3.1.0",
     "cypress": "^4.9.0",
+    "eslint-plugin-cypress": "^2.11.1",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
