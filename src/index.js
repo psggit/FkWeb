@@ -1,7 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { homeReducer } from "./App/home/duck";
+import { combineReducers } from "redux";
+
+import { App } from "./App";
 import "./styles.scss";
 
+const store = configureStore({
+  reducer: combineReducers({
+    home: homeReducer,
+  }),
+});
+
 var mountNode = document.getElementById("app");
-ReactDOM.render(<App name="FK" />, mountNode);
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  mountNode
+);
