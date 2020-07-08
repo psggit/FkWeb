@@ -1,2 +1,2 @@
-export { syed, harshit } from "./actions";
+export { onSyed, onHarshit } from "./actions";
 export { default as homeReducer } from "./reducers";

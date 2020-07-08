@@ -11,7 +11,7 @@ import "./styles.scss";
 
 const store = configureStore({
   reducer: combineReducers({
-    home: homeReducer,
+    name: homeReducer,
   }),
 });
 

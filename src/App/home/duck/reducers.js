@@ -1,11 +1,11 @@
-import { syed, harshit } from "./actions";
+import { onSyed, onHarshit } from "./actions";
 import { createReducer } from "@reduxjs/toolkit";
 
 const nameReducer = createReducer(
   { name: "default" },
   {
-    [syed]: (state) => (state.name = "syed"),
-    [harshit]: (state) => (state.name = "harshit"),
+    [onSyed]: () => ({ name: "syed" }),
+    [onHarshit]: () => ({ name: "harshit" }),
   }
 );
 
