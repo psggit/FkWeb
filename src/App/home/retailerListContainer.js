@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { RetailerList } from "./retailerListComponent";
-import { onSyed, onHarshit } from "./duck";
+import { onHarshit, waitForSyed } from "./duck";
 
 const mapStateToProps = (state) => {
   return { name: state.name.name };
@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSyed: () => dispatch(onSyed()),
+    onSyed: () => dispatch(waitForSyed()),
     onHarshit: () => dispatch(onHarshit()),
   };
 };
