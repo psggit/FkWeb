@@ -56,6 +56,10 @@ const config = {
       filename: "index.html",
     }),
     new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      ARGS_SENTRY_ENV: JSON.stringify(process.env.SENTRY_ENV),
+      ARGS_SENTRY_RELEASE: JSON.stringify(process.env.SENTRY_RELEASE),
+    }),
   ],
   optimization: {
     runtimeChunk: "single",
