@@ -2,9 +2,9 @@ import React from "react";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./home/Home";
-import Cart from "./Cart";
-import Search from "./Search";
-import Navigation from "./Navigation";
+import Cart from "./cart";
+import Search from "./search";
+import Navigation from "./navigation";
 
 function App() {
   return (
