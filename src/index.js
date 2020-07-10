@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { homeReducer } from "./App/home/duck";
 import { combineReducers } from "redux";
+import thunk from "redux-thunk";
 
 import * as Sentry from "@sentry/react";
 
@@ -21,6 +22,7 @@ const store = configureStore({
   reducer: combineReducers({
     name: homeReducer,
   }),
+  middleware: [thunk],
 });
 
 var mountNode = document.getElementById("app");
