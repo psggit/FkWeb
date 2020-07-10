@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import { homeReducer } from "./App/home/duck";
+import { homeReducer } from "./App/home";
 import { combineReducers } from "redux";
 import thunk from "redux-thunk";
 
@@ -20,7 +20,7 @@ Sentry.init({
 
 const store = configureStore({
   reducer: combineReducers({
-    name: homeReducer,
+    home: homeReducer,
   }),
   middleware: [thunk],
 });

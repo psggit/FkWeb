@@ -3,7 +3,7 @@ import { RetailerList } from "./retailerListComponent";
 import { onHarshit, waitForSyed } from "./duck";
 
 const mapStateToProps = (state) => {
-  return { name: state.name.name };
+  return { name: state.home.retailerList.name };
 };
 
 const mapDispatchToProps = (dispatch) => {

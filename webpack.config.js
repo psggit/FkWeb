@@ -46,6 +46,7 @@ const config = {
   },
   devServer: {
     contentBase: "./dist",
+    public: "fk-local.hipbar-dev.com",
   },
   plugins: [
     new CopyPlugin({

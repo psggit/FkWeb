@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 
 RetailerList.propTypes = {
   name: PropTypes.string,
+  onSyed: PropTypes.any,
+  onHarshit: PropTypes.any,
 };
 
-function RetailerList({name, onSyed, onHarshit}) {
+function RetailerList({ name, onSyed, onHarshit }) {
   return (
     <div>
       <h1> Hello {name}</h1>

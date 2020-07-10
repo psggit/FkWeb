@@ -1,9 +1,11 @@
 import React from "react";
-import { RetailerListContainer } from "./retailerListContainer";
+import { RetailerListContainer } from "./retailerList";
+import { CarouselContainer } from "./carousel";
 
 function Home() {
   return (
     <div>
+      <CarouselContainer />
       <RetailerListContainer />;
     </div>
   );

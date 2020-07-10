@@ -1,3 +1,3 @@
 export { onSyed, onHarshit } from "./actions";
-export { default as homeReducer } from "./reducers";
+export { retailerListReducer } from "./reducers";
 export { waitForSyed } from "./operations";
