@@ -14,7 +14,7 @@ const tabs = [
   {
     route: "/search",
     icon: searchIcon,
-    label: "Search",
+    label: "Search Drinks",
   },
   {
     route: "/cart",
@@ -27,12 +27,14 @@ function Navigation() {
   return (
     <div className="navBar">
       {tabs.map((value, index) => (
-        <NavLink to={value.route}>
-          <div className="navItem">
-            <img className="navImage" src={value.icon}></img>
-            <div className="navText">{value.label}</div>
-          </div>
-        </NavLink>
+        <div key={"navTouch" + index} className="col-4">
+          <NavLink to={value.route}>
+            <div className="navItem">
+              <img className="navImage" src={value.icon}></img>
+              <div className="navText">{value.label}</div>
+            </div>
+          </NavLink>
+        </div>
       ))}
     </div>
   );
