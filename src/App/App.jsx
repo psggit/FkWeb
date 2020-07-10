@@ -9,20 +9,20 @@ import Navigation from "./common/navigation";
 function App() {
   return (
     <div>
-     <Router>
-       <Switch>
-         <Route path="/">
-           <Home />
-         </Route>
-         <Route path="/search">
-           <Search />
-         </Route>
-         <Route path="/cart">
-           <Cart />
-         </Route>
-       </Switch>
-       <Navigation/>
-     </Router>
+      <Router>
+        <Switch>
+          <Route path="/search">
+            <Search />
+          </Route>
+          <Route path="/cart">
+            <Cart />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+        <Navigation />
+      </Router>
     </div>
   );
 }
