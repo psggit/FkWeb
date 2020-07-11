@@ -14,13 +14,16 @@ function Cart() {
         </div>
         <div>
           <div className="cart-item">
-            <div>Jhonnie Walker Black Label</div>
-            <div className="sub-item">
-              <div className="cart-volume">750ml | Rs 3,200.00</div>
-              <div className="cart-counter">
-                <div className="symbol">-</div>
-                <div>10</div>
-                <div className="symbol">+</div>
+            <img src={emptyCartIcon} className="cart-image" />
+            <div className="cart-content">
+              <div>Jhonnie Walker Black Label</div>
+              <div className="sub-item">
+                <div className="cart-volume">750ml | Rs 3,200.00</div>
+                <div className="cart-counter">
+                  <div className="symbol">-</div>
+                  <div>10</div>
+                  <div className="symbol">+</div>
+                </div>
               </div>
             </div>
           </div>
