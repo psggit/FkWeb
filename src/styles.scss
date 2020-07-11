@@ -1,18 +1,33 @@
 @import "~bootstrap/scss/bootstrap";
 
-$primary-color: white;
-$bg: black;
-h1 {
-  color: $primary-color;
-  background-color: $bg;
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Bold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+$primary-color: #d1d2dd;
+$bg: #0c0d0f;
+
 body {
-  background-color: #0C0D0F;
+  font-family: "Montserrat";
+  background-color: $bg;
 
   div {
-    color: #D1D2DD;
+    color: $primary-color;
   }
 }
 
-
+h1 {
+  color: $primary-color;
+  background-color: $bg;
+  font-family: bold;
+}
