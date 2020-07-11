@@ -12,6 +12,19 @@ function Cart() {
           <div className="retailer-name">KloudBar</div>
           <div className="cart-address">RA Colony, Chennai</div>
         </div>
+        <div>
+          <div className="cart-item">
+            <div>Jhonnie Walker Black Label</div>
+            <div className="sub-item">
+              <div className="cart-volume">750ml | Rs 3,200.00</div>
+              <div className="cart-counter">
+                <div className="symbol">-</div>
+                <div>10</div>
+                <div className="symbol">+</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="empty-cart hide-content">
         <img src={emptyCartIcon} width="120" height="120" />
