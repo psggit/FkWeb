@@ -1,11 +1,13 @@
 import React from "react";
 
+import "./style.scss";
+
 function Cart() {
   return (
-    <div>
-      <div>PURCHASING FROM</div>
-      <h6>KloudBar</h6>
-      <div>RA Colony, Chennai</div>
+    <div className="cart">
+      <div className="purchasing-from">PURCHASING FROM</div>
+      <div className="cart-header">KloudBar</div>
+      <div className="cart-address">RA Colony, Chennai</div>
     </div>
   );
 }
