@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./style.scss";
 
 RetailerList.propTypes = {
   name: PropTypes.string,
@@ -9,10 +10,47 @@ RetailerList.propTypes = {
 
 function RetailerList({ name, onSyed, onHarshit }) {
   return (
-    <div>
-      <h1> Hello {name}</h1>
-      <button onClick={onSyed}> Syed </button>
-      <button onClick={onHarshit}> Harshit </button>
+    <div className="retailer_list_wrap">
+      <div className="retailer_item">
+        <div className = "retailer_link">
+          <div className = "retailer_name">
+            Retailer - 1
+          </div>
+          <div className = "retailer_info">
+            Information About Retailer
+          </div>
+        </div>
+      </div>
+      <div className="retailer_item">
+        <div className = "retailer_link">
+          <div className = "retailer_name">
+            Retailer - 1
+          </div>
+          <div className = "retailer_info">
+            Information About Retailer
+          </div>
+        </div>
+      </div>
+      <div className="retailer_item">
+        <div className = "retailer_link">
+          <div className = "retailer_name">
+            Retailer - 1
+          </div>
+          <div className = "retailer_info">
+            Information About Retailer
+          </div>
+        </div>
+      </div>
+      <div className="retailer_item">
+        <div className = "retailer_link">
+          <div className = "retailer_name">
+            Retailer - 1
+          </div>
+          <div className = "retailer_info">
+            Information About Retailer
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
