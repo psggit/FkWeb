@@ -61,6 +61,14 @@ h1 {
   padding-right: 16px;
 }
 
+.show-content {
+  display: block !important;
+}
+
+.hide-content {
+  display: none !important;
+}
+
 .btn {
   display: flex;
   height: 40px;
