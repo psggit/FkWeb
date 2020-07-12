@@ -1,0 +1,21 @@
+
+.retailer_list_wrap {
+    padding: 0px 16px;
+    .retailer_item {
+        height: 78px;
+        padding: 16px 0px;
+        border-bottom: 1px solid #4e4e4e;
+    }
+    .retailer_link {
+        height: 100%;
+    }
+    .retailer_info {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 20px;
+        color: #515257;
+
+    }
+}
