@@ -1,0 +1,23 @@
+@import "../../../colors.scss";
+
+.add_more_drinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 64px;
+  border-bottom: 1px solid $border-color;
+
+  .drinks_icon {
+   margin-right: 10px;
+
+  }
+
+  .label {
+    align-self: center;
+  }
+
+  .arrow_right{
+	margin-left: 8px;
+  }
+}
+

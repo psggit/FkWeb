@@ -18,6 +18,15 @@ const config = {
         exclude: /node_modules/,
       },
       {
+        test: /\.(ttf|eot|woff|woff2)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "fonts/[name].[ext]",
+          },
+        },
+      },
+      {
         test: /\.scss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
@@ -46,6 +55,7 @@ const config = {
   },
   devServer: {
     contentBase: "./dist",
+    public: "fk-local.hipbar-dev.com",
   },
   plugins: [
     new CopyPlugin({
@@ -56,6 +66,11 @@ const config = {
       filename: "index.html",
     }),
     new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      ARGS_SENTRY_ENV: JSON.stringify(process.env.SENTRY_ENV),
+      ARGS_SENTRY_RELEASE: JSON.stringify(process.env.SENTRY_RELEASE),
+      ARGS_BASE_DOMAIN: JSON.stringify(process.env.BASE_DOMAIN),
+    }),
   ],
   optimization: {
     runtimeChunk: "single",

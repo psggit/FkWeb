@@ -1,0 +1,28 @@
+@import '../../../colors.scss';
+
+.navBar {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  border-top: 1px solid $border-color;
+  padding: 8px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  img {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.navText {
+  font-size: 8px;
+}
