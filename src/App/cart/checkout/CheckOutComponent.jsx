@@ -3,7 +3,7 @@ import nextIcon from "../../../assets/images/next.svg";
 import emptyCartIcon from "../../../assets/images/empty_cart.svg";
 import "./style.scss";
 
-function CheckoutComponent() {
+function CheckOutComponent() {
   return (
     <div className="bottom-bar">
       <div className="btn">
@@ -14,4 +14,4 @@ function CheckoutComponent() {
   );
 }
 
-export { CheckoutComponent };
+export { CheckOutComponent };
