@@ -69,6 +69,7 @@ const config = {
     new webpack.DefinePlugin({
       ARGS_SENTRY_ENV: JSON.stringify(process.env.SENTRY_ENV),
       ARGS_SENTRY_RELEASE: JSON.stringify(process.env.SENTRY_RELEASE),
+      ARGS_BASE_DOMAIN: JSON.stringify(process.env.SENTRY_RELEASE),
     }),
   ],
   optimization: {
