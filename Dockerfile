@@ -6,7 +6,7 @@ ARG SENTRY_RELEASE=default
 ARG BUILD_ENV=default
 ARG BASE_DOMAIN=default
 
-RUN webpack --mode production \
+RUN $(npm bin)/webpack --mode production \
   --env.SENTRY_ENV=${SENTRY_ENV} \
   --env.SENTRY_RELEASE=${SENTRY_RELEASE} \
   --env.BUILD_ENV=${BUILD_ENV} \
