@@ -8,8 +8,8 @@
   "license": "ISC",
   "scripts": {
     "clean": "rm dist/bundle.js",
-    "build-dev": "webpack -d --mode development",
-    "build-prod": "webpack -p --mode production",
+    "build-dev": "echo \"Look at dockerfile \"",
+    "build-prod": "echo \"Look at dockerfile \"",
     "start": "webpack-dev-server --hot --mode development",
     "test": "jest",
     "cy:run": "cypress run --record",
