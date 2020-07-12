@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss";
 import { AddMoreComponent } from "./addMore";
 import { CartItemComponent } from "./cartItem";
-import { CheckoutComponent } from "./checkout";
+import { CheckOutComponent } from "./checkout";
 import { EmptyCartComponent } from "./emptyCart";
 import { CartHeaderComponent } from "./header";
 
@@ -13,7 +13,7 @@ function Cart() {
         <CartHeaderComponent />
         <CartItemComponent />
         <AddMoreComponent />
-        <CheckoutComponent />
+        <CheckOutComponent />
       </div>
       <EmptyCartComponent className="hide-content" />
     </div>
