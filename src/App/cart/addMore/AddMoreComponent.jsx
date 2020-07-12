@@ -6,9 +6,9 @@ import "./style.scss";
 function AddMoreComponent() {
   return (
     <div className="add_more_drinks">
-      <img src={drinksIcon} />
-      <div>Add more drinks to cart</div>
-      <img src={rightArrowIcon} />
+      <img className="drinks_icon" src={drinksIcon} />
+      <div className="label">Add more drinks to cart</div>
+      <img className="arrow_right" src={rightArrowIcon} />
     </div>
   );
 }
