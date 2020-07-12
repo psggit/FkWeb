@@ -59,6 +59,10 @@ h1 {
   backdrop-filter: blur(25px);
   justify-content: flex-end;
   padding-right: 16px;
+  position: fixed;
+  bottom: 10%;
+  left: 0;
+  right: 0;
 }
 
 .show-content {
@@ -69,6 +73,9 @@ h1 {
   display: none !important;
 }
 
+.padding-24 {
+	padding: 24px;
+}
 .btn {
   display: flex;
   height: 40px;

@@ -10,12 +10,16 @@ function Cart() {
   return (
     <div className="cart">
       <div className="full-cart show-content">
-        <CartHeaderComponent />
-        <CartItemComponent />
-        <AddMoreComponent />
+        <div className="padding-24">
+          <CartHeaderComponent />
+          <CartItemComponent />
+          <AddMoreComponent />
+        </div>
         <CheckOutComponent />
       </div>
-      <EmptyCartComponent className="hide-content" />
+      <div className="hide-content">
+        <EmptyCartComponent />
+      </div>
     </div>
   );
 }
