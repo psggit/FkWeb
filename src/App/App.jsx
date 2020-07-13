@@ -14,18 +14,20 @@ function App() {
         <Switch>
           <Route path="/search">
             <Search />
+            <Navigation />
           </Route>
           <Route path="/cart">
             <Cart />
+            <Navigation />
           </Route>
           <Route path="/home">
             <Home />
+            <Navigation />
           </Route>
           <Route path="/">
             <AgreeAndContinueContainer />
           </Route>
         </Switch>
-        <Navigation />
       </Router>
     </div>
   );
