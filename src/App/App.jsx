@@ -12,18 +12,10 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route path="/search">
-            <Search />
-          </Route>
-          <Route path="/cart">
-            <Cart />
-          </Route>
-          <Route path="/address/create">
-            <SelectAddress />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route path="/search" component={Search} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/address/select" component={SelectAddress} />
+          <Route path="/" component={Home} />
         </Switch>
 
         <Navigation />
