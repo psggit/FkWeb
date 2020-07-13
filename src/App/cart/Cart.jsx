@@ -2,9 +2,9 @@ import React from "react";
 import "./style.scss";
 import { AddMoreComponent } from "./addMore";
 import { CartItemComponent } from "./cartItem";
-import { CheckOutComponent } from "./checkout";
 import { EmptyCartComponent } from "./emptyCart";
 import { CartHeaderComponent } from "./header";
+import { BottomNextComponent } from "../common/bottomNext";
 
 function Cart() {
   return (
@@ -15,7 +15,7 @@ function Cart() {
           <CartItemComponent />
           <AddMoreComponent />
         </div>
-        <CheckOutComponent />
+        <BottomNextComponent routePath="/address/select" />
       </div>
       <div className="hide-content">
         <EmptyCartComponent />

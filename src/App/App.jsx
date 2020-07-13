@@ -5,7 +5,7 @@ import { Home } from "./home";
 import Cart from "./cart";
 import Search from "./search";
 import SelectAddress from "./address";
-import Navigation from "./common/navigation";
+import BottomNavigationComponent from "./common/bottomNavigation";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path="/" component={Home} />
         </Switch>
 
-        <Navigation />
+        <BottomNavigationComponent />
       </Router>
     </div>
   );

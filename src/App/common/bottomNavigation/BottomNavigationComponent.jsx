@@ -23,7 +23,7 @@ const tabs = [
   },
 ];
 
-function Navigation() {
+function BottomNavigationComponent() {
   return (
     <div className="navBar">
       {tabs.map((value, index) => (
@@ -40,4 +40,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default BottomNavigationComponent;

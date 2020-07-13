@@ -2,15 +2,21 @@ import React from "react";
 import nextIcon from "../../../assets/images/next.svg";
 import "./style.scss";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function CheckOutComponent() {
+BottomNextComponent.propTypes = {
+  routePath: PropTypes.string,
+};
+
+function BottomNextComponent(props) {
+  const { routePath } = props;
   const history = useHistory();
-  function showSelectAddress() {
-    history.push("/address/select");
+  function showNext() {
+    history.push(routePath);
   }
   return (
     <div className="bottom-bar">
-      <div className="btn" onClick={showSelectAddress}>
+      <div className="btn-general" onClick={showNext}>
         <div className="btn-label">Checkout</div>
         <img className="btn-arrow" src={nextIcon} />
       </div>
@@ -18,4 +24,4 @@ function CheckOutComponent() {
   );
 }
 
-export { CheckOutComponent };
+export { BottomNextComponent };

@@ -1,0 +1,1 @@
+export { BottomNextComponent } from "./BottomNextComponent";
