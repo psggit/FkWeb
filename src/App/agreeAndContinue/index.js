@@ -1,3 +1,1 @@
-import AgreeAndContinue from "./AgreeAndContinue";
-
-export default AgreeAndContinue;
+export { AgreeAndContinueContainer } from "./agreeAndContinueContainer";

@@ -4244,6 +4244,13 @@ findup-sync@^3.0.0:
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
 
+fk-platform-sdk@^1.0.18:
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/fk-platform-sdk/-/fk-platform-sdk-1.0.18.tgz#9fa16bcfdf0b900dbdb91da951a1ce88acb5e8c4"
+  integrity sha512-eyOffqqwdThIUtDaRvWOIJf0ySRPp5zkunFacAebEU78cBGbJOsQ3fmBnaqOCzooEkG/vY8384elrF5/zrBQ+A==
+  dependencies:
+    tcs-instanceqm "1.0.3"
+
 flat-cache@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-2.0.1.tgz#5d296d6f04bda44a4630a301413bdbc2ec085ec0"
@@ -8968,6 +8975,11 @@ tar@^6.0.2:
     minizlib "^2.1.0"
     mkdirp "^1.0.3"
     yallist "^4.0.0"
+
+tcs-instanceqm@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tcs-instanceqm/-/tcs-instanceqm-1.0.3.tgz#8e4ed63164dafc4638e1a96c730385a95a7378ee"
+  integrity sha1-jk7WMWTa/EY44alscwOFqVpzeO4=
 
 terminal-link@^2.0.0:
   version "2.1.1"
