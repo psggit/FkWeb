@@ -18,17 +18,15 @@ function App() {
           <Route path="/cart">
             <Cart />
           </Route>
+          <Route path="/address/create">
+            <SelectAddress />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
         </Switch>
 
         <Navigation />
-      </Router>
-      <Router>
-        <Route path="/address/create">
-          <SelectAddress />
-        </Route>
       </Router>
     </div>
   );
