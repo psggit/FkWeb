@@ -1,9 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import "./style.scss";
-import backIcon from "../../../assets/images/cart.png";
-import helpIcon from "../../../assets/images/cart.png";
 import PropTypes from "prop-types";
+import backIcon from "../../../assets/images/back.svg";
+import helpIcon from "../../../assets/images/help.svg";
 
 ToolbarComponent.propTypes = {
   helpVisibility: PropTypes.any,
@@ -14,6 +14,7 @@ function ToolbarComponent(props) {
   const history = useHistory();
   const { helpVisibility } = props;
   const { title } = props;
+
   function goBack() {
     history.goBack();
   }

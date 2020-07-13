@@ -17,7 +17,7 @@ function App() {
           <Route path="/cart" component={Cart} />
           <Route path="/address/select" component={SelectAddress} />
           <Route path="/home" component={Home} />
-          <Route path="/" component={AgreeAndContinueContainer}/>
+          <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
 
         <BottomNavigationComponent />
