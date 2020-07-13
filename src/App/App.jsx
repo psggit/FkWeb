@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./home";
 import Cart from "./cart";
 import Search from "./search";
+import SelectAddress from "./address";
 import Navigation from "./common/navigation";
 
 function App() {
@@ -21,7 +22,13 @@ function App() {
             <Home />
           </Route>
         </Switch>
+
         <Navigation />
+      </Router>
+      <Router>
+        <Route path="/address/create">
+          <SelectAddress />
+        </Route>
       </Router>
     </div>
   );

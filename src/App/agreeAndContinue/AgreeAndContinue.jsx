@@ -4,4 +4,4 @@ function AgreeAndContinue() {
   return <div> AgreeAndContinue </div>;
 }
 
-export default AgreeAndContinue();
+export default AgreeAndContinue;
