@@ -5,10 +5,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = (env, argv) => {
-  const ARGS_SENTRY_ENV = JSON.stringify(env.SENTRY_ENV) || "local";
-  const ARGS_SENTRY_RELEASE = JSON.stringify(env.SENTRY_RELEASE) || "local";
-  const ARGS_BUILD_ENV = JSON.stringify(env.BUILD_ENV) || "local";
-  const ARGS_BASE_DOMAIN = JSON.stringify(env.BASE_DOMAIN) || "hipbar-dev.com";
+  const ARGS_SENTRY_ENV = JSON.stringify(env.SENTRY_ENV || "local");
+  const ARGS_SENTRY_RELEASE = JSON.stringify(env.SENTRY_RELEASE || "local");
+  const ARGS_BUILD_ENV = JSON.stringify(env.BUILD_ENV || "local");
+  const ARGS_BASE_DOMAIN = JSON.stringify(env.BASE_DOMAIN || "hipbar-dev.com");
   const config = {
     entry: ["react-hot-loader/patch", "./src/index.js"],
     output: {
