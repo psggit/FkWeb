@@ -51,18 +51,9 @@ h1 {
   font-family: bold;
 }
 
-.bottom-bar {
+.page-container {
   display: flex;
-  flex-direction: row;
-  height: 64px;
-  background: $secondary-bg;
-  backdrop-filter: blur(25px);
-  justify-content: flex-end;
-  padding-right: 16px;
-  position: fixed;
-  bottom: 8%;
-  left: 0;
-  right: 0;
+  flex-direction: column;
 }
 
 .show-content {
@@ -76,7 +67,8 @@ h1 {
 .padding-24 {
 	padding: 24px;
 }
-.btn {
+
+.btn-general {
   display: flex;
   height: 40px;
   width: 140px;
