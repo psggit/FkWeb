@@ -51,6 +51,11 @@ h1 {
   font-family: bold;
 }
 
+.page-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .show-content {
   display: block !important;
 }
