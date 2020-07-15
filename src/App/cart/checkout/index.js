@@ -1,1 +1,0 @@
-export { CheckOutComponent } from "./CheckOutComponent";

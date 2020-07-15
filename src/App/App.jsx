@@ -5,29 +5,21 @@ import { Home } from "./home";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import Cart from "./cart";
 import Search from "./search";
-import Navigation from "./common/navigation";
+import SelectAddress from "./address";
+import BottomNavigationComponent from "./common/bottomNavigation";
 
 function App() {
   return (
     <div>
       <Router>
         <Switch>
-          <Route path="/search">
-            <Search />
-            <Navigation />
-          </Route>
-          <Route path="/cart">
-            <Cart />
-            <Navigation />
-          </Route>
-          <Route path="/home">
-            <Home />
-            <Navigation />
-          </Route>
-          <Route path="/">
-            <AgreeAndContinueContainer />
-          </Route>
+          <Route path="/search" component={Search} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/address/select" component={SelectAddress} />
+          <Route path="/home" component={Home} />
+          <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
+        <BottomNavigationComponent />
       </Router>
     </div>
   );
