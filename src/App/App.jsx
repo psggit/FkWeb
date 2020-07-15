@@ -21,7 +21,6 @@ function App() {
           <Route path="/order/summary" component={OrderSummary} />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
-
         <BottomNavigationComponent />
       </Router>
     </div>
