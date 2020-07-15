@@ -5,6 +5,7 @@ import { CartItemComponent } from "./cartItem";
 import { EmptyCartComponent } from "./emptyCart";
 import { CartHeaderComponent } from "./header";
 import { BottomNextComponent } from "../common/bottomNext";
+import BottomNavigationComponent from "../common/bottomNavigation";
 
 function Cart() {
   return (
@@ -20,6 +21,7 @@ function Cart() {
       <div className="hide-content">
         <EmptyCartComponent />
       </div>
+      <BottomNavigationComponent />
     </div>
   );
 }

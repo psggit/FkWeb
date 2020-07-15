@@ -7,7 +7,6 @@ import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import Cart from "./cart";
 import Search from "./search";
 import SelectAddress from "./address";
-import BottomNavigationComponent from "./common/bottomNavigation";
 import OrderSummary from "./summary";
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
           <Route path="/order/summary" component={OrderSummary} />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
-        <BottomNavigationComponent />
       </Router>
     </div>
   );
