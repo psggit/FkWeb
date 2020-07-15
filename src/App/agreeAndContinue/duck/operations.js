@@ -1,4 +1,4 @@
-// import FKPlatform from "fk-platform-sdk/web";
+import FKPlatform from "fk-platform-sdk/web";
 import { loginAPI } from "../../../utils";
 import {
   tcAgreed,
@@ -10,7 +10,7 @@ import {
   loginFailed,
 } from "./actions";
 
-/* let fkPlatform = new FKPlatform("hipbar");
+let fkPlatform = new FKPlatform("hipbar");
 
 var scopeReq = [
   { scope: "user.email", isMandatory: false, shouldVerify: false },
@@ -30,16 +30,17 @@ const getGrantToken = () => {
       return { grantToken: "", error: false };
     });
 };
-*/
 
+/*
 const testFK = () => {
   return { grantToken: "grant-token-local", error: false };
 };
+*/
 
 const login = () => {
   return (dispatch) => {
     dispatch(getGrantTokenInitiated);
-    let gt = testFK();
+    let gt = getGrantToken();
     if (gt.error) {
       dispatch(fetchGrantTokenFailed());
       return;
