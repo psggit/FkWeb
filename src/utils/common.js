@@ -1,5 +1,5 @@
 const CommonHeaders = {
-  platform: "fk",
+  "App-Name": "fk",
 };
 
 export default CommonHeaders;

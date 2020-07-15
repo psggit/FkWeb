@@ -9,6 +9,7 @@ const loginAPI = (grantToken) => {
   var body = { grantToken: grantToken };
   return fetch(URL, {
     method: "POST",
+    credentials: "include",
     headers: headers,
     body: JSON.stringify(body),
   });

@@ -19,11 +19,16 @@ LFComponent.propTypes = {
   retryLogin: PropTypes.agreeTc,
 };
 
-function LFComponent() {
+LFComponent.propTypes = {
+  login: PropTypes.func,
+};
+
+function LFComponent(props) {
+  const login = props.login;
   return (
     <div>
       <div>login failed </div>
-      <button> retry </button>
+      <button onClick={login}> retry </button>
     </div>
   );
 }
@@ -38,7 +43,7 @@ function AgreeAndContinueComponent(props) {
   } else if (loginInProgress) {
     return <div> Login in progress </div>;
   } else if (loginFailed) {
-    return <LFComponent />;
+    return <LFComponent login={props.login} />;
   } else if (loginSuccess) {
     return <Redirect to=" /user/info/create" />;
   }
