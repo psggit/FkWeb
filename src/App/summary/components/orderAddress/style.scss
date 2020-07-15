@@ -1,0 +1,43 @@
+@import "../../../../colors.scss";
+
+.order-address-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  width: 100%;
+
+  .address-logo-container {
+    display: flex;
+    flex-direction: row;
+    width: 40px;
+    height: 100%;
+
+    .image {
+      width: 16px;
+      height: 22px;
+      align-self: center;
+    }
+  }
+
+  .address-details-container {
+    height: 40px;
+    width: 100%;
+
+    .title {
+      font-family: Montserrat;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    .address {
+      opacity: 0.6;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-family: Montserrat;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+  }
+}
