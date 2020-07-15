@@ -2,6 +2,7 @@ import React from "react";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./home";
+import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import Cart from "./cart";
 import Search from "./search";
@@ -17,6 +18,7 @@ function App() {
           <Route path="/cart" component={Cart} />
           <Route path="/address/select" component={SelectAddress} />
           <Route path="/home" component={Home} />
+          <Route path="/tc" component={IframeContainer} />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
         <BottomNavigationComponent />
