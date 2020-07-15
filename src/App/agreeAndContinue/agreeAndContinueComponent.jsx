@@ -1,7 +1,11 @@
 import React from "react";
 
 function AgreeAndContinueComponent() {
-  return <div> AgreeAndContinue </div>;
+  return (
+    <div>
+      <button> AgreeAndContinue </button>
+    </div>
+  );
 }
 
 export { AgreeAndContinueComponent };

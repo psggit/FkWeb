@@ -19,7 +19,6 @@ function App() {
           <Route path="/home" component={Home} />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
-
         <BottomNavigationComponent />
       </Router>
     </div>
