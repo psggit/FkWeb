@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { AgreeAndContinueComponent } from "./agreeAndContinueComponent";
-import { login, agreeTandC } from "./duck";
+import { login, agreeTandC, checkTC } from "./duck";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,6 +15,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     login: () => dispatch(login()),
     agreeTc: () => dispatch(agreeTandC()),
+    checkTC: () => dispatch(checkTC()),
   };
 };
 
