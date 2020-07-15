@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.scss";
-import locationIcon from "../../../../assets/images/home.png";
+import locationIcon from "../../../assets/images/home.png";
 
 function OrderAddressComponent() {
   return (
