@@ -16,7 +16,7 @@ function SelectAddress() {
           <img src={AddAddressIcon} className="add-image" />
         </div>
       </div>
-      <BottomNextComponent routePath="/address/select" />
+      <BottomNextComponent routePath="/order/summary" title="Proceed" />
     </div>
   );
 }

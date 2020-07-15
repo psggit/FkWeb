@@ -8,6 +8,7 @@ import Cart from "./cart";
 import Search from "./search";
 import SelectAddress from "./address";
 import BottomNavigationComponent from "./common/bottomNavigation";
+import OrderSummary from "./summary";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/address/select" component={SelectAddress} />
           <Route path="/home" component={Home} />
           <Route path="/tc" component={IframeContainer} />
+          <Route path="/order/summary" component={OrderSummary} />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
         <BottomNavigationComponent />
