@@ -68,6 +68,10 @@ module.exports = (env, argv) => {
     devServer: {
       contentBase: "./dist",
       public: "fk-local.hipbar-dev.com",
+      allowedHosts: ["*"],
+      historyApiFallback: {
+        index: "/",
+      },
     },
     plugins: [
       new CopyPlugin({
