@@ -31,6 +31,7 @@ function TcComponent(props) {
         <div onClick={agreeTc} className="acButton"> Agree & Continue </div>
       </div>
       <div className="aAndCTerms">
+
         <div className="tcLink">terms & conditions</div>
         <div className="tcLink">
           <div className="subtcLink privacyLink">Privacy Policy</div>
