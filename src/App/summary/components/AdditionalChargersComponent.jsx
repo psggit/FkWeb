@@ -11,12 +11,30 @@ function AdditionalChargersComponent(props) {
   const label = props.label;
   const charges = props.charges;
   return (
-    <div className="charges-container">
-      <div className="label-container">
-        <div>{label}</div>
-        <img src={downIcon} className="icon" />
+    <div>
+      <div className="charges-container">
+        <div className="label-container">
+          <div>{label}</div>
+          <img src={downIcon} className="icon" />
+        </div>
+        <div>{charges}</div>
       </div>
-      <div>{charges}</div>
+      <div className="detail-charges-container">
+        <div>Delivery Charges</div>
+        <div>Rs.19.50</div>
+      </div>
+      <div className="detail-charges-container">
+        <div>Delivery Charges</div>
+        <div>Rs.19.50</div>
+      </div>
+      <div className="detail-charges-container">
+        <div>Delivery Charges</div>
+        <div>Rs.19.50</div>
+      </div>
+      <div className="detail-charges-container">
+        <div>Delivery Charges</div>
+        <div>Rs.19.50</div>
+      </div>
     </div>
   );
 }
