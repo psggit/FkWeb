@@ -10,7 +10,15 @@ import {
   loginFailed,
 } from "./actions";
 
-let fkPlatform = new FKPlatform("hipbar");
+let fkPlatformActive = true;
+
+let fkPlatform = {};
+
+try {
+  fkPlatform = new FKPlatform("hipbar");
+} catch (e) {
+  fkPlatformActive = false;
+}
 
 var scopeReq = [
   { scope: "user.email", isMandatory: false, shouldVerify: false },
@@ -19,16 +27,20 @@ var scopeReq = [
 ];
 
 const getGrantToken = () => {
-  return fkPlatform
-    .getModuleHelper()
-    .getPermissionsModule()
-    .getToken(scopeReq)
-    .then((e) => {
-      return { grantToken: e.grantToken, error: false };
-    })
-    .catch(() => {
-      return { grantToken: "", error: false };
-    });
+  if (fkPlatformActive) {
+    return fkPlatform
+      .getModuleHelper()
+      .getPermissionsModule()
+      .getToken(scopeReq)
+      .then((e) => {
+        return { grantToken: e.grantToken, error: false };
+      })
+      .catch(() => {
+        return { grantToken: "", error: false };
+      });
+  } else {
+    return { grantToken: "dummyToken", error: false };
+  }
 };
 
 /*
