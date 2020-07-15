@@ -1,0 +1,1 @@
+export { tcReducer } from "./duck";
