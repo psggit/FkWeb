@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/style.scss";
 import logo from "../../assets/images/drinksAppLogo.svg";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 TcComponent.propTypes = {
@@ -31,10 +31,16 @@ function TcComponent(props) {
         <div onClick={agreeTc} className="acButton"> Agree & Continue </div>
       </div>
       <div className="aAndCTerms">
+        <Link to="/user-terms">
         <div className="tcLink">terms & conditions</div>
+        </Link>
         <div className="tcLink">
-          <div className="subtcLink privacyLink">Privacy Policy</div>
-          <div className="subtcLink gpLink">Grievance Policy</div>
+          <Link to="/privacy-policy">
+             <div className="subtcLink privacyLink">Privacy Policy</div>
+          </Link>
+          <Link to="/grievance-policy">
+            <div className="subtcLink gpLink">Grievance Policy</div>
+          </Link>
         </div>
       </div>
     </div>

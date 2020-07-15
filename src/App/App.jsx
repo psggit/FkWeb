@@ -11,6 +11,7 @@ import OrderSummary from "./summary";
 import BottomNavigationComponent from "./common/bottomNavigation";
 
 function App() {
+
   return (
     <div>
       <Router>
@@ -19,7 +20,9 @@ function App() {
           <Route path="/cart" component={Cart} />
           <Route path="/address/select" component={SelectAddress} />
           <Route path="/home" component={Home} />
-          <Route path="/tc" component={IframeContainer} />
+          <Route path="/user-terms" component={()=><IframeContainer url={'https://hipbar.com/user-terms'} title={`Terms And Condition`}/> } />
+          <Route path="/privacy-policy" component={()=><IframeContainer url={'https://hipbar.com/user-terms'} title={`Privacy Policy`}/> } />
+          <Route path="/grievance-policy" component={()=><IframeContainer url={'https://hipbar.com/user-terms'} title={`Grievance Policy`}/> } />
           <Route path="/order/summary" component={OrderSummary} />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
