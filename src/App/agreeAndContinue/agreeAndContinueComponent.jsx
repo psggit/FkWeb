@@ -2,24 +2,24 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
-tcComponent.propTypes = {
-  agreeTc: PropTypes.any,
+TcComponent.propTypes = {
+  agreeTc: PropTypes.func,
 };
 
-function tcComponent(props) {
+function TcComponent(props) {
   const agreeTc = props.agreeTc;
   return (
     <div>
-      <button onClick={agreeTc()}> AgreeAndContinue </button>
+      <button onClick={agreeTc}> AgreeAndContinue </button>
     </div>
   );
 }
 
-lFComponent.propTypes = {
+LFComponent.propTypes = {
   retryLogin: PropTypes.agreeTc,
 };
 
-function lFComponent() {
+function LFComponent() {
   return (
     <div>
       <div>login failed </div>
@@ -34,13 +34,13 @@ function AgreeAndContinueComponent(props) {
   const loginFailed = props.loginFailed;
   const loginSuccess = props.loginSuccess;
   if (showTC) {
-    return <tcComponent props={props} />;
+    return <TcComponent agreeTc={props.agreeTc} />;
   } else if (loginInProgress) {
     return <div> Login in progress </div>;
   } else if (loginFailed) {
-    return <lFComponent props={props} />;
+    return <LFComponent />;
   } else if (loginSuccess) {
-    <Redirect to=" /user/info/create" />;
+    return <Redirect to=" /user/info/create" />;
   }
 }
 
