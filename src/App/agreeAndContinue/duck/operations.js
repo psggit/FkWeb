@@ -59,7 +59,7 @@ const login = () => {
     }
     dispatch(fetchGrantTokenSuccess());
     dispatch(loginInProgress());
-    loginAPI(gt.token)
+    loginAPI(gt.grantToken)
       .then((res) => {
         if (res.status == 200) {
           dispatch(loginSuccess());
@@ -77,7 +77,7 @@ const setTc = () => {
   localStorage.setItem("tandc/status", "true");
 };
 
-const showTC = () => {
+const checkTC = () => {
   return (dispatch) => {
     var agreed = localStorage.getItem("tandc/status");
     if (agreed === "true") {
@@ -95,4 +95,4 @@ const agreeTandC = () => {
   };
 };
 
-export { login, agreeTandC, showTC };
+export { login, agreeTandC, checkTC };

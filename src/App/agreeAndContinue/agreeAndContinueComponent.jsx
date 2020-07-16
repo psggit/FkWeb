@@ -1,14 +1,18 @@
-import React from "react";
 import "./styles/style.scss";
 import logo from "../../assets/images/drinksAppLogo.svg";
 import { Redirect, Link } from "react-router-dom";
+import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 
 TcComponent.propTypes = {
   agreeTc: PropTypes.func,
+  checkTC: PropTypes.func,
 };
 
 function TcComponent(props) {
+  useLayoutEffect(() => {
+    props.checkTC();
+  });
   const agreeTc = props.agreeTc;
   return (
     <div className="aAndCWrap">
@@ -70,8 +74,9 @@ function AgreeAndContinueComponent(props) {
   const loginInProgress = props.loginInProgress;
   const loginFailed = props.loginFailed;
   const loginSuccess = props.loginSuccess;
+
   if (showTC) {
-    return <TcComponent agreeTc={props.agreeTc} />;
+    return <TcComponent {...props} />;
   } else if (loginInProgress) {
     return <div> Login in progress </div>;
   } else if (loginFailed) {
