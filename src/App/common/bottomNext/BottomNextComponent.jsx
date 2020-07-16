@@ -6,10 +6,12 @@ import PropTypes from "prop-types";
 
 BottomNextComponent.propTypes = {
   routePath: PropTypes.string,
+  title: PropTypes.string,
 };
 
 function BottomNextComponent(props) {
   const { routePath } = props;
+  const { title } = props;
   const history = useHistory();
   function showNext() {
     history.push(routePath);
@@ -17,7 +19,7 @@ function BottomNextComponent(props) {
   return (
     <div className="bottom-bar">
       <div className="btn-general" onClick={showNext}>
-        <div className="btn-label">Checkout</div>
+        <div className="btn-label">{title}</div>
         <img className="btn-arrow" src={nextIcon} />
       </div>
     </div>

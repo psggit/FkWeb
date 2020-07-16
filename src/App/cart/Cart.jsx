@@ -15,7 +15,7 @@ function Cart() {
           <CartItemComponent />
           <AddMoreComponent />
         </div>
-        <BottomNextComponent routePath="/address/select" />
+        <BottomNextComponent routePath="/address/select" title="Checkout" />
       </div>
       <div className="hide-content">
         <EmptyCartComponent />
