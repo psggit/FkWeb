@@ -59,7 +59,7 @@ const login = () => {
     }
     dispatch(fetchGrantTokenSuccess());
     dispatch(loginInProgress());
-    loginAPI(gt.token)
+    loginAPI(gt.grantToken)
       .then((res) => {
         if (res.status == 200) {
           dispatch(loginSuccess());

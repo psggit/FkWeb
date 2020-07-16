@@ -17,7 +17,9 @@ Sentry.init({
 var mountNode = document.getElementById("app");
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </Provider>,
   mountNode
 );
