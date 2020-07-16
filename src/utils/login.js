@@ -6,7 +6,7 @@ const URL = "https://api." + config.BASE_DOMAIN + "/consumer/api/1/fk/login";
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 
 const loginAPI = (grantToken) => {
-  var body = { grantToken: grantToken };
+  var body = { grant_token: grantToken };
   return fetch(URL, {
     method: "POST",
     credentials: "include",
