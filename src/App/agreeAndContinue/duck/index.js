@@ -1,2 +1,2 @@
 export { tcReducer } from "./reducer";
-export { login, agreeTandC } from "./operations";
+export { login, agreeTandC, checkTC} from "./operations";

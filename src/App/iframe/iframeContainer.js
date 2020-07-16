@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import { IframeComponent } from "./iframeComponent";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = () => {
   return {};
 };
 

@@ -14,7 +14,7 @@ import BottomNavigationComponent from "./common/bottomNavigation";
 function App() {
   return (
     <div>
-      <Router>
+        <Router>
         <Switch>
           <Route path="/search" component={Search} />
           <Route path="/cart" component={Cart} />
