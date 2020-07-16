@@ -1,5 +1,9 @@
 @import "../../colors.scss";
 
+.summary-wrapper {
+  height: 680px;
+}
+
 .order-layout {
   display: flex;
   flex-direction: row;

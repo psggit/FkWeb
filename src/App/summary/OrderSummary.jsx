@@ -16,7 +16,7 @@ function OrderSummary() {
   return (
     <div>
       <ToolbarComponent helpVisibility="true" title="Order Summary" />
-      <div className="page-container">
+      <div className="page-container summary-wrapper">
         <OrderAddressComponent />
         <OrderTotalComponent total="Rs. 5,214.50" />
         <CartTotalComponent cartTotal="Rs. 5,214.50" />
