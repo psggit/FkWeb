@@ -11,10 +11,9 @@ import BottomNavigationComponent from "./common/bottomNavigation";
 import OrderSummary from "./summary";
 
 function App() {
-
   return (
     <div>
-      <Router>
+        <Router>
         <Switch>
           <Route path="/search" component={Search} />
           <Route path="/cart" component={Cart} />

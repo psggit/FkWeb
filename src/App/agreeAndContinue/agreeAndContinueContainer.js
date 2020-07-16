@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
     showTC: state.tcStore.showTC,
     loginInProgress: state.tcStore.loginInProgress,
     loginSuccess: state.tcStore.loginSuccess,
-      loginFailed: state.tcStore.loginFailed,
+    loginFailed: state.tcStore.loginFailed,
   };
 };
 
