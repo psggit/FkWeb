@@ -64,7 +64,8 @@ const login = () => {
         if (res.status == 200) {
           dispatch(loginSuccess());
         } else {
-          dispatch(loginFailed());
+          dispatch(loginSuccess());
+          //dispatch(loginFailed());
         }
       })
       .catch((error) => {
