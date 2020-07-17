@@ -66,6 +66,7 @@ module.exports = (env, argv) => {
       },
     },
     devServer: {
+      host: "0.0.0.0",
       contentBase: "./dist",
       public: "fk-local.hipbar-dev.com",
       allowedHosts: ["*"],
