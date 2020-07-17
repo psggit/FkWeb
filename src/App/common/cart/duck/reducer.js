@@ -42,13 +42,15 @@ var Sku: {
   clearCart: boolean,
 };
 
-export const getDefaultState = (): State => {
+/*
+const getDefaultState = (): State => {
   return {
     retailer: {},
     products: {},
     retailerDiffers: false,
   };
 };
+*/
 
 let getTestState = (): State => {
   return {
@@ -110,7 +112,7 @@ let removeProduct = (state: State, sku: sku): state => {
   return state;
 };
 
-export const total = (oldS: State): number => {
+const cartTotal = (oldS: State): number => {
   let total: number = 0;
   for (let prod of oldS.products.values()) {
     total = total + prod.total;
@@ -120,8 +122,10 @@ export const total = (oldS: State): number => {
 
 const initialState = getTestState;
 
-export const cartReducer = createReducer(initialState, {
+const cartReducer = createReducer(initialState, {
   [addSkuToCart]: (state: State, e: Sku): State => addProduct({ ...state }, e),
   [removeSkuFromCart]: (state: State, e: Sku): State =>
     removeProduct({ ...state }, e),
 });
+
+export { cartReducer, cartTotal };
