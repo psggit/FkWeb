@@ -32,15 +32,17 @@ function TcComponent(props) {
         </div>
       </div>
       <div className="acButtonWrap">
-        <div onClick={agreeTc} className="acButton"> Agree & Continue </div>
+        <div onClick={agreeTc} className="acButton">
+          Agree & Continue
+        </div>
       </div>
       <div className="aAndCTerms">
         <Link to="/user-terms">
-        <div className="tcLink">terms & conditions</div>
+          <div className="tcLink">terms & conditions</div>
         </Link>
         <div className="tcLink">
           <Link to="/privacy-policy">
-             <div className="subtcLink privacyLink">Privacy Policy</div>
+            <div className="subtcLink privacyLink">Privacy Policy</div>
           </Link>
           <Link to="/grievance-policy">
             <div className="subtcLink gpLink">Grievance Policy</div>
@@ -50,10 +52,6 @@ function TcComponent(props) {
     </div>
   );
 }
-
-LFComponent.propTypes = {
-  retryLogin: PropTypes.agreeTc,
-};
 
 LFComponent.propTypes = {
   login: PropTypes.func,
@@ -82,7 +80,7 @@ function AgreeAndContinueComponent(props) {
   } else if (loginFailed) {
     return <LFComponent login={props.login} />;
   } else if (loginSuccess) {
-    return <Redirect to=" /user/info/create" />;
+    return <Redirect to="/user/info/create" />;
   }
 }
 
