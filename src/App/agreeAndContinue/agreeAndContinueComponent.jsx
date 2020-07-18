@@ -53,36 +53,17 @@ function TcComponent(props) {
   );
 }
 
-LFComponent.propTypes = {
-  login: PropTypes.func,
+AgreeAndContinueComponent.propTypes = {
+  showTC: PropTypes.boolean,
 };
-
-function LFComponent(props) {
-  const login = props.login;
-  return (
-    <div>
-      <div>login failed </div>
-      <button onClick={login}> retry </button>
-    </div>
-  );
-}
 
 function AgreeAndContinueComponent(props) {
   const showTC = props.showTC;
-  const loginInProgress = props.loginInProgress;
-  const loginFailed = props.loginFailed;
-  const loginSuccess = props.loginSuccess;
 
   if (showTC) {
     return <TcComponent {...props} />;
-  } else if (loginInProgress) {
-    return <div> Login in progress </div>;
-  } else if (loginFailed) {
-    return <LFComponent login={props.login} />;
-  } else if (loginSuccess) {
-    // TODO:@hl05 redirect to the right places
-    return <Redirect to="/cart" />;
   }
+  return <Redirect to="/user/login" />;
 }
 
 export { AgreeAndContinueComponent };

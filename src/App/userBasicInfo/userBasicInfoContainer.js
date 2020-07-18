@@ -4,6 +4,7 @@ import {
   ChangingBirthYear,
   ChangingGenderOperation,
   SelectIDTypeOperation,
+  login,
 } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -13,6 +14,10 @@ const mapStateToProps = (state) => {
     consumerIDTypes: state.ubiStore.consumerIDTypes,
     selectedDocument: state.ubiStore.selectedDocument,
     selectedDocumentValue: state.ubiStore.selectedDocumentValue,
+    loginInProgress: state.ubiStore.loginInProgress,
+    loginSuccess: state.ubiStore.loginSuccess,
+    loginFailed: state.ubiStore.loginFailed,
+    collectUserDetails: state.ubiStore.collectUserDetails,
   };
 };
 
@@ -21,6 +26,7 @@ const mapDispatchToProps = (dispatch) => {
     changeBirthYear: (value) => dispatch(ChangingBirthYear(value)),
     changingGenderFunc: (value) => dispatch(ChangingGenderOperation(value)),
     selectingIDProofFunc: (value) => dispatch(SelectIDTypeOperation(value)),
+    login: () => dispatch(login()),
   };
 };
 

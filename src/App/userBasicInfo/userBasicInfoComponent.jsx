@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import "./styles/style.scss";
 import shield from "../../assets/images/shield.svg";
 import { ToolbarComponent } from "../common/toolbar";
 import { Redirect, Link } from "react-router-dom";
 import PropTypes from "prop-types";
+
+LFComponent.propTypes = {
+  login: PropTypes.func,
+};
+
+function LFComponent(props) {
+  const login = props.login;
+  return (
+    <div>
+      <div>login failed </div>
+      <button onClick={login}> retry </button>
+    </div>
+  );
+}
 
 UserBasicInfoComponent.propTypes = {
   yob: PropTypes.string,
@@ -15,6 +29,11 @@ UserBasicInfoComponent.propTypes = {
   selectingIDProofFunc: PropTypes.func,
   selectedDocument: PropTypes.string,
   selectedDocumentValue: PropTypes.string,
+  loginInProgress: PropTypes.boolean,
+  loginFailed: PropTypes.boolean,
+  loginSuccess: PropTypes.boolean,
+  collectUserDetails: PropTypes.boolean,
+  login: PropTypes.func,
 };
 
 const OpenIDOptions = () => {
@@ -32,6 +51,27 @@ function UserBasicInfoComponent(props) {
   const showConsumerIDs = props.showConsumerIDs;
   const selectedDocument = props.selectedDocument;
   const selectedDocumentValue = props.selectedDocumentValue;
+  const loginSuccess = props.loginSuccess;
+  const loginInProgress = props.loginInProgress;
+  const loginFailed = props.loginFailed;
+  const collectUserDetails = props.collectUserDetails;
+  const trigger = !(loginSuccess || loginFailed || loginInProgress);
+  useLayoutEffect(() => {
+    if (trigger) {
+      props.login();
+    }
+  });
+
+  if (loginInProgress) {
+    return <div> Login in progress </div>;
+  } else if (loginFailed) {
+    return <LFComponent login={props.login} />;
+  } else if (loginSuccess) {
+    // TODO:@hl05 redirect to the right places
+    if (!collectUserDetails) {
+      return <Redirect to="/cart" />;
+    }
+  }
   return (
     <div className="page-container userBasicInfoComponent">
       <ToolbarComponent helpVisibility="true" title="Let's Get Started!" />
