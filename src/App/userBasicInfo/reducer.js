@@ -1,0 +1,1 @@
+export { userInfoCreateReducer } from "./duck";
