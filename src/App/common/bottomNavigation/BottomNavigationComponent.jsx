@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./navbar.scss";
 import homeIcon from "../../../assets/images/home.png";
-import searchIcon from "../../../assets/images/search.png";
+import searchIcon from "../../../assets/images/search.svg";
 import cartIcon from "../../../assets/images/cart.png";
 
 const tabs = [

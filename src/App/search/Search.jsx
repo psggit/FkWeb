@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BottomNavigationComponent from "../common/bottomNavigation";
 import SearchBox from "./SearchBox";
-import Layout from "../Layout/Layout";
 import { HeaderComponent } from "../common/toolbar";
+import SearchLayout from "../common/layout/SearchLayout";
 
 function Search() {
   const [cancelBtn, SetCancelBtn] = useState(false);
@@ -23,7 +23,7 @@ function Search() {
         <SearchBox cancelEnable={cancelEnable} />
         {cancelBtn ? <button>Cancel</button> : ""}
       </div>
-      <Layout>
+      <SearchLayout>
         <div className="search-child">
           <h6>What are you looking for today?</h6>
           <p>
@@ -32,7 +32,7 @@ function Search() {
           </p>
         </div>
         <BottomNavigationComponent />
-      </Layout>
+      </SearchLayout>
     </>
   );
 }

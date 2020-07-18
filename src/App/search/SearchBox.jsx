@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import searchIcon from "../../assets/images/search.svg";
 
 function SearchBox(props) {
-  const [inputType] = useState('text');
+  const [inputType] = useState("text");
   const [inputValue, setInputValue] = useState("");
 
   function handleChange(event) {
@@ -14,7 +15,7 @@ function SearchBox(props) {
         type={inputType}
         value={inputValue}
         name="input-form"
-        onFocus={()=>props.cancelEnable(true)}
+        onFocus={() => props.cancelEnable(true)}
         onChange={handleChange}
         className="inputclass"
       />
