@@ -1,1 +1,1 @@
-export { Reducer } from "./duck";
+export { userInfoCreateReducer } from "./duck";

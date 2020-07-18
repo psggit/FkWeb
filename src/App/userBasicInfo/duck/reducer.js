@@ -1,41 +1,38 @@
 import {
-  tcAgreed,
-  loginInProgress,
-  loginSuccess,
-  loginFailed,
+  birthYearEntered,
+  changeGenderAction,
+  selectIDTypeAction,
 } from "./actions";
+
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-  showTC: true,
-  loginInProgress: false,
-  loginSuccess: false,
-  loginFailed: false,
+  birthYear: "",
+  gender: "",
+  selectedDocument: "",
+  selectedDocumentValue: "",
+  consumerIDTypes: [
+    { idType: "Driving License", format: "text" },
+    { idType: "Passport", format: "text" },
+    { idType: "PAN Card", format: "text" },
+    { idType: "Voter ID", format: "text" },
+  ],
 };
 
-const Reducer = createReducer(initialState, {
-  [tcAgreed]: (state) => ({
+const userInfoCreateReducer = createReducer(initialState, {
+  [birthYearEntered]: (state, action) => ({
     ...state,
-    showTC: false,
+    birthYear: action.payload,
   }),
-  [loginInProgress]: (state) => ({
+  [changeGenderAction]: (state, action) => ({
     ...state,
-    loginInProgress: true,
-    loginSuccess: false,
-    loginFailed: false,
+    gender: action.payload,
   }),
-  [loginSuccess]: (state) => ({
+  [selectIDTypeAction]: (state, action) => ({
     ...state,
-    loginInProgress: false,
-    loginSuccess: true,
-    loginFailed: false,
-  }),
-  [loginFailed]: (state) => ({
-    ...state,
-    loginInProgress: false,
-    loginSuccess: false,
-    loginFailed: true,
+    selectedDocument: action.payload,
+    selectedDocumentValue: "",
   }),
 });
 
-export { Reducer };
+export { userInfoCreateReducer };

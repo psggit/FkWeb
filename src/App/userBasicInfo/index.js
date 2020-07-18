@@ -1,2 +1,2 @@
 export { UserBasicInfoContainer } from "./userBasicInfoContainer";
-export { Reducer } from "./reducer";
+export { userInfoCreateReducer } from "./reducer";

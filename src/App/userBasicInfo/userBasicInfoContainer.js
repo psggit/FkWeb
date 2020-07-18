@@ -1,20 +1,26 @@
 import { connect } from "react-redux";
 import { UserBasicInfoComponent } from "./userBasicInfoComponent";
-import { login, agreeTandC } from "./duck";
+import {
+  ChangingBirthYear,
+  ChangingGenderOperation,
+  SelectIDTypeOperation,
+} from "./duck";
 
 const mapStateToProps = (state) => {
   return {
-    showTC: state.tcStore.showTC,
-    loginInProgress: state.tcStore.loginInProgress,
-    loginSuccess: state.tcStore.loginSuccess,
-      loginFailed: state.tcStore.loginFailed,
+    yob: state.ubiStore.birthYear,
+    gender: state.ubiStore.gender,
+    consumerIDTypes: state.ubiStore.consumerIDTypes,
+    selectedDocument: state.ubiStore.selectedDocument,
+    selectedDocumentValue: state.ubiStore.selectedDocumentValue,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: () => dispatch(login()),
-    agreeTc: () => dispatch(agreeTandC()),
+    changeBirthYear: (value) => dispatch(ChangingBirthYear(value)),
+    changingGenderFunc: (value) => dispatch(ChangingGenderOperation(value)),
+    selectingIDProofFunc: (value) => dispatch(SelectIDTypeOperation(value)),
   };
 };
 

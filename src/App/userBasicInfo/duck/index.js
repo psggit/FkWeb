@@ -1,2 +1,6 @@
-export { Reducer } from "./reducer";
-export { login, agreeTandC } from "./operations";
+export { userInfoCreateReducer } from "./reducer";
+export {
+  ChangingBirthYear,
+  ChangingGenderOperation,
+  SelectIDTypeOperation,
+} from "./operations";
