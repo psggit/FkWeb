@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./home";
 import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
+import { UserBasicInfoContainer } from "./userBasicInfo";
+import Cart from "./cart";
 import { CartContainer } from "./cart";
 import Search from "./search";
 import SelectAddress from "./address";
@@ -16,6 +18,7 @@ function App() {
     <div>
       <Router>
         <Switch>
+          <Route path="/user/info/create" component={UserBasicInfoContainer} />
           <Route path="/search" component={Search} />
           <Route path="/cart" component={CartContainer} />
           <Route path="/address/select" component={SelectAddress} />
