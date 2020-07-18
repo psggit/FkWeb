@@ -6,7 +6,7 @@ import { EmptyCartComponent } from "./emptyCart";
 import { CartHeaderComponent } from "./header";
 import { BottomNextComponent } from "../common/bottomNext";
 
-function Cart() {
+function CartComponent(props) {
   return (
     <div className="cart">
       <div className="full-cart show-content">
@@ -24,4 +24,4 @@ function Cart() {
   );
 }
 
-export default Cart;
+export { CartComponent };

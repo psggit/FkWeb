@@ -80,7 +80,8 @@ function AgreeAndContinueComponent(props) {
   } else if (loginFailed) {
     return <LFComponent login={props.login} />;
   } else if (loginSuccess) {
-    return <Redirect to="/user/info/create" />;
+    // TODO:@hl05 redirect to the right places
+    return <Redirect to="/cart" />;
   }
 }
 

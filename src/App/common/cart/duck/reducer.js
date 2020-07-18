@@ -13,6 +13,7 @@ var Product: {
   skuId: number,
   brandName: string,
   brandId: number,
+  image: string,
   price: number,
   volume: number,
   count: number,
@@ -36,6 +37,7 @@ var Sku: {
   retailerDescription: string,
   sku_id: number,
   brand_name: string,
+  logo_low_res_image: string,
   brand_id: number,
   price: number,
   volume: number,
@@ -59,33 +61,62 @@ let getTestState = (): State => {
       name: "Gokul Arcade",
       description: "delivers very soon",
     },
+    retailerDiffers: false,
+    products: {
+      "1276": {
+        skuId: 1276,
+        brandName: "Kf blue",
+        brandId: 993,
+        logo_low_res_image:
+          "https://res.cloudinary.com/www-hipbar-com/image/upload/c_scale,h_300/v1557824990/Brand%20Logo's/TN/Beer.jpg",
+        price: 150,
+        volume: 650,
+        count: 2,
+        available: true,
+        subText: "",
+      },
+    },
   };
 };
 
-let addProduct = (state: State, sku: sku): state => {
+const initialState = getTestState;
+
+let setRetailer = (state: State, sku: Sku): State => {
+  state.set("retailer", {
+    id: sku.retailerId,
+    name: sku.retailerName,
+    description: sku.retailerDescription,
+  });
+  return state;
+};
+
+let isEmpty = (state: State): boolean => {
+  return Object.keys(state.products).length === 0;
+};
+
+let addProduct = (state: State, sku: Sku): state => {
   // handle existing retailer
   if (sku.retailerId !== state.retailer.id) {
     if (sku.clearCart === false) {
       state.set("retailerDiffers", true);
       return state;
     }
-    state.set("retailer", {
-      id: sku.retailerId,
-      name: sku.retailerName,
-      description: sku.retailerDescription,
-    });
-    state.set("products", {});
-    state.set("retailerDiffers", false);
+    state = setRetailer(initialState(), sku);
+  }
+
+  if (isEmpty(state)) {
+    state = setRetailer(initialState(), sku);
   }
 
   // set product details
-  let prod = state.products.get(sku.sku_id);
+  let prod = state.products.get(sku.sku_id.toString());
   //if doesn't exist, create one and add it to the map
   if (prod === undefined) {
     prod = {
       skuId: sku.sku_id,
       brandName: sku.brand_name,
       brandId: sku.brand_id,
+      image: sku.logo_low_res_image,
       price: sku.price,
       volume: sku.volume,
       count: 1,
@@ -95,12 +126,12 @@ let addProduct = (state: State, sku: sku): state => {
   } else {
     prod.count += 1;
   }
-  state.products.set(prod.skuId, prod);
+  state.products.set(prod.skuId.toString(), prod);
   return state;
 };
 
 let removeProduct = (state: State, sku: sku): state => {
-  let prod = state.products.get(sku.sku_id);
+  let prod = state.products.get(sku.sku_id.toString);
   if (prod === undefined) {
     return state;
   } else {
@@ -108,6 +139,9 @@ let removeProduct = (state: State, sku: sku): state => {
   }
   if (prod.count === 0) {
     state.products.delete(prod.skuId);
+  }
+  if (isEmpty(state)) {
+    return initialState();
   }
   return state;
 };
@@ -120,9 +154,7 @@ const cartTotal = (oldS: State): number => {
   return total;
 };
 
-const initialState = getTestState;
-
-const cartReducer = createReducer(initialState, {
+const cartReducer = createReducer(initialState(), {
   [addSkuToCart]: (state: State, e: Sku): State => addProduct({ ...state }, e),
   [removeSkuFromCart]: (state: State, e: Sku): State =>
     removeProduct({ ...state }, e),

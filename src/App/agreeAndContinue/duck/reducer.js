@@ -18,6 +18,9 @@ const tcReducer = createReducer(initialState, {
   [tcAgreed]: (state) => ({
     ...state,
     showTC: false,
+    loginInProgress: true,
+    loginSuccess: false,
+    loginFailed: false,
   }),
   [loginInProgress]: (state) => ({
     ...state,

@@ -30,7 +30,7 @@ const loginHandler = (gt, dispatch) => {
   dispatch(loginInProgress());
   loginAPI(gt.grantToken)
     .then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         dispatch(loginSuccess());
       } else {
         dispatch(loginFailed());
@@ -61,6 +61,7 @@ const loginWithGrantToken = (dispatch) => {
 
 const login = () => {
   return (dispatch) => {
+    dispatch(loginInProgress());
     if (fkPlatformActive) {
       dispatch(getGrantTokenInitiated);
       return loginWithGrantToken(dispatch);
@@ -88,7 +89,6 @@ const agreeTandC = () => {
   return (dispatch) => {
     setTc();
     dispatch(tcAgreed());
-    dispatch(login());
   };
 };
 

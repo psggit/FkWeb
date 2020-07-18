@@ -1,7 +1,7 @@
 import { createAction } from "@reduxjs/toolkit";
 
 //event for adding an sku to cart
-export const addSKUToCart = createAction("addSKUToCart");
+export const addSkuToCart = createAction("addSKUToCart");
 
 //event for removing an sku from cart
-export const reremoveSKUFromCart = createAction("removeSKUFromCart");
+export const removeSkuFromCart = createAction("removeSKUFromCart");

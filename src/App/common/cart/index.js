@@ -1,6 +1,6 @@
 export {
   cartReducer,
   cartTotal,
-  addSKUToCart,
-  removeSKUFromCart,
+  addSkuToCart,
+  removeSkuFromCart,
 } from "./duck";
