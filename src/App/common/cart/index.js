@@ -3,4 +3,5 @@ export {
   cartTotal,
   addSkuToCart,
   removeSkuFromCart,
+  isEmpty,
 } from "./duck";

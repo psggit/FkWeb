@@ -19,6 +19,7 @@ var Product: {
   count: number,
   available: boolean,
   subText: string,
+  logoLowResImage: string,
 };
 
 var Products: {
@@ -82,11 +83,11 @@ let getTestState = (): State => {
 const initialState = getTestState;
 
 let setRetailer = (state: State, sku: Sku): State => {
-  state.set("retailer", {
+  state["retailer"] = {
     id: sku.retailerId,
     name: sku.retailerName,
     description: sku.retailerDescription,
-  });
+  };
   return state;
 };
 
@@ -98,7 +99,7 @@ let addProduct = (state: State, sku: Sku): state => {
   // handle existing retailer
   if (sku.retailerId !== state.retailer.id) {
     if (sku.clearCart === false) {
-      state.set("retailerDiffers", true);
+      state["retailerDiffers"] = true;
       return state;
     }
     state = setRetailer(initialState(), sku);
@@ -109,7 +110,7 @@ let addProduct = (state: State, sku: Sku): state => {
   }
 
   // set product details
-  let prod = state.products.get(sku.sku_id.toString());
+  let prod = state.products[sku.sku_id.toString()];
   //if doesn't exist, create one and add it to the map
   if (prod === undefined) {
     prod = {
@@ -126,19 +127,19 @@ let addProduct = (state: State, sku: Sku): state => {
   } else {
     prod.count += 1;
   }
-  state.products.set(prod.skuId.toString(), prod);
+  state.products[prod.skuId.toString()] = prod;
   return state;
 };
 
 let removeProduct = (state: State, sku: sku): state => {
-  let prod = state.products.get(sku.sku_id.toString);
+  let prod = state.products[sku.sku_id.toString()];
   if (prod === undefined) {
     return state;
   } else {
     prod.count -= 1;
   }
   if (prod.count === 0) {
-    state.products.delete(prod.skuId);
+    delete state.products[prod.skuId];
   }
   if (isEmpty(state)) {
     return initialState();
@@ -155,9 +156,13 @@ const cartTotal = (oldS: State): number => {
 };
 
 const cartReducer = createReducer(initialState(), {
-  [addSkuToCart]: (state: State, e: Sku): State => addProduct({ ...state }, e),
-  [removeSkuFromCart]: (state: State, e: Sku): State =>
-    removeProduct({ ...state }, e),
+  [addSkuToCart]: (state: State, e: Sku): State => {
+    return void addProduct({ ...state }, e.payload);
+  },
+
+  [removeSkuFromCart]: (state: State, e: Sku): State => {
+    return void removeProduct({ ...state }, e.payload);
+  },
 });
 
-export { cartReducer, cartTotal };
+export { cartReducer, cartTotal, isEmpty };
