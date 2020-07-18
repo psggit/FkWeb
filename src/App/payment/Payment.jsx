@@ -8,6 +8,7 @@ import addNewIcon from "../../assets/images/add_address.svg";
 import netBankingIcon from "../../assets/images/add_address.svg";
 import downIcon from "../../assets/images/add_address.svg";
 import "./style.scss";
+import { ModalComponent } from "../common/modal";
 
 function UPIComponent() {
   return (
@@ -114,14 +115,15 @@ function NetBankingComponent() {
 
 function Payment() {
   return (
-    <div>
+    <>
       <ToolbarComponent helpVisibility="true" title="Pay Rs 32.00 using" />
       <div className="page-container">
         <UPIComponent />
         <CreditDebitCardsComponent />
         <NetBankingComponent />
+        <ModalComponent />
       </div>
-    </div>
+    </>
   );
 }
 
