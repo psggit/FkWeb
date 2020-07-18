@@ -62,18 +62,6 @@ const loginWithGrantToken = (dispatch) => {
 const login = () => {
   return (dispatch) => {
     dispatch(loginInProgress());
-    loginAPI(gt.grantToken)
-      .then((res) => {
-        if (res.status == 200) {
-          dispatch(loginSuccess());
-        } else {
-          dispatch(loginSuccess());
-          //dispatch(loginFailed());
-        }
-      })
-      .catch((error) => {
-        dispatch(loginFailed(error));
-      });
     if (fkPlatformActive) {
       dispatch(getGrantTokenInitiated);
       return loginWithGrantToken(dispatch);
