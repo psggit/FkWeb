@@ -6,9 +6,4 @@ const changeGenderAction = createAction("changeGenderAction");
 
 const selectIDTypeAction = createAction("selectIDTypeAction");
 
-
-export {
-  birthYearEntered,
-  selectIDTypeAction,
-  changeGenderAction,
-};
+export { birthYearEntered, selectIDTypeAction, changeGenderAction };

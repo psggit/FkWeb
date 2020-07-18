@@ -1,4 +1,3 @@
-import FKPlatform from "fk-platform-sdk/web";
 import {
   birthYearEntered,
   changeGenderAction,
