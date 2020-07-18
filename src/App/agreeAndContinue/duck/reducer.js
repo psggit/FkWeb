@@ -1,10 +1,11 @@
+import { createReducer } from "@reduxjs/toolkit";
+
 import {
   tcAgreed,
   loginInProgress,
   loginSuccess,
   loginFailed,
 } from "./actions";
-import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   showTC: true,
@@ -17,6 +18,9 @@ const tcReducer = createReducer(initialState, {
   [tcAgreed]: (state) => ({
     ...state,
     showTC: false,
+    loginInProgress: true,
+    loginSuccess: false,
+    loginFailed: false,
   }),
   [loginInProgress]: (state) => ({
     ...state,

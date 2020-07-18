@@ -4,8 +4,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./home";
 import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
+<<<<<<< HEAD
 import { UserBasicInfoContainer } from "./userBasicInfo";
 import Cart from "./cart";
+=======
+import { CartContainer } from "./cart";
+>>>>>>> 9732dec0162720783ac6b85e15a6c118732e75d9
 import Search from "./search";
 import SelectAddress from "./address";
 import OrderSummary from "./summary";
@@ -15,10 +19,15 @@ import BottomNavigationComponent from "./common/bottomNavigation";
 function App() {
   return (
     <div>
-        <Router>
+      <Router>
         <Switch>
+<<<<<<< HEAD
           <Route path="/search" component={UserBasicInfoContainer} />
           <Route path="/cart" component={Cart} />
+=======
+          <Route path="/search" component={Search} />
+          <Route path="/cart" component={CartContainer} />
+>>>>>>> 9732dec0162720783ac6b85e15a6c118732e75d9
           <Route path="/address/select" component={SelectAddress} />
           <Route path="/home" component={Home} />
           <Route

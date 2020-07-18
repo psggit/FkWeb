@@ -26,38 +26,41 @@ var scopeReq = [
   { scope: "user.name", isMandatory: true, shouldVerify: false },
 ];
 
-const getGrantToken = () => {
-  if (fkPlatformActive) {
-    return fkPlatform
-      .getModuleHelper()
-      .getPermissionsModule()
-      .getToken(scopeReq)
-      .then((e) => {
-        return { grantToken: e.grantToken, error: false };
-      })
-      .catch(() => {
-        return { grantToken: "", error: false };
-      });
-  } else {
-    return { grantToken: "dummyToken", error: false };
-  }
+const loginHandler = (gt, dispatch) => {
+  dispatch(loginInProgress());
+  loginAPI(gt.grantToken)
+    .then((res) => {
+      if (res.status === 200) {
+        dispatch(loginSuccess());
+      } else {
+        dispatch(loginFailed());
+      }
+    })
+    .catch((error) => {
+      dispatch(loginFailed(error));
+    });
+};
+
+const loginWithGrantToken = (dispatch) => {
+  return fkPlatform
+    .getModuleHelper()
+    .getPermissionsModule()
+    .getToken(scopeReq)
+    .then((gt) => {
+      dispatch(fetchGrantTokenSuccess());
+      loginHandler(gt, dispatch);
+    })
+    .catch(() => {
+      dispatch(fetchGrantTokenFailed());
+    });
 };
 
 /*
-const testFK = () => {
-  return { grantToken: "grant-token-local", error: false };
-};
-*/
+    return { grantToken: "dummyToken", error: false };
+ */
 
 const login = () => {
   return (dispatch) => {
-    dispatch(getGrantTokenInitiated);
-    let gt = getGrantToken();
-    if (gt.error) {
-      dispatch(fetchGrantTokenFailed());
-      return;
-    }
-    dispatch(fetchGrantTokenSuccess());
     dispatch(loginInProgress());
     loginAPI(gt.grantToken)
       .then((res) => {
@@ -71,6 +74,12 @@ const login = () => {
       .catch((error) => {
         dispatch(loginFailed(error));
       });
+    if (fkPlatformActive) {
+      dispatch(getGrantTokenInitiated);
+      return loginWithGrantToken(dispatch);
+    } else {
+      return loginHandler({ grantToken: "dummyToken" }, dispatch);
+    }
   };
 };
 
@@ -92,7 +101,6 @@ const agreeTandC = () => {
   return (dispatch) => {
     setTc();
     dispatch(tcAgreed());
-    dispatch(login());
   };
 };
 
