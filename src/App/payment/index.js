@@ -1,3 +1,3 @@
-import Payment from "./Payment";
+import PaymentOptions from "./PaymentOptions";
 
-export default Payment;
+export default PaymentOptions;
