@@ -42,4 +42,4 @@ function ToolbarComponent(props) {
   );
 }
 
-export default ToolbarComponent;
+export { ToolbarComponent };

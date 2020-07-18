@@ -1,3 +1,2 @@
-import ToolbarComponent from "./ToolbarComponent";
-
-export default ToolbarComponent;
+export { HeaderComponent } from "./HeaderComponent";
+export { ToolbarComponent } from "./ToolbarComponent";

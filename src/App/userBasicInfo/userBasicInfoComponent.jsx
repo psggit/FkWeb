@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/style.scss";
 import shield from "../../assets/images/shield.svg";
-import ToolbarComponent from "../common/toolbar";
+import { ToolbarComponent } from "../common/toolbar";
 import { Redirect, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -24,7 +24,6 @@ const OpenIDOptions = () => {
 const CloseIDOptions = () => {
   document.getElementById("kycID").classList.add("hide");
 };
-
 
 function UserBasicInfoComponent(props) {
   const yob = props.yob;
@@ -92,8 +91,12 @@ function UserBasicInfoComponent(props) {
           />
         </div>
       </div>
-      <div className={(selectedDocument == "" ? "hide ": "") + "input-component"}>
-        <div className="input-component-label no-fold-text">ENTER YOUR <span className="caps">{selectedDocument} </span> NUMBER</div>
+      <div
+        className={(selectedDocument == "" ? "hide " : "") + "input-component"}
+      >
+        <div className="input-component-label no-fold-text">
+          ENTER YOUR <span className="caps">{selectedDocument} </span> NUMBER
+        </div>
         <div className="inputComponentField input">
           <input
             placeholder={"Enter your " + selectedDocument + " number"}
@@ -110,9 +113,7 @@ function UserBasicInfoComponent(props) {
           </div>
           <div className="option_content">
             {availableConsumerIDs.map((id) => (
-              <div
-                  key={id.idType}
-              >
+              <div key={id.idType}>
                 <input
                   type="radio"
                   id={id.idType}
