@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./home";
 import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
-import Cart from "./cart";
+import { CartContainer } from "./cart";
 import Search from "./search";
 import SelectAddress from "./address";
 import OrderSummary from "./summary";
@@ -14,10 +14,10 @@ import BottomNavigationComponent from "./common/bottomNavigation";
 function App() {
   return (
     <div>
-        <Router>
+      <Router>
         <Switch>
           <Route path="/search" component={Search} />
-          <Route path="/cart" component={Cart} />
+          <Route path="/cart" component={CartContainer} />
           <Route path="/address/select" component={SelectAddress} />
           <Route path="/home" component={Home} />
           <Route
