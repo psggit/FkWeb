@@ -7,8 +7,9 @@ import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { CartContainer } from "./cart";
 import Search from "./search";
 import SelectAddress from "./address";
-import BottomNavigationComponent from "./common/bottomNavigation";
 import OrderSummary from "./summary";
+import Payment from "./payment";
+import BottomNavigationComponent from "./common/bottomNavigation";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
             )}
           />
           <Route path="/order/summary" component={OrderSummary} />
+          <Route path="/payment/options" component={Payment} />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
         <BottomNavigationComponent />
