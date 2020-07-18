@@ -22,18 +22,22 @@ function ToolbarComponent(props) {
   function showHelp() {}
 
   return (
-    <div className="tool-bar">
-      <div className="toolbar-layout">
-        <img className="back-arrow" src={backIcon} onClick={goBack} />
-        <img
-          className={
-            helpVisibility ? "help-icon show-content" : "help-icon hide-content"
-          }
-          src={helpIcon}
-          onClick={showHelp}
-        />
+    <div className="tool-bar-wrapper">
+      <div className="tool-bar fixed">
+        <div className="toolbar-layout">
+          <img className="back-arrow" src={backIcon} onClick={goBack} />
+          <img
+            className={
+              helpVisibility
+                ? "help-icon show-content"
+                : "help-icon hide-content"
+            }
+            src={helpIcon}
+            onClick={showHelp}
+          />
+        </div>
+        <div className="title">{title}</div>
       </div>
-      <div className="title">{title}</div>
     </div>
   );
 }
