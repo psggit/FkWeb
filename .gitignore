@@ -16,3 +16,4 @@ Thumbs.db
 .yarnclean
 
 cypress/
+local.sh

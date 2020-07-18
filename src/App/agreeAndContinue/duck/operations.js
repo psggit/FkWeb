@@ -20,6 +20,9 @@ try {
   fkPlatformActive = false;
 }
 
+/* TODO:@hl05 better error management */
+/* TODO:@hl05 making it work with regular web */
+
 var scopeReq = [
   { scope: "user.email", isMandatory: false, shouldVerify: false },
   { scope: "user.mobile", isMandatory: true, shouldVerify: true },
