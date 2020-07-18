@@ -54,7 +54,7 @@ function TcComponent(props) {
 }
 
 AgreeAndContinueComponent.propTypes = {
-  showTC: PropTypes.boolean,
+  showTC: PropTypes.bool,
 };
 
 function AgreeAndContinueComponent(props) {

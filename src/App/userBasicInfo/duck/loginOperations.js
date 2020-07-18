@@ -51,7 +51,12 @@ const onError = (dispatch) => {
 
 const loginHandler = (gt, dispatch) => {
   dispatch(loginInProgress());
-  loginAPI(gt.grantToken, processResponse, onSuccess, onError);
+  loginAPI(
+    gt.grantToken,
+    processResponse(dispatch),
+    onSuccess(dispatch),
+    onError(dispatch)
+  );
 };
 
 const loginWithGrantToken = (dispatch) => {

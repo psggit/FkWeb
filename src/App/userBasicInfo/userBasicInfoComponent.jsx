@@ -19,7 +19,7 @@ function LFComponent(props) {
   );
 }
 
-UserBasicInfoComponent.propTypes = {
+CollectInfoComponent.propTypes = {
   yob: PropTypes.string,
   gender: PropTypes.string,
   selectedID: PropTypes.string,
@@ -29,49 +29,15 @@ UserBasicInfoComponent.propTypes = {
   selectingIDProofFunc: PropTypes.func,
   selectedDocument: PropTypes.string,
   selectedDocumentValue: PropTypes.string,
-  loginInProgress: PropTypes.boolean,
-  loginFailed: PropTypes.boolean,
-  loginSuccess: PropTypes.boolean,
-  collectUserDetails: PropTypes.boolean,
-  login: PropTypes.func,
 };
 
-const OpenIDOptions = () => {
-  document.getElementById("kycID").classList.remove("hide");
-};
-
-const CloseIDOptions = () => {
-  document.getElementById("kycID").classList.add("hide");
-};
-
-function UserBasicInfoComponent(props) {
+function CollectInfoComponent(props) {
   const yob = props.yob;
   const gender = props.gender;
   const availableConsumerIDs = props.consumerIDTypes;
-  const showConsumerIDs = props.showConsumerIDs;
+  //const showConsumerIDs = props.showConsumerIDs;
   const selectedDocument = props.selectedDocument;
   const selectedDocumentValue = props.selectedDocumentValue;
-  const loginSuccess = props.loginSuccess;
-  const loginInProgress = props.loginInProgress;
-  const loginFailed = props.loginFailed;
-  const collectUserDetails = props.collectUserDetails;
-  const trigger = !(loginSuccess || loginFailed || loginInProgress);
-  useLayoutEffect(() => {
-    if (trigger) {
-      props.login();
-    }
-  });
-
-  if (loginInProgress) {
-    return <div> Login in progress </div>;
-  } else if (loginFailed) {
-    return <LFComponent login={props.login} />;
-  } else if (loginSuccess) {
-    // TODO:@hl05 redirect to the right places
-    if (!collectUserDetails) {
-      return <Redirect to="/cart" />;
-    }
-  }
   return (
     <div className="page-container userBasicInfoComponent">
       <ToolbarComponent helpVisibility="true" title="Let's Get Started!" />
@@ -165,8 +131,7 @@ function UserBasicInfoComponent(props) {
                   htmlFor={id.idType}
                   className="no-fold-text option flex vcenter"
                 >
-                  {" "}
-                  {id.idType}{" "}
+                  {id.idType}
                 </label>
               </div>
             ))}
@@ -186,5 +151,58 @@ function UserBasicInfoComponent(props) {
       </div>
     </div>
   );
+}
+
+UserBasicInfoComponent.propTypes = {
+  yob: PropTypes.string,
+  gender: PropTypes.string,
+  selectedID: PropTypes.string,
+  consumerIDTypes: PropTypes.array,
+  showConsumerIDs: PropTypes.bool,
+  changeBirthYear: PropTypes.func,
+  selectingIDProofFunc: PropTypes.func,
+  selectedDocument: PropTypes.string,
+  selectedDocumentValue: PropTypes.string,
+
+  loginInProgress: PropTypes.bool,
+  loginFailed: PropTypes.bool,
+  loginSuccess: PropTypes.bool,
+  collectUserDetails: PropTypes.bool,
+  login: PropTypes.func,
+};
+
+const OpenIDOptions = () => {
+  document.getElementById("kycID").classList.remove("hide");
+};
+
+const CloseIDOptions = () => {
+  document.getElementById("kycID").classList.add("hide");
+};
+
+function UserBasicInfoComponent(props) {
+  const loginSuccess = props.loginSuccess;
+  const loginInProgress = props.loginInProgress;
+  const loginFailed = props.loginFailed;
+  const collectUserDetails = props.collectUserDetails;
+  const trigger = !(loginSuccess || loginFailed || loginInProgress);
+  useLayoutEffect(() => {
+    if (trigger) {
+      props.login();
+    }
+  });
+
+  if (loginInProgress) {
+    return <div> Login in progress </div>;
+  } else if (loginFailed) {
+    return <LFComponent login={props.login} />;
+  } else if (loginSuccess) {
+    if (!collectUserDetails) {
+      return <Redirect to="/home" />;
+    } else {
+      return <CollectInfoComponent {...props} />;
+    }
+  } else {
+    return <div> deff </div>;
+  }
 }
 export { UserBasicInfoComponent };
