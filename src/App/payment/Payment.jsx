@@ -1,5 +1,5 @@
 import React from "react";
-import ToolbarComponent from "../common/toolbar";
+import { ToolbarComponent } from "../common/toolbar";
 import upiIcon from "../../assets/images/upi.svg";
 import nextIcon from "../../assets/images/right_arrow.svg";
 import cardIcon from "../../assets/images/new_cards.svg";

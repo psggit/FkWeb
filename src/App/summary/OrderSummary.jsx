@@ -1,5 +1,5 @@
 import React from "react";
-import ToolbarComponent from "../common/toolbar";
+import { ToolbarComponent } from "../common/toolbar";
 import { BottomNextComponent } from "../common/bottomNext";
 import {
   OrderAddressComponent,

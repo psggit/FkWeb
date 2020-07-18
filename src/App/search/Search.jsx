@@ -2,20 +2,23 @@ import React, { useState, useEffect } from "react";
 import BottomNavigationComponent from "../common/bottomNavigation";
 import SearchBox from "./SearchBox";
 import Layout from "../Layout/Layout";
+import { HeaderComponent } from "../common/toolbar";
 
 function Search() {
   const [cancelBtn, SetCancelBtn] = useState(false);
   const cancelEnable = (val) => {
     SetCancelBtn(val);
   };
+
   useEffect(() => {
     window.addEventListener("focusout", () => {
       SetCancelBtn(false);
     });
   });
+
   return (
     <>
-      <div>Search</div>
+      <HeaderComponent title="Search" />
       <div className="search-container">
         <SearchBox cancelEnable={cancelEnable} />
         {cancelBtn ? <button>Cancel</button> : ""}

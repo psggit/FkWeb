@@ -1,5 +1,5 @@
 import React from "react";
-import ToolbarComponent from "../common/toolbar";
+import { ToolbarComponent } from "../common/toolbar";
 import AddressComponent from "./components";
 import AddAddressIcon from "../../assets/images/add_address.svg";
 import { BottomNextComponent } from "../common/bottomNext";
