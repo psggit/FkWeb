@@ -41,7 +41,7 @@ module.exports = (env, argv) => {
             {
               loader: "svg-url-loader",
               options: {
-                limit: 10000,
+                limit: 50000,
               },
             },
           ],
