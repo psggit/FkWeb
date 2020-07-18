@@ -185,6 +185,7 @@ let validateCart = (state: State, data: Object): State => {
   state = replaceProductInfo(state, data.products);
   state = setUnAvailableProducts(state, data.unavail_items);
   state.validationFailure = false;
+  state.retailer.description = data.delivery_message;
   return state;
 };
 
