@@ -114,6 +114,8 @@ function NetBankingComponent() {
 }
 
 function Payment() {
+  const [modalShow, setModalShow] = React.useState(true);
+
   return (
     <>
       <ToolbarComponent helpVisibility="true" title="Pay Rs 32.00 using" />
@@ -121,7 +123,7 @@ function Payment() {
         <UPIComponent />
         <CreditDebitCardsComponent />
         <NetBankingComponent />
-        <ModalComponent />
+        <ModalComponent title="Error" content="Something went wrong" show={modalShow} onHide={() => setModalShow(false)} />
       </div>
     </>
   );

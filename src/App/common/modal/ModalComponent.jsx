@@ -17,20 +17,24 @@ class ModalComponent extends Component {
     return (
       <Modal
         {...this.props}
-        size="lg"
+        size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        animation={false}
+        backdrop="static"
+        keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Title id="contained-modal-title-vcenter" className="text-dark">
             {this.props.title}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="text-dark">
           <p>{this.props.content}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
+          <Button onClick={this.props.onHide} variant="secondary">Close</Button>
+          <Button onClick={this.props.retry} variant="secondary">Retry</Button>
         </Modal.Footer>
       </Modal>
     );
