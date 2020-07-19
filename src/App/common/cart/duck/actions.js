@@ -6,11 +6,11 @@ export const addSkuToCart = createAction("addSKUToCart");
 //event for removing an sku from cart
 export const removeSkuFromCart = createAction("removeSKUFromCart");
 
-//validate in progress
-export const validateInProgress = createAction("validateInProgress");
+//validation in progress
+export const validationInProgress = createAction("validationInProgress");
 
 // successful validation
-export const validateSuccessful = createAction("validateSuccessful");
+export const validationSuccessful = createAction("validationSuccessful");
 
 // validation failed, need to retry
 export const validationFailure = createAction("validationFailure");

@@ -17,7 +17,7 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route path="/user/info/create" component={UserBasicInfoContainer} />
+          <Route path="/user/login" component={UserBasicInfoContainer} />
           <Route path="/search" component={Search} />
           <Route path="/cart" component={CartContainer} />
           <Route path="/address/select" component={SelectAddress} />
