@@ -9,17 +9,32 @@ import "./style.scss";
 function PaymentOptions() {
   const [modalShow, setModalShow] = React.useState(false);
 
+  function retry() {
+//    setModalShow(false);
+  }
+
+  function close() {}
+
   return (
     <>
       <ToolbarComponent helpVisibility="true" title="Pay Rs 32.00 using" />
-      <div className="page-container">
+      <div className="page-container" onClick={() => setModalShow(true)}>
         <CreditDebitCardsComponent />
         <NetBankingComponent />
         <ModalComponent
           title="Error"
           content="Something went wrong"
+          actionitems={[
+            {
+              name: "Retry",
+              func: retry(),
+            },
+            {
+              name: "close",
+              func: close(),
+            },
+          ]}
           show={modalShow}
-          onHide={() => setModalShow(false)}
         />
         <BottomNextComponent routePath="payment" title="Pay" />
       </div>
