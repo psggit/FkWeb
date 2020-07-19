@@ -1,11 +1,11 @@
 import React from "react";
 import { ToolbarComponent } from "../common/toolbar";
-import { ModalComponent } from "../common/modal";
+import { Modal } from "../common/modal";
 import { CreditDebitCardsComponent, NetBankingComponent } from "./components";
 import { BottomNextComponent } from "../common/bottomNext";
 
 import "./style.scss";
-import {LoadingComponent} from "../common/loading";
+import {ModalOptions} from "../common/modal/Modal";
 
 function PaymentOptions() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -16,17 +16,27 @@ function PaymentOptions() {
       <div className="page-container" onClick={() => setModalShow(true)}>
         <CreditDebitCardsComponent />
         <NetBankingComponent />
-        <ModalComponent
-          title="Error"
-          content="Something went wrong"
-          option="Retry"
+        <Modal
           show={modalShow}
-          onHide={() => setModalShow(false)}
+          title="Alert"
+          content="Something went wrong please try again"
+          option="dismiss"
+          handleOption={() => setModalShow(false)}
         />
         <BottomNextComponent routePath="payment" title="Pay" />
       </div>
     </>
   );
 }
+
+        //<ModalOptions
+        //  show={modalShow}
+        //  title="Alert"
+        //  content="Something went wrong please try again"
+        //  option1="dismiss"
+        //  option2="dismiss"
+        //  handleOption1={() => setModalShow(false)}
+        //  handleOption2={() => setModalShow(false)}
+        ///>
 
 export default PaymentOptions;
