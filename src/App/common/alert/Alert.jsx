@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.scss";
 
-function Modal({ handleOption, show, title, content, option }) {
+function Alert({ handleOption, show, title, content, option }) {
   return (
     <div className={show ? "modal display-block" : "modal display-none"}>
       <section className="modal-main">
@@ -15,7 +15,7 @@ function Modal({ handleOption, show, title, content, option }) {
   );
 }
 
-function ModalOptions({
+function AlertWithOptions({
   handleOption1,
   handleOption2,
   show,
@@ -42,4 +42,4 @@ function ModalOptions({
   );
 }
 
-export { Modal, ModalOptions };
+export { Alert, AlertWithOptions };
