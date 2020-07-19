@@ -5,15 +5,10 @@ import { CreditDebitCardsComponent, NetBankingComponent } from "./components";
 import { BottomNextComponent } from "../common/bottomNext";
 
 import "./style.scss";
+import {LoadingComponent} from "../common/loading";
 
 function PaymentOptions() {
   const [modalShow, setModalShow] = React.useState(false);
-
-  function retry() {
-//    setModalShow(false);
-  }
-
-  function close() {}
 
   return (
     <>
@@ -24,17 +19,9 @@ function PaymentOptions() {
         <ModalComponent
           title="Error"
           content="Something went wrong"
-          actionitems={[
-            {
-              name: "Retry",
-              func: retry(),
-            },
-            {
-              name: "close",
-              func: close(),
-            },
-          ]}
+          option="Retry"
           show={modalShow}
+          onHide={() => setModalShow(false)}
         />
         <BottomNextComponent routePath="payment" title="Pay" />
       </div>
