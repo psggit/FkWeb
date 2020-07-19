@@ -11,6 +11,7 @@ import SelectAddress from "./address";
 import OrderSummary from "./summary";
 import PaymentOptions from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
+import { OrderPlaced } from "./order";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           />
           <Route path="/order/summary" component={OrderSummary} />
           <Route path="/payment/options" component={PaymentOptions} />
+          <Route path="/order/placed" component={OrderPlaced} />
           <Route
             path="/payment"
             component={() => (
