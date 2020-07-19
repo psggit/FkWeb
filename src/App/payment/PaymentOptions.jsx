@@ -5,7 +5,7 @@ import { CreditDebitCardsComponent, NetBankingComponent } from "./components";
 import { BottomNextComponent } from "../common/bottomNext";
 
 import "./style.scss";
-import {ModalOptions} from "../common/modal/Modal";
+import {AlertWithOptions} from "../common/modal";
 
 function PaymentOptions() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -16,7 +16,7 @@ function PaymentOptions() {
       <div className="page-container" onClick={() => setModalShow(true)}>
         <CreditDebitCardsComponent />
         <NetBankingComponent />
-        <Modal
+        <Alert
           show={modalShow}
           title="Alert"
           content="Something went wrong please try again"
