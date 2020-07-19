@@ -5,12 +5,11 @@ import { Home } from "./home";
 import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { UserBasicInfoContainer } from "./userBasicInfo";
-import Cart from "./cart";
 import { CartContainer } from "./cart";
 import Search from "./search";
 import SelectAddress from "./address";
 import OrderSummary from "./summary";
-import Payment from "./payment";
+import PaymentOptions from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
 
 function App() {
@@ -51,7 +50,16 @@ function App() {
             )}
           />
           <Route path="/order/summary" component={OrderSummary} />
-          <Route path="/payment/options" component={Payment} />
+          <Route path="/payment/options" component={PaymentOptions} />
+          <Route
+            path="/payment"
+            component={() => (
+              <IframeContainer
+                url={"https://hipbar.com/user-terms"}
+                title={`Payment`}
+              />
+            )}
+          />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
         <BottomNavigationComponent />
