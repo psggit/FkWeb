@@ -15,6 +15,7 @@ const CloseIDOptions = () => {
 };
 
 function OtherBanksComponent() {
+
 	const banks = [{
 		"payment_method_type": "NB",
 		"payment_method": "NB_HDFC",
@@ -22,7 +23,6 @@ function OtherBanksComponent() {
 		"image_url": "https://res.cloudinary.com/www-hipbar-com/image/upload/c_scale,h_88,q_80/v1535119548/Bank%20Logos%20_56px%20/HDFC.png",
 		"listing_order": 1
 	}];
-
 	return (
 		<>
 			<div className="options-overlay flex center hide" id="otherBanksID">
@@ -69,12 +69,19 @@ function OtherBanksComponent() {
 function PaymentOptions() {
 	const [modalShow, setModalShow] = React.useState(false);
 
+	const banks = [{
+		"payment_method_type": "NB",
+		"payment_method": "NB_HDFC",
+		"description": "HDFC Bank",
+		"image_url": "https://res.cloudinary.com/www-hipbar-com/image/upload/c_scale,h_88,q_80/v1535119548/Bank%20Logos%20_56px%20/HDFC.png",
+		"listing_order": 1
+	}];
 	return (
 		<>
 			<ToolbarComponent helpVisibility="true" title="Pay Rs 32.00 using"/>
 			<div className="page-container">
 				<CreditDebitCardsComponent/>
-				<NetBankingComponent onClick={() => OpenIDOptions}/>
+				<NetBankingComponent banks={banks} onBankSelected={OpenIDOptions}/>
 				<Alert
 					show={modalShow}
 					title="Alert"
@@ -82,7 +89,7 @@ function PaymentOptions() {
 					option="dismiss"
 					handleOption={() => setModalShow(false)}
 				/>
-				<OtherBanksComponent />
+				<OtherBanksComponent onOtherBackSelected={OpenIDOptions}/>
 				<BottomNextComponent routePath="/order/placed" title="Pay"/>
 			</div>
 		</>
