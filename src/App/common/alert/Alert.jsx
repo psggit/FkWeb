@@ -1,5 +1,14 @@
 import React from "react";
 import "./style.scss";
+import PropTypes from "prop-types";
+
+Alert.propTypes = {
+  handleOption: PropTypes.any,
+  show: PropTypes.any,
+  title: PropTypes.any,
+  content: PropTypes.any,
+  option: PropTypes.any,
+};
 
 function Alert({ handleOption, show, title, content, option }) {
   return (
@@ -14,6 +23,16 @@ function Alert({ handleOption, show, title, content, option }) {
     </div>
   );
 }
+
+AlertWithOptions.propTypes = {
+  handleOption1: PropTypes.any,
+  handleOption2: PropTypes.any,
+  show: PropTypes.any,
+  title: PropTypes.string,
+  content: PropTypes.string,
+  option1: PropTypes.any,
+  option2: PropTypes.any,
+};
 
 function AlertWithOptions({
   handleOption1,
