@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 
 import "./style.scss";
@@ -12,6 +12,8 @@ CartComponent.propTypes = {
   isEmpty: PropTypes.bool,
   products: PropTypes.object,
   key: PropTypes.number,
+  retailer: PropTypes.object,
+  validateCart: PropTypes.func,
 };
 
 function returnEmptyCart() {
@@ -40,7 +42,15 @@ function CartComponent(props) {
   let isEmpty = props.isEmpty;
   if (isEmpty) {
     return returnEmptyCart();
+  } else {
+    useLayoutEffect(() => {
+      props.validateCart({
+        retailer: props.retailer,
+        products: props.products,
+      });
+    });
   }
+
   return (
     <div className="cart">
       <div className="hide-content">

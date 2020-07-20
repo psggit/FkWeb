@@ -5,20 +5,21 @@ import { Home } from "./home";
 import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { UserBasicInfoContainer } from "./userBasicInfo";
-import Cart from "./cart";
 import { CartContainer } from "./cart";
 import Search from "./search";
 import SelectAddress from "./address";
 import OrderSummary from "./summary";
-import Payment from "./payment";
+import PaymentOptions from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
+import { OrderPlaced } from "./order";
 
 function App() {
   return (
     <div>
       <Router>
         <Switch>
-          <Route path="/search" component={UserBasicInfoContainer} />
+          <Route path="/user/login" component={UserBasicInfoContainer} />
+          <Route path="/search" component={Search} />
           <Route path="/cart" component={CartContainer} />
           <Route path="/address/select" component={SelectAddress} />
           <Route path="/home" component={Home} />
@@ -50,7 +51,17 @@ function App() {
             )}
           />
           <Route path="/order/summary" component={OrderSummary} />
-          <Route path="/payment/options" component={Payment} />
+          <Route path="/payment/options" component={PaymentOptions} />
+          <Route path="/order/placed" component={OrderPlaced} />
+          <Route
+            path="/payment"
+            component={() => (
+              <IframeContainer
+                url={"https://hipbar.com/user-terms"}
+                title={`Payment`}
+              />
+            )}
+          />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
         <BottomNavigationComponent />

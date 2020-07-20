@@ -7,3 +7,5 @@ export {
   FinaliseIDProofValueOperation,
   CheckDeclarationOperation,
 } from "./operations";
+
+export { login } from "./loginOperations";

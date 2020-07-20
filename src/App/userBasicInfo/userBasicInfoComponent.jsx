@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import "./styles/style.scss";
 import shield from "../../assets/images/shield.svg";
-import ToolbarComponent from "../common/toolbar";
+import { ToolbarComponent } from "../common/toolbar";
 import { Redirect, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-UserBasicInfoComponent.propTypes = {
+LFComponent.propTypes = {
+  login: PropTypes.func,
+};
+
+function LFComponent(props) {
+  const login = props.login;
+  return (
+    <div>
+      <div>login failed </div>
+      <button onClick={login}> retry </button>
+    </div>
+  );
+}
+
+CollectInfoComponent.propTypes = {
   yob: PropTypes.string,
   gender: PropTypes.string,
   selectedID: PropTypes.string,
@@ -30,11 +44,11 @@ const CloseIDOptions = () => {
   document.getElementById("kycID").classList.add("hide");
 };
 
-function UserBasicInfoComponent(props) {
+function CollectInfoComponent(props) {
   const yob = props.yob;
   const gender = props.gender;
   const availableConsumerIDs = props.consumerIDTypes;
-  const showConsumerIDs = props.showConsumerIDs;
+  //const showConsumerIDs = props.showConsumerIDs;
   const selectedDocument = props.selectedDocument;
   const selectedDocumentValue = props.selectedDocumentValue;
   const finalisedDocument = props.finalisedDocument;
@@ -149,8 +163,7 @@ function UserBasicInfoComponent(props) {
                   htmlFor={id.idType}
                   className="no-fold-text option flex vcenter"
                 >
-                  {" "}
-                  {id.idType}{" "}
+                  {id.idType}
                 </label>
               </div>
             ))}
@@ -175,5 +188,51 @@ function UserBasicInfoComponent(props) {
       </div>
     </div>
   );
+}
+
+UserBasicInfoComponent.propTypes = {
+  yob: PropTypes.string,
+  gender: PropTypes.string,
+  selectedID: PropTypes.string,
+  consumerIDTypes: PropTypes.array,
+  showConsumerIDs: PropTypes.bool,
+  changeBirthYear: PropTypes.func,
+  selectingIDProofFunc: PropTypes.func,
+  selectedDocument: PropTypes.string,
+  selectedDocumentValue: PropTypes.string,
+
+  loginInProgress: PropTypes.bool,
+  loginFailed: PropTypes.bool,
+  loginSuccess: PropTypes.bool,
+  collectUserDetails: PropTypes.bool,
+  login: PropTypes.func,
+};
+
+
+function UserBasicInfoComponent(props) {
+  const loginSuccess = props.loginSuccess;
+  const loginInProgress = props.loginInProgress;
+  const loginFailed = props.loginFailed;
+  const collectUserDetails = props.collectUserDetails;
+  const trigger = !(loginSuccess || loginFailed || loginInProgress);
+  useLayoutEffect(() => {
+    if (trigger) {
+      props.login();
+    }
+  });
+
+  if (loginInProgress) {
+    return <div> Login in progress </div>;
+  } else if (loginFailed) {
+    return <LFComponent login={props.login} />;
+  } else if (loginSuccess) {
+    if (!collectUserDetails) {
+      return <Redirect to="/home" />;
+    } else {
+      return <CollectInfoComponent {...props} />;
+    }
+  } else {
+    return <div> deff </div>;
+  }
 }
 export { UserBasicInfoComponent };

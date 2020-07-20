@@ -1,4 +1,7 @@
 import {
+  loginInProgress,
+  loginSuccess,
+  loginFailed,
   birthYearEntered,
   changeGenderAction,
   selectIDTypeAction,
@@ -11,6 +14,10 @@ import {
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
+  loginInProgress: false,
+  loginSuccess: false,
+  loginFailed: false,
+  collectUserDetails: false,
   birthYear: "",
   gender: "",
   selectedDocument: "",
@@ -27,6 +34,29 @@ const initialState = {
 };
 
 const userInfoCreateReducer = createReducer(initialState, {
+  [loginInProgress]: (state) => ({
+    ...state,
+    loginInProgress: true,
+    loginSuccess: false,
+    loginFailed: false,
+  }),
+  [loginSuccess]: (state, data) => ({
+    ...state,
+    loginInProgress: false,
+    loginSuccess: true,
+    loginFailed: false,
+    collectUserDetails: !(
+      data.bz_kyc_exist &&
+      data.yob_exist &&
+      data.gender_exist
+    ),
+  }),
+  [loginFailed]: (state) => ({
+    ...state,
+    loginInProgress: false,
+    loginSuccess: false,
+    loginFailed: true,
+  }),
   [birthYearEntered]: (state, action) => ({
     ...state,
     birthYear: action.payload,

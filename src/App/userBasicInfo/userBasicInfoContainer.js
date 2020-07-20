@@ -7,6 +7,7 @@ import {
   ChangeDocumentValueOperation,
   CheckDeclarationOperation,
   FinaliseIDProofValueOperation,
+  login,
 } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -19,6 +20,10 @@ const mapStateToProps = (state) => {
     showDeclaration: state.ubiStore.showDeclaration,
     checkDeclaration: state.ubiStore.checkDeclaration,
     selectedDocumentValue: state.ubiStore.selectedDocumentValue,
+    loginInProgress: state.ubiStore.loginInProgress,
+    loginSuccess: state.ubiStore.loginSuccess,
+    loginFailed: state.ubiStore.loginFailed,
+    collectUserDetails: state.ubiStore.collectUserDetails,
   };
 };
 
@@ -30,6 +35,7 @@ const mapDispatchToProps = (dispatch) => {
     changeDocumentValueFunc: (value) => dispatch(ChangeDocumentValueOperation(value)),
     finaliseIDProofFunc: ()=>dispatch(FinaliseIDProofValueOperation()),
     checkDeclarationFunc: ()=>dispatch(CheckDeclarationOperation()),
+    login: () => dispatch(login()),
   };
 };
 

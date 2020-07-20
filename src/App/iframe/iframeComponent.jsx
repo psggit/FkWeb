@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/style.scss";
-import ToolbarComponent from "../common/toolbar";
+import { ToolbarComponent } from "../common/toolbar";
 import PropTypes from "prop-types";
 
 IframeComponent.propTypes = {
