@@ -32,9 +32,10 @@ const mapDispatchToProps = (dispatch) => {
     changeBirthYear: (value) => dispatch(ChangingBirthYear(value)),
     changingGenderFunc: (value) => dispatch(ChangingGenderOperation(value)),
     selectingIDProofFunc: (value) => dispatch(SelectIDTypeOperation(value)),
-    changeDocumentValueFunc: (value) => dispatch(ChangeDocumentValueOperation(value)),
-    finaliseIDProofFunc: ()=>dispatch(FinaliseIDProofValueOperation()),
-    checkDeclarationFunc: ()=>dispatch(CheckDeclarationOperation()),
+    changeDocumentValueFunc: (value) =>
+      dispatch(ChangeDocumentValueOperation(value)),
+    finaliseIDProofFunc: () => dispatch(FinaliseIDProofValueOperation()),
+    checkDeclarationFunc: () => dispatch(CheckDeclarationOperation()),
     login: () => dispatch(login()),
   };
 };

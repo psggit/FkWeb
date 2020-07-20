@@ -51,7 +51,6 @@ const CheckDeclarationOperation = () => {
   };
 };
 
-
 const ChangeDocumentValueOperation = (value) => {
   return (dispatch, getState) => {
     dispatch(changeDocumentValueAction(value));
