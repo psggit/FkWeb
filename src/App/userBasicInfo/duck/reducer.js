@@ -24,7 +24,7 @@ const initialState = {
   finalisedDocument: "",
   selectedDocumentValue: "",
   showDeclaration: false,
-  checkDeclaration:false,
+  checkDeclaration: false,
   consumerIDTypes: [
     { idType: "Driving License", format: "text" },
     { idType: "Passport", format: "text" },

@@ -1,4 +1,3 @@
-import FKPlatform from "fk-platform-sdk/web";
 import {
   birthYearEntered,
   changeGenderAction,
@@ -52,7 +51,7 @@ const CheckDeclarationOperation = () => {
 };
 
 const ChangeDocumentValueOperation = (value) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(changeDocumentValueAction(value));
     dispatch(CheckCheckBoxOperation());
   };
