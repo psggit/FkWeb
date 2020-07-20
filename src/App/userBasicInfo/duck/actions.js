@@ -6,4 +6,21 @@ const changeGenderAction = createAction("changeGenderAction");
 
 const selectIDTypeAction = createAction("selectIDTypeAction");
 
-export { birthYearEntered, selectIDTypeAction, changeGenderAction };
+const finaliseIDTypeAction = createAction("finaliseIDTypeAction");
+
+const changeDocumentValueAction = createAction("ChangeDocumentValueAction");
+
+const showCheckboxAction = createAction("showCheckboxAction");
+
+const checkCheckboxAction = createAction("checkCheckboxAction");
+
+
+export {
+  changeDocumentValueAction,
+  birthYearEntered,
+  selectIDTypeAction,
+  changeGenderAction,
+  finaliseIDTypeAction,
+  showCheckboxAction,
+  checkCheckboxAction,
+};

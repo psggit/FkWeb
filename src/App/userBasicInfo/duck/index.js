@@ -3,4 +3,7 @@ export {
   ChangingBirthYear,
   ChangingGenderOperation,
   SelectIDTypeOperation,
+  ChangeDocumentValueOperation,
+  FinaliseIDProofValueOperation,
+  CheckDeclarationOperation,
 } from "./operations";
