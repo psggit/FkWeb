@@ -25,10 +25,23 @@ CollectInfoComponent.propTypes = {
   selectedID: PropTypes.string,
   consumerIDTypes: PropTypes.array,
   showConsumerIDs: PropTypes.bool,
+  showDeclaration: PropTypes.bool,
+  checkDeclaration: PropTypes.bool,
   changeBirthYear: PropTypes.func,
   selectingIDProofFunc: PropTypes.func,
+  changeDocumentValueFunc: PropTypes.func,
   selectedDocument: PropTypes.string,
+  finalisedDocument: PropTypes.string,
   selectedDocumentValue: PropTypes.string,
+  finaliseIDProofFunc: PropTypes.func,
+};
+
+const OpenIDOptions = () => {
+  document.getElementById("kycID").classList.remove("hide");
+};
+
+const CloseIDOptions = () => {
+  document.getElementById("kycID").classList.add("hide");
 };
 
 function CollectInfoComponent(props) {
@@ -38,6 +51,9 @@ function CollectInfoComponent(props) {
   //const showConsumerIDs = props.showConsumerIDs;
   const selectedDocument = props.selectedDocument;
   const selectedDocumentValue = props.selectedDocumentValue;
+  const finalisedDocument = props.finalisedDocument;
+  const showDeclaration = props.showDeclaration;
+  const checkDeclaration = props.checkDeclaration;
   return (
     <div className="page-container userBasicInfoComponent">
       <ToolbarComponent helpVisibility="true" title="Let's Get Started!" />
@@ -91,7 +107,7 @@ function CollectInfoComponent(props) {
             placeholder="Select ID proof"
             onClick={() => OpenIDOptions()}
             className="input_field_100"
-            value={selectedDocument}
+            value={finalisedDocument}
             type="text"
             readOnly
           />
@@ -101,15 +117,31 @@ function CollectInfoComponent(props) {
         className={(selectedDocument == "" ? "hide " : "") + "input-component"}
       >
         <div className="input-component-label no-fold-text">
-          ENTER YOUR <span className="caps">{selectedDocument} </span> NUMBER
+          ENTER YOUR <span className="caps">{finalisedDocument} </span> NUMBER
         </div>
         <div className="inputComponentField input">
           <input
-            placeholder={"Enter your " + selectedDocument + " number"}
+            placeholder={"Enter your " + finalisedDocument + " number"}
             className="input_field_100"
+            onChange={(e) => props.changeDocumentValueFunc(e.target.value)}
             value={selectedDocumentValue}
             type="text"
           />
+        </div>
+      </div>
+      <div className="input-component">
+        <div
+          onClick={() => props.checkDeclarationFunc()}
+          className={
+            (checkDeclaration ? "selected " : "") +
+            (showDeclaration ? "" : "inactive ") +
+            "input-component-checkbox"
+          }
+        >
+          <div className="checkbox"></div>
+          <div className="checkbox-text">
+            I declare that the details furnished above are correct
+          </div>
         </div>
       </div>
       <div className="options-overlay flex center hide" id="kycID">
@@ -119,7 +151,7 @@ function CollectInfoComponent(props) {
           </div>
           <div className="option_content">
             {availableConsumerIDs.map((id) => (
-              <div key={id.idType}>
+              <div key={"key_" + id.idType}>
                 <input
                   type="radio"
                   id={id.idType}
@@ -136,13 +168,18 @@ function CollectInfoComponent(props) {
               </div>
             ))}
           </div>
-          <div className="option_footer">
-            <div onClick={() => CloseIDOptions()} className="cancel">
+          <div className="option_footer flex vcenter hend">
+            <div onClick={() => CloseIDOptions()} className="btun cancel">
               Cancel
             </div>
             <div
-              onClick={(e) => props.selectingIDProofFunc(e)}
-              className="next"
+              onClick={() => {
+                props.finaliseIDProofFunc();
+                CloseIDOptions();
+              }}
+              className={
+                (selectedDocument != "" ? "active " : "inactive ") + "btun"
+              }
             >
               Next
             </div>
@@ -171,13 +208,6 @@ UserBasicInfoComponent.propTypes = {
   login: PropTypes.func,
 };
 
-const OpenIDOptions = () => {
-  document.getElementById("kycID").classList.remove("hide");
-};
-
-const CloseIDOptions = () => {
-  document.getElementById("kycID").classList.add("hide");
-};
 
 function UserBasicInfoComponent(props) {
   const loginSuccess = props.loginSuccess;
