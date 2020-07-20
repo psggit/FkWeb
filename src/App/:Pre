@@ -27,14 +27,6 @@ function OtherBanksComponent(props) {
         "https://res.cloudinary.com/www-hipbar-com/image/upload/c_scale,h_88,q_80/v1535119548/Bank%20Logos%20_56px%20/HDFC.png",
       listing_order: 1,
     },
-    {
-      payment_method_type: "NB",
-      payment_method: "NB_DFC",
-      description: "DFC Bank",
-      image_url:
-        "https://res.cloudinary.com/www-hipbar-com/image/upload/c_scale,h_88,q_80/v1535119548/Bank%20Logos%20_56px%20/HDFC.png",
-      listing_order: 1,
-    },
   ];
 
   return (
@@ -48,9 +40,10 @@ function OtherBanksComponent(props) {
             {banks.map((id) => (
               <div
                 key={id.payment_method}
-                id={id.payment_method}
-                onClick={() => {
-                  setSelectedBank(id.payment_method);
+                value={id.payment_method}
+                onClick={(e) => {
+                  console.log("Bank selected");
+                  setSelectedBank(e.target.value)
                 }}
               >
                 <input
