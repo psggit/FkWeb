@@ -7,18 +7,21 @@ import PropTypes from "prop-types";
 BottomNextComponent.propTypes = {
   routePath: PropTypes.string,
   title: PropTypes.string,
+  inActive: PropTypes.bool,
 };
 
 function BottomNextComponent(props) {
   const { routePath } = props;
-  const { title } = props;
+  const { title, inActive } = props;
   const history = useHistory();
   function showNext() {
-    history.push(routePath);
+    if (inActive != true) {
+      history.push(routePath);
+    }
   }
   return (
     <div className="bottom-bar">
-      <div className="btn-general" onClick={showNext}>
+      <div className={(inActive == true ? "disable " : "" ) + "btn-general"} onClick={showNext}>
         <div className="btn-label">{title}</div>
         <img className="btn-arrow" src={nextIcon} />
       </div>

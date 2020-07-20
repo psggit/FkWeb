@@ -93,12 +93,29 @@ h1 {
 }
 .option {
   height: 44px;
-  padding: 0px 16px;
+  padding: 0px 8px;
 }
 .no-fold-text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+input[type="radio"] {
+  display: none;
+}
+.radiobtn {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 3px solid;
+}
+
+input[type="radio"]:checked + .radiobtn {
+  border: 3px solid $orange-color;
+}
+.radio_item {
+  padding: 0px 10px;
 }
 
 input[type="radio"]:before {
@@ -233,6 +250,10 @@ input[type="radio"]:checked {
 
 .padding-24 {
   padding: 24px;
+}
+
+.btn-general.disable {
+  background: $edit-color;
 }
 
 .btn-general {

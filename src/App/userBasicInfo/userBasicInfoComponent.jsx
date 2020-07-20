@@ -4,6 +4,7 @@ import shield from "../../assets/images/shield.svg";
 import { ToolbarComponent } from "../common/toolbar";
 import { Redirect, Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import {BottomNextComponent} from "../common/bottomNext"
 
 LFComponent.propTypes = {
   login: PropTypes.func,
@@ -144,14 +145,16 @@ function CollectInfoComponent(props) {
           </div>
         </div>
       </div>
-      <div className="options-overlay flex center hide" id="kycID">
+      <BottomNextComponent title="Proceed" inActive={!checkDeclaration} />
+          <div className="options-overlay flex center hide" id="kycID">
         <div className="options">
           <div className="option_header flex vcenter no-fold-text">
             Select ID Proof
           </div>
           <div className="option_content">
             {availableConsumerIDs.map((id) => (
-              <div key={"key_" + id.idType}>
+              <div className = "radio_item flex vcenter"
+              key={"key_" + id.idType}>
                 <input
                   type="radio"
                   id={id.idType}
@@ -159,6 +162,8 @@ function CollectInfoComponent(props) {
                   value={id.idType}
                   onClick={(e) => props.selectingIDProofFunc(e.target.value)}
                 />
+                <div className = "radiobtn">
+                </div>
                 <label
                   htmlFor={id.idType}
                   className="no-fold-text option flex vcenter"
@@ -210,29 +215,29 @@ UserBasicInfoComponent.propTypes = {
 
 
 function UserBasicInfoComponent(props) {
-  const loginSuccess = props.loginSuccess;
-  const loginInProgress = props.loginInProgress;
-  const loginFailed = props.loginFailed;
-  const collectUserDetails = props.collectUserDetails;
-  const trigger = !(loginSuccess || loginFailed || loginInProgress);
-  useLayoutEffect(() => {
-    if (trigger) {
-      props.login();
-    }
-  });
-
-  if (loginInProgress) {
-    return <div> Login in progress </div>;
-  } else if (loginFailed) {
-    return <LFComponent login={props.login} />;
-  } else if (loginSuccess) {
-    if (!collectUserDetails) {
-      return <Redirect to="/home" />;
-    } else {
+//  const loginSuccess = props.loginSuccess;
+//  const loginInProgress = props.loginInProgress;
+//  const loginFailed = props.loginFailed;
+//  const collectUserDetails = props.collectUserDetails;
+//  const trigger = !(loginSuccess || loginFailed || loginInProgress);
+//  useLayoutEffect(() => {
+//    if (trigger) {
+//      props.login();
+//    }
+//  });
+//
+//  if (loginInProgress) {
+//    return <div> Login in progress </div>;
+//  } else if (loginFailed) {
+//    return <LFComponent login={props.login} />;
+//  } else if (loginSuccess) {
+//    if (!collectUserDetails) {
+//      return <Redirect to="/home" />;
+//    } else {
       return <CollectInfoComponent {...props} />;
-    }
-  } else {
-    return <div> deff </div>;
-  }
+//     }
+//   } else {
+//     return <div> deff </div>;
+//   }
 }
 export { UserBasicInfoComponent };
