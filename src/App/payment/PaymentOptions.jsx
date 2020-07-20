@@ -47,6 +47,7 @@ function OtherBanksComponent(props) {
           <div className="option_content">
             {banks.map((id) => (
               <div
+                className="radio_item flex vcenter"
                 key={id.payment_method}
                 id={id.payment_method}
                 onClick={() => {
@@ -60,6 +61,7 @@ function OtherBanksComponent(props) {
                   onChange={() => {}}
                   checked={selectedBank == id.payment_method}
                 />
+                <div className="radiobtn" />
                 <label
                   htmlFor={id.payment_method}
                   className="no-fold-text option flex vcenter"
@@ -82,7 +84,9 @@ function OtherBanksComponent(props) {
                   onNextButton();
                 }
               }}
-              className={(selectedBank != "" ? "active" : "inactive") + "btun"}
+              className={
+                (selectedBank != "" ? "active " : "inactive ") + "btun"
+              }
             >
               Next
             </div>
@@ -98,10 +102,12 @@ OtherBanksComponent.propTypes = {
 };
 
 PaymentOptions.propTypes = {
-  selectedBank: PropTypes.any,
+  bank: PropTypes.any,
 };
 
-function PaymentOptions(props) {
+function PaymentOptions() {
+  const [selectedBank, setSelectedBank] = useState("");
+
   const openOtherBankOptions = () => {
     document.getElementById("otherBanksID").classList.remove("hide");
   };
@@ -117,11 +123,6 @@ function PaymentOptions(props) {
     },
   ];
 
-  function setBank(bank) {
-    console.log(bank);
-    props.selectedBank = bank;
-  }
-
   return (
     <>
       <ToolbarComponent helpVisibility="true" title="Pay Rs 32.00 using" />
@@ -132,8 +133,11 @@ function PaymentOptions(props) {
           onBankSelected={openOtherBankOptions}
           onOtherBankSelected={openOtherBankOptions}
         />
-        <OtherBanksComponent onBankSelected={(bank) => setBank(bank)} />
-        <BottomNextComponent routePath="/order/placed" title="Pay" />
+        <OtherBanksComponent onBankSelected={(bank) => setSelectedBank(bank)} />
+        <BottomNextComponent
+          routePath={"/order/placed/" + selectedBank}
+          title="Pay"
+        />
       </div>
     </>
   );
