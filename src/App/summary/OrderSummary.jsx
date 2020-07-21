@@ -1,14 +1,14 @@
 import React from "react";
 import { ToolbarComponent } from "../common/toolbar";
 import { BottomNextComponent } from "../common/bottomNext";
+import { OrderAddressComponent, YouPayComponent } from "./components";
 import {
-  OrderAddressComponent,
   OrderTotalComponent,
   AdditionalChargersComponent,
-  YouPayComponent,
   GstNumberComponent,
   CartTotalComponent,
-} from "./components";
+} from "../common/summary";
+
 import "./style.scss";
 import infoIcon from "../../assets/images/info.svg";
 
