@@ -4,4 +4,5 @@ export {
   addSkuToCart,
   removeSkuFromCart,
   isEmpty,
+  validateCart,
 } from "./duck";

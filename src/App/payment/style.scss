@@ -1,33 +1,5 @@
 @import "../../colors.scss";
 
-/* simulate radiobutton appearance using pseudoselector */
-//input[type="radio"] + label:before {
-//  content: "";
-//  /* create custom radiobutton appearance */
-//  display: inline-block;
-//  width: 15px;
-//  height: 15px;
-//  padding: 3px;
-//  margin-right: 5px;
-//  /* background-color only for content */
-//  background-clip: content-box;
-//  border: 1px solid $order-color;
-//  background-color: $secondary-bg;
-//  border-radius: 50%;
-//}
-//
-///* appearance of checked radiobutton */
-//input[type="radio"]:checked + label:before {
-//  background-color: $orange-color;
-//}
-//
-///* resetting default box-sizing */
-//*,
-//*:before,
-//*:after {
-//  box-sizing: border-box;
-//}
-
 .upi-component {
   display: flex;
   flex-direction: column;
@@ -80,9 +52,10 @@
 .card-container {
   display: flex;
   flex-direction: column;
-  margin-top: 46px;
+  margin-top: 24px;
 
   .card-title {
+    font-family: MontserratBold;
     font-size: 16px;
     line-height: 20px;
   }
@@ -201,6 +174,61 @@
     .image {
       width: 24px;
       height: 24px;
+    }
+  }
+}
+
+.net-banking-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 46px;
+
+  .title {
+    font-family: MontserratBold;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .bank-list-container {
+    display: flex;
+    flex-direction: row;
+
+    .bank {
+      padding: 16px;
+      flex-direction: column;
+      justify-content: center;
+      display: flex;
+
+      .image {
+        width: 46px;
+        height: 46px;
+        align-self: center;
+      }
+
+      .name {
+        font-size: 10px;
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+      }
+    }
+  }
+
+  .other-banks {
+    display: flex;
+    flex-direction: row;
+    height: 64px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $border-color;
+
+    .other-bank-title {
+      font-size: 16px;
+    }
+
+    .down-image {
+      width: 14px;
+      height: 8px;
     }
   }
 }

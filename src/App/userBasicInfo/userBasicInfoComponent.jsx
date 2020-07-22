@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import "./styles/style.scss";
 import shield from "../../assets/images/shield.svg";
 import { ToolbarComponent } from "../common/toolbar";
 import { Redirect, Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import {BottomNextComponent} from "../common/bottomNext"
 
-UserBasicInfoComponent.propTypes = {
+LFComponent.propTypes = {
+  login: PropTypes.func,
+};
+
+function LFComponent(props) {
+  const login = props.login;
+  return (
+    <div>
+      <div>login failed </div>
+      <button onClick={login}> retry </button>
+    </div>
+  );
+}
+
+CollectInfoComponent.propTypes = {
   yob: PropTypes.string,
   gender: PropTypes.string,
   selectedID: PropTypes.string,
   consumerIDTypes: PropTypes.array,
   showConsumerIDs: PropTypes.bool,
+  showDeclaration: PropTypes.bool,
+  checkDeclaration: PropTypes.bool,
   changeBirthYear: PropTypes.func,
   selectingIDProofFunc: PropTypes.func,
+  changeDocumentValueFunc: PropTypes.func,
   selectedDocument: PropTypes.string,
+  finalisedDocument: PropTypes.string,
   selectedDocumentValue: PropTypes.string,
+  finaliseIDProofFunc: PropTypes.func,
 };
 
 const OpenIDOptions = () => {
@@ -25,13 +45,16 @@ const CloseIDOptions = () => {
   document.getElementById("kycID").classList.add("hide");
 };
 
-function UserBasicInfoComponent(props) {
+function CollectInfoComponent(props) {
   const yob = props.yob;
   const gender = props.gender;
   const availableConsumerIDs = props.consumerIDTypes;
-  const showConsumerIDs = props.showConsumerIDs;
+  //const showConsumerIDs = props.showConsumerIDs;
   const selectedDocument = props.selectedDocument;
   const selectedDocumentValue = props.selectedDocumentValue;
+  const finalisedDocument = props.finalisedDocument;
+  const showDeclaration = props.showDeclaration;
+  const checkDeclaration = props.checkDeclaration;
   return (
     <div className="page-container userBasicInfoComponent">
       <ToolbarComponent helpVisibility="true" title="Let's Get Started!" />
@@ -85,7 +108,7 @@ function UserBasicInfoComponent(props) {
             placeholder="Select ID proof"
             onClick={() => OpenIDOptions()}
             className="input_field_100"
-            value={selectedDocument}
+            value={finalisedDocument}
             type="text"
             readOnly
           />
@@ -95,25 +118,43 @@ function UserBasicInfoComponent(props) {
         className={(selectedDocument == "" ? "hide " : "") + "input-component"}
       >
         <div className="input-component-label no-fold-text">
-          ENTER YOUR <span className="caps">{selectedDocument} </span> NUMBER
+          ENTER YOUR <span className="caps">{finalisedDocument} </span> NUMBER
         </div>
         <div className="inputComponentField input">
           <input
-            placeholder={"Enter your " + selectedDocument + " number"}
+            placeholder={"Enter your " + finalisedDocument + " number"}
             className="input_field_100"
+            onChange={(e) => props.changeDocumentValueFunc(e.target.value)}
             value={selectedDocumentValue}
             type="text"
           />
         </div>
       </div>
-      <div className="options-overlay flex center hide" id="kycID">
+      <div className="input-component">
+        <div
+          onClick={() => props.checkDeclarationFunc()}
+          className={
+            (checkDeclaration ? "selected " : "") +
+            (showDeclaration ? "" : "inactive ") +
+            "input-component-checkbox"
+          }
+        >
+          <div className="checkbox"></div>
+          <div className="checkbox-text">
+            I declare that the details furnished above are correct
+          </div>
+        </div>
+      </div>
+      <BottomNextComponent title="Proceed" inActive={!checkDeclaration} />
+          <div className="options-overlay flex center hide" id="kycID">
         <div className="options">
           <div className="option_header flex vcenter no-fold-text">
             Select ID Proof
           </div>
           <div className="option_content">
             {availableConsumerIDs.map((id) => (
-              <div key={id.idType}>
+              <div className = "radio_item flex vcenter"
+              key={"key_" + id.idType}>
                 <input
                   type="radio"
                   id={id.idType}
@@ -121,23 +162,29 @@ function UserBasicInfoComponent(props) {
                   value={id.idType}
                   onClick={(e) => props.selectingIDProofFunc(e.target.value)}
                 />
+                <div className = "radiobtn">
+                </div>
                 <label
                   htmlFor={id.idType}
                   className="no-fold-text option flex vcenter"
                 >
-                  {" "}
-                  {id.idType}{" "}
+                  {id.idType}
                 </label>
               </div>
             ))}
           </div>
-          <div className="option_footer">
-            <div onClick={() => CloseIDOptions()} className="cancel">
+          <div className="option_footer flex vcenter hend">
+            <div onClick={() => CloseIDOptions()} className="btun cancel">
               Cancel
             </div>
             <div
-              onClick={(e) => props.selectingIDProofFunc(e)}
-              className="next"
+              onClick={() => {
+                props.finaliseIDProofFunc();
+                CloseIDOptions();
+              }}
+              className={
+                (selectedDocument != "" ? "active " : "inactive ") + "btun"
+              }
             >
               Next
             </div>
@@ -146,5 +193,51 @@ function UserBasicInfoComponent(props) {
       </div>
     </div>
   );
+}
+
+UserBasicInfoComponent.propTypes = {
+  yob: PropTypes.string,
+  gender: PropTypes.string,
+  selectedID: PropTypes.string,
+  consumerIDTypes: PropTypes.array,
+  showConsumerIDs: PropTypes.bool,
+  changeBirthYear: PropTypes.func,
+  selectingIDProofFunc: PropTypes.func,
+  selectedDocument: PropTypes.string,
+  selectedDocumentValue: PropTypes.string,
+
+  loginInProgress: PropTypes.bool,
+  loginFailed: PropTypes.bool,
+  loginSuccess: PropTypes.bool,
+  collectUserDetails: PropTypes.bool,
+  login: PropTypes.func,
+};
+
+
+function UserBasicInfoComponent(props) {
+//  const loginSuccess = props.loginSuccess;
+//  const loginInProgress = props.loginInProgress;
+//  const loginFailed = props.loginFailed;
+//  const collectUserDetails = props.collectUserDetails;
+//  const trigger = !(loginSuccess || loginFailed || loginInProgress);
+//  useLayoutEffect(() => {
+//    if (trigger) {
+//      props.login();
+//    }
+//  });
+//
+//  if (loginInProgress) {
+//    return <div> Login in progress </div>;
+//  } else if (loginFailed) {
+//    return <LFComponent login={props.login} />;
+//  } else if (loginSuccess) {
+//    if (!collectUserDetails) {
+//      return <Redirect to="/home" />;
+//    } else {
+      return <CollectInfoComponent {...props} />;
+//     }
+//   } else {
+//     return <div> deff </div>;
+//   }
 }
 export { UserBasicInfoComponent };

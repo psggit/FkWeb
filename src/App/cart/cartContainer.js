@@ -1,6 +1,11 @@
 import { connect } from "react-redux";
 import { CartComponent } from "./cartComponent";
-import { addSkuToCart, removeSkuFromCart, isEmpty } from "../common/cart";
+import {
+  addSkuToCart,
+  removeSkuFromCart,
+  isEmpty,
+  validateCart,
+} from "../common/cart";
 
 const mapStateToProps = (state) => {
   return {
@@ -21,6 +26,7 @@ const mapDispatchToProps = (dispatch) => {
     removeSKUFromCart: (e) => {
       return () => dispatch(removeSkuFromCart(e));
     },
+    validateCart: (cs) => dispatch(validateCart(cs)),
   };
 };
 

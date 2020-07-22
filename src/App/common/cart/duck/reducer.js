@@ -1,15 +1,22 @@
 /* @flow */
-import { addSkuToCart, removeSkuFromCart } from "./actions";
+import {
+  addSkuToCart,
+  removeSkuFromCart,
+  validationSuccessful,
+  validationFailure,
+} from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
 
-var Retailer: {
+const unAvailableProductText = "Product is not available";
+
+declare type Retailer = {
   id: number,
   name: string,
   description: string,
 };
 
-var Product: {
+declare type Product = {
   skuId: number,
   brandName: string,
   brandId: number,
@@ -22,17 +29,18 @@ var Product: {
   logoLowResImage: string,
 };
 
-var Products: {
+declare type Products = {
   skuId: Product,
 };
 
-var State: {
+declare type State = {
   retailer: Retailer,
   products: Products,
   retailerDiffers: boolean,
+  validationFailure: boolean,
 };
 
-var Sku: {
+declare type Sku = {
   retailerId: number,
   retailerName: string,
   retailerDescription: string,
@@ -51,6 +59,7 @@ const getDefaultState = (): State => {
     retailer: {},
     products: {},
     retailerDiffers: false,
+    validationFailure: false,
   };
 };
 */
@@ -63,6 +72,7 @@ let getTestState = (): State => {
       description: "delivers very soon",
     },
     retailerDiffers: false,
+    validationFailure: false,
     products: {
       "1276": {
         skuId: 1276,
@@ -74,7 +84,7 @@ let getTestState = (): State => {
         volume: 650,
         count: 2,
         available: true,
-        subText: "",
+        subText: unAvailableProductText,
       },
     },
   };
@@ -95,7 +105,7 @@ let isEmpty = (state: State): boolean => {
   return Object.keys(state.products).length === 0;
 };
 
-let addProduct = (state: State, sku: Sku): state => {
+let addProduct = (state: State, sku: Sku): State => {
   // handle existing retailer
   if (sku.retailerId !== state.retailer.id) {
     if (sku.clearCart === false) {
@@ -110,7 +120,7 @@ let addProduct = (state: State, sku: Sku): state => {
   }
 
   // set product details
-  let prod = state.products[sku.sku_id.toString()];
+  let prod = state.products[sku.sku_id];
   //if doesn't exist, create one and add it to the map
   if (prod === undefined) {
     prod = {
@@ -122,17 +132,17 @@ let addProduct = (state: State, sku: Sku): state => {
       volume: sku.volume,
       count: 1,
       available: true,
-      subText: "",
+      subText: unAvailableProductText,
     };
   } else {
     prod.count += 1;
   }
-  state.products[prod.skuId.toString()] = prod;
+  state.products[prod.skuId] = prod;
   return state;
 };
 
-let removeProduct = (state: State, sku: sku): state => {
-  let prod = state.products[sku.sku_id.toString()];
+let removeProduct = (state: State, sku: Sku): State => {
+  let prod = state.products[sku.sku_id];
   if (prod === undefined) {
     return state;
   } else {
@@ -147,21 +157,59 @@ let removeProduct = (state: State, sku: sku): state => {
   return state;
 };
 
+let replaceProductInfo = (state: State, skus: Array<Sku>): State => {
+  for (let sku of skus) {
+    state.products[sku.sku_id] = {
+      skuId: sku.sku_id,
+      brandName: sku.brand_name,
+      brandId: sku.brand_id,
+      image: sku.logo_low_res_image,
+      price: sku.price,
+      volume: sku.volume,
+      count: state.products[sku.sku_id].count,
+      available: true,
+      subText: unAvailableProductText,
+    };
+  }
+  return state;
+};
+
+let setUnAvailableProducts = (state: State, skus: Array<number>): State => {
+  for (let id of skus) {
+    state.products[id].available = false;
+  }
+  return state;
+};
+
+let validateCart = (state: State, data: Object): State => {
+  state = replaceProductInfo(state, data.products);
+  state = setUnAvailableProducts(state, data.unavail_items);
+  state.validationFailure = false;
+  state.retailer.description = data.delivery_message;
+  return state;
+};
+
 const cartTotal = (oldS: State): number => {
   let total: number = 0;
-  for (let prod of oldS.products.values()) {
-    total = total + prod.total;
+  for (let prod of Object.values(oldS.products)) {
+    total = total + prod.price;
   }
   return total;
 };
 
 const cartReducer = createReducer(initialState(), {
-  [addSkuToCart]: (state: State, e: Sku): State => {
+  [addSkuToCart]: (state: State, e: Object) => {
     return void addProduct({ ...state }, e.payload);
   },
 
-  [removeSkuFromCart]: (state: State, e: Sku): State => {
+  [removeSkuFromCart]: (state: State, e: Object) => {
     return void removeProduct({ ...state }, e.payload);
+  },
+  [validationSuccessful]: (state: State, data: Object) => {
+    return void validateCart(state, data);
+  },
+  [validationFailure]: (state: State): State => {
+    return { ...state, validationFailure: true };
   },
 });
 
