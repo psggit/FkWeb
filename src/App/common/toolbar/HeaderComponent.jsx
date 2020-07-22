@@ -10,10 +10,8 @@ function HeaderComponent(props) {
   const { title } = props;
 
   return (
-    <div className="header-wrapper">
-      <div className="tool-bar fixed">
-        <div className="title">{title}</div>
-      </div>
+    <div className="header-bar fixed">
+      <div className="title">{title}</div>
     </div>
   );
 }

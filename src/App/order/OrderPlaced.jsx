@@ -1,5 +1,5 @@
 import React from "react";
-import { ToolbarComponent } from "../common/toolbar";
+import { HeaderComponent } from "../common/toolbar";
 import { BottomNextComponent } from "../common/bottomNext";
 import successIcon from "../../assets/images/success.svg";
 import PropTypes from "prop-types";
@@ -158,7 +158,7 @@ function OrderSummaryComponent(props) {
 function OrderPlaced() {
   return (
     <>
-      <ToolbarComponent title="Order Info" />
+      <HeaderComponent title="Order Placed" />
       <div className="page-container order-placed">
         <OrderPlacedHeaderComponent
           orderPrice="Rs 50000"
