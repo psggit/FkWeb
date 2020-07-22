@@ -4,7 +4,6 @@
 @import "./App//search/Search.scss";
 @import "./App/common/drinks/title.scss";
 
-
 @font-face {
   font-family: "Montserrat";
   src: url("assets/fonts/Montserrat-Regular.ttf");
@@ -119,7 +118,7 @@ input[type="radio"]:checked + label:before {
   background-color: $secondary-bg;
   border: 1px $border-color solid;
   .next {
-	  color: $orange-color;
+    color: $orange-color;
   }
 }
 .center {
