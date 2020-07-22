@@ -126,7 +126,7 @@ function PaymentOptions() {
   return (
     <>
       <ToolbarComponent helpVisibility="true" title="Pay Rs 32.00 using" />
-      <div className="page-container">
+      <div className="page-container payment-option-container">
         <CreditDebitCardsComponent />
         <NetBankingComponent
           banks={banks}
