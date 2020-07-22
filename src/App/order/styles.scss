@@ -1,0 +1,197 @@
+@import "../../colors.scss";
+
+.order-placed {
+  height: 1086px;
+  margin-top: 64px;
+}
+
+.header-container {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .header-image {
+    width: 56px;
+    height: 56px;
+  }
+
+  .header-detail-container {
+    margin-left: 24px;
+    display: flex;
+    flex-direction: column;
+    .order-price {
+      font-size: 24px;
+      line-height: 24px;
+      width: 100%;
+    }
+
+    .retailer-name {
+      margin-top: 8px;
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+  width: 100%;
+  padding-bottom: 12px;
+  border-bottom: 1px solid $border-color;
+
+  .detail {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4px;
+    width: 100%;
+
+    .header {
+      color: $edit-color;
+      padding-right: 8px;
+      font-size: 14px;
+      line-height: 24px;
+      font-family: MontserratBold;
+    }
+
+    .content {
+      font-size: 14px;
+      line-height: 24px;
+    }
+  }
+}
+
+.arrival-container {
+  margin-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 0.5px solid $border-color;
+
+  .arrival-time {
+    font-family: MontserratBold;
+    font-size: 16px;
+  }
+
+  .otp-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 12px;
+    font-size: 16px;
+
+    .otp-number {
+      padding-left: 8px;
+      font-family: MontserratBold;
+    }
+  }
+
+  .keep-id-ready {
+    color: $edit-color;
+    font-size: 12px;
+    margin-top: 4px;
+    padding-bottom: 12px;
+    border-bottom: 0.5px solid $border-color;
+  }
+
+  .tell-a-friend-container {
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .tell-a-friend {
+      margin-right: 24px;
+      width: 100%;
+
+      .header {
+        font-family: MontserratBold;
+        font-size: 16px;
+      }
+      .content {
+        margin-top: 4px;
+        color: $edit-color;
+        font-size: 12px;
+      }
+    }
+
+    .invite-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .invite {
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 8px;
+        text-align: center;
+        height: 36px;
+        font-family: MontserratBold;
+        font-size: 12px;
+        border: 1px solid $border-color;
+        background: $border-color;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+.generic-detail-container {
+  margin-top: 18px;
+  padding-bottom: 16px;
+  border-bottom: 0.5px solid $border-color;
+
+  .order-sub-header {
+    color: $edit-color;
+    font-family: MontserratBold;
+    font-size: 14px;
+  }
+
+  .brand-item {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .brand-details {
+      display: flex;
+      flex-direction: column;
+      font-size: 12px;
+      line-height: 16px;
+
+      .brand-name {
+        font-family: MontserratBold;
+      }
+      .brand-sku-details {
+        color: $edit-color;
+        margin-top: 8px;
+      }
+    }
+
+    .quantity {
+      font-size: 20px;
+      width: 32px;
+      line-height: 24px;
+      text-align: right;
+      padding-right: 8px;
+      align-self: center;
+    }
+  }
+
+  .address-type {
+    text-transform: uppercase;
+    margin-top: 12px;
+    width: 100%;
+    line-height: 16px;
+    font-size: 12px;
+    font-family: MontserratBold;
+  }
+
+  .address {
+    font-size: 12px;
+    line-height: 18px;
+    max-height: 36px;
+    width: 100%;
+    margin-top: 6px;
+  }
+}
