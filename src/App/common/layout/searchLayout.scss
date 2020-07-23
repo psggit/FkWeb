@@ -1,16 +1,16 @@
-    .layout-container{
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        bottom: 60px;
-        top: 73px;
-        display: flex;
+.layout-container {
+  flex-direction: column;
+  width: 100%;
+  position: absolute;
+  bottom: 60px;
+  top: 90px;
+  display: flex;
 
-        .search-child{
-            text-align: center;
-            h6{
-                font-weight: 600;
-            }
-        }
+  .search-child {
+    text-align: center;
+    h6 {
+      font-weight: 600;
     }
-    
+  }
+}
+
