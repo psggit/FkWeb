@@ -52,4 +52,4 @@ function PaymentOptions() {
   );
 }
 
-export default PaymentOptions;
+export { PaymentOptions };
