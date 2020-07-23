@@ -28,3 +28,5 @@ function EditText(props) {
     </div>
   );
 }
+
+export { EditText };
