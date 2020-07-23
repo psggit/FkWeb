@@ -18,7 +18,7 @@ function CreditDebitCardsComponent() {
       <div className="card-title">Credit/Debit Cards</div>
       <NewCardComponent onclick={showAddNewCard} />
       <SavedCardComponent />
-      <AddNewCardComponent />
+      <AddNewCardComponent onclick={showAddNewCard}/>
     </div>
   );
 }
