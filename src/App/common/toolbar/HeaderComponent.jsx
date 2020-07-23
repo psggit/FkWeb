@@ -4,10 +4,11 @@ import PropTypes from "prop-types";
 
 HeaderComponent.propTypes = {
   title: PropTypes.any,
+  children: PropTypes.any,
 };
 
 function HeaderComponent(props) {
-  const { title,children } = props;
+  const { title, children } = props;
 
   return (
     <div className="header-bar fixed">

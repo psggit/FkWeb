@@ -1,5 +1,10 @@
 @import "../../colors.scss";
 
+
+.payment-option-container {
+  height: 596px;
+}
+
 .upi-component {
   display: flex;
   flex-direction: column;
@@ -181,7 +186,7 @@
 .net-banking-container {
   display: flex;
   flex-direction: column;
-  margin-top: 46px;
+  margin-top: 26px;
 
   .title {
     font-family: MontserratBold;

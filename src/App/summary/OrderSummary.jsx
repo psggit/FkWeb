@@ -18,7 +18,7 @@ function OrderSummary() {
       <ToolbarComponent helpVisibility="true" title="Order Summary" />
       <div className="page-container summary-wrapper">
         <OrderAddressComponent />
-        <OrderTotalComponent total="Rs. 5,214.50" />
+        <OrderTotalComponent marginTop={true} total="Rs. 5,214.50" />
         <CartTotalComponent cartTotal="Rs. 5,214.50" />
         <AdditionalChargersComponent
           label="Additional Charges"
