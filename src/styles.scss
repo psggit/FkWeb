@@ -108,10 +108,20 @@ input[type="radio"] {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  border: 3px solid;
+  border: 2px solid;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 input[type="radio"]:checked + .radiobtn {
+  border: 3px solid $orange-color;
+}
+.radiobtn.selected{
   border: 3px solid $orange-color;
 }
 .radio_item {
