@@ -1,14 +1,14 @@
 import React from "react";
 import { ToolbarComponent } from "../common/toolbar";
 import { BottomNextComponent } from "../common/bottomNext";
+import { OrderAddressComponent, YouPayComponent } from "./components";
 import {
-  OrderAddressComponent,
   OrderTotalComponent,
   AdditionalChargersComponent,
-  YouPayComponent,
   GstNumberComponent,
   CartTotalComponent,
-} from "./components";
+} from "../common/summary";
+
 import "./style.scss";
 import infoIcon from "../../assets/images/info.svg";
 
@@ -18,7 +18,7 @@ function OrderSummary() {
       <ToolbarComponent helpVisibility="true" title="Order Summary" />
       <div className="page-container summary-wrapper">
         <OrderAddressComponent />
-        <OrderTotalComponent total="Rs. 5,214.50" />
+        <OrderTotalComponent marginTop={true} total="Rs. 5,214.50" />
         <CartTotalComponent cartTotal="Rs. 5,214.50" />
         <AdditionalChargersComponent
           label="Additional Charges"

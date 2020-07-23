@@ -6,6 +6,14 @@ const changeGenderAction = createAction("changeGenderAction");
 
 const selectIDTypeAction = createAction("selectIDTypeAction");
 
+const finaliseIDTypeAction = createAction("finaliseIDTypeAction");
+
+const changeDocumentValueAction = createAction("ChangeDocumentValueAction");
+
+const showCheckboxAction = createAction("showCheckboxAction");
+
+const checkCheckboxAction = createAction("checkCheckboxAction");
+
 //Fetch grant token, action to trigger fetching grant token
 const fetchGrantToken = createAction("fetchGrantToken");
 
@@ -31,6 +39,13 @@ const loginSuccess = createAction("loginSuccess");
 const loginFailed = createAction("loginFailed");
 
 export {
+  changeDocumentValueAction,
+  birthYearEntered,
+  selectIDTypeAction,
+  changeGenderAction,
+  finaliseIDTypeAction,
+  showCheckboxAction,
+  checkCheckboxAction,
   fetchGrantToken,
   getGrantTokenInitiated,
   fetchGrantTokenSuccess,
@@ -39,7 +54,4 @@ export {
   loginInProgress,
   loginSuccess,
   loginFailed,
-  birthYearEntered,
-  selectIDTypeAction,
-  changeGenderAction,
 };
