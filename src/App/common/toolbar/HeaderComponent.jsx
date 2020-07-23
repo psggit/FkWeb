@@ -7,11 +7,12 @@ HeaderComponent.propTypes = {
 };
 
 function HeaderComponent(props) {
-  const { title } = props;
+  const { title,children } = props;
 
   return (
     <div className="header-bar fixed">
       <div className="title">{title}</div>
+      {children}
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import UpArrow from "../../../assets/images/up.svg";
-import DownArrow from "../../../assets/images/down.svg";
+import { AddItemComponent } from "./additem";
+import UpArrow from "../../assets/images/up.svg";
+import DownArrow from "../../assets/images/down.svg";
+
 function AccordionItem(props) {
   const [active, setActive] = useState(false);
 
@@ -12,19 +14,28 @@ function AccordionItem(props) {
   return (
     <div className={activeClass}>
       <div className="accordionItem" onClick={toggle}>
+        <img className="thumbnail" src={brandList.logo_low_res_image} alt="" />
         <span className="summary">{brandList.brand_name}</span>
         <span className="">
-          <img src={active ? DownArrow : UpArrow} alt="up" />
+          <img src={active ? UpArrow : DownArrow} alt="upDown Arrow" />
         </span>
       </div>
-      <span className="folding-pannel answer">50 ml</span>
-      <span className="folding-pannel answer">100 ml</span>
+      {brandList.sku.map((item) => (
+        <div className="folding-pannel answer">
+          <div>
+            <span>{item.volume} ml</span>
+            <span> | </span>
+            <span>&#x20B9; {item.price}</span>
+          </div>
+          <AddItemComponent {...props} />
+        </div>
+      ))}
     </div>
   );
 }
 
 function Accordion() {
-  const [data, setData] = useState(sampleQuestions);
+  const [data, setData] = useState(retailerData);
   const renderQuestion = (key) => {
     return <AccordionItem key={key} index={key} details={data[key]} />;
   };
@@ -32,13 +43,16 @@ function Accordion() {
   return (
     <div>
       <div className="accordion-container">
-        <div className="accordion-title"><span> </span><h5>Kloud Bar</h5></div>
-        {sampleQuestions.map((item, index) => renderQuestion(index))}{" "}
+        <div className="accordion-title">
+          <span> </span>
+          <h5>Kloud Bar</h5>
+        </div>
+        {retailerData.map((item, index) => renderQuestion(index))}{" "}
       </div>
     </div>
   );
 }
-const sampleQuestions = [
+const retailerData = [
   {
     brand_name: "Budejovicky Budvar",
     brand_id: 2192,

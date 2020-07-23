@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import BottomNavigationComponent from "../common/bottomNavigation";
-import SearchBox from "./SearchBox";
-// import { HeaderComponent } from "../common/toolbar";
+import { SearchBox } from "./SearchBox";
+import { HeaderComponent } from "../common/toolbar";
 import SearchLayout from "../common/layout/SearchLayout";
-import {Accordion} from '../common/drinks'
+import { Accordion } from "../drinks";
 
 function Search() {
   const [cancelBtn, SetCancelBtn] = useState(false);
@@ -19,12 +19,14 @@ function Search() {
 
   return (
     <>
-      <div className="search-container">
-        <SearchBox cancelEnable={cancelEnable} />
-        {cancelBtn ? <button>Cancel</button> : ""}
-      </div>
+      <HeaderComponent title="Search Drinks">
+        <div className="search-container">
+          <SearchBox cancelEnable={cancelEnable} />
+          {true ? <button>Cancel</button> : ""}
+        </div>
+      </HeaderComponent>
       <SearchLayout>
-      <Accordion />
+        <Accordion />
         <BottomNavigationComponent />
       </SearchLayout>
     </>

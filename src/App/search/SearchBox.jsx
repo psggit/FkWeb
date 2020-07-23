@@ -22,4 +22,4 @@ function SearchBox(props) {
     </>
   );
 }
-export default SearchBox;
+export {SearchBox};

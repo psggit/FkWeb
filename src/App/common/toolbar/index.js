@@ -1,2 +1,2 @@
-// export { HeaderComponent } from "./HeaderComponent";
+export { HeaderComponent } from "./HeaderComponent";
 export { ToolbarComponent } from "./ToolbarComponent";
