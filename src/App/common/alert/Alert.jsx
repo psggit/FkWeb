@@ -15,6 +15,7 @@ function Alert({ handleOption, show, title, content, option }) {
   );
 }
 
+
 function AlertWithOptions({
   handleOption1,
   handleOption2,
