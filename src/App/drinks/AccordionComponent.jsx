@@ -45,7 +45,7 @@ function Accordion() {
       <div className="accordion-container">
         <div className="accordion-title">
           <span> </span>
-          <h5>Kloud Bar</h5>
+          <div>Kloud Bar</div>
         </div>
         {retailerData.map((item, index) => renderQuestion(index))}{" "}
       </div>
