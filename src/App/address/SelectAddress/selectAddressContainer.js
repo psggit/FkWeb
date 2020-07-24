@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { SelectAddressComponent } from "./selectAddressComponent";
 import {
   SelectAddressOperation
-} from "./duck";
+} from "../duck";
 
 const mapStateToProps = (state) => {
   return {
