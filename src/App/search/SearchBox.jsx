@@ -11,6 +11,7 @@ function SearchBox(props) {
   }
   return (
     <>
+      <img className="search-img"src={searchIcon} alt='searchIcon' />
       <input
         type={inputType}
         value={inputValue}

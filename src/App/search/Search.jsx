@@ -22,7 +22,7 @@ function Search() {
       <HeaderComponent title="Search Drinks">
         <div className="search-container">
           <SearchBox cancelEnable={cancelEnable} />
-          {true ? <button>Cancel</button> : ""}
+          {cancelBtn ? <button>Cancel</button> : ""}
         </div>
       </HeaderComponent>
       <SearchLayout>
