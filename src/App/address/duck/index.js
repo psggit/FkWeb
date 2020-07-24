@@ -1,4 +1,2 @@
 export { addressListReducer } from "./reducer";
-export {
-  SelectAddressOperation
-} from "./operations";
+export { SelectAddressOperation } from "./operations";
