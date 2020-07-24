@@ -12,7 +12,7 @@ const store = configureStore({
   reducer: combineReducers({
     home: homeReducer,
     tcStore: tcReducer,
-    addItem:accordianReducer,
+    addItem: accordianReducer,
     ubiStore: userInfoCreateReducer,
     cart: cartReducer,
   }),
