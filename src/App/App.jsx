@@ -9,7 +9,7 @@ import { CartContainer } from "./cart";
 import Search from "./search";
 import {SelectAddressContainer} from "./address";
 import OrderSummary from "./summary";
-import PaymentOptions from "./payment";
+import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
 import { OrderPlaced } from "./order";
 
@@ -52,6 +52,10 @@ function App() {
           />
           <Route path="/order/summary" component={OrderSummary} />
           <Route path="/payment/options" component={PaymentOptions} />
+          <Route
+            path="/payment/add/new/card"
+            component={AddCardAndProcessPayment}
+          />
           <Route path="/order/placed" component={OrderPlaced} />
           <Route
             path="/payment"

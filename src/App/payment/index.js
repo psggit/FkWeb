@@ -1,3 +1,2 @@
-import PaymentOptions from "./PaymentOptions";
-
-export default PaymentOptions;
+export { PaymentOptions } from "./PaymentOptions";
+export { AddCardAndProcessPayment } from "./AddCardAndProcessPayment";

@@ -10,13 +10,13 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const unAvailableProductText = "Product is not available";
 
-var Retailer: {
+declare type Retailer = {
   id: number,
   name: string,
   description: string,
 };
 
-var Product: {
+declare type Product = {
   skuId: number,
   brandName: string,
   brandId: number,
@@ -29,18 +29,18 @@ var Product: {
   logoLowResImage: string,
 };
 
-var Products: {
+declare type Products = {
   skuId: Product,
 };
 
-var State: {
+declare type State = {
   retailer: Retailer,
   products: Products,
   retailerDiffers: boolean,
   validationFailure: boolean,
 };
 
-var Sku: {
+declare type Sku = {
   retailerId: number,
   retailerName: string,
   retailerDescription: string,
@@ -191,21 +191,21 @@ let validateCart = (state: State, data: Object): State => {
 
 const cartTotal = (oldS: State): number => {
   let total: number = 0;
-  for (let prod of oldS.products.values()) {
-    total = total + prod.total;
+  for (let prod of Object.values(oldS.products)) {
+    total = total + prod.price;
   }
   return total;
 };
 
 const cartReducer = createReducer(initialState(), {
-  [addSkuToCart]: (state: State, e: Sku): State => {
+  [addSkuToCart]: (state: State, e: Object) => {
     return void addProduct({ ...state }, e.payload);
   },
 
-  [removeSkuFromCart]: (state: State, e: Sku): State => {
+  [removeSkuFromCart]: (state: State, e: Object) => {
     return void removeProduct({ ...state }, e.payload);
   },
-  [validationSuccessful]: (state: State, data: Object): State => {
+  [validationSuccessful]: (state: State, data: Object) => {
     return void validateCart(state, data);
   },
   [validationFailure]: (state: State): State => {
