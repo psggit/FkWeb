@@ -3,6 +3,7 @@
 @import "./App/common/layout/searchLayout.scss";
 @import "./App//search/Search.scss";
 
+
 @font-face {
   font-family: "Montserrat";
   src: url("assets/fonts/Montserrat-Regular.ttf");
@@ -37,6 +38,12 @@
   font-weight: bold;
   font-style: normal;
 }
+//mixin
+ @mixin content-center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+ }
 
 body {
   font-family: "Montserrat";

@@ -10,13 +10,13 @@
 }
 
 .header-bar {
-  height: 64px;
   display: flex;
   background-color: $bg;
   flex-direction: column;
   left: 0;
   right: 0;
   top: 0;
+  margin-top: 16px;
   justify-content: flex-end;
 
   .title {
