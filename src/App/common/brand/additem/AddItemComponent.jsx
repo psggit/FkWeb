@@ -2,11 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { increment, decrement } from "./actions";
+
 function AddItemComponent(props) {
   const counter = useSelector((state) => state);
   const dispatch = useDispatch();
   const {
-    addItem: { count },
+    skuItem: { count },
   } = counter;
   return (
     <div className="cart-content">

@@ -3,14 +3,17 @@ import BottomNavigationComponent from "../common/bottomNavigation";
 import { SearchBox } from "./SearchBox";
 import { HeaderComponent } from "../common/toolbar";
 import SearchLayout from "../common/layout/SearchLayout";
-import { Accordion } from "../drinks";
+import { BrandComponent } from "../common/brand";
 
 function Search() {
   const [cancelBtn, SetCancelBtn] = useState(false);
+  const [query, SetQuery] = useState('');
   const cancelEnable = (val) => {
     SetCancelBtn(val);
   };
-
+  const handleInput = (val) => {
+      SetQuery(val);
+  };
   useEffect(() => {
     window.addEventListener("focusout", () => {
       SetCancelBtn(false);
@@ -21,12 +24,12 @@ function Search() {
     <>
       <HeaderComponent title="Search Drinks">
         <div className="search-container">
-          <SearchBox cancelEnable={cancelEnable} />
+          <SearchBox cancelEnable={cancelEnable} handleInput={handleInput}/>
           {cancelBtn ? <button>Cancel</button> : ""}
         </div>
       </HeaderComponent>
       <SearchLayout>
-        <Accordion />
+        <BrandComponent query={query}/>
         <BottomNavigationComponent />
       </SearchLayout>
     </>
