@@ -1,0 +1,46 @@
+@import "../../colors.scss";
+
+.myorders-container {
+  margin-top: 76px;
+}
+
+.order-item {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0.5px solid $border-color;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  .order-item-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .item-display-title {
+      font-family: MontserratBold;
+      font-size: 16px;
+      line-height: 16px;
+    }
+
+    .item-display-total {
+      font-size: 16px;
+      line-height: 24px;
+      color: $orange-color;
+    }
+  }
+
+  .item-date {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 16px;
+    color: $edit-color;
+  }
+
+  .retailer-name {
+    font-size: 12px;
+    line-height: 16px;
+    color: $edit-color;
+    margin-top: 8px;
+  }
+}
