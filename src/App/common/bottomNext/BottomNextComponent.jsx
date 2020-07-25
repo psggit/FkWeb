@@ -21,7 +21,10 @@ function BottomNextComponent(props) {
   }
   return (
     <div className="bottom-bar">
-      <div className={(inActive == true ? "disable " : "" ) + "btn-general"} onClick={showNext}>
+      <div
+        className={(inActive == true ? "disable " : "") + "btn-general"}
+        onClick={showNext}
+      >
         <div className="btn-label">{title}</div>
         <img className="btn-arrow" src={nextIcon} />
       </div>

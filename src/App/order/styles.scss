@@ -2,7 +2,6 @@
 
 .order-placed {
   height: 1086px;
-  margin-top: 64px;
 }
 
 .remove-top-border {
@@ -69,8 +68,6 @@
 
 .arrival-container {
   margin-top: 12px;
-  padding-bottom: 12px;
-  border-bottom: 0.5px solid $border-color;
 
   .arrival-time {
     font-family: MontserratBold;
@@ -96,6 +93,11 @@
     padding-bottom: 12px;
     border-bottom: 0.5px solid $border-color;
   }
+}
+
+.tell-a-friend-wrapper {
+  border-bottom: 0.5px solid $border-color;
+  padding-bottom: 12px;
 
   .tell-a-friend-container {
     margin-top: 16px;

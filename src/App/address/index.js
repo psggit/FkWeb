@@ -1,3 +1,2 @@
-import SelectAddress from "./SelectAddress";
-
-export default SelectAddress;
+export { SelectAddressContainer } from "./SelectAddress/selectAddressContainer";
+export { addressListReducer } from "./reducer";

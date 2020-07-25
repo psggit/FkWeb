@@ -1,0 +1,44 @@
+@import "../../../colors.scss";
+
+.address-wrap {
+  background-color: $container-bg;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  padding: 16px;
+  padding-bottom: 0px;
+  margin-bottom: 14px;
+}
+
+.radiobtn {
+  position: absolute;
+  left: 0px;
+}
+.address-container {
+  padding-top: 15px;
+  border-bottom: 1px solid $border-color;
+}
+.add-new-address {
+  display: flex;
+  height: 64px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .title {
+    font-family: Montserrat;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .add-image {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.no-address-text {
+  text-align: center;
+  color: $edit-color;
+  padding: 4px 45px;
+  font-size: 14px;
+}
