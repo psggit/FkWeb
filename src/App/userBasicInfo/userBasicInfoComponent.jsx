@@ -248,29 +248,29 @@ UserBasicInfoComponent.propTypes = {
 };
 
 function UserBasicInfoComponent(props) {
-  //  const loginSuccess = props.loginSuccess;
-  //  const loginInProgress = props.loginInProgress;
-  //  const loginFailed = props.loginFailed;
-  //  const collectUserDetails = props.collectUserDetails;
-  //  const trigger = !(loginSuccess || loginFailed || loginInProgress);
-  //  useLayoutEffect(() => {
-  //    if (trigger) {
-  //      props.login();
-  //    }
-  //  });
-  //
-  //  if (loginInProgress) {
-  //    return <div> Login in progress </div>;
-  //  } else if (loginFailed) {
-  //    return <LFComponent login={props.login} />;
-  //  } else if (loginSuccess) {
-  //    if (!collectUserDetails) {
-  //      return <Redirect to="/home" />;
-  //    } else {
-  return <CollectInfoComponent {...props} />;
-  //     }
-  //   } else {
-  //     return <div> deff </div>;
-  //   }
+  const loginSuccess = props.loginSuccess;
+  const loginInProgress = props.loginInProgress;
+  const loginFailed = props.loginFailed;
+  const collectUserDetails = props.collectUserDetails;
+  const trigger = !(loginSuccess || loginFailed || loginInProgress);
+  useLayoutEffect(() => {
+    if (trigger) {
+      props.login();
+    }
+  });
+
+  if (loginInProgress) {
+    return <div> Login in progress </div>;
+  } else if (loginFailed) {
+    return <LFComponent login={props.login} />;
+  } else if (loginSuccess) {
+    if (!collectUserDetails) {
+      return <Redirect to="/home" />;
+    } else {
+      return <CollectInfoComponent {...props} />;
+     }
+   } else {
+     return <div> deff </div>;
+   }
 }
 export { UserBasicInfoComponent };
