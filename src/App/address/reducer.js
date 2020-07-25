@@ -1,0 +1,1 @@
+export { addressListReducer } from "./duck";

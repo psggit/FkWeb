@@ -7,7 +7,7 @@ import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { UserBasicInfoContainer } from "./userBasicInfo";
 import { CartContainer } from "./cart";
 import Search from "./search";
-import SelectAddress from "./address";
+import {SelectAddressContainer} from "./address";
 import OrderSummary from "./summary";
 import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
@@ -21,7 +21,7 @@ function App() {
           <Route path="/user/login" component={UserBasicInfoContainer} />
           <Route path="/search" component={Search} />
           <Route path="/cart" component={CartContainer} />
-          <Route path="/address/select" component={SelectAddress} />
+          <Route path="/address/select" component={SelectAddressContainer} />
           <Route path="/home" component={Home} />
           <Route
             path="/user-terms"

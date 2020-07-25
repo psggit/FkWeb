@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 
 import { configureStore } from "@reduxjs/toolkit";
 import { homeReducer } from "../App/home";
+import { addressListReducer } from "../App/address";
 import { tcReducer } from "../App/agreeAndContinue";
 import { accordianReducer } from "../App/drinks";
 import { userInfoCreateReducer } from "../App/userBasicInfo";
@@ -14,6 +15,7 @@ const store = configureStore({
     tcStore: tcReducer,
     addItem: accordianReducer,
     ubiStore: userInfoCreateReducer,
+    addressStore: addressListReducer,
     cart: cartReducer,
   }),
   middleware: [thunk],

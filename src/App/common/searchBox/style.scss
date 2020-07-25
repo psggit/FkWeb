@@ -1,0 +1,26 @@
+@import "../../../colors.scss";
+
+.search-box-wrapper {
+  position: relative;
+  .searchIcon {
+    position: absolute;
+    top: 8px;
+    width: 20px;
+    left: 10px;
+  }
+
+  input {
+    background-color: $border-color;
+    border-radius: 4px;
+    border: 0px;
+    color: $primary-color;
+    width: 100%;
+    padding: 6px;
+    padding-left: 36px;
+    caret-color: #e97c07;
+  }
+  input:focus {
+    border: 0px;
+    outline: none;
+  }
+}
