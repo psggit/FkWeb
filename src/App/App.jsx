@@ -13,7 +13,7 @@ import OrderSummary from "./summary";
 import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
 import { OrderPlaced } from "./order";
-import { CreateAddressComponent } from "./address/create";
+import { ChooseLocationContainer } from "./address/chooseLocation";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
           <Route path="/myorders" component={MyOrdersComponent} />
           <Route path="/address/select" component={SelectAddressContainer} />
           <Route path="/home" component={Home} />
-          <Route path="/address/create" component={CreateAddressComponent} />
+          <Route path="/choose/location" component={ChooseLocationContainer} />
           <Route
             path="/user-terms"
             component={() => (
