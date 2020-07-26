@@ -1,10 +1,7 @@
 @import "../../colors.scss";
 
 .address-container {
-  margin-left: 24px;
   margin-top: 16px;
-  margin-right: 24px;
-  margin-bottom: 16px;
   border-bottom: 1px solid $border-color;
 }
 
@@ -24,5 +21,39 @@
   .add-image {
     width: 24px;
     height: 24px;
+  }
+}
+
+.new-address-container {
+  margin-top: 128px;
+}
+
+.add-new-address-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 72px;
+  border-bottom: 1px solid $border-color;
+
+  .add-new-address-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .address-detail {
+    margin-left: 12px;
+    width: 100%;
+
+    .title {
+      font-size: 14px;
+      line-height: 18px;
+      width: 100%;
+    }
+
+    .address {
+      font-size: 12px;
+      line-height: 16px;
+      margin-top: 6px;
+    }
   }
 }

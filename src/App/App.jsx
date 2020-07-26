@@ -8,11 +8,12 @@ import { UserBasicInfoContainer } from "./userBasicInfo";
 import { CartContainer } from "./cart";
 import { MyOrdersComponent } from "./myorders";
 import Search from "./search";
-import {SelectAddressContainer} from "./address";
+import { SelectAddressContainer } from "./address";
 import OrderSummary from "./summary";
 import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
 import { OrderPlaced } from "./order";
+import { CreateAddressComponent } from "./address/create";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/myorders" component={MyOrdersComponent} />
           <Route path="/address/select" component={SelectAddressContainer} />
           <Route path="/home" component={Home} />
-          <Route path="/address/create" component={Home} />
+          <Route path="/address/create" component={CreateAddressComponent} />
           <Route
             path="/user-terms"
             component={() => (
