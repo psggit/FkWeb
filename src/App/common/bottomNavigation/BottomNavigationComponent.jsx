@@ -31,17 +31,19 @@ const tabs = [
 
 function BottomNavigationComponent() {
   return (
-    <div className="navBar">
-      {tabs.map((value, index) => (
-        <div key={"navTouch" + index} className="col-3">
-          <NavLink to={value.route}>
-            <div className="navItem">
-              <img className="navImage" src={value.icon}></img>
-              <div className="navText">{value.label}</div>
-            </div>
-          </NavLink>
-        </div>
-      ))}
+    <div className="navBar-height">
+      <div className="navBar navBar-height">
+        {tabs.map((value, index) => (
+          <div key={"navTouch" + index} className="col-3">
+            <NavLink to={value.route}>
+              <div className="navItem">
+                <img className="navImage" src={value.icon}></img>
+                <div className="navText">{value.label}</div>
+              </div>
+            </NavLink>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
