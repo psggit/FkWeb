@@ -3,7 +3,7 @@ import BottomNavigationComponent from "../common/bottomNavigation";
 import { SearchBox } from "./SearchBox";
 import { HeaderComponent } from "../common/toolbar";
 import SearchLayout from "../common/layout/SearchLayout";
-import { BrandComponent } from "../common/brand";
+import { BrandContainer } from "../common/brand";
 
 function Search() {
   const [cancelBtn, SetCancelBtn] = useState(false);
@@ -29,7 +29,7 @@ function Search() {
         </div>
       </HeaderComponent>
       <SearchLayout>
-        <BrandComponent query={query}/>
+        <BrandContainer query={query}/>
         <BottomNavigationComponent />
       </SearchLayout>
     </>

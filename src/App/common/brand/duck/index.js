@@ -1,2 +1,2 @@
 export { searchDrinkReducer } from "./reducer";
-export {getSearchDrinks} from './action'
+export {getSearchDrinks} from './searchOperations';

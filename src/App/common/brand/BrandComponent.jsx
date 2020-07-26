@@ -1,11 +1,10 @@
 import React, { useState,useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { AddItemComponent } from "./additem";
 import UpArrow from "../../../assets/images/up.svg";
 import DownArrow from "../../../assets/images/down.svg";
-import { getSearchDrinks } from "./duck";
 import {LoadingComponent} from '../loading'
+
 
 function SkuItem(props) {
   const [active, setActive] = useState(false);
@@ -18,8 +17,10 @@ function SkuItem(props) {
     <React.Fragment>
     <div  className={activeClass}>
       <div className="accordionItem" onClick={toggle}>
+        <div>
         <img className="thumbnail" src={brandList.logo_low_res_image} alt="" />
         <span className="summary">{brandList.brand_name}</span>
+        </div>
         <span className="">
           <img src={active ? UpArrow : DownArrow} alt="upDown Arrow" />
         </span>
@@ -41,12 +42,8 @@ function SkuItem(props) {
   )
 }
 
-function BrandComponent({ query }) {
-  const brandState = useSelector((state) => state);
-  const {
-    searchItem: { data,pending },
-  } = brandState;
-  const dispatch = useDispatch();
+function BrandComponent(props) {
+  const { query,data,pending ,getSearchDrinks}=props;
   const isFirstRun = useRef(true);
   useEffect(() => {
     if (isFirstRun.current) {
@@ -54,7 +51,7 @@ function BrandComponent({ query }) {
       return;
     }
     if(query.length >2){
-      dispatch(getSearchDrinks(query));
+      getSearchDrinks(query);
     }
   }, [query]);
   const renderQuestion = (item) => {
@@ -88,8 +85,8 @@ function BrandComponent({ query }) {
         </div>
       ) : ( 
         <div className="initial-text">
-          <div>Sorry </div>
-          <div className="mid-light-text">The drink you searched for isn't available at a store near you right now</div>
+          <div>Sorry! </div>
+          <div className="sorry-text" style={{width:'100%',margin:0,padding:'5px 20px'}}>The drink you searched for isn't available at a store near you right now</div>
         </div>       
       )}
     </>
@@ -98,6 +95,9 @@ function BrandComponent({ query }) {
 
 BrandComponent.propTypes = {
   query: PropTypes.string,
+  getSearchDrinks: PropTypes.func,
+  data:PropTypes.array,
+  pending:PropTypes.bool
 };
 
 export { BrandComponent };

@@ -6,26 +6,15 @@ const URL =
 
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 
-const searchDrinkAPI = async(reqBody) => {
- let response= await fetch(URL, {
+const searchDrinkAPI = (reqBody, process, onSuccess, onError) => {
+ fetch(URL, {
     method: "POST",
     headers: headers,
-    body: JSON.stringify(reqBody),
+    body: reqBody,
   })
-  try{
-    if (response.ok) {
-      return response.json();
-    }
-    if (res.status === 400) {
-      //TODO:@hl05 setup sentry here?
-      throw new Error("invalid params");
-    } else {
-      throw new Error("Something went wrong, try again");
-    }
-  }
-  catch(err){
-    return err
-  }
+  .then((res) => process(res))
+  .then((data) => onSuccess(data))
+  .catch((err) => onError(err));
 };
 
 export { searchDrinkAPI };
