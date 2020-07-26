@@ -25,6 +25,7 @@ function App() {
           <Route path="/myorders" component={MyOrdersComponent} />
           <Route path="/address/select" component={SelectAddressContainer} />
           <Route path="/home" component={Home} />
+          <Route path="/address/create" component={Home} />
           <Route
             path="/user-terms"
             component={() => (
