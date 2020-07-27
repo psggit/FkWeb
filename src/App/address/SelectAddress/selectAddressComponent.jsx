@@ -26,7 +26,6 @@ function SelectAddressComponent(props) {
   return (
     <>
       <ToolbarComponent helpVisibility="true" title="Choose Address" />
-      <AddressComponent {...props} />
       <div className="page-container">
         <AddressComponent {...props} />
         <div className="add-new-address" onClick={showAddAddress}>
