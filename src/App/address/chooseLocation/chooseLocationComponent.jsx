@@ -72,11 +72,13 @@ function ChooseLocationComponent(props) {
             {props.isCancelButton ? <button>Cancel</button> : ""}
           </div>
         </HeaderComponent>
-        <div className="page-container new-address-container"></div>
-        {props.isSearchMode ? <PlacesDetailComponent /> : <MapComponent />}
+        <div className="page-container new-address-container">
+          <MapComponent />
+        </div>
       </div>
     </>
   );
 }
+//{props.isSearchMode ? <PlacesDetailComponent /> : <MapComponent />}
 
 export { ChooseLocationComponent };
