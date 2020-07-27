@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ToolbarComponent } from "../../common/toolbar";
-import { SearchBoxComponent } from "../../common/searchBox";
 import AddressComponent from "./../components";
 import AddAddressIcon from "../../../assets/images/add_address.svg";
 import { BottomNextComponent } from "../../common/bottomNext";
@@ -12,9 +11,13 @@ SelectAddressComponent.propTypes = {
   savedUserAddresses: PropTypes.array,
   selectedAddress: PropTypes.object,
   selectAddressFunc: PropTypes.func,
+  onMountFunc: PropTypes.func,
 };
 
 function SelectAddressComponent(props) {
+  useEffect(() => {
+    props.onMountFunc();
+  }, []);
   const history = useHistory();
   function showAddAddress() {
     history.push("/choose/location");
