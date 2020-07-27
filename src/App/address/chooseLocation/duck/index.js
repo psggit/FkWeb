@@ -1,8 +1,4 @@
-export {
-  addressFromGpsReducer,
-  autoCompleteReducer,
-  placeDetailsReducer,
-} from "./reducer";
+export { chooseLocationReducer } from "./reducer";
 
 export {
   getAddressFromGpsOperation,

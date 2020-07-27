@@ -17,7 +17,7 @@ SelectAddressComponent.propTypes = {
 function SelectAddressComponent(props) {
   const history = useHistory();
   function showAddAddress() {
-    history.push("/address/create");
+    history.push("/choose/location");
   }
 
   return (

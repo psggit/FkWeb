@@ -1,23 +1,27 @@
 import { connect } from "react-redux";
-import { SelectAddressOperation } from "../duck";
 import { ChooseLocationComponent } from "./chooseLocationComponent";
+import {
+  autoCompleteOperation,
+  getPlacesDetailsOperation,
+  getAddressFromGpsOperation,
+} from "./duck";
 
 const mapStateToProps = (state) => {
   return {
     isSearchMode: state.chooseLocation.isSearchMode,
     isCancelButton: state.chooseLocation.isCancelButton,
-    mapCenterGps: state.chooseLocation.mapCenterGps,
-    autoCompletePlaces: state.chooseLocation.autoComplete.places,
+    autoCompletePlaces: state.chooseLocation.autoComplete.autoCompletePlaces,
     placesInfo: state.chooseLocation.placesInfo,
     address: state.chooseLocation.address,
+    mapCenterGps: state.chooseLocation.mapCenterGps,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    autoComplete: (value) => dispatch(SelectAddressOperation(value)),
-    getPlacesDetails: (value) => dispatch(SelectAddressOperation(value)),
-    getAddressFromGps: (value) => dispatch(SelectAddressOperation(value)),
+    autoComplete: (value) => dispatch(autoCompleteOperation(value)),
+    getPlacesDetails: (value) => dispatch(getPlacesDetailsOperation(value)),
+    getAddressFromGps: (value) => dispatch(getAddressFromGpsOperation(value)),
   };
 };
 

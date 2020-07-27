@@ -18,6 +18,7 @@ ChooseLocationComponent.propTypes = {
   autoCompletePlaces: PropTypes.array,
   placesInfo: PropTypes.object,
   address: PropTypes.object,
+  mapCenterGps: PropTypes.string,
   autoComplete: PropTypes.func,
   getPlacesDetails: PropTypes.func,
   getAddressFromGps: PropTypes.func,

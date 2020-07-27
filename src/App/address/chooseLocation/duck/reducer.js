@@ -12,27 +12,22 @@ const initialState = {
   autoCompletePlaces: [],
   placesInfo: {},
   address: {},
+  mapCenterGps: "",
 };
 
-const addressFromGpsReducer = createReducer(initialState, {
+const chooseLocationReducer = createReducer(initialState, {
   [getAddressFromGpsAction]: (state, action) => ({
     ...state,
-    addressFromGps: action.payload,
+    address: action.payload,
   }),
-});
-
-const autoCompleteReducer = createReducer(initialState, {
   [autoCompleteAction]: (state, action) => ({
     ...state,
     autoCompletePlaces: action.payload,
   }),
-});
-
-const placeDetailsReducer = createReducer(initialState, {
   [getPlacesDetailsAction]: (state, action) => ({
     ...state,
-    placeDetails: action.payload,
+    placesInfo: action.payload,
   }),
 });
 
-export { placeDetailsReducer, addressFromGpsReducer, autoCompleteReducer };
+export { chooseLocationReducer };
