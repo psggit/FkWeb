@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 
 import { configureStore } from "@reduxjs/toolkit";
 import { homeReducer } from "../App/home";
+import { chooseLocationReducer } from "../App/address/chooseLocation";
 import { addressListReducer } from "../App/address";
 import { tcReducer } from "../App/agreeAndContinue";
 import { accordianReducer } from "../App/drinks";
@@ -17,6 +18,7 @@ const store = configureStore({
     ubiStore: userInfoCreateReducer,
     addressStore: addressListReducer,
     cart: cartReducer,
+    chooseLocation: chooseLocationReducer,
   }),
   middleware: [thunk],
 });

@@ -223,7 +223,7 @@ function CollectInfoComponent(props) {
       <SelectIDComponent {...props} />
       <CheckBoxComponent {...props} />
       <BottomNextComponent
-        routePath="/address/select"
+        routePath="/choose/location"
         title="Proceed"
         inActive={!checkDeclaration}
       />
