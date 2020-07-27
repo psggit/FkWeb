@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { HeaderComponent } from "../../common/toolbar";
+import { ToolbarComponent } from "../../common/toolbar";
 import { SearchBox } from "../../search/SearchBox";
 import locationIcon from "../../../assets/images/location.svg";
 import "../style.scss";
@@ -41,7 +41,16 @@ const MyMapComponent = compose(
     googleMapURL:
       "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
+    containerElement: (
+      <div
+        style={{
+          width: `100%`,
+          position: `fixed`,
+          bottom: `56px`,
+          top: `164px`,
+        }}
+      />
+    ),
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withScriptjs,
@@ -69,18 +78,15 @@ function ChooseLocationComponent(props) {
   return (
     <>
       <div>
-        <HeaderComponent title="Add New Address">
-          <div className="search-container">
-            <SearchBox cancelEnable={props.isCancelButton} />
-            {props.isCancelButton ? <button>Cancel</button> : ""}
-          </div>
-        </HeaderComponent>
-        <div className="page-container new-address-container">
-          <MyMapComponent
-            isMarkerShown={true}
-            onMarkerClick={handleMarkerClick}
-          />
+        <ToolbarComponent title="Add New Address" />
+        <div className="search-container">
+          <SearchBox cancelEnable={props.isCancelButton} />
+          {props.isCancelButton ? <button>Cancel</button> : ""}
         </div>
+        <MyMapComponent
+          isMarkerShown={true}
+          onMarkerClick={handleMarkerClick}
+        />
       </div>
     </>
   );
