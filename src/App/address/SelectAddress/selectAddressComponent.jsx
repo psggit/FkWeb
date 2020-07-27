@@ -30,6 +30,7 @@ function SelectAddressComponent(props) {
       <div className="add-new-address">
         <div className="title">Add New Address</div>
         <img src={AddAddressIcon} className="add-image" />
+      </div>
       <div className="page-container">
         <AddressComponent {...props} />
         <div className="add-new-address" onClick={showAddAddress}>
