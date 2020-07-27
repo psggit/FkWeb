@@ -4,6 +4,9 @@
   margin-top: 16px;
   border-bottom: 1px solid $border-color;
 }
+#gmap {
+  position: fixed !important;
+}
 
 .add-new-address {
   display: flex;
