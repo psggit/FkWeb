@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     selectAddressFunc: (value) => dispatch(SelectAddressOperation(value)),
-    onMountFunc: (value) => dispatch(FetchAddressListOperation()),
+    onMountFunc: () => dispatch(FetchAddressListOperation()),
   };
 };
 

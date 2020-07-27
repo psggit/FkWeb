@@ -15,9 +15,9 @@ SelectAddressComponent.propTypes = {
 };
 
 function SelectAddressComponent(props) {
-  useEffect(()=> {
-    props.onMountFunc()
-  },[]);
+  useEffect(() => {
+    props.onMountFunc();
+  }, []);
   const history = useHistory();
   function showAddAddress() {
     history.push("/address/create");

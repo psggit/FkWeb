@@ -1,11 +1,11 @@
-import { selectAddressAction,
-fetchAddressListSuccessAction,
-fetchAddressListFailAction
+import {
+  selectAddressAction,
+  fetchAddressListSuccessAction,
+  fetchAddressListFailAction,
+  updateAddressListAction,
 } from "./actions";
 
-import {
-  fetchAddressListAPI
-} from "../../../utils/fetchAddress"
+import { fetchAddressListAPI } from "../../../utils/fetchAddress";
 
 const SelectAddressOperation = (value) => {
   return (dispatch, getState) => {
@@ -44,29 +44,14 @@ const processResponse = (dispatch) => {
   };
 };
 
-
-const FetchAddressListOperation = (value) => {
+const FetchAddressListOperation = () => {
   return (dispatch) => {
     fetchAddressListAPI(
-      processResponse(dispatch),
-      onSuccess(dispatch),
-      onError(dispatch)
-    )
-  };
-};
-
-const validateCart = (cartState) => {
-  let reqBody = reqBodyFromState(cartState);
-  return (dispatch) => {
-    dispatch(validationInProgress());
-    updateCartAPI(
-      reqBody,
       processResponse(dispatch),
       onSuccess(dispatch),
       onError(dispatch)
     );
   };
 };
-
 
 export { SelectAddressOperation, FetchAddressListOperation };

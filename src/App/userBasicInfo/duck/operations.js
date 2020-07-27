@@ -65,8 +65,8 @@ const SelectIDTypeOperation = (value) => {
 
 const FinaliseIDProofValueOperation = (selectedDocument) => {
   return (dispatch) => {
-      dispatch(finaliseIDTypeAction(selectedDocument));
-      dispatch(CheckCheckBoxOperation());
+    dispatch(finaliseIDTypeAction(selectedDocument));
+    dispatch(CheckCheckBoxOperation());
   };
 };
 
