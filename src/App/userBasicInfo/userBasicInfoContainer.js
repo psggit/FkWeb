@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
     selectingIDProofFunc: (value) => dispatch(SelectIDTypeOperation(value)),
     changeDocumentValueFunc: (value) =>
       dispatch(ChangeDocumentValueOperation(value)),
-    finaliseIDProofFunc: () => dispatch(FinaliseIDProofValueOperation()),
+    finaliseIDProofFunc: (selectedDocument) => dispatch(FinaliseIDProofValueOperation(selectedDocument)),
     checkDeclarationFunc: () => dispatch(CheckDeclarationOperation()),
     login: () => dispatch(login()),
   };

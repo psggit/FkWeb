@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { SelectAddressComponent } from "./selectAddressComponent";
-import { SelectAddressOperation } from "../duck";
+import { SelectAddressOperation, FetchAddressListOperation } from "../duck";
 
 const mapStateToProps = (state) => {
   return {
@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     selectAddressFunc: (value) => dispatch(SelectAddressOperation(value)),
+    onMountFunc: (value) => dispatch(FetchAddressListOperation()),
   };
 };
 

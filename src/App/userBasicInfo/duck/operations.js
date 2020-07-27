@@ -63,13 +63,10 @@ const SelectIDTypeOperation = (value) => {
   };
 };
 
-const FinaliseIDProofValueOperation = () => {
-  return (dispatch, getState) => {
-    let value = getState().ubiStore.selectedDocument;
-    if (value != getState().ubiStore.finalisedDocument) {
-      dispatch(finaliseIDTypeAction(value));
+const FinaliseIDProofValueOperation = (selectedDocument) => {
+  return (dispatch) => {
+      dispatch(finaliseIDTypeAction(selectedDocument));
       dispatch(CheckCheckBoxOperation());
-    }
   };
 };
 
