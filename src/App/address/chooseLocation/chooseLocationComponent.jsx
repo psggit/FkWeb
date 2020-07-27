@@ -4,13 +4,7 @@ import { SearchBox } from "../../search/SearchBox";
 import locationIcon from "../../../assets/images/location.svg";
 import "../style.scss";
 import PropTypes from "prop-types";
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
-import { compose, withProps } from "recompose";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 
 ChooseLocationComponent.propTypes = {
   isSearchMode: PropTypes.bool,
@@ -36,35 +30,51 @@ function PlacesDetailComponent(props) {
   );
 }
 
-const MyMapComponent = compose(
-  withProps({
-    googleMapURL:
-      "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: (
-      <div
-        style={{
-          width: `100%`,
-          position: `fixed`,
-          bottom: `56px`,
-          top: `164px`,
+const containerStyle = {
+  width: `100%`,
+  position: `fixed`,
+  bottom: `56px`,
+  top: `164px`,
+};
+
+const center = {
+  lat: -34.397,
+  lng: 150.644,
+};
+
+function MapComponent() {
+  const [map, setMap] = React.useState(null);
+
+  const onLoad = React.useCallback(function callback(map) {
+    const bounds = new window.google.maps.LatLngBounds();
+    map.fitBounds(bounds);
+    setMap(map);
+  }, []);
+
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null);
+  }, []);
+
+  return (
+    <LoadScript googleMapsApiKey="AIzaSyCHGLLAB117OiC9rDD9ON3gRP1LQLAAQmI">
+      <GoogleMap
+        id="gmap"
+        mapContainerStyle={{
+          width: "100%",
+          bottom: "56px",
+          top: "164px",
         }}
-      />
-    ),
-    mapElement: <div style={{ height: `100%` }} />,
-  }),
-  withScriptjs,
-  withGoogleMap
-)((props) => (
-  <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
-    {props.isMarkerShown && (
-      <Marker
-        position={{ lat: -34.397, lng: 150.644 }}
-        onClick={props.onMarkerClick}
-      />
-    )}
-  </GoogleMap>
-));
+        center={center}
+        zoom={10}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      >
+        {/* Child components, such as markers, info windows, etc. */}
+        <></>
+      </GoogleMap>
+    </LoadScript>
+  );
+}
 
 function ChooseLocationComponent(props) {
   useEffect(() => {
@@ -72,8 +82,6 @@ function ChooseLocationComponent(props) {
       //SetCancelBtn(false);
     });
   });
-
-  function handleMarkerClick() {}
 
   return (
     <>
@@ -83,10 +91,9 @@ function ChooseLocationComponent(props) {
           <SearchBox cancelEnable={props.isCancelButton} />
           {props.isCancelButton ? <button>Cancel</button> : ""}
         </div>
-        <MyMapComponent
-          isMarkerShown={true}
-          onMarkerClick={handleMarkerClick}
-        />
+        <div>
+          <MapComponent />
+        </div>
       </div>
     </>
   );

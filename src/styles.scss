@@ -52,6 +52,9 @@ body {
   background-color: $bg;
   display: flex;
 
+  section {
+    width: 100%;
+  }
 
   div {
     color: $primary-color;
