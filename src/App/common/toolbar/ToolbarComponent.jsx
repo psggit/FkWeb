@@ -7,12 +7,14 @@ import helpIcon from "../../../assets/images/help.svg";
 
 ToolbarComponent.propTypes = {
   helpVisibility: PropTypes.any,
-  title: PropTypes.any,
+  title: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 function ToolbarComponent(props) {
   const history = useHistory();
   const { helpVisibility } = props;
+  const { onClick } = props;
   const { title } = props;
 
   function goBack() {
@@ -25,7 +27,11 @@ function ToolbarComponent(props) {
     <div className="tool-bar-wrapper">
       <div className="tool-bar fixed">
         <div className="toolbar-layout">
-          <img className="back-arrow" src={backIcon} onClick={goBack} />
+          <img
+            className="back-arrow"
+            src={backIcon}
+            onClick={onClick != null ? onClick : goBack}
+          />
           <img
             className={
               helpVisibility

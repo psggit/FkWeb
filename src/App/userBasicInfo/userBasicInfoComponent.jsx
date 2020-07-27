@@ -191,22 +191,22 @@ function SelectIDComponent(props) {
 }
 function CheckBoxComponent(props) {
   return (
-      <div className="input-component">
-        <div
-          onClick={() => props.checkDeclarationFunc(true)}
-          className={
-            (props.checkDeclaration ? "selected " : "") +
-            (props.showDeclaration ? "" : "inactive ") +
-            "input-component-checkbox"
-          }
-        >
-          <div className="checkbox"></div>
-          <div className="checkbox-text">
-            I declare that the details furnished above are correct
-          </div>
+    <div className="input-component">
+      <div
+        onClick={() => props.checkDeclarationFunc(true)}
+        className={
+          (props.checkDeclaration ? "selected " : "") +
+          (props.showDeclaration ? "" : "inactive ") +
+          "input-component-checkbox"
+        }
+      >
+        <div className="checkbox"></div>
+        <div className="checkbox-text">
+          I declare that the details furnished above are correct
         </div>
       </div>
-  )
+    </div>
+  );
 }
 
 function CollectInfoComponent(props) {
@@ -222,7 +222,11 @@ function CollectInfoComponent(props) {
       <GenderSelectionComponent {...props} />
       <SelectIDComponent {...props} />
       <CheckBoxComponent {...props} />
-      <BottomNextComponent title="Proceed" inActive={!checkDeclaration} />
+      <BottomNextComponent
+        routePath="/address/select"
+        title="Proceed"
+        inActive={!checkDeclaration}
+      />
     </div>
   );
 }
@@ -268,9 +272,9 @@ function UserBasicInfoComponent(props) {
       return <Redirect to="/home" />;
     } else {
       return <CollectInfoComponent {...props} />;
-     }
-   } else {
-     return <div> deff </div>;
-   }
+    }
+  } else {
+    return <div> deff </div>;
+  }
 }
 export { UserBasicInfoComponent };

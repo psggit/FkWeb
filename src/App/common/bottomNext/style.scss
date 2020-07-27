@@ -1,17 +1,26 @@
 @import "../../../colors.scss";
-
+@import "../../../dimens.scss";
 
 .bottom-bar {
   display: flex;
   flex-direction: row;
-  height: 64px;
   background: $secondary-bg;
   backdrop-filter: blur(25px);
   justify-content: flex-end;
   padding-right: 16px;
   position: fixed;
-  bottom: 7%;
+  bottom: 56px;
   left: 0;
   right: 0;
 }
 
+@media only screen and (max-height: $win-max-height) {
+  .bottom-bar-height {
+    display: none;
+  }
+}
+
+
+.bottom-bar-height {
+  height: 64px;
+}
