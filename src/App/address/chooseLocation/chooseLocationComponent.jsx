@@ -36,7 +36,7 @@ function PlacesDetailComponent(props) {
   );
 }
 
-const MapComponent = compose(
+const MyMapComponent = compose(
   withProps({
     googleMapURL:
       "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
@@ -46,7 +46,7 @@ const MapComponent = compose(
   }),
   withScriptjs,
   withGoogleMap
-)((props) => {
+)((props) => (
   <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
     {props.isMarkerShown && (
       <Marker
@@ -54,8 +54,8 @@ const MapComponent = compose(
         onClick={props.onMarkerClick}
       />
     )}
-  </GoogleMap>;
-});
+  </GoogleMap>
+));
 
 function ChooseLocationComponent(props) {
   useEffect(() => {
@@ -63,6 +63,8 @@ function ChooseLocationComponent(props) {
       //SetCancelBtn(false);
     });
   });
+
+  function handleMarkerClick() {}
 
   return (
     <>
@@ -74,7 +76,10 @@ function ChooseLocationComponent(props) {
           </div>
         </HeaderComponent>
         <div className="page-container new-address-container">
-          <MapComponent />
+          <MyMapComponent
+            isMarkerShown={true}
+            onMarkerClick={handleMarkerClick}
+          />
         </div>
       </div>
     </>

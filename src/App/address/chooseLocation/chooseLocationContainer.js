@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
   return {
     isSearchMode: state.chooseLocation.isSearchMode,
     isCancelButton: state.chooseLocation.isCancelButton,
-    autoCompletePlaces: state.chooseLocation.autoComplete.autoCompletePlaces,
+    autoCompletePlaces: state.chooseLocation.autoCompletePlaces,
     placesInfo: state.chooseLocation.placesInfo,
     address: state.chooseLocation.address,
     mapCenterGps: state.chooseLocation.mapCenterGps,
