@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import searchIcon from "../../assets/images/search.svg";
 
 function SearchBox(props) {
   const [inputType] = useState("text");
@@ -22,4 +21,4 @@ function SearchBox(props) {
     </>
   );
 }
-export {SearchBox};
+export { SearchBox };

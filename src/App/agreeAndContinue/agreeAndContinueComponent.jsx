@@ -1,5 +1,5 @@
 import "./styles/style.scss";
-import logo from "../../assets/images/drinksAppLogo.svg";
+import { appIcon } from "../../assets/images";
 import { Redirect, Link } from "react-router-dom";
 import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
@@ -17,7 +17,7 @@ function TcComponent(props) {
   return (
     <div className="aAndCWrap">
       <div className="brandBox">
-        <img src={logo} />
+        <img src={appIcon} />
         <div className="subHead">
           YOUR BAR <br /> ON THE CLOUD
         </div>

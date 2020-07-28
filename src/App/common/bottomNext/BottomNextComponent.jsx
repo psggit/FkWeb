@@ -1,5 +1,5 @@
 import React from "react";
-import nextIcon from "../../../assets/images/next.svg";
+import { nextIcon } from "../../../assets/images";
 import "./style.scss";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";

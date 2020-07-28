@@ -1,8 +1,8 @@
 import React, { useLayoutEffect, useState } from "react";
 import "./styles/style.scss";
-import shield from "../../assets/images/shield.svg";
+import { shieldIcon } from "../../assets/images";
 import { ToolbarComponent } from "../common/toolbar";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { BottomNextComponent } from "../common/bottomNext";
 
@@ -100,7 +100,7 @@ function InfoComponent(props) {
         confirm and continue.
       </div>
       <div className="input-shield">
-        <img src={shield} />
+        <img src={shieldIcon} />
       </div>
     </div>
   );

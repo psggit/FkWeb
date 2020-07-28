@@ -1,5 +1,5 @@
 import React from "react";
-import upiIcon from "../../../assets/images/upi.svg";
+import { upiIcon } from "../../../assets/images";
 import { UPILowSuccessRate } from "./UPILowSuccessRate";
 
 import "../style.scss";

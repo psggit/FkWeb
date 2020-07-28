@@ -1,10 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./navbar.scss";
-import homeIcon from "../../../assets/images/home.png";
-import searchIcon from "../../../assets/images/search.svg";
-import cartIcon from "../../../assets/images/cart.png";
-import myOrdersIcon from "../../../assets/images/myorders.svg";
+import {
+  homeIcon,
+  searchIcon,
+  cartIcon,
+  myOrdersIcon,
+} from "../../../assets/images";
 
 const tabs = [
   {

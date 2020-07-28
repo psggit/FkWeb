@@ -1,6 +1,6 @@
 import React from "react";
 import "../style.scss";
-import lockIcon from "../../../assets/images/lock.svg";
+import { lockIcon } from "../../../assets/images";
 
 function SavedCardComponent() {
   return (

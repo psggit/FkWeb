@@ -2,7 +2,7 @@ import React from "react";
 import { ToolbarComponent } from "../../common/toolbar";
 import { SearchBoxComponent } from "../../common/searchBox";
 import AddressComponent from "./../components";
-import AddAddressIcon from "../../../assets/images/add_address.svg";
+import { addAddressIcon } from "../../../assets/images";
 import { BottomNextComponent } from "../../common/bottomNext";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
@@ -27,7 +27,7 @@ function SelectAddressComponent(props) {
         <AddressComponent {...props} />
         <div className="add-new-address" onClick={showAddAddress}>
           <div className="title">Add New Address</div>
-          <img src={AddAddressIcon} className="add-image" />
+          <img src={addAddressIcon} className="add-image" />
         </div>
       </div>
       <BottomNextComponent
