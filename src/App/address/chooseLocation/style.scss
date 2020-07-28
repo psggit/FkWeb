@@ -1,7 +1,43 @@
+@import "../../../colors.scss";
+
 .marker {
   width: 40px;
   height: 60px;
   position: fixed;
   left: 46%;
   top: 47%;
+}
+
+#gmap {
+  position: fixed !important;
+}
+
+.add-new-address-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 72px;
+  border-bottom: 1px solid $border-color;
+
+  .add-new-address-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .address-detail {
+    margin-left: 12px;
+    width: 100%;
+
+    .title {
+      font-size: 14px;
+      line-height: 18px;
+      width: 100%;
+    }
+
+    .address {
+      font-size: 12px;
+      line-height: 16px;
+      margin-top: 6px;
+    }
+  }
 }
