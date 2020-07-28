@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ToolbarComponent } from "../../common/toolbar";
 import { SearchBox } from "../../search/SearchBox";
 import "../style.scss";
@@ -7,6 +7,8 @@ import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { BottomNextComponent } from "../../common/bottomNext";
 import { locationIcon, mapMarkerIcon } from "../../../assets/images";
 import "./style.scss";
+
+const mapStyle = require("./styles.json");
 
 ChooseLocationComponent.propTypes = {
   isSearchMode: PropTypes.bool,
@@ -39,18 +41,14 @@ const containerStyle = {
   top: `164px`,
 };
 
-const center = {
-  lat: 13.005958,
-  lng: 80.250492,
-};
-
 function MapComponent() {
   const [map, setMap] = React.useState(null);
+  const [center, setCenter] = useState({ lat: 13.006928, lng: 80.255516 });
 
   const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
-    setMap(map);
+    //    const bounds = new window.google.maps.LatLngBounds();
+    //    map.fitBounds(bounds);
+    //    setMap(map);
   }, []);
 
   const onUnmount = React.useCallback(function callback(map) {
@@ -61,6 +59,9 @@ function MapComponent() {
     <LoadScript googleMapsApiKey="AIzaSyCHGLLAB117OiC9rDD9ON3gRP1LQLAAQmI">
       <GoogleMap
         id="gmap"
+        options={{
+          styles: mapStyle,
+        }}
         mapContainerStyle={{
           width: "100%",
           bottom: "120px",
