@@ -1,2 +1,2 @@
-export { BrandContainer } from "./BrandContainer";
-export { skuItemReducer, searchDrinkReducer} from "./reducer";
+export { BrandComponent } from "./BrandComponent";
+export { skuItemReducer } from "./additem";

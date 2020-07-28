@@ -7,7 +7,8 @@ import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { UserBasicInfoContainer } from "./userBasicInfo";
 import { CartContainer } from "./cart";
 import { MyOrdersComponent } from "./myorders";
-import Search from "./search";
+import {SearchContainer} from "./search";
+import {StoreFrontContainer} from "./storeFront";
 import {SelectAddressContainer} from "./address";
 import OrderSummary from "./summary";
 import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
@@ -20,11 +21,12 @@ function App() {
       <Router>
         <Switch>
           <Route path="/user/login" component={UserBasicInfoContainer} />
-          <Route path="/search" component={Search} />
+          <Route path="/search" component={SearchContainer} />
           <Route path="/cart" component={CartContainer} />
           <Route path="/myorders" component={MyOrdersComponent} />
           <Route path="/address/select" component={SelectAddressContainer} />
           <Route path="/home" component={Home} />
+          <Route path="/storefront" component={StoreFrontContainer} />
           <Route
             path="/user-terms"
             component={() => (

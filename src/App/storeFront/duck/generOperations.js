@@ -1,19 +1,17 @@
 import {
-    getSearchDrinksSuccess,
-    getSearchDrinksInProgress,
-    getSearchDrinksFailed,
+    getSearchGenresSuccess,
+    getSearchGenresInProgress,
+    getSearchGenresFailed,
   } from "./action";
-import {searchDrinkAPI} from '../../../../utils';
+import {searchGenresAPI,} from '../../../utils';
 
   
   const reqBodyFromState = (query) => {
     return JSON.stringify({
-      city_id: 5,
-      offset:0,
-      gps:"13.011557355101441,80.25409296154976",
-      query: query,
-      limit:5,
-      state_id: 4,
+      "city_id": 5,
+      "gps": "13.011557355101441,80.25409296154976",
+      "retailer_id": 436,
+      "state_id": 4
     });
   };
   
@@ -33,21 +31,21 @@ import {searchDrinkAPI} from '../../../../utils';
   
   const onSuccess = (dispatch) => {
     return (data) => {
-      dispatch(getSearchDrinksSuccess(data));
+      dispatch(getSearchGenresSuccess(data));
     };
   };
   
   const onError = (dispatch) => {
     return (err) => {
-      dispatch(getSearchDrinksFailed(err));
+      dispatch(getSearchGenresFailed(err));
     };
   };
  
-  const getSearchDrinks = (query) => {
+  const getGeners = (query) => {
     let reqBody = reqBodyFromState(query);
     return (dispatch) => {
-      dispatch(getSearchDrinksInProgress());
-      searchDrinkAPI(
+      dispatch(getSearchGenresInProgress());
+      searchGenresAPI(
         reqBody,
         processResponse(dispatch),
         onSuccess(dispatch),
@@ -55,5 +53,6 @@ import {searchDrinkAPI} from '../../../../utils';
       );
     };
   };
+
   
-  export { getSearchDrinks };
+  export { getGeners };

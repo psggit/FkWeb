@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { BrandComponent } from "./BrandComponent";
+import { SearchComponent } from "./SearchComponent";
 import { getSearchDrinks } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -13,9 +13,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const BrandContainer = connect(
+const SearchContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(BrandComponent);
+)(SearchComponent);
 
-export { BrandContainer };
+export { SearchContainer };

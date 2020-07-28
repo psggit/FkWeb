@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import { useHistory } from "react-router-dom";
 import "./style.scss";
 import PropTypes from "prop-types";
@@ -15,7 +15,7 @@ function ToolbarComponent(props) {
   const history = useHistory();
   const { helpVisibility } = props;
   const { onClick } = props;
-  const { title } = props;
+  const { title ,children} = props;
 
   function goBack() {
     history.goBack();
@@ -43,6 +43,7 @@ function ToolbarComponent(props) {
           />
         </div>
         <div className="title">{title}</div>
+        {children}
       </div>
     </div>
   );
