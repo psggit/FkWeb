@@ -8,7 +8,7 @@ import { UserBasicInfoContainer } from "./userBasicInfo";
 import { CartContainer } from "./cart";
 import { MyOrdersComponent } from "./myorders";
 import Search from "./search";
-import { SelectAddressContainer } from "./address";
+import { SelectAddressContainer, AddressEditContainer } from "./address";
 import OrderSummary from "./summary";
 import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
@@ -21,7 +21,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/user/login" component={UserBasicInfoContainer} />
-          <Route path="/search" component={Search} />
+          <Route path="/search" component={AddressEditContainer} />
           <Route path="/cart" component={CartContainer} />
           <Route path="/myorders" component={MyOrdersComponent} />
           <Route path="/address/select" component={SelectAddressContainer} />

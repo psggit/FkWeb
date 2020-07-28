@@ -4,7 +4,6 @@
 @import "./App/common/layout/searchLayout.scss";
 @import "./App//search/Search.scss";
 
-
 @font-face {
   font-family: "Montserrat";
   src: url("assets/fonts/Montserrat-Regular.ttf");
@@ -40,11 +39,11 @@
   font-style: normal;
 }
 //mixin
- @mixin content-center {
+@mixin content-center {
   justify-content: center;
   align-items: center;
   display: flex;
- }
+}
 
 body {
   font-family: "Montserrat";
@@ -129,7 +128,7 @@ input[type="radio"] {
 input[type="radio"]:checked + .radiobtn {
   border: 3px solid $orange-color;
 }
-.radiobtn.selected{
+.radiobtn.selected {
   border: 3px solid $orange-color;
 }
 .radio_item {
@@ -173,6 +172,12 @@ input[type="radio"]:checked {
   }
   .checkbox-text {
     padding-left: 14px;
+  }
+}
+.input-component.inactive {
+  opacity: 0.5;
+  input {
+    pointer-events: none;
   }
 }
 .input-component-checkbox.inactive {

@@ -13,6 +13,10 @@ function EmptyAddressComponent() {
 }
 function AddressComponent(props) {
   const addresses = props.savedUserAddresses;
+	function RadioClick() {
+		document.getElementByClassName("radiobtn")
+	}
+
   return (
     <div className="address-container">
       {addresses.length == 0 && <EmptyAddressComponent />}
