@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import downIcon from "../../../assets/images/right_arrow.svg";
+import { rightArrowIcon } from "../../../assets/images";
 
 AdditionalChargersComponent.propTypes = {
   label: PropTypes.any,
@@ -15,7 +15,7 @@ function AdditionalChargersComponent(props) {
       <div className="charges-container">
         <div className="label-container">
           <div>{label}</div>
-          <img src={downIcon} className="icon" />
+          <img src={rightArrowIcon} className="icon" />
         </div>
         <div>{charges}</div>
       </div>

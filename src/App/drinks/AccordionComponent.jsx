@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AddItemComponent } from "./additem";
-import UpArrow from "../../assets/images/up.svg";
-import DownArrow from "../../assets/images/down.svg";
+import { upIcon, downArrowIcon } from "../../assets/images";
 
 function AccordionItem(props) {
   const [active, setActive] = useState(false);
@@ -17,7 +16,7 @@ function AccordionItem(props) {
         <img className="thumbnail" src={brandList.logo_low_res_image} alt="" />
         <span className="summary">{brandList.brand_name}</span>
         <span className="">
-          <img src={active ? UpArrow : DownArrow} alt="upDown Arrow" />
+          <img src={active ? upIcon : downArrowIcon} alt="upDown Arrow" />
         </span>
       </div>
       {brandList.sku.map((item) => (

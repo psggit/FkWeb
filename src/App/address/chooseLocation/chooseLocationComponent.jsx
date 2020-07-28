@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { ToolbarComponent } from "../../common/toolbar";
 import { SearchBox } from "../../search/SearchBox";
-import locationIcon from "../../../assets/images/location.svg";
 import "../style.scss";
 import PropTypes from "prop-types";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { BottomNextComponent } from "../../common/bottomNext";
+import { locationIcon, mapMarkerIcon } from "../../../assets/images";
+import "./style.scss";
 
 ChooseLocationComponent.propTypes = {
   isSearchMode: PropTypes.bool,
@@ -38,8 +40,8 @@ const containerStyle = {
 };
 
 const center = {
-  lat: -34.397,
-  lng: 150.644,
+  lat: 13.005958,
+  lng: 80.250492,
 };
 
 function MapComponent() {
@@ -61,17 +63,14 @@ function MapComponent() {
         id="gmap"
         mapContainerStyle={{
           width: "100%",
-          bottom: "56px",
+          bottom: "120px",
           top: "164px",
         }}
         center={center}
         zoom={10}
         onLoad={onLoad}
         onUnmount={onUnmount}
-      >
-        {/* Child components, such as markers, info windows, etc. */}
-        <></>
-      </GoogleMap>
+      />
     </LoadScript>
   );
 }
@@ -93,7 +92,9 @@ function ChooseLocationComponent(props) {
         </div>
         <div>
           <MapComponent />
+          <img src={mapMarkerIcon} className="marker" />
         </div>
+        <BottomNextComponent title="Set Location" />
       </div>
     </>
   );
