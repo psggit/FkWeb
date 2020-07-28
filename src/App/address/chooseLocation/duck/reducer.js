@@ -8,7 +8,7 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   isSearchMode: false,
-  isCancelButton: false,
+  isCancelButton: true,
   autoCompletePlaces: [],
   placesInfo: {},
   address: {},
