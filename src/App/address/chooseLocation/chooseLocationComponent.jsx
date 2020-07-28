@@ -34,25 +34,22 @@ function PlacesDetailComponent(props) {
   );
 }
 
-const containerStyle = {
-  width: `100%`,
-  position: `fixed`,
-  bottom: `56px`,
-  top: `164px`,
-};
-
 function MapComponent() {
   const [map, setMap] = React.useState(null);
   const [center, setCenter] = useState({ lat: 13.006928, lng: 80.255516 });
 
   const onLoad = React.useCallback(function callback(map) {
-    //    const bounds = new window.google.maps.LatLngBounds();
-    //    map.fitBounds(bounds);
-    //    setMap(map);
+    setMap(map);
   }, []);
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
+  }, []);
+
+  const onCenterChanged = React.useCallback(function callback() {
+    if (map) {
+      setCenter(map.getCenter());
+    }
   }, []);
 
   return (
@@ -61,6 +58,14 @@ function MapComponent() {
         id="gmap"
         options={{
           styles: mapStyle,
+          streetViewControl: false,
+          keyboardShortcuts: false, // disable keyboard shortcuts
+          mapTypeControl: false,
+          zoomControl: false,
+          rotateControl: false,
+          fullscreenControl: false,
+          scaleControl: false, // allow scale controle
+          scrollwheel: false, // allow scroll wheel
         }}
         mapContainerStyle={{
           width: "100%",
@@ -68,8 +73,9 @@ function MapComponent() {
           top: "164px",
         }}
         center={center}
-        zoom={10}
+        zoom={14}
         onLoad={onLoad}
+        onCenterChanged={onCenterChanged}
         onUnmount={onUnmount}
       />
     </LoadScript>
