@@ -1,2 +1,2 @@
 export { PlacesDetailComponent } from "./PlacesDetailComponent";
-export { MapWithMarkerComponent } from "./MapWithMarkerComponent"
+export { MapWithMarkerComponent } from "./MapWithMarkerComponent";
