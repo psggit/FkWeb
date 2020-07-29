@@ -26,10 +26,10 @@ const initialState = {
   showDeclaration: false,
   checkDeclaration: false,
   consumerIDTypes: [
-    { idType: "Driving License", format: "text" },
-    { idType: "Passport", format: "text" },
-    { idType: "PAN Card", format: "text" },
-    { idType: "Voter ID", format: "text" },
+    { idType: "Driving License", name:"dl"},
+    { idType: "Passport", name:"passport" },
+    { idType: "PAN Card", name:"pan"},
+    { idType: "Voter ID", name:"voterid" },
   ],
 };
 

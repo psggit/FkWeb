@@ -1,7 +1,8 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import "./styles/style.scss";
-import { shieldIcon } from "../../assets/images";
+import { shieldIcon, drinksIcon } from "../../assets/images";
 import { ToolbarComponent } from "../common/toolbar";
+import { SplashLoadingComponent } from "../common/splashLoading";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { BottomNextComponent } from "../common/bottomNext";
@@ -13,16 +14,22 @@ LFComponent.propTypes = {
 function LFComponent(props) {
   const login = props.login;
   return (
-    <div>
-      <div>login failed </div>
-      <button onClick={login}> retry </button>
-    </div>
+    <>
+      <SplashLoadingComponent
+        motion={false}
+        icon={drinksIcon}
+        text="Login Failed"
+        buttonFunc={login}
+        buttonText="Retry"
+      />
+    </>
   );
 }
 
 CollectInfoComponent.propTypes = {
   yob: PropTypes.string,
   gender: PropTypes.string,
+  fetchKYCOptionsFunc: PropTypes.func,
   selectedID: PropTypes.string,
   consumerIDTypes: PropTypes.array,
   showConsumerIDs: PropTypes.bool,
@@ -137,14 +144,14 @@ function SelectIDComponent(props) {
               <div className="radio_item flex vcenter" key={"key_" + id.idType}>
                 <input
                   type="radio"
-                  id={id.idType}
+                  id={id.name}
                   name="idType"
                   value={id.idType}
-                  onClick={(e) => props.selectingIDProofFunc(e.target.value)}
+                  onClick={(e) => props.selectingIDProofFunc(e.target.id)}
                 />
                 <div className="radiobtn"></div>
                 <label
-                  htmlFor={id.idType}
+                  htmlFor={id.name}
                   className="no-fold-text option flex vcenter"
                 >
                   {id.idType}
@@ -213,6 +220,13 @@ function CollectInfoComponent(props) {
   const yob = props.yob;
   const checkDeclaration = props.checkDeclaration;
   const showDeclaration = props.showDeclaration;
+  const updateKycFunc = props.updateKycFunc;
+  const data={
+    dob: yob,
+    gender: props.gender,
+    kycType: props.finalisedDocument,
+    kycValue: props.selectedDocumentValue,
+  }
 
   return (
     <div className="page-container userBasicInfoComponent">
@@ -223,8 +237,8 @@ function CollectInfoComponent(props) {
       <SelectIDComponent {...props} />
       <CheckBoxComponent {...props} />
       <BottomNextComponent
-        routePath="/choose/location"
         title="Proceed"
+        onClickFunc={()=> updateKycFunc(data)}
         inActive={!checkDeclaration}
       />
     </div>
@@ -239,6 +253,7 @@ UserBasicInfoComponent.propTypes = {
   showConsumerIDs: PropTypes.bool,
   changeBirthYear: PropTypes.func,
   changingGenderFunc: PropTypes.func,
+  updateKycFunc: PropTypes.func,
   selectingIDProofFunc: PropTypes.func,
   selectedDocument: PropTypes.string,
   selectedDocumentValue: PropTypes.string,
@@ -252,29 +267,32 @@ UserBasicInfoComponent.propTypes = {
 };
 
 function UserBasicInfoComponent(props) {
-  const loginSuccess = props.loginSuccess;
-  const loginInProgress = props.loginInProgress;
-  const loginFailed = props.loginFailed;
-  const collectUserDetails = props.collectUserDetails;
-  const trigger = !(loginSuccess || loginFailed || loginInProgress);
-  useLayoutEffect(() => {
-    if (trigger) {
-      props.login();
-    }
-  });
+ //  const loginSuccess = props.loginSuccess;
+ //  const loginInProgress = props.loginInProgress;
+ //  const loginFailed = props.loginFailed;
+ //  const collectUserDetails = props.collectUserDetails;
+ //  const trigger = !(loginSuccess || loginFailed || loginInProgress);
+ //  useLayoutEffect(() => {
+ //    if (trigger) {
+ //      props.login();
+ //    }
+ //  });
 
-  if (loginInProgress) {
-    return <div> Login in progress </div>;
-  } else if (loginFailed) {
-    return <LFComponent login={props.login} />;
-  } else if (loginSuccess) {
-    if (!collectUserDetails) {
-      return <Redirect to="/home" />;
-    } else {
-      return <CollectInfoComponent {...props} />;
-    }
-  } else {
-    return <div> deff </div>;
-  }
+ //  if (loginInProgress) {
+ //    return (
+ //      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
+ //    );
+ //  } else if (loginFailed) {
+ //    return <LFComponent login={props.login} />;
+ //  } else if (loginSuccess) {
+ //    if (!collectUserDetails) {
+ //      return <Redirect to="/home" />;
+ //    } else {
+ //      return <CollectInfoComponent {...props} />;
+ //    }
+ //  } else {
+ //    return <div> deff </div>;
+ //  }
+  return <CollectInfoComponent {...props} />;
 }
 export { UserBasicInfoComponent };

@@ -7,6 +7,7 @@ import {
   changeDocumentValueAction,
   finaliseIDTypeAction,
 } from "./actions";
+import { updateBasicKYCAPI } from "../../../utils";
 
 const ChangingBirthYear = (value) => {
   return (dispatch) => {
@@ -70,10 +71,54 @@ const FinaliseIDProofValueOperation = (selectedDocument) => {
   };
 };
 
+const onSuccess = () => {
+  return (data) => {
+    history.pushState("/choose/location");
+  };
+};
+
+const onError = (dispatch) => {
+  return (err) => {
+    alert(err);
+  };
+};
+
+const processResponse = (dispatch) => {
+  return (res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    if (res.status === 400) {
+      throw new Error("invalid params");
+    } else {
+      throw new Error("Something went wrong, try again");
+    }
+  };
+};
+
+const UpdateKYCOperation = (value) => {
+  var reqBody = {
+    dob: value.dob,
+    gender: value.gender,
+    name: "",
+    kyc_type: value.kycType,
+    kyc_value: value.kycValue,
+  };
+  return (dispatch) => {
+    updateBasicKYCAPI(
+      reqBody,
+      processResponse(dispatch),
+      onSuccess(),
+      onError(dispatch)
+    );
+  };
+};
+
 export {
   ChangingBirthYear,
   FinaliseIDProofValueOperation,
   ChangingGenderOperation,
+  UpdateKYCOperation,
   SelectIDTypeOperation,
   ChangeDocumentValueOperation,
   CheckDeclarationOperation,

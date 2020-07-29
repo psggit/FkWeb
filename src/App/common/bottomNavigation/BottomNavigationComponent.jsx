@@ -10,7 +10,7 @@ import {
 
 const tabs = [
   {
-    route: "/",
+    route: "/home",
     icon: homeIcon,
     label: "Home",
   },
