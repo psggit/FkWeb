@@ -17,6 +17,7 @@
     "cy:ci": "start-server-and-test start http-get://localhost:8080 cy:run"
   },
   "dependencies": {
+    "@react-google-maps/api": "^1.9.9",
     "@reduxjs/toolkit": "^1.4.0",
     "@sentry/react": "^5.19.0",
     "bootstrap": "^4.5.0",
@@ -27,7 +28,6 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.2.0",
     "react-dom": "^16.13.1",
-    "react-google-maps": "^9.4.5",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "redux-thunk": "^2.3.0",

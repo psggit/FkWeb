@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import drinksIcon from "../../../assets/images/drinks.svg";
+import { drinksIcon } from "../../../assets/images";
 import "./style.scss";
 
 CartItemComponent.protoTypes = {

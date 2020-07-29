@@ -46,8 +46,15 @@
 }
 
 body {
+  width:100%;
+  height:100%;
   font-family: "Montserrat";
   background-color: $bg;
+  display: flex;
+
+  section {
+    width: 100%;
+  }
 
   div {
     color: $primary-color;

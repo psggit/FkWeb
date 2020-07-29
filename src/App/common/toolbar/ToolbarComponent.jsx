@@ -2,8 +2,8 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import "./style.scss";
 import PropTypes from "prop-types";
-import backIcon from "../../../assets/images/back.svg";
-import helpIcon from "../../../assets/images/help.svg";
+import { backIcon } from "../../../assets/images";
+import { helpIcon } from "../../../assets/images";
 
 ToolbarComponent.propTypes = {
   helpVisibility: PropTypes.any,
