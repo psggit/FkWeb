@@ -1,10 +1,10 @@
 import React from "react";
 
-function SearchLayout({children}) {
+function SearchLayout({children,custom}) {
 
   return (
     <>
-<div className="layout-container">
+<div className={`layout-container ${custom}`}>
     {children}
 </div>
     </>

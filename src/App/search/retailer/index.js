@@ -1,0 +1,1 @@
+export { RetailerComponent } from './RetailerComponent';
