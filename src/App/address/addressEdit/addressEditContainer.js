@@ -1,21 +1,17 @@
 import { connect } from "react-redux";
-import { AddressEditComponent } from "./addressEditComponent.jsx"
+import { AddressEditComponent } from "./addressEditComponent.jsx";
 // Import Operations
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = () => {
+  return {};
+};
 
-  }
-}
+const mapDispatchToProps = () => {
+  return {};
+};
 
-const mapDispatchToProps = (state) => {
-  return {
-
-  }
-}
-
-const AddressEditContainer = connect (
+const AddressEditContainer = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(AddressEditComponent);
 
-export { AddressEditContainer }
+export { AddressEditContainer };

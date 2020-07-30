@@ -2,7 +2,7 @@ import config from "../config";
 import CommonHeaders from "./common";
 
 const URL =
-  "https://api." + config.BASE_DOMAIN + "/consumer/api/2/update/signupinfo"
+  "https://api." + config.BASE_DOMAIN + "/consumer/api/2/update/signupinfo";
 
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 

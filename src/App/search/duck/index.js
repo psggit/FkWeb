@@ -1,2 +1,2 @@
 export { searchDrinkReducer } from "./reducer";
-export {getSearchDrinks} from './searchOperations';
+export { getSearchDrinks } from "./searchOperations";

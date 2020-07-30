@@ -1,2 +1,2 @@
 export { retailerListReducer } from "./reducers";
-export { waitForSyed } from "./operations";
+export { fetchRetailersOperation } from "./fetchRetailersOperations";

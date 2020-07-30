@@ -1,1 +1,1 @@
-export { RetailerComponent } from './RetailerComponent';
+export { RetailerComponent } from "./RetailerComponent";

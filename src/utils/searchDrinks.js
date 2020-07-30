@@ -2,19 +2,22 @@ import config from "../config";
 import CommonHeaders from "./common";
 
 const URL =
-"https://cors-anywhere.herokuapp.com/"+"https://retailer." + config.BASE_DOMAIN + "/Api/stockandprice/search/locateDrinks";
+  "https://cors-anywhere.herokuapp.com/" +
+  "https://retailer." +
+  config.BASE_DOMAIN +
+  "/Api/stockandprice/search/locateDrinks";
 
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 
 const searchDrinkAPI = (reqBody, process, onSuccess, onError) => {
- fetch(URL, {
+  fetch(URL, {
     method: "POST",
     headers: headers,
     body: reqBody,
   })
-  .then((res) => process(res))
-  .then((data) => onSuccess(data))
-  .catch((err) => onError(err));
+    .then((res) => process(res))
+    .then((data) => onSuccess(data))
+    .catch((err) => onError(err));
 };
 
 export { searchDrinkAPI };

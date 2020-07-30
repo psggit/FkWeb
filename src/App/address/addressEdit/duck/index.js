@@ -1,2 +1,1 @@
-export { addressEditReducer } from './reducer'
-
+export { addressEditReducer } from "./reducer";

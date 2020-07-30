@@ -1,12 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
-const initialState = {
+const initialState = {};
 
-}
+const addressEditReducer = createReducer(initialState, {});
 
-const addressEditReducer = createReducer(initialState, {
-
-});
-
-export {
- addressEditReducer
-}
+export { addressEditReducer };

@@ -1,2 +1,2 @@
-export {StoreFrontContainer} from "./storeFrontContainer";
-export {storeFrontReducer} from "./reducer";
+export { StoreFrontContainer } from "./storeFrontContainer";
+export { storeFrontReducer } from "./reducer";

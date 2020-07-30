@@ -1,2 +1,2 @@
-export {SearchContainer} from "./searchContainer";
-export {searchDrinkReducer} from './duck'
+export { SearchContainer } from "./searchContainer";
+export { searchDrinkReducer } from "./duck";
