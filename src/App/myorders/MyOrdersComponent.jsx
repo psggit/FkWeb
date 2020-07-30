@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HeaderComponent } from "../common/toolbar";
 import "./style.scss";
 import { OrderItem } from "./components";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function MyOrdersComponent() {
+MyOrdersComponent.propTypes = {
+  getMyOrdersFunc: PropTypes.func,
+};
+
+function MyOrdersComponent(props) {
   const history = useHistory();
+
+  useEffect(() => {
+    props.getMyOrdersFunc;
+  }, []);
 
   function showOrderDetail() {
     history.push("/order/info");
