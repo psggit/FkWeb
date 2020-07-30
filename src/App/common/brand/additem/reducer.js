@@ -2,7 +2,7 @@ const initialState = {
   count: 0,
 };
 
-function accordianReducer(state = initialState, action) {
+function skuItemReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case "INCREMENT":
@@ -16,4 +16,4 @@ function accordianReducer(state = initialState, action) {
   }
 }
 
-export { accordianReducer };
+export { skuItemReducer };

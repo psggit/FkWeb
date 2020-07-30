@@ -12,15 +12,23 @@ SelectAddressComponent.propTypes = {
   selectedAddress: PropTypes.object,
   selectAddressFunc: PropTypes.func,
   onMountFunc: PropTypes.func,
+  flow:PropTypes.string,
 };
 
 function SelectAddressComponent(props) {
   useEffect(() => {
     props.onMountFunc();
   }, []);
+
+  const flow = "checkout"
   const history = useHistory();
+
   function showAddAddress() {
     history.push("/choose/location");
+  }
+
+  function onClickProcess() {
+    history.push(flow !== "signupflow" ?  "/order/summary" : "/home")
   }
 
   return (
@@ -34,7 +42,7 @@ function SelectAddressComponent(props) {
         </div>
       </div>
       <BottomNextComponent
-        routePath="/order/summary"
+        onClickFunc = {onClickProcess}
         inActive={props.selectedAddress.address_id == undefined}
         title="Proceed"
       />

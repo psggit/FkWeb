@@ -5,16 +5,20 @@ import { homeReducer } from "../App/home";
 import { chooseLocationReducer } from "../App/address/chooseLocation";
 import { addressListReducer } from "../App/address";
 import { tcReducer } from "../App/agreeAndContinue";
-import { accordianReducer } from "../App/drinks";
+import { skuItemReducer } from "../App/common/brand";
+import { searchDrinkReducer } from "../App/search";
 import { userInfoCreateReducer } from "../App/userBasicInfo";
 import { cartReducer } from "../App/common/cart";
 import thunk from "redux-thunk";
+import { storeFrontReducer } from "../App/storeFront";
 
 const store = configureStore({
   reducer: combineReducers({
     home: homeReducer,
     tcStore: tcReducer,
-    addItem: accordianReducer,
+    skuItem: skuItemReducer,
+    storeFront: storeFrontReducer,
+    searchItem: searchDrinkReducer,
     ubiStore: userInfoCreateReducer,
     addressStore: addressListReducer,
     cart: cartReducer,

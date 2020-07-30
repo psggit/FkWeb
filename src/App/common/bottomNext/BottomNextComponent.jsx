@@ -8,15 +8,20 @@ BottomNextComponent.propTypes = {
   routePath: PropTypes.string,
   title: PropTypes.string,
   inActive: PropTypes.bool,
+  onClickFunc: PropTypes.func,
 };
 
 function BottomNextComponent(props) {
   const { routePath } = props;
-  const { title, inActive } = props;
+  const { title, inActive, onClickFunc } = props;
   const history = useHistory();
-  function showNext() {
+  function clickProcess() {
     if (inActive != true) {
-      history.push(routePath);
+      if (routePath === undefined) {
+	 onClickFunc()
+      } else {
+	 history.push(routePath);
+      }
     }
   }
   return (
@@ -24,7 +29,7 @@ function BottomNextComponent(props) {
       <div className="bottom-bar bottom-bar-height">
         <div
           className={(inActive == true ? "disable " : "") + "btn-general"}
-          onClick={showNext}
+          onClick={() => clickProcess()}
         >
           <div className="btn-label">{title}</div>
           <img className="btn-arrow" src={nextIcon} />

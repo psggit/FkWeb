@@ -4,6 +4,7 @@ export {
   ChangingGenderOperation,
   SelectIDTypeOperation,
   ChangeDocumentValueOperation,
+  UpdateKYCOperation,
   FinaliseIDProofValueOperation,
   CheckDeclarationOperation,
 } from "./operations";

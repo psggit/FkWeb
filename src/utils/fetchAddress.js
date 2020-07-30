@@ -7,6 +7,7 @@ const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 const fetchAddressListAPI = (process, onSuccess, onError) => {
   fetch(URL, {
     method: "GET",
+    credentials: "include",
     headers: headers,
   })
     .then((res) => process(res))
