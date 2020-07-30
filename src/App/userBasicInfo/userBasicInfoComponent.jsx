@@ -18,7 +18,7 @@ function LFComponent(props) {
       <SplashLoadingComponent
         motion={false}
         icon={drinksIcon}
-        text="Login Failed"
+        text="Something went wrong, please try again."
         buttonFunc={login}
         buttonText="Retry"
       />
@@ -297,7 +297,7 @@ function UserBasicInfoComponent(props) {
     if (collectUserDetails) {
       return <CollectInfoComponent {...props} />;
     } else {
-      return <Redirect to="/home" />;
+      return <Redirect to="/address/select/sf" />;
     }
   } else {
     return <div> </div>;

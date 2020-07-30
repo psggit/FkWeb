@@ -12,7 +12,8 @@ SelectAddressComponent.propTypes = {
   selectedAddress: PropTypes.object,
   selectAddressFunc: PropTypes.func,
   onMountFunc: PropTypes.func,
-  flow:PropTypes.string,
+  flow: PropTypes.string,
+  redirect: PropTypes.string,
 };
 
 function SelectAddressComponent(props) {
@@ -20,7 +21,6 @@ function SelectAddressComponent(props) {
     props.onMountFunc();
   }, []);
 
-  const flow = "checkout"
   const history = useHistory();
 
   function showAddAddress() {
@@ -28,7 +28,13 @@ function SelectAddressComponent(props) {
   }
 
   function onClickProcess() {
-    history.push(flow !== "signupflow" ?  "/order/summary" : "/home")
+    if (props.redirect === "sf") {
+      history.push("/home");
+    } else if (props.redirect === "osm") {
+      history.push("/order/summary");
+    } else {
+      history.push("/home");
+    }
   }
 
   return (
@@ -42,7 +48,7 @@ function SelectAddressComponent(props) {
         </div>
       </div>
       <BottomNextComponent
-        onClickFunc = {onClickProcess}
+        onClickFunc={onClickProcess}
         inActive={props.selectedAddress.address_id == undefined}
         title="Proceed"
       />
