@@ -21,11 +21,10 @@ function MyOrdersComponent(props) {
   }
 
   const orderItems = (props) => {
-    return props.orders.map((order, key) => {
-      console.log("Render" + JSON.stringify(order));
+    return props.orders.map((order) => {
       return (
         <OrderItem
-          key={key}
+          key={order.order_id}
           title={order.display_name}
           amount={order.amount}
           date={order.created_at}
