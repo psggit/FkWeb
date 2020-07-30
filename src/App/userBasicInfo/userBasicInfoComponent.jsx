@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
 import "./styles/style.scss";
 import { shieldIcon, drinksIcon } from "../../assets/images";
 import { ToolbarComponent } from "../common/toolbar";
@@ -268,7 +268,6 @@ UserBasicInfoComponent.propTypes = {
   selectedDocument: PropTypes.string,
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
-
   loginInProgress: PropTypes.bool,
   loginFailed: PropTypes.bool,
   loginSuccess: PropTypes.bool,
@@ -295,13 +294,13 @@ function UserBasicInfoComponent(props) {
   } else if (loginFailed) {
     return <LFComponent login={props.login} />;
   } else if (loginSuccess) {
-    if (!collectUserDetails) {
-      return <Redirect to="/home" />;
-    } else {
+    if (collectUserDetails) {
       return <CollectInfoComponent {...props} />;
+    } else {
+      return <Redirect to="/home" />;
     }
   } else {
-    return <div> deff </div>;
+    return <div> </div>;
   }
 }
 export { UserBasicInfoComponent };
