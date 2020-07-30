@@ -4,7 +4,7 @@ import { GetMyOrdersOperation } from "./duck";
 
 const mapStateToProps = (state) => {
   return {
-    myOrders: state.myOrdersStore.myOrders,
+    orders: state.myOrders.myOrders,
   };
 };
 

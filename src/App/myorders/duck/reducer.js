@@ -3,31 +3,31 @@ import { getOrderInProgress, getOrderSuccess, getOrderFailed } from "./actions";
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-  getOrderInProgress: false,
-  getOrderSuccess: false,
-  getOrderFailed: false,
+  fetchOrderInProgress: false,
+  fetchOrderSuccess: false,
+  fetchOrderFailed: false,
   myOrders: [],
 };
 
 const myOrdersReducer = createReducer(initialState, {
   [getOrderInProgress]: (state) => ({
     ...state,
-    getOrderInProgress: true,
-    getOrderSuccess: false,
-    getOrderFailed: false,
+    fetchOrderInProgress: true,
+    fetchOrderSuccess: false,
+    fetchOrderFailed: false,
   }),
   [getOrderSuccess]: (state, data) => ({
     ...state,
-    getOrderInProgress: false,
-    getOrderSuccess: true,
-    getOrderFailed: false,
-    myOrders: state.myOrders.concat(data),
+    fetchOrderInProgress: false,
+    fetchOrderSuccess: true,
+    fetchOrderFailed: false,
+    myOrders: state.myOrders.concat(data.payload),
   }),
   [getOrderFailed]: (state) => ({
     ...state,
-    getOrderInProgress: false,
-    getOrderSuccess: false,
-    getOrderFailed: true,
+    fetchOrderInProgress: false,
+    fetchOrderSuccess: false,
+    fetchOrderFailed: true,
   }),
 });
 
