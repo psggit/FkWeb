@@ -5,7 +5,7 @@ import {
 } from "./action";
 import { searchGenresAPI } from "../../../utils";
 
-const reqBodyFromState = (query) => {
+const reqBodyFromState = () => {
   return JSON.stringify({
     city_id: 5,
     gps: "13.011557355101441,80.25409296154976",
@@ -14,7 +14,7 @@ const reqBodyFromState = (query) => {
   });
 };
 
-const processResponse = (dispatch) => {
+const processResponse = () => {
   return (res) => {
     if (res.ok) {
       return res.json();

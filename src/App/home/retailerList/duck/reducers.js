@@ -31,11 +31,11 @@ const initialState = {
 };
 
 const retailerListReducer = createReducer(initialState, {
-  [fetchRetailersInProgress]: (state, action) => ({
+  [fetchRetailersInProgress]: (state) => ({
     ...state,
     retailerFetchStatus: "inProgress",
   }),
-  [fetchRetailersFailure]: (state, action) => ({
+  [fetchRetailersFailure]: (state) => ({
     ...state,
     retailerFetchStatus: "failed",
   }),

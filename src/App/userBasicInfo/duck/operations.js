@@ -72,18 +72,18 @@ const FinaliseIDProofValueOperation = (selectedDocument) => {
 };
 
 const onSuccess = () => {
-  return (data) => {
+  return () => {
     history.pushState("/choose/location");
   };
 };
 
-const onError = (dispatch) => {
+const onError = () => {
   return (err) => {
     alert(err);
   };
 };
 
-const processResponse = (dispatch) => {
+const processResponse = () => {
   return (res) => {
     if (res.ok) {
       return res.json();
