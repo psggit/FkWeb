@@ -25,7 +25,10 @@ function App() {
           <Route path="/search" component={SearchContainer} />
           <Route path="/cart" component={CartContainer} />
           <Route path="/myorders" component={MyOrdersContainer} />
-          <Route path="/address/select" component={SelectAddressContainer} />
+          <Route
+            path="/address/select/:redirect"
+            component={SelectAddressContainer}
+          />
           <Route path="/home" component={Home} />
           <Route path="/choose/location" component={ChooseLocationContainer} />
           <Route path="/storefront" component={StoreFrontContainer} />
