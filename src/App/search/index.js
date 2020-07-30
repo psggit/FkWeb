@@ -1,3 +1,2 @@
-import Search from "./Search";
-
-export default Search;
+export { SearchContainer } from "./searchContainer";
+export { searchDrinkReducer } from "./duck";

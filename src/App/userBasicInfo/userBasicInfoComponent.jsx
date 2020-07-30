@@ -267,32 +267,31 @@ UserBasicInfoComponent.propTypes = {
 };
 
 function UserBasicInfoComponent(props) {
- //  const loginSuccess = props.loginSuccess;
- //  const loginInProgress = props.loginInProgress;
- //  const loginFailed = props.loginFailed;
- //  const collectUserDetails = props.collectUserDetails;
- //  const trigger = !(loginSuccess || loginFailed || loginInProgress);
- //  useLayoutEffect(() => {
- //    if (trigger) {
- //      props.login();
- //    }
- //  });
+   const loginSuccess = props.loginSuccess;
+   const loginInProgress = props.loginInProgress;
+   const loginFailed = props.loginFailed;
+   const collectUserDetails = props.collectUserDetails;
+   const trigger = !(loginSuccess || loginFailed || loginInProgress);
+   useLayoutEffect(() => {
+     if (trigger) {
+       props.login();
+     }
+   });
 
- //  if (loginInProgress) {
- //    return (
- //      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
- //    );
- //  } else if (loginFailed) {
- //    return <LFComponent login={props.login} />;
- //  } else if (loginSuccess) {
- //    if (!collectUserDetails) {
- //      return <Redirect to="/home" />;
- //    } else {
- //      return <CollectInfoComponent {...props} />;
- //    }
- //  } else {
- //    return <div> deff </div>;
- //  }
-  return <CollectInfoComponent {...props} />;
+   if (loginInProgress) {
+     return (
+       <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
+     );
+   } else if (loginFailed) {
+     return <LFComponent login={props.login} />;
+   } else if (loginSuccess) {
+     if (!collectUserDetails) {
+       return <Redirect to="/home" />;
+     } else {
+       return <CollectInfoComponent {...props} />;
+     }
+   } else {
+     return <div> deff </div>;
+   }
 }
 export { UserBasicInfoComponent };

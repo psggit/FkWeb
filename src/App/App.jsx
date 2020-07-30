@@ -9,6 +9,8 @@ import { CartContainer } from "./cart";
 import { MyOrdersComponent } from "./myorders";
 import Search from "./search";
 import { SelectAddressContainer, AddressEditContainer } from "./address";
+import {SearchContainer} from "./search";
+import {StoreFrontContainer} from "./storeFront";
 import OrderSummary from "./summary";
 import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
@@ -21,12 +23,13 @@ function App() {
       <Router>
         <Switch>
           <Route path="/user/login" component={UserBasicInfoContainer} />
-          <Route path="/search" component={UserBasicInfoContainer} />
+          <Route path="/search" component={SearchContainer} />
           <Route path="/cart" component={CartContainer} />
           <Route path="/myorders" component={MyOrdersComponent} />
           <Route path="/address/select" component={SelectAddressContainer} />
           <Route path="/home" component={Home} />
           <Route path="/choose/location" component={ChooseLocationContainer} />
+          <Route path="/storefront" component={StoreFrontContainer} />
           <Route
             path="/user-terms"
             component={() => (

@@ -1,2 +1,2 @@
-export {AddressEditContainer} from "./addressEditContainer"
-export {addressEditReducer} from "./duck"
+export { AddressEditContainer } from "./addressEditContainer";
+export { addressEditReducer } from "./duck";

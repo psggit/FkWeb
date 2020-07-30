@@ -1,2 +1,2 @@
 export { AddItemComponent } from "./AddItemComponent";
-export { accordianReducer } from "./reducer";
+export { skuItemReducer } from "./reducer";

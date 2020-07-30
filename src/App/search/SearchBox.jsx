@@ -1,22 +1,27 @@
 import React, { useState } from "react";
+import {searchIcon} from "../../assets/images"
 
 function SearchBox(props) {
-  const [inputType] = useState("text");
+  const [inputType] = useState("search");
   const [inputValue, setInputValue] = useState("");
-
+  const{handleInput,cancelEnable}=props
   function handleChange(event) {
-    setInputValue(event.target.value);
-    if (props.onChange) props.onChange(inputValue);
+    let value=event.target.value;
+    setInputValue(value);
+    handleInput(value);
   }
   return (
     <>
+      <img className="search-img"src={searchIcon} alt='searchIcon' />
       <input
         type={inputType}
         value={inputValue}
         name="input-form"
-        onFocus={() => props.cancelEnable(true)}
+        onFocus={() => cancelEnable(true)}
         onChange={handleChange}
+        placeholder="Search drinks"
         className="inputclass"
+        autoComplete="off"
       />
     </>
   );

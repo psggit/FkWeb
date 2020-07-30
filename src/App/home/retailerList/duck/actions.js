@@ -1,6 +1,11 @@
 import { createAction } from "@reduxjs/toolkit";
 
-const onSyed = createAction("syed");
-const onHarshit = createAction("harshit");
+const fetchRetailersSuccessfull = createAction("fetchRetailersSuccessfull");
+const fetchRetailersFailure = createAction("fetchRetailersFailure");
+const fetchRetailersInProgress = createAction("fetchRetailersInProgress");
 
-export { onSyed, onHarshit };
+export {
+  fetchRetailersInProgress,
+  fetchRetailersFailure,
+  fetchRetailersSuccessfull,
+};
