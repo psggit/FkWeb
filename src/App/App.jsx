@@ -6,8 +6,7 @@ import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { UserBasicInfoContainer } from "./userBasicInfo";
 import { CartContainer } from "./cart";
-import { MyOrdersComponent } from "./myorders";
-import Search from "./search";
+import { MyOrdersContainer } from "./myorders";
 import { SelectAddressContainer, AddressEditContainer } from "./address";
 import { SearchContainer } from "./search";
 import { StoreFrontContainer } from "./storeFront";
@@ -25,7 +24,7 @@ function App() {
           <Route path="/user/login" component={UserBasicInfoContainer} />
           <Route path="/search" component={SearchContainer} />
           <Route path="/cart" component={CartContainer} />
-          <Route path="/myorders" component={MyOrdersComponent} />
+          <Route path="/myorders" component={MyOrdersContainer} />
           <Route
             path="/address/select/:redirect"
             component={SelectAddressContainer}
