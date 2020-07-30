@@ -54,6 +54,11 @@ const CloseIDOptions = () => {
   document.getElementById("kycID").classList.add("hide");
 };
 
+YearOfBirthInputComponent.propTypes = {
+  yob: PropTypes.string,
+  changeBirthYear: PropTypes.func,
+};
+
 function YearOfBirthInputComponent(props) {
   return (
     <div className="input-component">
@@ -69,6 +74,11 @@ function YearOfBirthInputComponent(props) {
     </div>
   );
 }
+
+GenderSelectionComponent.propTypes = {
+  gender: PropTypes.string,
+  changingGenderFunc: PropTypes.func,
+};
 
 function GenderSelectionComponent(props) {
   const gender = props.gender;
@@ -99,7 +109,7 @@ function GenderSelectionComponent(props) {
   );
 }
 
-function InfoComponent(props) {
+function InfoComponent() {
   return (
     <div className="input-component flex">
       <div className="input-info">
@@ -221,12 +231,12 @@ function CollectInfoComponent(props) {
   const checkDeclaration = props.checkDeclaration;
   const showDeclaration = props.showDeclaration;
   const updateKycFunc = props.updateKycFunc;
-  const data={
+  const data = {
     dob: yob,
     gender: props.gender,
     kycType: props.finalisedDocument,
     kycValue: props.selectedDocumentValue,
-  }
+  };
 
   return (
     <div className="page-container userBasicInfoComponent">
@@ -238,7 +248,7 @@ function CollectInfoComponent(props) {
       <CheckBoxComponent {...props} />
       <BottomNextComponent
         title="Proceed"
-        onClickFunc={()=> updateKycFunc(data)}
+        onClickFunc={() => updateKycFunc(data)}
         inActive={!checkDeclaration}
       />
     </div>
@@ -267,31 +277,31 @@ UserBasicInfoComponent.propTypes = {
 };
 
 function UserBasicInfoComponent(props) {
-   const loginSuccess = props.loginSuccess;
-   const loginInProgress = props.loginInProgress;
-   const loginFailed = props.loginFailed;
-   const collectUserDetails = props.collectUserDetails;
-   const trigger = !(loginSuccess || loginFailed || loginInProgress);
-   useLayoutEffect(() => {
-     if (trigger) {
-       props.login();
-     }
-   });
+  const loginSuccess = props.loginSuccess;
+  const loginInProgress = props.loginInProgress;
+  const loginFailed = props.loginFailed;
+  const collectUserDetails = props.collectUserDetails;
+  const trigger = !(loginSuccess || loginFailed || loginInProgress);
+  useLayoutEffect(() => {
+    if (trigger) {
+      props.login();
+    }
+  });
 
-   if (loginInProgress) {
-     return (
-       <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
-     );
-   } else if (loginFailed) {
-     return <LFComponent login={props.login} />;
-   } else if (loginSuccess) {
-     if (!collectUserDetails) {
-       return <Redirect to="/home" />;
-     } else {
-       return <CollectInfoComponent {...props} />;
-     }
-   } else {
-     return <div> deff </div>;
-   }
+  if (loginInProgress) {
+    return (
+      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
+    );
+  } else if (loginFailed) {
+    return <LFComponent login={props.login} />;
+  } else if (loginSuccess) {
+    if (!collectUserDetails) {
+      return <Redirect to="/home" />;
+    } else {
+      return <CollectInfoComponent {...props} />;
+    }
+  } else {
+    return <div> deff </div>;
+  }
 }
 export { UserBasicInfoComponent };
