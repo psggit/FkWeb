@@ -31,7 +31,7 @@ function SelectAddressComponent(props) {
     if (props.redirect === "sf") {
       history.push("/home");
     } else if (props.redirect === "osm") {
-      history.push("/home");
+      history.push("/order/summary");
     } else {
       history.push("/home");
     }
