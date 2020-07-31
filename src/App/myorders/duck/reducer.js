@@ -9,6 +9,13 @@ const initialState = {
   myOrders: [],
 };
 
+function removeDuplicates(data) {
+  return data.filter(
+    (order, index, self) =>
+      index === self.findIndex((o) => o.order_id === order.order_id)
+  );
+}
+
 const myOrdersReducer = createReducer(initialState, {
   [getOrderInProgress]: (state) => ({
     ...state,
@@ -21,7 +28,7 @@ const myOrdersReducer = createReducer(initialState, {
     fetchOrderInProgress: false,
     fetchOrderSuccess: true,
     fetchOrderFailed: false,
-    myOrders: state.myOrders.concat(data.payload),
+    myOrders: removeDuplicates(state.myOrders.concat(data.payload)),
   }),
   [getOrderFailed]: (state) => ({
     ...state,

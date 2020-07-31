@@ -8,34 +8,31 @@ import {
 } from "../../common/summary";
 
 OrderSummaryComponent.propTypes = {
-  orderTotal: PropTypes.string,
-  cartTotal: PropTypes.string,
-  additionalCharges: PropTypes.string,
-  taxAmount: PropTypes.string,
-  gstNumber: PropTypes.string,
+  orderDetail: PropTypes.object,
 };
 
 function OrderSummaryComponent(props) {
-  const {
-    orderTotal,
-    cartTotal,
-    additionalCharges,
-    taxAmount,
-    gstNumber,
-  } = props;
-
   return (
     <>
       <div className="generic-detail-container">
         <div className="order-sub-header">ORDER SUMMARY</div>
-        <OrderTotalComponent total={orderTotal} />
-        <CartTotalComponent cartTotal={cartTotal} />
+        <OrderTotalComponent total={props.orderDetail.display_total_paid} />
+        <CartTotalComponent cartTotal={props.orderDetail.display_cart_total} />
         <AdditionalChargersComponent
           label="Additional Charges"
-          charges={additionalCharges}
+          charges={props.orderDetail.total_fee}
+          chargesList={props.orderDetail.fee_details}
         />
-        <AdditionalChargersComponent label="Taxes" charges={taxAmount} />
-        <GstNumberComponent gstNumber={gstNumber} />
+        <AdditionalChargersComponent
+          label="Taxes"
+          charges={props.orderDetail.total_tax}
+          chargesList={props.orderDetail.tax_details}
+        />
+        {props.orderDetail.gst_number != "" ? (
+          <GstNumberComponent gstNumber={props.orderDetail.gst_number} />
+        ) : (
+          <div />
+        )}
       </div>
     </>
   );
