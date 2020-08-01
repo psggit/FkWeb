@@ -18,9 +18,9 @@ function BottomNextComponent(props) {
   function clickProcess() {
     if (inActive != true) {
       if (routePath === undefined) {
-	 onClickFunc()
+        onClickFunc();
       } else {
-	 history.push(routePath);
+        history.push(routePath);
       }
     }
   }
