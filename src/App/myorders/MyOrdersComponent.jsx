@@ -16,8 +16,9 @@ MyOrdersComponent.propTypes = {
 function MyOrdersComponent(props) {
   const history = useHistory();
 
-  function showOrderDetail() {
-    history.push("/order/info");
+  function showOrderDetail(order) {
+    history.push({ pathname: "/order/detail", state: { order: order } });
+    //    history.push("/order/" + order.type + "/" + order.order_id);
   }
 
   const orderItems = (props) => {
@@ -29,7 +30,9 @@ function MyOrdersComponent(props) {
           amount={order.amount}
           date={order.created_at}
           retailerName={order.retailer_name}
-          onClick={showOrderDetail}
+          onClick={() => {
+            showOrderDetail(order);
+          }}
         />
       );
     });

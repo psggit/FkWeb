@@ -13,8 +13,8 @@ import { StoreFrontContainer } from "./storeFront";
 import OrderSummary from "./summary";
 import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
-import { OrderPlaced } from "./order";
 import { ChooseLocationContainer } from "./address/chooseLocation";
+import { OrderDetailsContainer } from "./order";
 
 function App() {
   return (
@@ -65,30 +65,7 @@ function App() {
             path="/payment/add/new/card"
             component={AddCardAndProcessPayment}
           />
-          <Route
-            path="/order/info"
-            component={(props) => (
-              <OrderPlaced {...props} isOrderDetail={true} />
-            )}
-          />
-          <Route
-            path="/order/cancelled"
-            component={(props) => (
-              <OrderPlaced {...props} isOrderCancelled={true} />
-            )}
-          />
-          <Route
-            path="/order/delivered"
-            component={(props) => (
-              <OrderPlaced {...props} isOrderDelivered={true} />
-            )}
-          />
-          <Route
-            path="/order/placed"
-            component={(props) => (
-              <OrderPlaced {...props} isOrderPlaced={true} />
-            )}
-          />
+          <Route path="/order/detail" component={OrderDetailsContainer} />
           <Route
             path="/payment"
             component={() => (
