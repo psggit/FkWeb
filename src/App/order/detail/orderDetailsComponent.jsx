@@ -1,10 +1,10 @@
 import React, { useLayoutEffect } from "react";
-import { ToolbarComponent } from "../common/toolbar";
-import { BottomNextComponent } from "../common/bottomNext";
+import { ToolbarComponent } from "../../common/toolbar";
+import { BottomNextComponent } from "../../common/bottomNext";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import "./styles.scss";
+import "../styles.scss";
 import {
   DeliveryAddressComponent,
   OrderDrinksComponent,
@@ -13,7 +13,7 @@ import {
   OrderSummaryComponent,
   OrderSuccessComponent,
   TellAFriendComponent,
-} from "./components";
+} from "../components";
 
 OrderDetailsComponent.propTypes = {
   getOrderDetailsFunc: PropTypes.func,
