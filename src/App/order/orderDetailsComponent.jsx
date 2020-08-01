@@ -86,7 +86,7 @@ function OrderDetailsComponent(props) {
   return (
     <>
       <RenderToolBar />
-      <div className="page-container order-placed">
+      <div className="page-container">
         <RenderOrderSuccess />
         <OrderPlacedHeaderComponent
           purchasedOn={props.order.created_at}
