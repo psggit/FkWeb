@@ -1,7 +1,10 @@
 import {
   getPlacesDetailsAction,
-  getAddressFromGpsAction,
   autoCompleteAction,
+  updateAddressFromGpsAction,
+  getAddressFromGpsFailAction,
+  getAddressFromGpsInProgressAction,
+  storeMapGpsAction,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -11,18 +14,22 @@ const initialState = {
   isCancelButton: true,
   autoCompletePlaces: [],
   placesInfo: {},
-  address: {},
-  mapCenterGps: "",
+  selectedMapAddress: {},
+  selectedGps: {lat: 13.006928, lng: 80.255516},
 };
 
 const chooseLocationReducer = createReducer(initialState, {
-  [getAddressFromGpsAction]: (state, action) => ({
-    ...state,
-    address: action.payload,
-  }),
   [autoCompleteAction]: (state, action) => ({
     ...state,
     autoCompletePlaces: action.payload,
+  }),
+  [storeMapGpsAction]: (state, action) => ({
+    ...state,
+    selectedGps: action.payload,
+  }),
+  [updateAddressFromGpsAction]: (state, action) => ({
+    ...state,
+    selectedMapAddress: action.payload,
   }),
   [getPlacesDetailsAction]: (state, action) => ({
     ...state,

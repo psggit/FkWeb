@@ -27,6 +27,7 @@ function App() {
           <Route path="/cart" component={CartContainer} />
           <Route path="/myorders" component={MyOrdersComponent} />
           <Route path="/address/select" component={SelectAddressContainer} />
+          <Route path="/address/create" component={AddressEditContainer} />
           <Route path="/home" component={Home} />
           <Route path="/choose/location" component={ChooseLocationContainer} />
           <Route path="/storefront" component={StoreFrontContainer} />

@@ -1,17 +1,9 @@
 import {
-  getAddressFromGpsAction,
   getPlacesDetailsAction,
   autoCompleteAction,
+  storeMapGpsAction,
 } from "./actions";
 
-const getAddressFromGpsOperation = (value) => {
-  return (dispatch, getState) => {
-    var addressFromGps = getState().chooseLocation.mapCenterGps.find((gps) => {
-      return gps == value;
-    });
-    dispatch(getAddressFromGpsAction(addressFromGps));
-  };
-};
 
 const getPlacesDetailsOperation = (value) => {
   return (dispatch, getState) => {
@@ -23,6 +15,12 @@ const getPlacesDetailsOperation = (value) => {
     dispatch(getPlacesDetailsAction(placeDetails));
   };
 };
+
+const storeGpsOperation = (value) => {
+  return (dispatch) => {
+    dispatch(storeMapGpsAction(value))
+  }
+}
 
 const autoCompleteOperation = (value) => {
   return (dispatch, getState) => {
@@ -36,7 +34,7 @@ const autoCompleteOperation = (value) => {
 };
 
 export {
-  getAddressFromGpsOperation,
   getPlacesDetailsOperation,
+  storeGpsOperation,
   autoCompleteOperation,
 };

@@ -9,17 +9,13 @@ import { fetchAddressListAPI } from "../../../utils/fetchAddress";
 
 const SelectAddressOperation = (value) => {
   return (dispatch, getState) => {
-    var selectedAddress = getState().addressStore.savedUserAddresses.find(
-      (address) => {
-        return address.address_id == value;
-      }
-    );
-    dispatch(selectAddressAction(selectedAddress));
+    dispatch(selectAddressAction(value));
   };
 };
 
 const onSuccess = (dispatch) => {
   return (data) => {
+    dispatch(updateAddressListAction(data));
     dispatch(fetchAddressListSuccessAction(data));
   };
 };
@@ -33,7 +29,6 @@ const onError = (dispatch) => {
 const processResponse = (dispatch) => {
   return (res) => {
     if (res.ok) {
-      dispatch(updateAddressListAction(res.body));
       return res.json();
     }
     if (res.status === 400) {

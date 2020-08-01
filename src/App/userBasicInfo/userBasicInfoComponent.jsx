@@ -35,8 +35,8 @@ CollectInfoComponent.propTypes = {
   showConsumerIDs: PropTypes.bool,
   showDeclaration: PropTypes.bool,
   checkDeclaration: PropTypes.bool,
-  selectedDocument: PropTypes.string,
-  finalisedDocument: PropTypes.string,
+  selectedDocument: PropTypes.object,
+  finalisedDocument: PropTypes.object,
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
   changeBirthYear: PropTypes.func,
@@ -128,7 +128,7 @@ function SelectIDComponent(props) {
             placeholder="Select ID proof"
             onClick={() => OpenIDOptions()}
             className="input_field_100"
-            value={finalisedDocument}
+            value={finalisedDocument.value}
             type="text"
             readOnly
           />
@@ -147,7 +147,12 @@ function SelectIDComponent(props) {
                   id={id.name}
                   name="idType"
                   value={id.idType}
-                  onClick={(e) => props.selectingIDProofFunc(e.target.id)}
+                  onClick={(e) =>
+                    props.selectingIDProofFunc({
+                      id: id.name,
+                      value: id.idType,
+                    })
+                  }
                 />
                 <div className="radiobtn"></div>
                 <label
@@ -178,14 +183,18 @@ function SelectIDComponent(props) {
         </div>
       </div>
       <div
-        className={(finalisedDocument == "" ? "hide " : "") + "input-component"}
+        className={
+          (finalisedDocument.value == undefined ? "hide " : "") +
+          "input-component"
+        }
       >
         <div className="input-component-label no-fold-text">
-          ENTER YOUR <span className="caps">{finalisedDocument} </span> NUMBER
+          ENTER YOUR <span className="caps">{finalisedDocument.value} </span>{" "}
+          NUMBER
         </div>
         <div className="inputComponentField input">
           <input
-            placeholder={"Enter your " + finalisedDocument + " number"}
+            placeholder={"Enter your " + finalisedDocument.value + " number"}
             className="input_field_100"
             onChange={(e) => props.changeDocumentValueFunc(e.target.value)}
             value={selectedDocumentValue}
@@ -221,12 +230,12 @@ function CollectInfoComponent(props) {
   const checkDeclaration = props.checkDeclaration;
   const showDeclaration = props.showDeclaration;
   const updateKycFunc = props.updateKycFunc;
-  const data={
+  const data = {
     dob: yob,
     gender: props.gender,
-    kycType: props.finalisedDocument,
+    kycType: props.finalisedDocument.id,
     kycValue: props.selectedDocumentValue,
-  }
+  };
 
   return (
     <div className="page-container userBasicInfoComponent">
@@ -238,7 +247,7 @@ function CollectInfoComponent(props) {
       <CheckBoxComponent {...props} />
       <BottomNextComponent
         title="Proceed"
-        onClickFunc={()=> updateKycFunc(data)}
+        onClickFunc={() => updateKycFunc(data)}
         inActive={!checkDeclaration}
       />
     </div>
@@ -255,7 +264,7 @@ UserBasicInfoComponent.propTypes = {
   changingGenderFunc: PropTypes.func,
   updateKycFunc: PropTypes.func,
   selectingIDProofFunc: PropTypes.func,
-  selectedDocument: PropTypes.string,
+  selectedDocument: PropTypes.object,
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
 
@@ -267,31 +276,31 @@ UserBasicInfoComponent.propTypes = {
 };
 
 function UserBasicInfoComponent(props) {
-   const loginSuccess = props.loginSuccess;
-   const loginInProgress = props.loginInProgress;
-   const loginFailed = props.loginFailed;
-   const collectUserDetails = props.collectUserDetails;
-   const trigger = !(loginSuccess || loginFailed || loginInProgress);
-   useLayoutEffect(() => {
-     if (trigger) {
-       props.login();
-     }
-   });
+  const loginSuccess = props.loginSuccess;
+  const loginInProgress = props.loginInProgress;
+  const loginFailed = props.loginFailed;
+  const collectUserDetails = props.collectUserDetails;
+  const trigger = !(loginSuccess || loginFailed || loginInProgress);
+  useLayoutEffect(() => {
+    if (trigger) {
+      props.login();
+    }
+  });
 
-   if (loginInProgress) {
-     return (
-       <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
-     );
-   } else if (loginFailed) {
-     return <LFComponent login={props.login} />;
-   } else if (loginSuccess) {
-     if (!collectUserDetails) {
-       return <Redirect to="/home" />;
-     } else {
-       return <CollectInfoComponent {...props} />;
-     }
-   } else {
-     return <div> deff </div>;
-   }
+  if (loginInProgress) {
+    return (
+      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
+    );
+  } else if (loginFailed) {
+    return <LFComponent login={props.login} />;
+  } else if (loginSuccess) {
+    if (!collectUserDetails) {
+      return <Redirect to="/home" />;
+    } else {
+      return <CollectInfoComponent {...props} />;
+    }
+  } else {
+    return <div> deff </div>;
+  }
 }
 export { UserBasicInfoComponent };

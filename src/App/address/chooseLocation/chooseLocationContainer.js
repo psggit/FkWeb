@@ -4,6 +4,7 @@ import {
   autoCompleteOperation,
   getPlacesDetailsOperation,
   getAddressFromGpsOperation,
+  storeGpsOperation,
 } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -12,8 +13,8 @@ const mapStateToProps = (state) => {
     isCancelButton: state.chooseLocation.isCancelButton,
     autoCompletePlaces: state.chooseLocation.autoCompletePlaces,
     placesInfo: state.chooseLocation.placesInfo,
-    address: state.chooseLocation.address,
-    mapCenterGps: state.chooseLocation.mapCenterGps,
+    address: state.chooseLocation.selectedMapAddress,
+    mapCenterGps: state.chooseLocation.selectedGps,
   };
 };
 
@@ -22,6 +23,7 @@ const mapDispatchToProps = (dispatch) => {
     autoComplete: (value) => dispatch(autoCompleteOperation(value)),
     getPlacesDetails: (value) => dispatch(getPlacesDetailsOperation(value)),
     getAddressFromGps: (value) => dispatch(getAddressFromGpsOperation(value)),
+    storeGpsFunc: (value) => dispatch(storeGpsOperation(value)),
   };
 };
 
