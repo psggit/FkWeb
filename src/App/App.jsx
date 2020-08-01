@@ -15,6 +15,7 @@ import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
 import { ChooseLocationContainer } from "./address/chooseLocation";
 import { OrderDetailsContainer } from "./order";
+import { StateCityContainer } from "./stateCity";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             component={SelectAddressContainer}
           />
           <Route path="/home" component={Home} />
+          <Route path="/statecity/select" component={StateCityContainer} />
           <Route path="/choose/location" component={ChooseLocationContainer} />
           <Route path="/storefront" component={StoreFrontContainer} />
           <Route

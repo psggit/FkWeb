@@ -13,6 +13,7 @@ import thunk from "redux-thunk";
 import { storeFrontReducer } from "../App/storeFront";
 import { myOrdersReducer } from "../App/myorders";
 import { orderDetailReducer } from "../App/order";
+import { stateCityReducer } from "../App/stateCity";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -27,6 +28,7 @@ const store = configureStore({
     chooseLocation: chooseLocationReducer,
     myOrders: myOrdersReducer,
     order: orderDetailReducer,
+    stateCity: stateCityReducer,
   }),
   middleware: [thunk],
 });

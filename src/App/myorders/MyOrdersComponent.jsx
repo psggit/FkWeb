@@ -17,8 +17,8 @@ function MyOrdersComponent(props) {
   const history = useHistory();
 
   function showOrderDetail(order) {
-    history.push({ pathname: "/order/detail", state: { order: order } });
-    //    history.push("/order/" + order.type + "/" + order.order_id);
+    history.push({ pathname: "/statecity/select" });
+    //history.push({ pathname: "/order/detail", state: { order: order } });
   }
 
   const orderItems = (props) => {
