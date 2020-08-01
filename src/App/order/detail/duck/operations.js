@@ -1,4 +1,4 @@
-import { getOrdersDetailAPI } from "../../../utils";
+import { getOrdersDetailAPI } from "../../../../utils";
 import {
   getOrderDetailSuccess,
   getOrderDetailFailed,
