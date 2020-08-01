@@ -14,7 +14,7 @@ import OrderSummary from "./summary";
 import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
 import { ChooseLocationContainer } from "./address/chooseLocation";
-import { OrderDetailsContainer } from "./order";
+import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
 import { StateCityContainer } from "./stateCity";
 
 function App() {
@@ -68,6 +68,7 @@ function App() {
             component={AddCardAndProcessPayment}
           />
           <Route path="/order/detail" component={OrderDetailsContainer} />
+          <Route path="/order/placed" component={OrderPlacedContainer} />
           <Route
             path="/payment"
             component={() => (
