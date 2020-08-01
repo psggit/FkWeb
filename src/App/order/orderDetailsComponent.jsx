@@ -28,7 +28,6 @@ function OrderDetailsComponent(props) {
   const history = useHistory();
 
   useLayoutEffect(() => {
-    console.log(props.order);
     props.getOrderDetailsFunc({
       orderType: props.order.type,
       orderID: props.order.order_id,
@@ -53,7 +52,6 @@ function OrderDetailsComponent(props) {
   }
 
   function RenderBottomNext() {
-    console.log("Render Comp order detail " + props.orderDetail);
     if (props.order == null) {
       return <BottomNextComponent routePath="/" title="Home" />;
     }
