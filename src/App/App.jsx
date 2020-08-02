@@ -79,7 +79,7 @@ function App() {
               />
             )}
           />
-          <Route path="/" component={AgreeAndContinueContainer} />
+          <Route path="/" component={Home} />
         </Switch>
         <BottomNavigationComponent />
       </Router>
@@ -88,3 +88,5 @@ function App() {
 }
 
 export default hot(App);
+
+//<Route path="/" component={AgreeAndContinueContainer} />

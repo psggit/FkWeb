@@ -22,15 +22,15 @@ function RetailerTemplate(retailers) {
   });
 }
 function NoRetailerTemplate() {
-  return <div>NO RETAILERS FOUND...</div>;
+  return <div>NO RETAILERS FOUND...</div>
 }
 
 function FetchFailedTemplate() {
-  return <div>Failed to Fetch...</div>;
+  return <div>Failed to Fetch...</div>
 }
 
 function ServiceUnavailableTemplate() {
-  return <div>Service Unavailable in your city...</div>;
+  return <div>Service Unavailable in your city...</div>
 }
 
 function RetailerList(props) {
