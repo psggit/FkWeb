@@ -4,7 +4,6 @@ import {
   storeMapGpsAction,
 } from "./actions";
 
-
 const getPlacesDetailsOperation = (value) => {
   return (dispatch, getState) => {
     var placeDetails = getState().chooseLocation.placeDetails.find(
@@ -18,9 +17,9 @@ const getPlacesDetailsOperation = (value) => {
 
 const storeGpsOperation = (value) => {
   return (dispatch) => {
-    dispatch(storeMapGpsAction(value))
-  }
-}
+    dispatch(storeMapGpsAction(value));
+  };
+};
 
 const autoCompleteOperation = (value) => {
   return (dispatch, getState) => {
@@ -33,8 +32,4 @@ const autoCompleteOperation = (value) => {
   };
 };
 
-export {
-  getPlacesDetailsOperation,
-  storeGpsOperation,
-  autoCompleteOperation,
-};
+export { getPlacesDetailsOperation, storeGpsOperation, autoCompleteOperation };

@@ -9,7 +9,7 @@ import { getAddressFromGpsAPI } from "../../../../utils";
 const onSuccess = (dispatch) => {
   return (data) => {
     dispatch(updateAddressFromGpsAction(data));
-  }
+  };
 };
 
 const onError = (dispatch) => {
@@ -18,7 +18,7 @@ const onError = (dispatch) => {
   };
 };
 
-const processResponse = (dispatch) => {
+const processResponse = () => {
   return (res) => {
     if (res.ok) {
       return res.json();
@@ -34,7 +34,7 @@ const processResponse = (dispatch) => {
 const getAddressFromGpsOperation = (value) => {
   return (dispatch) => {
     dispatch(getAddressFromGpsInProgressAction());
-    var reqParams = {"gps":value.lat + "," + value.lng};
+    var reqParams = { gps: value.lat + "," + value.lng };
     getAddressFromGpsAPI(
       reqParams,
       processResponse(dispatch),
@@ -44,4 +44,4 @@ const getAddressFromGpsOperation = (value) => {
   };
 };
 
-export { getAddressFromGpsOperation};
+export { getAddressFromGpsOperation };

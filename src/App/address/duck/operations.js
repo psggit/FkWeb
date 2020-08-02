@@ -8,7 +8,7 @@ import {
 import { fetchAddressListAPI } from "../../../utils/fetchAddress";
 
 const SelectAddressOperation = (value) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(selectAddressAction(value));
   };
 };
@@ -26,7 +26,7 @@ const onError = (dispatch) => {
   };
 };
 
-const processResponse = (dispatch) => {
+const processResponse = () => {
   return (res) => {
     if (res.ok) {
       return res.json();

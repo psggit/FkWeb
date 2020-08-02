@@ -1,2 +1,2 @@
-export { OrderPlacedContainer } from "./OrderPlacedContainer";
+export { OrderPlacedContainer } from "./orderPlacedContainer";
 export { orderPlacedReducer } from "./duck";

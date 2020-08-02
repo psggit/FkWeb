@@ -2,8 +2,8 @@ import {
   getPlacesDetailsAction,
   autoCompleteAction,
   updateAddressFromGpsAction,
-  getAddressFromGpsFailAction,
-  getAddressFromGpsInProgressAction,
+//  getAddressFromGpsFailAction,
+//  getAddressFromGpsInProgressAction,
   storeMapGpsAction,
 } from "./actions";
 
@@ -15,7 +15,7 @@ const initialState = {
   autoCompletePlaces: [],
   placesInfo: {},
   selectedMapAddress: {},
-  selectedGps: {lat: 13.006928, lng: 80.255516},
+  selectedGps: { lat: 13.006928, lng: 80.255516 },
 };
 
 const chooseLocationReducer = createReducer(initialState, {

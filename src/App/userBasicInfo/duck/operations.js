@@ -59,7 +59,7 @@ const ChangeDocumentValueOperation = (value) => {
 };
 
 const SelectIDTypeOperation = (value) => {
-  console.log(value)
+  console.log(value);
   return (dispatch) => {
     dispatch(selectIDTypeAction(value));
   };

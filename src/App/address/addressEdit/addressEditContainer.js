@@ -4,7 +4,7 @@ import { AddressEditComponent } from "./addressEditComponent.jsx";
 const mapStateToProps = (state) => {
   return {
     address: state.chooseLocation.selectedMapAddress,
-    mapCenterGps:state.chooseLocation.selectedGps,
+    mapCenterGps: state.chooseLocation.selectedGps,
   };
 };
 
