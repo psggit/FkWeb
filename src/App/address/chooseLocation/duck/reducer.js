@@ -2,8 +2,8 @@ import {
   getPlacesDetailsAction,
   autoCompleteAction,
   updateAddressFromGpsAction,
-//  getAddressFromGpsFailAction,
-//  getAddressFromGpsInProgressAction,
+  //  getAddressFromGpsFailAction,
+  //  getAddressFromGpsInProgressAction,
   storeMapGpsAction,
 } from "./actions";
 
