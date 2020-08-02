@@ -8,6 +8,7 @@ import { UserBasicInfoContainer } from "./userBasicInfo";
 import { CartContainer } from "./cart";
 import { MyOrdersComponent } from "./myorders";
 import {SearchContainer} from "./search";
+import {SearchByStoreContainer} from "./searchByStore";
 import {StoreFrontContainer} from "./storeFront";
 import {SelectAddressContainer} from "./address";
 import OrderSummary from "./summary";
@@ -22,6 +23,7 @@ function App() {
         <Switch>
           <Route path="/user/login" component={UserBasicInfoContainer} />
           <Route path="/search" component={SearchContainer} />
+          <Route path="/searchbystore" component={SearchByStoreContainer} />
           <Route path="/cart" component={CartContainer} />
           <Route path="/myorders" component={MyOrdersComponent} />
           <Route path="/address/select" component={SelectAddressContainer} />

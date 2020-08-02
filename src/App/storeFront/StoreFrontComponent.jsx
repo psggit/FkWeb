@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import BottomNavigationComponent from "../common/bottomNavigation";
 import { ToolbarComponent } from "../common/toolbar";
-import { SearchBox } from "../search/SearchBox";
 import SearchLayout from "../common/layout/SearchLayout";
 import { BrandComponent } from "../common/brand";
 import fssaiImg from "../../assets/images/fssai.png";
 import {LoadingComponent} from '../common/loading'
-
+import searchIcon from "../../assets/images/search.svg";
 
 function StoreFrontComponent(props) {
   const { getGeners,getBrands, brandItems, generItems } = props;
@@ -38,8 +38,11 @@ function StoreFrontComponent(props) {
     <>
       <ToolbarComponent title="Kloud Bar">
         <div className="dopen-text">Get Delivery between 12pm-9pm(Today)</div>
-        <div className="search-container">
-          <SearchBox />
+        <div className="search-container store-search">
+          <div >
+          <img className=""src={searchIcon} alt='searchIcon' />
+          Search Drinks 
+          </div>
         </div>
       </ToolbarComponent>
       <SearchLayout custom="custom">
@@ -60,5 +63,11 @@ function StoreFrontComponent(props) {
     </>
   );
 }
+StoreFrontComponent.propTypes = {
+  generItems: PropTypes.object,
+  brandItems: PropTypes.object,
+  getBrands: PropTypes.func,
+  getGeners: PropTypes.func,
+};
 
 export { StoreFrontComponent };
