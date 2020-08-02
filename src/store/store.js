@@ -11,7 +11,6 @@ import { userInfoCreateReducer } from "../App/userBasicInfo";
 import { cartReducer } from "../App/common/cart";
 import thunk from "redux-thunk";
 import { storeFrontReducer } from "../App/storeFront";
-import { useHistory } from "react-router-dom";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -25,7 +24,7 @@ const store = configureStore({
     cart: cartReducer,
     chooseLocation: chooseLocationReducer,
   }),
-  middleware: [thunk, useHistory],
+  middleware: [thunk],
 });
 
 export default store;

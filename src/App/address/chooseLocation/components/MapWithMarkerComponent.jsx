@@ -61,7 +61,7 @@ function MapWithMarkerComponent(props) {
     <>
       <MapComponent storeGpsFunc = {props.storeGpsFunc} />
       <img src={mapMarkerIcon} className="marker" />
-      <BottomNextComponent onClickFunc = {props.onProceedFunc}title="Set Location" />
+      <BottomNextComponent routePath = "/address/create" title="Set Location" />
     </>
   );
 }
