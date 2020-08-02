@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
     products: state.cart.products,
     retailerDiffers: state.cart.retailerDiffers,
     isEmpty: isEmpty(state.cart),
+    validationFailure: state.cart.validationFailure,
   };
 };
 

@@ -7,6 +7,31 @@ import { CartItemComponent } from "./cartItem";
 import { EmptyCartComponent } from "./emptyCart";
 import { CartHeaderComponent } from "./header";
 import { BottomNextComponent } from "../common/bottomNext";
+import { SplashLoadingComponent } from "../common/splashLoading";
+import { drinksIcon } from "../../assets/images";
+
+RetryValidationComponent.propTypes = {
+  products: PropTypes.object,
+  retailer: PropTypes.object,
+  validateCart: PropTypes.func,
+};
+
+function RetryValidationComponent(props) {
+  let payload = {
+    retailer: props.retailer,
+    products: props.products,
+  };
+  let validate = () => props.validateCart(payload);
+  return (
+    <SplashLoadingComponent
+      motion={false}
+      icon={drinksIcon}
+      text="Something went wrong, please try again."
+      buttonFunc={validate}
+      buttonText="Retry"
+    />
+  );
+}
 
 CartComponent.propTypes = {
   isEmpty: PropTypes.bool,
@@ -38,6 +63,10 @@ const cartItems = (props) => {
   });
 };
 
+CartComponent.propTypes = {
+  validationFailure: PropTypes.bool,
+};
+
 function CartComponent(props) {
   let isEmpty = props.isEmpty;
   if (isEmpty) {
@@ -49,6 +78,10 @@ function CartComponent(props) {
         products: props.products,
       });
     });
+  }
+
+  if (props.validationFailure) {
+    return <RetryValidationComponent {...props} />;
   }
 
   return (
