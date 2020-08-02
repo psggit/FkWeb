@@ -7,29 +7,28 @@ import { updateCartAPI } from "../../../../utils";
 
 const reqBodyFromState = (cartState) => {
   let products = [];
-  for (let prod in Object.values(cartState.products)) {
+  for (let prod of Object.values(cartState.products)) {
     let p = {
       count: prod.count,
       sku_id: prod.skuId,
     };
     products.push(p);
   }
-  return JSON.stringify({
+  return {
     city_id: 5,
     retailer_id: cartState.retailer.id,
-    state_id: 4,
+    state_id: 1,
     products: products,
-  });
+  };
 };
 
-const processResponse = (dispatch) => {
+const processResponse = () => {
   return (res) => {
     if (res.ok) {
-      dispatch(validationFailure());
+      //dispatch(validationFailure());
       return res.json();
     }
     if (res.status === 400) {
-      //TODO:@hl05 setup sentry here?
       throw new Error("invalid params");
     } else {
       throw new Error("Something went wrong, try again");
