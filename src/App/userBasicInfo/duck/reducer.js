@@ -40,15 +40,15 @@ const userInfoCreateReducer = createReducer(initialState, {
     loginSuccess: false,
     loginFailed: false,
   }),
-  [loginSuccess]: (state, data) => ({
+  [loginSuccess]: (state, action) => ({
     ...state,
     loginInProgress: false,
     loginSuccess: true,
     loginFailed: false,
     collectUserDetails: !(
-      data.bz_kyc_exist &&
-      data.yob_exist &&
-      data.gender_exist
+      action.payload.data.bz_kyc_exist &&
+      action.payload.data.dob_exist &&
+      action.payload.data.gender_exist
     ),
   }),
   [loginFailed]: (state) => ({

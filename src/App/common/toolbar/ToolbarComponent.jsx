@@ -15,7 +15,7 @@ function ToolbarComponent(props) {
   const history = useHistory();
   const { helpVisibility } = props;
   const { onClick } = props;
-  const { title ,children} = props;
+  const { title, children } = props;
 
   function goBack() {
     history.goBack();

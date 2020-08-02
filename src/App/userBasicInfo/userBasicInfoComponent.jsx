@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
 import "./styles/style.scss";
 import { shieldIcon, drinksIcon } from "../../assets/images";
 import { ToolbarComponent } from "../common/toolbar";
@@ -18,7 +18,7 @@ function LFComponent(props) {
       <SplashLoadingComponent
         motion={false}
         icon={drinksIcon}
-        text="Login Failed"
+        text="Something went wrong, please try again."
         buttonFunc={login}
         buttonText="Retry"
       />
@@ -54,6 +54,11 @@ const CloseIDOptions = () => {
   document.getElementById("kycID").classList.add("hide");
 };
 
+YearOfBirthInputComponent.propTypes = {
+  yob: PropTypes.string,
+  changeBirthYear: PropTypes.func,
+};
+
 function YearOfBirthInputComponent(props) {
   return (
     <div className="input-component">
@@ -69,6 +74,11 @@ function YearOfBirthInputComponent(props) {
     </div>
   );
 }
+
+GenderSelectionComponent.propTypes = {
+  gender: PropTypes.string,
+  changingGenderFunc: PropTypes.func,
+};
 
 function GenderSelectionComponent(props) {
   const gender = props.gender;
@@ -99,7 +109,7 @@ function GenderSelectionComponent(props) {
   );
 }
 
-function InfoComponent(props) {
+function InfoComponent() {
   return (
     <div className="input-component flex">
       <div className="input-info">
@@ -267,7 +277,6 @@ UserBasicInfoComponent.propTypes = {
   selectedDocument: PropTypes.object,
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
-
   loginInProgress: PropTypes.bool,
   loginFailed: PropTypes.bool,
   loginSuccess: PropTypes.bool,
@@ -294,13 +303,13 @@ function UserBasicInfoComponent(props) {
   } else if (loginFailed) {
     return <LFComponent login={props.login} />;
   } else if (loginSuccess) {
-    if (!collectUserDetails) {
-      return <Redirect to="/home" />;
-    } else {
+    if (collectUserDetails) {
       return <CollectInfoComponent {...props} />;
+    } else {
+      return <Redirect to="/statecity/select" />;
     }
   } else {
-    return <div> deff </div>;
+    return <div> </div>;
   }
 }
 export { UserBasicInfoComponent };

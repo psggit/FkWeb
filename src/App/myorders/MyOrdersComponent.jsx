@@ -1,33 +1,53 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { HeaderComponent } from "../common/toolbar";
 import "./style.scss";
 import { OrderItem } from "./components";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function MyOrdersComponent() {
+MyOrdersComponent.propTypes = {
+  fetchOrderInProgress: PropTypes.bool,
+  fetchOrderFailed: PropTypes.bool,
+  fetchOrderSuccess: PropTypes.bool,
+  orders: PropTypes.array,
+  getMyOrdersFunc: PropTypes.func,
+};
+
+function MyOrdersComponent(props) {
   const history = useHistory();
 
-  function showOrderDetail() {
-    history.push("/order/info");
+  function showOrderDetail(order) {
+    history.push({ pathname: "/order/detail", state: { order: order } });
   }
+
+  const orderItems = (props) => {
+    return props.orders.map((order) => {
+      return (
+        <OrderItem
+          key={order.order_id}
+          title={order.display_name}
+          amount={order.amount}
+          date={order.created_at}
+          retailerName={order.retailer_name}
+          onClick={() => {
+            showOrderDetail(order);
+          }}
+        />
+      );
+    });
+  };
+
+  useLayoutEffect(() => {
+    props.getMyOrdersFunc({
+      offset: 0,
+    });
+  }, []);
 
   return (
     <>
       <HeaderComponent title="My Orders" />
       <div className="page-container myorders-container">
-        <OrderItem
-          title="Order Info"
-          amount="₹ 6,824.65"
-          date="15 Apr, 2020  12:12 PM"
-          retailerName="Kloud Bar"
-          onClick={showOrderDetail}
-        />
-        <OrderItem
-          title="Payment Failed"
-          amount="₹ 6,824.65"
-          date="15 Apr, 2020  12:12 PM"
-          onClick={showOrderDetail}
-        />
+        {orderItems(props)}
       </div>
     </>
   );

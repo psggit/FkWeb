@@ -6,3 +6,6 @@ export { searchDrinkAPI } from "./searchDrinks";
 export { searchGenresAPI, getBrandAPI } from "./storeFront";
 export { fetchRetailersAPI } from "./fetchRetailers";
 export { getAddressFromGpsAPI } from "./getAddressFromGPS"
+export { getMyOrdersAPI } from "./getMyOrders";
+export { getOrdersDetailAPI } from "./orderDetail";
+export { getAvaialableCitiesAPI, getAvaialableStatesAPI } from "./stateCity";

@@ -1,0 +1,30 @@
+@import "../../colors.scss";
+
+.location-app-image {
+  margin-top: 8px;
+  width: 64px;
+  height: 64px;
+}
+
+.location-msg {
+  margin-top: 32px;
+  margin-right: 36px;
+  font-size: 14px;
+  font-family: MontserratBold;
+  line-height: 18px;
+}
+
+.state-city-item {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $border-color;
+
+  .title {
+    width: 100%;
+    font-size: 16px;
+    line-height: 16px;
+    align-self: center;
+  }
+}
