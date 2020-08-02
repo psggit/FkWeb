@@ -7,6 +7,9 @@ import "./style.scss";
 
 AddressEditComponent.propTypes = {
   text: PropTypes.string,
+  mapCenterGps:PropTypes.object,
+  getAddressFromGps:PropTypes.object,
+  address:PropTypes.object,
 };
 
 function SaveAddressCheckBoxComponent(props) {
@@ -51,7 +54,10 @@ function DoNothing() {
   return;
 }
 
-function AddressEditComponent(props) {
+function AddressInputComponent(props) {
+  useEffect(() => {
+    props.getAddressFromGps(props.mapCenterGps);
+  }, []);
   return (
     <div id="addressEditPage" className="page-container">
       <ToolbarComponent title="Your Address" />
@@ -84,6 +90,16 @@ function AddressEditComponent(props) {
       <BottomNextComponent routePath="/order/summary" title="Proceed" />
     </div>
   );
+}
+
+function AddressEditComponent(props) {
+
+  const gpsSelected = props.mapCenterGps ? true : false
+  if (gpsSelected == false) {
+    return <Redirect to="/choose/location"/> ;
+  } else {
+    return <AddressInputComponent {...props}/> ;
+  }
 }
 
 export { AddressEditComponent };

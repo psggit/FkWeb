@@ -25,6 +25,7 @@ function App() {
           <Route path="/user/login" component={UserBasicInfoContainer} />
           <Route path="/search" component={SearchContainer} />
           <Route path="/cart" component={CartContainer} />
+          <Route path="/address/create" component={AddressEditContainer} />
           <Route path="/myorders" component={MyOrdersContainer} />
           <Route
             path="/address/select/:redirect"

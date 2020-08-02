@@ -13,9 +13,9 @@ function EmptyAddressComponent() {
 }
 function AddressComponent(props) {
   const addresses = props.savedUserAddresses;
-	function RadioClick() {
-		document.getElementByClassName("radiobtn")
-	}
+  function RadioClick() {
+    document.getElementByClassName("radiobtn");
+  }
 
   return (
     <div className="address-container">
@@ -24,7 +24,7 @@ function AddressComponent(props) {
         return (
           <div key={address.address_id} className="address-wrap">
             <div
-              onClick={() => props.selectAddressFunc(address.address_id)}
+              onClick={() => props.selectAddressFunc(address)}
               className="address-detail-container"
             >
               <div className="clickableComponent">
