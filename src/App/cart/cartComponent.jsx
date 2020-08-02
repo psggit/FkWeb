@@ -1,15 +1,37 @@
 import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 
-import * as Sentry from "@sentry/react";
-
 import "./style.scss";
 import { AddMoreComponent } from "./addMore";
 import { CartItemComponent } from "./cartItem";
 import { EmptyCartComponent } from "./emptyCart";
 import { CartHeaderComponent } from "./header";
 import { BottomNextComponent } from "../common/bottomNext";
-import { Alert } from "../common/alert";
+import { SplashLoadingComponent } from "../common/splashLoading";
+import { drinksIcon } from "../../assets/images";
+
+RetryValidationComponent.propTypes = {
+  products: PropTypes.object,
+  retailer: PropTypes.object,
+  validateCart: PropTypes.func,
+};
+
+function RetryValidationComponent(props) {
+  let payload = {
+    retailer: props.retailer,
+    products: props.products,
+  };
+  let validate = () => props.validateCart(payload);
+  return (
+    <SplashLoadingComponent
+      motion={false}
+      icon={drinksIcon}
+      text="Something went wrong, please try again."
+      buttonFunc={validate}
+      buttonText="Retry"
+    />
+  );
+}
 
 CartComponent.propTypes = {
   isEmpty: PropTypes.bool,
@@ -41,14 +63,9 @@ const cartItems = (props) => {
   });
 };
 
-function RetryOnValidationFailure(props) {
-  let ps = {
-    show: true,
-    title: "Someting went wrong",
-    content: "Please try again",
-  };
-  return <Alert {...ps} />;
-}
+CartComponent.propTypes = {
+  validationFailure: PropTypes.bool,
+};
 
 function CartComponent(props) {
   let isEmpty = props.isEmpty;
@@ -63,25 +80,24 @@ function CartComponent(props) {
     });
   }
 
+  if (props.validationFailure) {
+    return <RetryValidationComponent {...props} />;
+  }
+
   return (
-    <Sentry.ErrorBoundary fallback={RetryOnValidationFailure}>
-      <d3v />
-      /*
-      <div className="cart">
-        <div className="hide-content">
-          <EmptyCartComponent />
-        </div>
-        <div className="full-cart show-content">
-          <div className="padding-24">
-            <CartHeaderComponent {...props} />
-            {cartItems(props)}
-            <AddMoreComponent />
-          </div>
-          <BottomNextComponent routePath="/address/select" title="Checkout" />
-        </div>
+    <div className="cart">
+      <div className="hide-content">
+        <EmptyCartComponent />
       </div>
-      */
-    </Sentry.ErrorBoundary>
+      <div className="full-cart show-content">
+        <div className="padding-24">
+          <CartHeaderComponent {...props} />
+          {cartItems(props)}
+          <AddMoreComponent />
+        </div>
+        <BottomNextComponent routePath="/address/select" title="Checkout" />
+      </div>
+    </div>
   );
 }
 

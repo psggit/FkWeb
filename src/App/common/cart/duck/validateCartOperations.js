@@ -22,14 +22,13 @@ const reqBodyFromState = (cartState) => {
   };
 };
 
-const processResponse = (dispatch) => {
+const processResponse = () => {
   return (res) => {
     if (res.ok) {
-      dispatch(validationFailure());
+      //dispatch(validationFailure());
       return res.json();
     }
     if (res.status === 400) {
-      //TODO:@hl05 setup sentry here?
       throw new Error("invalid params");
     } else {
       throw new Error("Something went wrong, try again");
