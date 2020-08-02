@@ -11,6 +11,9 @@ import { userInfoCreateReducer } from "../App/userBasicInfo";
 import { cartReducer } from "../App/common/cart";
 import thunk from "redux-thunk";
 import { storeFrontReducer } from "../App/storeFront";
+import { myOrdersReducer } from "../App/myorders";
+import { orderDetailReducer } from "../App/order";
+import { stateCityReducer } from "../App/stateCity";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -23,6 +26,9 @@ const store = configureStore({
     addressStore: addressListReducer,
     cart: cartReducer,
     chooseLocation: chooseLocationReducer,
+    myOrders: myOrdersReducer,
+    order: orderDetailReducer,
+    stateCity: stateCityReducer,
   }),
   middleware: [thunk],
 });

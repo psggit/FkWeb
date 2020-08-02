@@ -11,8 +11,9 @@ ChooseLocationComponent.propTypes = {
   autoCompletePlaces: PropTypes.array,
   placesInfo: PropTypes.object,
   address: PropTypes.object,
-  mapCenterGps: PropTypes.string,
+  mapCenterGps: PropTypes.object,
   autoComplete: PropTypes.func,
+  storeGpsFunc: PropTypes.func,
   getPlacesDetails: PropTypes.func,
   getAddressFromGps: PropTypes.func,
 };
@@ -29,7 +30,10 @@ function ChooseLocationComponent(props) {
       <div>
         <ToolbarComponent title="Add New Address" />
         <div className="search-container">
-          <SearchBox cancelEnable={props.isCancelButton} />
+          <SearchBox
+            cancelEnable={props.isCancelButton}
+            placeholder="Search Location"
+          />
           {props.isCancelButton ? <button>Cancel</button> : ""}
         </div>
         <div>
@@ -38,7 +42,10 @@ function ChooseLocationComponent(props) {
               <PlacesDetailComponent title="Adyar" address="Address of Adyar" />
             </div>
           ) : (
-            <MapWithMarkerComponent />
+            <MapWithMarkerComponent
+              storeGpsFunc={props.storeGpsFunc}
+              onProceedFunc={() => props.getAddressFromGps(props.mapCenterGps)}
+            />
           )}
         </div>
       </div>

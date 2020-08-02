@@ -95,7 +95,7 @@ function CartComponent(props) {
           {cartItems(props)}
           <AddMoreComponent />
         </div>
-        <BottomNextComponent routePath="/address/select" title="Checkout" />
+        <BottomNextComponent routePath="/address/select/osm" title="Checkout" />
       </div>
     </div>
   );

@@ -35,8 +35,8 @@ CollectInfoComponent.propTypes = {
   showConsumerIDs: PropTypes.bool,
   showDeclaration: PropTypes.bool,
   checkDeclaration: PropTypes.bool,
-  selectedDocument: PropTypes.string,
-  finalisedDocument: PropTypes.string,
+  selectedDocument: PropTypes.object,
+  finalisedDocument: PropTypes.object,
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
   changeBirthYear: PropTypes.func,
@@ -138,7 +138,7 @@ function SelectIDComponent(props) {
             placeholder="Select ID proof"
             onClick={() => OpenIDOptions()}
             className="input_field_100"
-            value={finalisedDocument}
+            value={finalisedDocument.value}
             type="text"
             readOnly
           />
@@ -157,7 +157,12 @@ function SelectIDComponent(props) {
                   id={id.name}
                   name="idType"
                   value={id.idType}
-                  onClick={(e) => props.selectingIDProofFunc(e.target.id)}
+                  onClick={(e) =>
+                    props.selectingIDProofFunc({
+                      id: id.name,
+                      value: id.idType,
+                    })
+                  }
                 />
                 <div className="radiobtn"></div>
                 <label
@@ -188,14 +193,18 @@ function SelectIDComponent(props) {
         </div>
       </div>
       <div
-        className={(finalisedDocument == "" ? "hide " : "") + "input-component"}
+        className={
+          (finalisedDocument.value == undefined ? "hide " : "") +
+          "input-component"
+        }
       >
         <div className="input-component-label no-fold-text">
-          ENTER YOUR <span className="caps">{finalisedDocument} </span> NUMBER
+          ENTER YOUR <span className="caps">{finalisedDocument.value} </span>{" "}
+          NUMBER
         </div>
         <div className="inputComponentField input">
           <input
-            placeholder={"Enter your " + finalisedDocument + " number"}
+            placeholder={"Enter your " + finalisedDocument.value + " number"}
             className="input_field_100"
             onChange={(e) => props.changeDocumentValueFunc(e.target.value)}
             value={selectedDocumentValue}
@@ -234,7 +243,7 @@ function CollectInfoComponent(props) {
   const data = {
     dob: yob,
     gender: props.gender,
-    kycType: props.finalisedDocument,
+    kycType: props.finalisedDocument.id,
     kycValue: props.selectedDocumentValue,
   };
 
@@ -265,7 +274,7 @@ UserBasicInfoComponent.propTypes = {
   changingGenderFunc: PropTypes.func,
   updateKycFunc: PropTypes.func,
   selectingIDProofFunc: PropTypes.func,
-  selectedDocument: PropTypes.string,
+  selectedDocument: PropTypes.object,
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
   loginInProgress: PropTypes.bool,
@@ -297,7 +306,7 @@ function UserBasicInfoComponent(props) {
     if (collectUserDetails) {
       return <CollectInfoComponent {...props} />;
     } else {
-      return <Redirect to="/address/select/sf" />;
+      return <Redirect to="/statecity/select" />;
     }
   } else {
     return <div> </div>;

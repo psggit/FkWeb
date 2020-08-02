@@ -6,16 +6,16 @@ import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { UserBasicInfoContainer } from "./userBasicInfo";
 import { CartContainer } from "./cart";
-import { MyOrdersComponent } from "./myorders";
-import Search from "./search";
+import { MyOrdersContainer } from "./myorders";
 import { SelectAddressContainer, AddressEditContainer } from "./address";
 import { SearchContainer } from "./search";
 import { StoreFrontContainer } from "./storeFront";
 import OrderSummary from "./summary";
 import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
 import BottomNavigationComponent from "./common/bottomNavigation";
-import { OrderPlaced } from "./order";
 import { ChooseLocationContainer } from "./address/chooseLocation";
+import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
+import { StateCityContainer } from "./stateCity";
 
 function App() {
   return (
@@ -25,12 +25,14 @@ function App() {
           <Route path="/user/login" component={UserBasicInfoContainer} />
           <Route path="/search" component={SearchContainer} />
           <Route path="/cart" component={CartContainer} />
-          <Route path="/myorders" component={MyOrdersComponent} />
+          <Route path="/address/create" component={AddressEditContainer} />
+          <Route path="/myorders" component={MyOrdersContainer} />
           <Route
             path="/address/select/:redirect"
             component={SelectAddressContainer}
           />
           <Route path="/home" component={Home} />
+          <Route path="/statecity/select" component={StateCityContainer} />
           <Route path="/choose/location" component={ChooseLocationContainer} />
           <Route path="/storefront" component={StoreFrontContainer} />
           <Route
@@ -66,30 +68,8 @@ function App() {
             path="/payment/add/new/card"
             component={AddCardAndProcessPayment}
           />
-          <Route
-            path="/order/info"
-            component={(props) => (
-              <OrderPlaced {...props} isOrderDetail={true} />
-            )}
-          />
-          <Route
-            path="/order/cancelled"
-            component={(props) => (
-              <OrderPlaced {...props} isOrderCancelled={true} />
-            )}
-          />
-          <Route
-            path="/order/delivered"
-            component={(props) => (
-              <OrderPlaced {...props} isOrderDelivered={true} />
-            )}
-          />
-          <Route
-            path="/order/placed"
-            component={(props) => (
-              <OrderPlaced {...props} isOrderPlaced={true} />
-            )}
-          />
+          <Route path="/order/detail" component={OrderDetailsContainer} />
+          <Route path="/order/placed" component={OrderPlacedContainer} />
           <Route
             path="/payment"
             component={() => (
