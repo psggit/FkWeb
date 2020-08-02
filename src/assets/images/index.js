@@ -20,3 +20,4 @@ export const shieldIcon = require("./shield.svg");
 export const successIcon = require("./success.svg");
 export const upIcon = require("./up.svg");
 export const upiIcon = require("./upi.svg");
+export const deliveryPersonIcon = require("./delivery_person.svg");
