@@ -85,7 +85,6 @@ function App() {
           />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
-        <BottomNavigationComponent />
       </Router>
     </div>
   );
