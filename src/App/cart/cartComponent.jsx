@@ -1,6 +1,8 @@
 import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 
+import { useHistory } from "react-router-dom";
+
 import "./style.scss";
 import { AddMoreComponent } from "./addMore";
 import { CartItemComponent } from "./cartItem";
@@ -109,10 +111,14 @@ function AlertValidateErrorComponent(props) {
 CartComponent.propTypes = {
   validationFailure: PropTypes.bool,
   validateError: PropTypes.bool,
+  resetValidation: PropTypes.func,
+  validationSuccessful: PropTypes.bool,
 };
 
 function CartComponent(props) {
-  console.log(props);
+  useLayoutEffect(() => {
+    props.resetValidation();
+  }, []);
   let isEmpty = props.isEmpty;
   if (isEmpty) {
     return returnEmptyCart();
@@ -124,6 +130,11 @@ function CartComponent(props) {
 
   if (props.validateError) {
     return <AlertValidateErrorComponent {...props} />;
+  }
+
+  if (props.validationSuccessful) {
+    let history = useHistory();
+    history.push("/address/select/osm");
   }
 
   return (

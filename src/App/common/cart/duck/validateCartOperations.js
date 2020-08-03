@@ -15,9 +15,9 @@ const reqBodyFromState = (cartState) => {
     products.push(p);
   }
   return {
-    city_id: 5,
+    city_id: 35,
     retailer_id: cartState.retailer.id,
-    state_id: 1,
+    state_id: 4,
     products: products,
   };
 };
