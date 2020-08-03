@@ -17,12 +17,14 @@ RetryValidationComponent.propTypes = {
   products: PropTypes.object,
   retailer: PropTypes.object,
   validateCart: PropTypes.func,
+  selectedAddress: PropTypes.object,
 };
 
 function RetryValidationComponent(props) {
   let payload = {
     retailer: props.retailer,
     products: props.products,
+    selectedAddress: props.selectedAddress,
   };
   let validate = () => props.validateCart(payload);
   return (
@@ -77,6 +79,7 @@ function NextComponent(props) {
   let validateParams = {
     retailer: props.retailer,
     products: props.products,
+    selectedAddress: props.selectedAddress,
   };
   if (shouldValidate) {
     return (
