@@ -52,6 +52,7 @@ function CartItemComponent({ product, addItem, removeItem, retailer }) {
             </div>
           </div>
         </div>
+        {!product.available && "item is not avaialable."}
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import {
   validationInProgress,
   validationFailure,
 } from "./actions";
-import { updateCartAPI } from "../../../../utils";
+import { validateCartAPI } from "../../../../utils";
 
 const reqBodyFromState = (cartState) => {
   let products = [];
@@ -25,7 +25,6 @@ const reqBodyFromState = (cartState) => {
 const processResponse = () => {
   return (res) => {
     if (res.ok) {
-      //dispatch(validationFailure());
       return res.json();
     }
     if (res.status === 400) {
@@ -44,6 +43,7 @@ const onSuccess = (dispatch) => {
 
 const onError = (dispatch) => {
   return (err) => {
+    console.log(err);
     dispatch(validationFailure(err));
   };
 };
@@ -52,7 +52,7 @@ const validateCart = (cartState) => {
   let reqBody = reqBodyFromState(cartState);
   return (dispatch) => {
     dispatch(validationInProgress());
-    updateCartAPI(
+    validateCartAPI(
       reqBody,
       processResponse(dispatch),
       onSuccess(dispatch),
