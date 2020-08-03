@@ -232,7 +232,7 @@ const cartReducer = createReducer(initialState(), {
   [validationSuccessful]: (state: State, e: Object) => {
     return void validateCart(state, e.payload);
   },
-  [validationInProgress]: (state: State, data: Object) => {
+  [validationInProgress]: (state: State): State => {
     return {
       ...state,
       validationFailure: false,
@@ -262,7 +262,6 @@ const cartReducer = createReducer(initialState(), {
       validateError: false,
     };
   },
-
 });
 
 export { cartReducer, cartTotal, isEmpty };
