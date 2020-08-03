@@ -1,26 +1,46 @@
-import { getCriticalAds } from "./actions";
-import config from "../../../../config";
+import { fetchCriticalAdsAPI } from '../../../../utils';
+import {
+  fetchCriticalAdsSuccess,
+  fetchCriticalAdsFailure,
+  fetchCriticalAdsInProgress
+} from "./actions";
 
-const fetchAds = () => {
-  const URL = "https://gremlin." + config.BASE_DOMAIN + "/consumer/marketing/ads/critical_ads/15";
-  return fetch(URL, {
-    headers: { Authorization: "Bearer cb04d1e946864660a022c5c88d486fd0" },
-  });
+const processResponse = (dispatch) => {
+  return (res) => {
+    if (res.ok) {
+      dispatch(fetchCriticalAdsSuccess());
+      return res.json();
+    }
+    if (res.status === 400) {
+      throw new Error("invalid params");
+    } else {
+      throw new Error("Something went wrong, try again");
+    }
+  };
+};
+
+const onSuccess = (dispatch) => {
+  return (data) => {
+    dispatch(fetchCriticalAdsSuccess(data));
+  };
+};
+
+const onError = (dispatch) => {
+  return (err) => {
+    dispatch(fetchCriticalAdsFailure(err));
+  };
 };
 
 const fetchHomeCriticalAds = () => {
   return (dispatch) => {
-    return fetchAds()
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        dispatch(getCriticalAds(json));
-      })
-      .catch(error => {
-        console.log("[Error fetching URL] /consumer/marketing/ads/critical_ads/15");
-        console.log(error);
-      })
+    dispatch(fetchCriticalAdsInProgress());
+    fetchCriticalAdsAPI(
+      "",
+      processResponse(dispatch),
+      onSuccess(dispatch),
+      onError(dispatch)
+    );
   };
-};
+}
 
 export { fetchHomeCriticalAds };

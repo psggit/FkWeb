@@ -1,4 +1,7 @@
-import { getCriticalAds, setPopupVisibility} from "./actions";
+import { setPopupVisibility,
+    fetchCriticalAdsSuccess,
+    fetchCriticalAdsFailure,
+    fetchCriticalAdsInProgress} from "./actions";
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -54,12 +57,16 @@ const initialState = {
         "description": "3: Get your favourite drinks home delivered!",
         "disclaimer": "3: Drink responsibly"
     }],
-    isViewed: true
+    isViewed: true,
+    criticalAdsFetchState: "inProgress"
 }
 
 const criticalAdsReducer = createReducer(initialState, {
-    [getCriticalAds]:  (state, action) => ({...state, items: action.payload.ads}),
-    [setPopupVisibility]: (state, action) => ({...state, isViewed: false})
+    [setPopupVisibility]: (state) => ({...state, isViewed: false}),
+    [fetchCriticalAdsSuccess]: (state, action) => ({...state, items: action.payload.ads, criticalAdsFetchState: "success"}),
+    [fetchCriticalAdsFailure]: (state) => ({...state, criticalAdsFetchState: "failed"}),
+    [fetchCriticalAdsInProgress]: (state) => ({...state, criticalAdsFetchState: "inProgress"}),
+
 })
 
 export { criticalAdsReducer };
