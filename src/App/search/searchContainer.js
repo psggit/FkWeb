@@ -3,8 +3,10 @@ import { SearchComponent } from "./SearchComponent";
 import { getSearchDrinks } from "./duck";
 
 const mapStateToProps = (state) => {
-  const { searchItem: { data, pending }} = state;
-  return { data,pending };
+  const {
+    searchItem: { data, pending },
+  } = state;
+  return { data, pending };
 };
 
 const mapDispatchToProps = (dispatch) => {

@@ -10,7 +10,7 @@ import {
 } from "../common/summary";
 
 import "./style.scss";
-import infoIcon from "../../assets/images/info.svg";
+import { infoIcon } from "../../assets/images";
 
 function OrderSummary() {
   return (

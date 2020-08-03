@@ -7,6 +7,7 @@ import {
   changeDocumentValueAction,
   finaliseIDTypeAction,
 } from "./actions";
+import { updateBasicKYCAPI } from "../../../utils";
 
 const ChangingBirthYear = (value) => {
   return (dispatch) => {
@@ -58,18 +59,59 @@ const ChangeDocumentValueOperation = (value) => {
 };
 
 const SelectIDTypeOperation = (value) => {
+  console.log(value);
   return (dispatch) => {
     dispatch(selectIDTypeAction(value));
   };
 };
 
-const FinaliseIDProofValueOperation = () => {
-  return (dispatch, getState) => {
-    let value = getState().ubiStore.selectedDocument;
-    if (value != getState().ubiStore.finalisedDocument) {
-      dispatch(finaliseIDTypeAction(value));
-      dispatch(CheckCheckBoxOperation());
+const FinaliseIDProofValueOperation = (selectedDocument) => {
+  return (dispatch) => {
+    dispatch(finaliseIDTypeAction(selectedDocument));
+    dispatch(CheckCheckBoxOperation());
+  };
+};
+
+const onSuccess = () => {
+  return () => {
+    history.pushState("/choose/location");
+  };
+};
+
+const onError = () => {
+  return (err) => {
+    alert(err);
+  };
+};
+
+const processResponse = () => {
+  return (res) => {
+    if (res.ok) {
+      return res.json();
     }
+    if (res.status === 400) {
+      throw new Error("invalid params");
+    } else {
+      throw new Error("Something went wrong, try again");
+    }
+  };
+};
+
+const UpdateKYCOperation = (value) => {
+  var reqBody = {
+    dob: value.dob,
+    gender: value.gender,
+    name: "",
+    kyc_type: value.kycType,
+    kyc_value: value.kycValue,
+  };
+  return (dispatch) => {
+    updateBasicKYCAPI(
+      reqBody,
+      processResponse(dispatch),
+      onSuccess(),
+      onError(dispatch)
+    );
   };
 };
 
@@ -77,6 +119,7 @@ export {
   ChangingBirthYear,
   FinaliseIDProofValueOperation,
   ChangingGenderOperation,
+  UpdateKYCOperation,
   SelectIDTypeOperation,
   ChangeDocumentValueOperation,
   CheckDeclarationOperation,

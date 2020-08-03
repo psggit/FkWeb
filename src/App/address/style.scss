@@ -1,10 +1,7 @@
 @import "../../colors.scss";
 
 .address-container {
-  margin-left: 24px;
   margin-top: 16px;
-  margin-right: 24px;
-  margin-bottom: 16px;
   border-bottom: 1px solid $border-color;
 }
 
@@ -26,3 +23,8 @@
     height: 24px;
   }
 }
+
+.new-address-container {
+  margin-top: 128px;
+}
+

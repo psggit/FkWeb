@@ -1,17 +1,19 @@
 import { connect } from "react-redux";
 import { SelectAddressComponent } from "./selectAddressComponent";
-import { SelectAddressOperation } from "../duck";
+import { SelectAddressOperation, FetchAddressListOperation } from "../duck";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     savedUserAddresses: state.addressStore.savedUserAddresses,
     selectedAddress: state.addressStore.selectedAddress,
+    redirect: props.match.params.redirect,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     selectAddressFunc: (value) => dispatch(SelectAddressOperation(value)),
+    onMountFunc: () => dispatch(FetchAddressListOperation()),
   };
 };
 

@@ -1,2 +1,4 @@
 export { SelectAddressContainer } from "./SelectAddress/selectAddressContainer";
-export { addressListReducer } from "./reducer";
+export { ChooseLocationContainer } from "./chooseLocation";
+export { AddressEditContainer } from "./addressEdit/addressEditContainer";
+export { addressListReducer, addressEditReducer } from "./reducer";

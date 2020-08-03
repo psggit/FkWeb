@@ -1,1 +1,2 @@
-export { MyOrdersComponent } from "./MyOrdersComponent";
+export { MyOrdersContainer } from "./myOrdersContainer";
+export { myOrdersReducer } from "./duck";

@@ -1,8 +1,9 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
 import "./styles/style.scss";
-import shield from "../../assets/images/shield.svg";
+import { shieldIcon, drinksIcon } from "../../assets/images";
 import { ToolbarComponent } from "../common/toolbar";
-import { Redirect, Link } from "react-router-dom";
+import { SplashLoadingComponent } from "../common/splashLoading";
+import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { BottomNextComponent } from "../common/bottomNext";
 
@@ -13,23 +14,29 @@ LFComponent.propTypes = {
 function LFComponent(props) {
   const login = props.login;
   return (
-    <div>
-      <div>login failed </div>
-      <button onClick={login}> retry </button>
-    </div>
+    <>
+      <SplashLoadingComponent
+        motion={false}
+        icon={drinksIcon}
+        text="Something went wrong, please try again."
+        buttonFunc={login}
+        buttonText="Retry"
+      />
+    </>
   );
 }
 
 CollectInfoComponent.propTypes = {
   yob: PropTypes.string,
   gender: PropTypes.string,
+  fetchKYCOptionsFunc: PropTypes.func,
   selectedID: PropTypes.string,
   consumerIDTypes: PropTypes.array,
   showConsumerIDs: PropTypes.bool,
   showDeclaration: PropTypes.bool,
   checkDeclaration: PropTypes.bool,
-  selectedDocument: PropTypes.string,
-  finalisedDocument: PropTypes.string,
+  selectedDocument: PropTypes.object,
+  finalisedDocument: PropTypes.object,
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
   changeBirthYear: PropTypes.func,
@@ -47,6 +54,11 @@ const CloseIDOptions = () => {
   document.getElementById("kycID").classList.add("hide");
 };
 
+YearOfBirthInputComponent.propTypes = {
+  yob: PropTypes.string,
+  changeBirthYear: PropTypes.func,
+};
+
 function YearOfBirthInputComponent(props) {
   return (
     <div className="input-component">
@@ -62,6 +74,11 @@ function YearOfBirthInputComponent(props) {
     </div>
   );
 }
+
+GenderSelectionComponent.propTypes = {
+  gender: PropTypes.string,
+  changingGenderFunc: PropTypes.func,
+};
 
 function GenderSelectionComponent(props) {
   const gender = props.gender;
@@ -92,7 +109,7 @@ function GenderSelectionComponent(props) {
   );
 }
 
-function InfoComponent(props) {
+function InfoComponent() {
   return (
     <div className="input-component flex">
       <div className="input-info">
@@ -100,7 +117,7 @@ function InfoComponent(props) {
         confirm and continue.
       </div>
       <div className="input-shield">
-        <img src={shield} />
+        <img src={shieldIcon} />
       </div>
     </div>
   );
@@ -121,7 +138,7 @@ function SelectIDComponent(props) {
             placeholder="Select ID proof"
             onClick={() => OpenIDOptions()}
             className="input_field_100"
-            value={finalisedDocument}
+            value={finalisedDocument.value}
             type="text"
             readOnly
           />
@@ -137,14 +154,19 @@ function SelectIDComponent(props) {
               <div className="radio_item flex vcenter" key={"key_" + id.idType}>
                 <input
                   type="radio"
-                  id={id.idType}
+                  id={id.name}
                   name="idType"
                   value={id.idType}
-                  onClick={(e) => props.selectingIDProofFunc(e.target.value)}
+                  onClick={(e) =>
+                    props.selectingIDProofFunc({
+                      id: id.name,
+                      value: id.idType,
+                    })
+                  }
                 />
                 <div className="radiobtn"></div>
                 <label
-                  htmlFor={id.idType}
+                  htmlFor={id.name}
                   className="no-fold-text option flex vcenter"
                 >
                   {id.idType}
@@ -171,14 +193,18 @@ function SelectIDComponent(props) {
         </div>
       </div>
       <div
-        className={(finalisedDocument == "" ? "hide " : "") + "input-component"}
+        className={
+          (finalisedDocument.value == undefined ? "hide " : "") +
+          "input-component"
+        }
       >
         <div className="input-component-label no-fold-text">
-          ENTER YOUR <span className="caps">{finalisedDocument} </span> NUMBER
+          ENTER YOUR <span className="caps">{finalisedDocument.value} </span>{" "}
+          NUMBER
         </div>
         <div className="inputComponentField input">
           <input
-            placeholder={"Enter your " + finalisedDocument + " number"}
+            placeholder={"Enter your " + finalisedDocument.value + " number"}
             className="input_field_100"
             onChange={(e) => props.changeDocumentValueFunc(e.target.value)}
             value={selectedDocumentValue}
@@ -191,28 +217,35 @@ function SelectIDComponent(props) {
 }
 function CheckBoxComponent(props) {
   return (
-      <div className="input-component">
-        <div
-          onClick={() => props.checkDeclarationFunc(true)}
-          className={
-            (props.checkDeclaration ? "selected " : "") +
-            (props.showDeclaration ? "" : "inactive ") +
-            "input-component-checkbox"
-          }
-        >
-          <div className="checkbox"></div>
-          <div className="checkbox-text">
-            I declare that the details furnished above are correct
-          </div>
+    <div className="input-component">
+      <div
+        onClick={() => props.checkDeclarationFunc(true)}
+        className={
+          (props.checkDeclaration ? "selected " : "") +
+          (props.showDeclaration ? "" : "inactive ") +
+          "input-component-checkbox"
+        }
+      >
+        <div className="checkbox"></div>
+        <div className="checkbox-text">
+          I declare that the details furnished above are correct
         </div>
       </div>
-  )
+    </div>
+  );
 }
 
 function CollectInfoComponent(props) {
   const yob = props.yob;
   const checkDeclaration = props.checkDeclaration;
   const showDeclaration = props.showDeclaration;
+  const updateKycFunc = props.updateKycFunc;
+  const data = {
+    dob: yob,
+    gender: props.gender,
+    kycType: props.finalisedDocument.id,
+    kycValue: props.selectedDocumentValue,
+  };
 
   return (
     <div className="page-container userBasicInfoComponent">
@@ -222,7 +255,11 @@ function CollectInfoComponent(props) {
       <GenderSelectionComponent {...props} />
       <SelectIDComponent {...props} />
       <CheckBoxComponent {...props} />
-      <BottomNextComponent title="Proceed" inActive={!checkDeclaration} />
+      <BottomNextComponent
+        title="Proceed"
+        onClickFunc={() => updateKycFunc(data)}
+        inActive={!checkDeclaration}
+      />
     </div>
   );
 }
@@ -235,11 +272,11 @@ UserBasicInfoComponent.propTypes = {
   showConsumerIDs: PropTypes.bool,
   changeBirthYear: PropTypes.func,
   changingGenderFunc: PropTypes.func,
+  updateKycFunc: PropTypes.func,
   selectingIDProofFunc: PropTypes.func,
-  selectedDocument: PropTypes.string,
+  selectedDocument: PropTypes.object,
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
-
   loginInProgress: PropTypes.bool,
   loginFailed: PropTypes.bool,
   loginSuccess: PropTypes.bool,
@@ -260,17 +297,19 @@ function UserBasicInfoComponent(props) {
   });
 
   if (loginInProgress) {
-    return <div> Login in progress </div>;
+    return (
+      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
+    );
   } else if (loginFailed) {
     return <LFComponent login={props.login} />;
   } else if (loginSuccess) {
-    if (!collectUserDetails) {
-      return <Redirect to="/home" />;
-    } else {
+    if (collectUserDetails) {
       return <CollectInfoComponent {...props} />;
-     }
-   } else {
-     return <div> deff </div>;
-   }
+    } else {
+      return <Redirect to="/statecity/select" />;
+    }
+  } else {
+    return <div> </div>;
+  }
 }
 export { UserBasicInfoComponent };

@@ -26,11 +26,10 @@ declare type Product = {
   count: number,
   available: boolean,
   subText: string,
-  logoLowResImage: string,
 };
 
 declare type Products = {
-  skuId: Product,
+  [skuId: string]: Product,
 };
 
 declare type State = {
@@ -78,7 +77,7 @@ let getTestState = (): State => {
         skuId: 1276,
         brandName: "Kf blue",
         brandId: 993,
-        logo_low_res_image:
+        image:
           "https://res.cloudinary.com/www-hipbar-com/image/upload/c_scale,h_300/v1557824990/Brand%20Logo's/TN/Beer.jpg",
         price: 150,
         volume: 650,
@@ -137,19 +136,19 @@ let addProduct = (state: State, sku: Sku): State => {
   } else {
     prod.count += 1;
   }
-  state.products[prod.skuId] = prod;
+  state.products[prod.skuId.toString()] = prod;
   return state;
 };
 
 let removeProduct = (state: State, sku: Sku): State => {
-  let prod = state.products[sku.sku_id];
+  let prod = state.products[sku.sku_id.toString()];
   if (prod === undefined) {
     return state;
   } else {
     prod.count -= 1;
   }
   if (prod.count === 0) {
-    delete state.products[prod.skuId];
+    delete state.products[prod.skuId.toString()];
   }
   if (isEmpty(state)) {
     return initialState();
@@ -159,14 +158,14 @@ let removeProduct = (state: State, sku: Sku): State => {
 
 let replaceProductInfo = (state: State, skus: Array<Sku>): State => {
   for (let sku of skus) {
-    state.products[sku.sku_id] = {
+    state.products[sku.sku_id.toString()] = {
       skuId: sku.sku_id,
       brandName: sku.brand_name,
       brandId: sku.brand_id,
       image: sku.logo_low_res_image,
       price: sku.price,
       volume: sku.volume,
-      count: state.products[sku.sku_id].count,
+      count: state.products[sku.sku_id.toString()].count,
       available: true,
       subText: unAvailableProductText,
     };
@@ -176,7 +175,7 @@ let replaceProductInfo = (state: State, skus: Array<Sku>): State => {
 
 let setUnAvailableProducts = (state: State, skus: Array<number>): State => {
   for (let id of skus) {
-    state.products[id].available = false;
+    state.products[id.toString()].available = false;
   }
   return state;
 };
@@ -191,7 +190,7 @@ let validateCart = (state: State, data: Object): State => {
 
 const cartTotal = (oldS: State): number => {
   let total: number = 0;
-  for (let prod of Object.values(oldS.products)) {
+  for (let prod: Product of Object.values(oldS.products)) {
     total = total + prod.price;
   }
   return total;

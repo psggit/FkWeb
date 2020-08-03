@@ -1,5 +1,5 @@
 import React from "react";
-import downIcon from "../../../assets/images/down.svg";
+import { downArrowIcon } from "../../../assets/images";
 import "../style.scss";
 import PropTypes from "prop-types";
 
@@ -30,7 +30,7 @@ function NetBankingComponent(props) {
       </div>
       <div className="other-banks" onClick={onOtherBankSelected}>
         <div className="other-bank-title">Other Banks</div>
-        <img src={downIcon} className="down-image" />
+        <img src={downArrowIcon} className="down-image" />
       </div>
     </div>
   );

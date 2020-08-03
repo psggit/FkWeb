@@ -1,15 +1,19 @@
 import { connect } from "react-redux";
 import { RetailerList } from "./retailerListComponent";
-import { onHarshit, waitForSyed } from "./duck";
+import { fetchRetailersOperation } from "./duck";
 
 const mapStateToProps = (state) => {
-  return { name: state.home.retailerList.name };
+  return {
+    retailers: state.home.retailerList.retailers,
+    retailerFetchStatus: state.home.retailerList.retailerFetchStatus,
+    selectedAddress: state.addressStore.selectedAddress,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSyed: () => dispatch(waitForSyed()),
-    onHarshit: () => dispatch(onHarshit()),
+    fetchRetailersFunc: (selectedAddress) =>
+      dispatch(fetchRetailersOperation(selectedAddress)),
   };
 };
 

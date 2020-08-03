@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import successIcon from "../../../assets/images/success.svg";
+import { successIcon } from "../../../assets/images";
 
 OrderSuccessComponent.propTypes = {
   orderPrice: PropTypes.string,

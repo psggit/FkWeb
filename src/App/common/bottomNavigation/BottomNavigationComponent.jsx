@@ -1,14 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./navbar.scss";
-import homeIcon from "../../../assets/images/home.png";
-import searchIcon from "../../../assets/images/search.svg";
-import cartIcon from "../../../assets/images/cart.png";
-import myOrdersIcon from "../../../assets/images/myorders.svg";
+import {
+  homeIcon,
+  searchIcon,
+  cartIcon,
+  myOrdersIcon,
+} from "../../../assets/images";
 
 const tabs = [
   {
-    route: "/",
+    route: "/home",
     icon: homeIcon,
     label: "Home",
   },
@@ -31,17 +33,19 @@ const tabs = [
 
 function BottomNavigationComponent() {
   return (
-    <div className="navBar">
-      {tabs.map((value, index) => (
-        <div key={"navTouch" + index} className="col-3">
-          <NavLink to={value.route}>
-            <div className="navItem">
-              <img className="navImage" src={value.icon}></img>
-              <div className="navText">{value.label}</div>
-            </div>
-          </NavLink>
-        </div>
-      ))}
+    <div className="navBar-height">
+      <div className="navBar navBar-height">
+        {tabs.map((value, index) => (
+          <div key={"navTouch" + index} className="col-3">
+            <NavLink to={value.route}>
+              <div className="navItem">
+                <img className="navImage" src={value.icon}></img>
+                <div className="navText">{value.label}</div>
+              </div>
+            </NavLink>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

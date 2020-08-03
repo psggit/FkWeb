@@ -1,56 +1,61 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import "./style.scss";
 
 RetailerList.propTypes = {
-  name: PropTypes.string,
-  onSyed: PropTypes.any,
-  onHarshit: PropTypes.any,
+  retailers: PropTypes.array,
+  retailerFetchStatus: PropTypes.string,
+  fetchRetailersFunc: PropTypes.func,
+  selectedAddress: PropTypes.object,
 };
 
-function RetailerList({ name, onSyed, onHarshit }) {
+function RetailerTemplate(retailers) {
+  return retailers.retailers.map((retailer) => {
+    return (
+      <div key={retailer.retailer_id} className="retailer_item">
+        <div className="retailer_link">
+          <div className="retailer_name">{retailer.retailer_name}</div>
+          <div className="retailer_info">{retailer.store_info_msg}</div>
+        </div>
+      </div>
+    );
+  });
+}
+function NoRetailerTemplate() {
+  return <div>NO RETAILERS FOUND...</div>;
+}
+
+function FetchFailedTemplate() {
+  return <div>Failed to Fetch...</div>;
+}
+
+function ServiceUnavailableTemplate() {
+  return <div>Service Unavailable in your city...</div>;
+}
+
+function RetailerList(props) {
+  const retailers = props.retailers;
+  const retailerFetchStatus = props.retailerFetchStatus;
+  const fetchRetailersFunc = props.fetchRetailersFunc;
+  const selectedAddress = props.selectedAddress;
+  useEffect(() => {
+    fetchRetailersFunc(selectedAddress);
+  }, []);
   return (
     <div className="retailer_list_wrap">
-      <div className="retailer_item">
-        <div className = "retailer_link">
-          <div className = "retailer_name">
-            Retailer - 1
-          </div>
-          <div className = "retailer_info">
-            Information About Retailer
-          </div>
+      {retailerFetchStatus === "inProgress" && (
+        <div className="flex hcenter vcenter loading">
+          {" "}
+          <div className="loader"></div>
         </div>
-      </div>
-      <div className="retailer_item">
-        <div className = "retailer_link">
-          <div className = "retailer_name">
-            Retailer - 1
-          </div>
-          <div className = "retailer_info">
-            Information About Retailer
-          </div>
-        </div>
-      </div>
-      <div className="retailer_item">
-        <div className = "retailer_link">
-          <div className = "retailer_name">
-            Retailer - 1
-          </div>
-          <div className = "retailer_info">
-            Information About Retailer
-          </div>
-        </div>
-      </div>
-      <div className="retailer_item">
-        <div className = "retailer_link">
-          <div className = "retailer_name">
-            Retailer - 1
-          </div>
-          <div className = "retailer_info">
-            Information About Retailer
-          </div>
-        </div>
-      </div>
+      )}
+      {retailers.length !== 0 && retailerFetchStatus === "success" && (
+        <RetailerTemplate retailers={retailers} />
+      )}
+      {retailers.length === 0 && retailerFetchStatus === "success" && (
+        <NoRetailerTemplate />
+      )}
+      {retailerFetchStatus === "failed" && <FetchFailedTemplate />}
     </div>
   );
 }

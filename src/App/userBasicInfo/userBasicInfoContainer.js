@@ -7,6 +7,7 @@ import {
   ChangeDocumentValueOperation,
   CheckDeclarationOperation,
   FinaliseIDProofValueOperation,
+  UpdateKYCOperation,
   login,
 } from "./duck";
 
@@ -32,9 +33,11 @@ const mapDispatchToProps = (dispatch) => {
     changeBirthYear: (value) => dispatch(ChangingBirthYear(value)),
     changingGenderFunc: (value) => dispatch(ChangingGenderOperation(value)),
     selectingIDProofFunc: (value) => dispatch(SelectIDTypeOperation(value)),
+    updateKycFunc: (value) => dispatch(UpdateKYCOperation(value)),
     changeDocumentValueFunc: (value) =>
       dispatch(ChangeDocumentValueOperation(value)),
-    finaliseIDProofFunc: () => dispatch(FinaliseIDProofValueOperation()),
+    finaliseIDProofFunc: (selectedDocument) =>
+      dispatch(FinaliseIDProofValueOperation(selectedDocument)),
     checkDeclarationFunc: () => dispatch(CheckDeclarationOperation()),
     login: () => dispatch(login()),
   };

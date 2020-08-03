@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import searchIcon from "../../assets/images/search.svg";
+import {searchIcon} from "../../assets/images"
 
 function SearchBox(props) {
   const [inputType] = useState("search");
   const [inputValue, setInputValue] = useState("");
-  const{handleInput,cancelEnable}=props
+  const{handleInput,cancelEnable, placeholder}=props
   function handleChange(event) {
     let value=event.target.value;
     setInputValue(value);
@@ -19,11 +19,11 @@ function SearchBox(props) {
         name="input-form"
         onFocus={() => cancelEnable(true)}
         onChange={handleChange}
-        placeholder="Search drinks"
+        placeholder={placeholder}
         className="inputclass"
         autoComplete="off"
       />
     </>
   );
 }
-export {SearchBox};
+export { SearchBox };

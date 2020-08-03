@@ -1,5 +1,5 @@
 import React from "react";
-import emptyCartIcon from "../../../assets/images/empty_cart.svg";
+import { emptyCartIcon } from "../../../assets/images";
 import "./style.scss";
 
 function EmptyCartComponent() {
