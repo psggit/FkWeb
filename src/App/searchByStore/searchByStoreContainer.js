@@ -3,9 +3,11 @@ import { SearchByStoreComponent } from "./SearchByStoreComponent";
 import { getSearchByStore } from "./duck";
 
 const mapStateToProps = (state) => {
-  console.log(state)
-  const { searchByStore: { data, pending }} = state;
-  return { data,pending };
+  console.log(state);
+  const {
+    searchByStore: { data, pending },
+  } = state;
+  return { data, pending };
 };
 
 const mapDispatchToProps = (dispatch) => {

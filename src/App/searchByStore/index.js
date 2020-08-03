@@ -1,2 +1,2 @@
-export {SearchByStoreContainer} from "./searchByStoreContainer";
-export {searchByStoreReducer} from './duck' 
+export { SearchByStoreContainer } from "./searchByStoreContainer";
+export { searchByStoreReducer } from "./duck";

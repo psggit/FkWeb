@@ -6,7 +6,5 @@ export const getSearchByStoreInProgress = createAction("PENDING");
 //getSearchByStoreSuccess got the array of data
 export const getSearchByStoreSuccess = createAction("SUCCESS");
 
-//fetch search by store failed 
+//fetch search by store failed
 export const getSearchByStoreFailed = createAction("FAILURE");
-
-

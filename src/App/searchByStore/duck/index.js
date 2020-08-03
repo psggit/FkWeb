@@ -1,2 +1,2 @@
 export { searchByStoreReducer } from "./reducer";
-export {getSearchByStore} from './searchBystoreOperations';
+export { getSearchByStore } from "./searchBystoreOperations";
