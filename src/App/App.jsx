@@ -1,11 +1,12 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home } from "./home";
+import { HomeContainer } from "./home";
 import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { UserBasicInfoContainer } from "./userBasicInfo";
 import { CartContainer } from "./cart";
+import { SearchByStoreContainer } from "./searchByStore";
 import { MyOrdersContainer } from "./myorders";
 import { SelectAddressContainer, AddressEditContainer } from "./address";
 import { SearchContainer } from "./search";
@@ -16,6 +17,7 @@ import BottomNavigationComponent from "./common/bottomNavigation";
 import { ChooseLocationContainer } from "./address/chooseLocation";
 import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
 import { StateCityContainer } from "./stateCity";
+import { OrderInfoContainer } from "./order/info";
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         <Switch>
           <Route path="/user/login" component={UserBasicInfoContainer} />
           <Route path="/search" component={SearchContainer} />
+          <Route path="/searchbystore" component={SearchByStoreContainer} />
           <Route path="/cart" component={CartContainer} />
           <Route path="/address/create" component={AddressEditContainer} />
           <Route path="/myorders" component={MyOrdersContainer} />
@@ -31,7 +34,7 @@ function App() {
             path="/address/select/:redirect"
             component={SelectAddressContainer}
           />
-          <Route path="/home" component={Home} />
+          <Route path="/home" component={HomeContainer} />
           <Route path="/statecity/select" component={StateCityContainer} />
           <Route path="/choose/location" component={ChooseLocationContainer} />
           <Route path="/storefront" component={StoreFrontContainer} />
@@ -70,6 +73,7 @@ function App() {
           />
           <Route path="/order/detail" component={OrderDetailsContainer} />
           <Route path="/order/placed" component={OrderPlacedContainer} />
+          <Route path="/order/info" component={OrderInfoContainer} />
           <Route
             path="/payment"
             component={() => (
@@ -79,7 +83,7 @@ function App() {
               />
             )}
           />
-          <Route path="/" component={Home} />
+          <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
         <BottomNavigationComponent />
       </Router>
@@ -88,5 +92,3 @@ function App() {
 }
 
 export default hot(App);
-
-//<Route path="/" component={AgreeAndContinueContainer} />

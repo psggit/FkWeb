@@ -44,7 +44,7 @@ function RetailerComponent(props) {
       </>
     );
   }
-  
+
   RetailerComponent.propTypes = {
     query: PropTypes.string,
     getSearchDrinks: PropTypes.func,
