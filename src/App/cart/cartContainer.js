@@ -19,6 +19,7 @@ const mapStateToProps = (state) => {
     validateError: state.cart.validateError,
     validateErrorMessage: state.cart.validateErrorMessage,
     validationSuccessful: state.cart.validationSuccessful,
+    selectedAddress: state.addressStore.selectedAddress,
   };
 };
 
