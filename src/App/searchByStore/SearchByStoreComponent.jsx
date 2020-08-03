@@ -1,16 +1,16 @@
-import React, {useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import BottomNavigationComponent from "../common/bottomNavigation";
 import { SearchBox } from "./SearchBox";
 import { ToolbarComponent } from "../common/toolbar";
 import { BrandComponent } from "../common/brand";
 import SearchLayout from "../common/layout/SearchLayout";
-import {LoadingComponent} from '../common/loading'
+import { LoadingComponent } from "../common/loading";
 
 function SearchByStoreComponent(props) {
   const [cancelBtn, SetCancelBtn] = useState(false);
   const [query, SetQuery] = useState("");
-  const {getSearchByStore,data, pending}=props;
+  const { getSearchByStore, data, pending } = props;
   const cancelEnable = (val) => {
     SetCancelBtn(val);
   };
@@ -51,7 +51,7 @@ function SearchByStoreComponent(props) {
       </ToolbarComponent>
       <SearchLayout custom="custom">
         <div className="accordion-container mar-zero">
-          {pending?<LoadingComponent />:renderSku(data)}
+          {pending ? <LoadingComponent /> : renderSku(data)}
         </div>
         <BottomNavigationComponent />
       </SearchLayout>
