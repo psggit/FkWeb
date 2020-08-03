@@ -6,6 +6,7 @@ import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { UserBasicInfoContainer } from "./userBasicInfo";
 import { CartContainer } from "./cart";
+import { SearchByStoreContainer } from "./searchByStore";
 import { MyOrdersContainer } from "./myorders";
 import { SelectAddressContainer, AddressEditContainer } from "./address";
 import { SearchContainer } from "./search";
@@ -25,6 +26,7 @@ function App() {
         <Switch>
           <Route path="/user/login" component={UserBasicInfoContainer} />
           <Route path="/search" component={SearchContainer} />
+          <Route path="/searchbystore" component={SearchByStoreContainer} />
           <Route path="/cart" component={CartContainer} />
           <Route path="/address/create" component={AddressEditContainer} />
           <Route path="/myorders" component={MyOrdersContainer} />

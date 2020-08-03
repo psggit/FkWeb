@@ -3,6 +3,7 @@ export { updateCartAPI } from "./updateCart";
 export { fetchAddressListAPI } from "./fetchAddress";
 export { updateBasicKYCAPI } from "./updateBasicKYC";
 export { searchDrinkAPI } from "./searchDrinks";
+export { searchByStoreAPI } from "./searchByStore";
 export { searchGenresAPI, getBrandAPI } from "./storeFront";
 export { fetchRetailersAPI } from "./fetchRetailers";
 export { getAddressFromGpsAPI } from "./getAddressFromGPS";

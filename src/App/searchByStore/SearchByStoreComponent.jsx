@@ -1,15 +1,16 @@
-import React, {useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import BottomNavigationComponent from "../common/bottomNavigation";
 import { SearchBox } from "./SearchBox";
-import { HeaderComponent } from "../common/toolbar";
+import { ToolbarComponent } from "../common/toolbar";
+import { BrandComponent } from "../common/brand";
 import SearchLayout from "../common/layout/SearchLayout";
-import { RetailerComponent } from "./retailer";
+import { LoadingComponent } from "../common/loading";
 
-function SearchComponent(props) {
+function SearchByStoreComponent(props) {
   const [cancelBtn, SetCancelBtn] = useState(false);
   const [query, SetQuery] = useState("");
-  const {getSearchDrinks}=props;
+  const { getSearchByStore, data, pending } = props;
   const cancelEnable = (val) => {
     SetCancelBtn(val);
   };
@@ -28,26 +29,40 @@ function SearchComponent(props) {
       return;
     }
     if (query.length > 2) {
-      getSearchDrinks(query);
+      getSearchByStore(query);
     }
   }, [query]);
-
+  const renderSku = (item) => {
+    return (
+      <>
+        {item.map((item, index) => (
+          <BrandComponent key={item.brand_id} brandList={item} />
+        ))}
+      </>
+    );
+  };
   return (
     <>
-      <HeaderComponent title="Search Drinks">
+      <ToolbarComponent title="Search Drinks">
         <div className="search-container">
           <SearchBox cancelEnable={cancelEnable} handleInput={handleInput} />
           {cancelBtn ? <button>Cancel</button> : ""}
         </div>
-      </HeaderComponent>
-      <SearchLayout>
-        <RetailerComponent query={query} {...props} />
+      </ToolbarComponent>
+      <SearchLayout custom="custom">
+        <div className="accordion-container mar-zero">
+          {pending ? <LoadingComponent /> : renderSku(data)}
+        </div>
         <BottomNavigationComponent />
       </SearchLayout>
     </>
   );
 }
-SearchComponent.propTypes = {
-  getSearchDrinks: PropTypes.func,
+
+SearchByStoreComponent.propTypes = {
+  data: PropTypes.array,
+  pending: PropTypes.bool,
+  getSearchByStore: PropTypes.func,
 };
-export { SearchComponent };
+
+export { SearchByStoreComponent };

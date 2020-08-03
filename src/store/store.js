@@ -7,6 +7,7 @@ import { addressListReducer } from "../App/address";
 import { tcReducer } from "../App/agreeAndContinue";
 import { skuItemReducer } from "../App/common/brand";
 import { searchDrinkReducer } from "../App/search";
+import { searchByStoreReducer } from "../App/searchByStore";
 import { userInfoCreateReducer } from "../App/userBasicInfo";
 import { cartReducer } from "../App/common/cart";
 import thunk from "redux-thunk";
@@ -20,6 +21,7 @@ const store = configureStore({
     home: homeReducer,
     tcStore: tcReducer,
     skuItem: skuItemReducer,
+    searchByStore: searchByStoreReducer,
     storeFront: storeFrontReducer,
     searchItem: searchDrinkReducer,
     ubiStore: userInfoCreateReducer,
