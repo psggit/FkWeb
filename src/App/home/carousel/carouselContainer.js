@@ -3,12 +3,15 @@ import { CarouselComponent } from "./carouselComponent";
 import { fetchHomeCarousel } from "./duck";
 
 const mapStateToProps = (state) => {
-  return { items: state.home.carousel.items };
+  return {
+    items: state.home.carousel.items,
+    address: state.addressStore.selectedAddress,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchHomeCarousel: () => dispatch(fetchHomeCarousel()),
+    fetchHomeCarousel: (value) => dispatch(fetchHomeCarousel(value)),
   };
 };
 

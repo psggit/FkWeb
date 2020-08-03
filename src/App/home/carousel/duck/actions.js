@@ -1,5 +1,11 @@
 import { createAction } from "@reduxjs/toolkit";
 
-const getHomeCarousel = createAction("getHomeCarousel");
+const getHomeCarouselInProgress = createAction("getHomeCarouselInProgress");
+const getHomeCarouselSuccess = createAction("getHomeCarouselSuccess");
+const getHomeCarouselFailure = createAction("getHomeCarouselFailure");
 
-export { getHomeCarousel };
+export {
+  getHomeCarouselInProgress,
+  getHomeCarouselSuccess,
+  getHomeCarouselFailure,
+};
