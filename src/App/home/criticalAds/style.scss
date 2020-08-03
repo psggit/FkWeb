@@ -1,5 +1,6 @@
 @import "../../../colors.scss";
 
+
 .modal-content{
     flex-direction: column !important;
     box-sizing: content-box;
@@ -8,6 +9,9 @@
     border-color: transparent !important;
     /*height: 479px;*/
     overflow: hidden;
+    max-width: 90%;
+    margin: 0 auto;
+    
     
     img{
         max-width: 100%;
@@ -30,15 +34,11 @@
         box-sizing: content-box;
         background-color: $border-color;
         height: 180px;
-        line-height: 180px;
         padding: 1rem;
         border-radius: 0 0 10px 10px;
-        display: table;
-    }
-
-    .section-content{
-        display: table-cell;
-        vertical-align: middle;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .carousel-inner{
@@ -52,7 +52,7 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 22px;
     line-height: 24px;
     text-align: center;
 }
@@ -62,7 +62,7 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 18px;
     text-align: center;
 }
@@ -72,7 +72,7 @@
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 14px;
     text-align: center;
 }
