@@ -3,6 +3,7 @@ import {
   addSkuToCart,
   removeSkuFromCart,
   validationSuccessful,
+  validationInProgress,
   validationFailure,
 } from "./actions";
 
@@ -37,6 +38,10 @@ declare type State = {
   products: Products,
   retailerDiffers: boolean,
   validationFailure: boolean,
+  validationSuccessful: boolean,
+  validationInProgress: boolean,
+  validateError: boolean,
+  validateErrorMessage: string,
 };
 
 declare type Sku = {
@@ -59,6 +64,11 @@ const getDefaultState = (): State => {
     products: {},
     retailerDiffers: false,
     validationFailure: false,
+    validationInProgress: false,
+    validationSuccessful: false,
+    validateError: false,
+    validateErrorMessage: "",
+
   };
 };
 */
@@ -72,6 +82,10 @@ let getTestState = (): State => {
     },
     retailerDiffers: false,
     validationFailure: false,
+    validationInProgress: false,
+    validationSuccessful: false,
+    validateError: false,
+    validateErrorMessage: "",
     products: {
       "1276": {
         skuId: 1276,
@@ -181,10 +195,21 @@ let setUnAvailableProducts = (state: State, skus: Array<number>): State => {
 };
 
 let validateCart = (state: State, data: Object): State => {
-  state = replaceProductInfo(state, data.products);
-  state = setUnAvailableProducts(state, data.unavail_items);
+  state = setUnAvailableProducts(state, data.unavailble_items);
   state.validationFailure = false;
   state.retailer.description = data.delivery_message;
+  if (data.statusCode === 0) {
+    state = replaceProductInfo(state, data.products);
+    state.validateError = false;
+    state.validateErrorMessage = "";
+    state.validationSuccessful = true;
+    state.validationInProgress = false;
+  } else {
+    state.validateError = true;
+    state.validateErrorMessage = data.message;
+    state.validationSuccessful = false;
+    state.validationInProgress = false;
+  }
   return state;
 };
 
@@ -200,15 +225,31 @@ const cartReducer = createReducer(initialState(), {
   [addSkuToCart]: (state: State, e: Object) => {
     return void addProduct({ ...state }, e.payload);
   },
-
   [removeSkuFromCart]: (state: State, e: Object) => {
     return void removeProduct({ ...state }, e.payload);
   },
-  [validationSuccessful]: (state: State, data: Object) => {
-    return void validateCart(state, data);
+  [validationSuccessful]: (state: State, e: Object) => {
+    return void validateCart(state, e.payload);
+  },
+  [validationInProgress]: (state: State, data: Object) => {
+    return {
+      ...state,
+      validationFailure: false,
+      validationSuccessful: false,
+      validationInProgress: true,
+      validateError: false,
+      validateErrorMessage: "",
+    };
   },
   [validationFailure]: (state: State): State => {
-    return { ...state, validationFailure: true };
+    return {
+      ...state,
+      validationFailure: true,
+      validationSuccessful: false,
+      validationInProgress: false,
+      validateError: false,
+      validateErrorMessage: "",
+    };
   },
 });
 

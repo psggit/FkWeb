@@ -1,5 +1,5 @@
 export { loginAPI } from "./login";
-export { updateCartAPI } from "./updateCart";
+export { validateCartAPI } from "./validateCart";
 export { fetchAddressListAPI } from "./fetchAddress";
 export { updateBasicKYCAPI } from "./updateBasicKYC";
 export { searchDrinkAPI } from "./searchDrinks";
