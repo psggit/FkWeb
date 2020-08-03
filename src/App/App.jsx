@@ -1,7 +1,7 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home } from "./home";
+import { HomeContainer } from "./home";
 import { IframeContainer } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { UserBasicInfoContainer } from "./userBasicInfo";
@@ -16,6 +16,7 @@ import BottomNavigationComponent from "./common/bottomNavigation";
 import { ChooseLocationContainer } from "./address/chooseLocation";
 import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
 import { StateCityContainer } from "./stateCity";
+import { OrderInfoContainer } from "./order/info";
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
             path="/address/select/:redirect"
             component={SelectAddressContainer}
           />
-          <Route path="/home" component={Home} />
+          <Route path="/home" component={HomeContainer} />
           <Route path="/statecity/select" component={StateCityContainer} />
           <Route path="/choose/location" component={ChooseLocationContainer} />
           <Route path="/storefront" component={StoreFrontContainer} />
@@ -70,6 +71,7 @@ function App() {
           />
           <Route path="/order/detail" component={OrderDetailsContainer} />
           <Route path="/order/placed" component={OrderPlacedContainer} />
+          <Route path="/order/info" component={OrderInfoContainer} />
           <Route
             path="/payment"
             component={() => (

@@ -12,16 +12,20 @@ function CarouselComponent(props) {
     props.fetchHomeCarousel();
   });
 
+  const carouselItems = (props) => {
+    return props.items.map((item, index) => {
+      return (
+        <div key={"carousel-item-" + index} className="xc">
+          <img src={item.high_res_image} />
+        </div>
+      );
+    });
+  };
+
   return (
     <div className="m_wrap">
       <div className="s_wrap">
-        <div className="dx">
-          {props.items.map((item, index) => (
-            <div key={"carousel-item-" + index} className="xc">
-              <img src={item.high_res_image} />
-            </div>
-          ))}
-        </div>
+        <div className="dx">{props.items ? carouselItems(props) : <div />}</div>
       </div>
     </div>
   );
