@@ -5,10 +5,9 @@ import {
   fetchCriticalAdsInProgress
 } from "./actions";
 
-const processResponse = (dispatch) => {
+const processResponse = () => {
   return (res) => {
     if (res.ok) {
-      dispatch(fetchCriticalAdsSuccess());
       return res.json();
     }
     if (res.status === 400) {
@@ -26,20 +25,18 @@ const onSuccess = (dispatch) => {
 };
 
 const onError = (dispatch) => {
+  
   return (err) => {
+    console.log("ERROR >>> "+err);
     dispatch(fetchCriticalAdsFailure(err));
   };
 };
 
 const fetchHomeCriticalAds = () => {
+  console.log("fetchHOMECRiticalads");
   return (dispatch) => {
     dispatch(fetchCriticalAdsInProgress());
-    fetchCriticalAdsAPI(
-      "",
-      processResponse(dispatch),
-      onSuccess(dispatch),
-      onError(dispatch)
-    );
+    fetchCriticalAdsAPI(processResponse(dispatch), onSuccess(dispatch), onError(dispatch));
   };
 }
 

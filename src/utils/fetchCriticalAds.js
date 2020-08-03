@@ -5,16 +5,16 @@ const URL = "https://gremlin." + config.BASE_DOMAIN + "/consumer/marketing/ads/c
 
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 
-const fetchCriticalAdsAPI = (reqBody, process, onSuccess, onError) => {
+const fetchCriticalAdsAPI = (process, onSuccess, onError) => {
+  console.log("fetchCriticalAdsAPI");
   fetch(URL, {
-    method: "POST",
+    method: "GET",
     credentials: "include",
     headers: headers,
-    body: JSON.stringify(reqBody),
   })
-    .then((res) => process(res))
-    .then((data) => onSuccess(data))
-    .catch((err) => onError(err));
+  .then((res) => process(res))
+  .then((data) => onSuccess(data))
+  .catch((err) => onError(err));
 };
 
 export { fetchCriticalAdsAPI };

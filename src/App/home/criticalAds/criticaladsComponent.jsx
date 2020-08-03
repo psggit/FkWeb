@@ -23,6 +23,7 @@ function CriticaladsComponent(props) {
       setStartIndex(selectedIndex);
     };
 
+
     useEffect(() => {
       props.fetchHomeCriticalAds();
     }, []);
