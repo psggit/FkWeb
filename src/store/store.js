@@ -15,6 +15,7 @@ import { storeFrontReducer } from "../App/storeFront";
 import { myOrdersReducer } from "../App/myorders";
 import { orderDetailReducer } from "../App/order";
 import { stateCityReducer } from "../App/stateCity";
+import { summaryReducer } from "../App/summary";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -31,6 +32,7 @@ const store = configureStore({
     myOrders: myOrdersReducer,
     order: orderDetailReducer,
     stateCity: stateCityReducer,
+    summary: summaryReducer,
   }),
   middleware: [thunk],
 });
