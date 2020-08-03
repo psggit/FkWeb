@@ -6,11 +6,22 @@ import {
   createPaymentInProgress,
   createPaymentFailed,
   createPaymentSuccess,
+  fetchPaymentOptionsInProgress,
+  fetchPaymentOptionsFailed,
+  fetchPaymentOptionsSuccess,
 } from "./actions";
 
 let initialState = {
+  //Payment Options store
+  fetchPaymentOptionsDetails: {},
+  fetchPaymentOptionsInProgress: false,
+  fetchPaymentOptionsFailed: false,
+  fetchPaymentOptionsSuccess: false,
+  fetchPaymentOptionsError: false,
+  fetchPaymentOptionsErrorMessage: false,
+
   //Payment store
-  paymentDetails: {},
+  createPaymentDetails: {},
   createPaymentInProgress: false,
   createPaymentFailed: false,
   createPaymentSuccess: false,
@@ -91,6 +102,40 @@ const paymentReducer = createReducer(initialState, {
       createPaymentSuccess: true,
       createPaymentError: false,
       createPaymentErrorMessage: "",
+    };
+  },
+
+  [fetchPaymentOptionsInProgress]: (state) => {
+    return {
+      ...state,
+
+      fetchPaymentOptionsInProgress: true,
+      fetchPaymentOptionsFailed: false,
+      fetchPaymentOptionsSuccess: false,
+      fetchPaymentOptionsError: false,
+      fetchPaymentOptionsErrorMessage: "",
+    };
+  },
+
+  [fetchPaymentOptionsFailed]: (state) => {
+    return {
+      ...state,
+      fetchPaymentOptionsInProgress: true,
+      fetchPaymentOptionsFailed: true,
+      fetchPaymentOptionsSuccess: false,
+      fetchPaymentOptionsError: false,
+      fetchPaymentOptionsErrorMessage: "",
+    };
+  },
+
+  [fetchPaymentOptionsSuccess]: (state) => {
+    return {
+      ...state,
+      fetchPaymentOptionsInProgress: true,
+      fetchPaymentOptionsFailed: false,
+      fetchPaymentOptionsSuccess: true,
+      fetchPaymentOptionsError: false,
+      fetchPaymentOptionsErrorMessage: "",
     };
   },
 });
