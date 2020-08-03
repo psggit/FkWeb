@@ -5,6 +5,7 @@ import {
   validationSuccessful,
   validationInProgress,
   validationFailure,
+  closeValidationErrorMessage,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -241,6 +242,7 @@ const cartReducer = createReducer(initialState(), {
       validateErrorMessage: "",
     };
   },
+
   [validationFailure]: (state: State): State => {
     return {
       ...state,
@@ -251,6 +253,16 @@ const cartReducer = createReducer(initialState(), {
       validateErrorMessage: "",
     };
   },
+  [closeValidationErrorMessage]: (state: State): State => {
+    return {
+      ...state,
+      validationFailure: false,
+      validationSuccessful: false,
+      validationInProgress: false,
+      validateError: false,
+    };
+  },
+
 });
 
 export { cartReducer, cartTotal, isEmpty };

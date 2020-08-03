@@ -9,6 +9,7 @@ import { CartHeaderComponent } from "./header";
 import { BottomNextComponent } from "../common/bottomNext";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { drinksIcon } from "../../assets/images";
+import { Alert } from "../common/alert";
 
 RetryValidationComponent.propTypes = {
   products: PropTypes.object,
@@ -89,11 +90,29 @@ function NextComponent(props) {
   }
 }
 
+AlertValidateErrorComponent.propTypes = {
+  closeValidationErrorMessage: PropTypes.func,
+  validateErrorMessage: PropTypes.string,
+};
+
+function AlertValidateErrorComponent(props) {
+  return (
+    <Alert
+      handleOption={props.closeValidationErrorMessage}
+      show={true}
+      title={props.validateErrorMessage}
+      option={"Ok"}
+    />
+  );
+}
+
 CartComponent.propTypes = {
   validationFailure: PropTypes.bool,
+  validateError: PropTypes.bool,
 };
 
 function CartComponent(props) {
+  console.log(props);
   let isEmpty = props.isEmpty;
   if (isEmpty) {
     return returnEmptyCart();
@@ -101,6 +120,10 @@ function CartComponent(props) {
 
   if (props.validationFailure) {
     return <RetryValidationComponent {...props} />;
+  }
+
+  if (props.validateError) {
+    return <AlertValidateErrorComponent {...props} />;
   }
 
   return (
