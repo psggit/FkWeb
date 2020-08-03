@@ -6,6 +6,7 @@ import {
   validationInProgress,
   validationFailure,
   closeValidationErrorMessage,
+  resetValidation,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -43,6 +44,7 @@ declare type State = {
   validationInProgress: boolean,
   validateError: boolean,
   validateErrorMessage: string,
+  redirect: boolean,
 };
 
 declare type Sku = {
@@ -69,7 +71,7 @@ const getDefaultState = (): State => {
     validationSuccessful: false,
     validateError: false,
     validateErrorMessage: "",
-
+    redirect: false,
   };
 };
 */
@@ -77,7 +79,7 @@ const getDefaultState = (): State => {
 let getTestState = (): State => {
   return {
     retailer: {
-      id: 436,
+      id: 446,
       name: "Gokul Arcade",
       description: "delivers very soon",
     },
@@ -87,9 +89,10 @@ let getTestState = (): State => {
     validationSuccessful: false,
     validateError: false,
     validateErrorMessage: "",
+    redirect: false,
     products: {
-      "1276": {
-        skuId: 1276,
+      "1278": {
+        skuId: 1278,
         brandName: "Kf blue",
         brandId: 993,
         image:
@@ -196,7 +199,7 @@ let setUnAvailableProducts = (state: State, skus: Array<number>): State => {
 };
 
 let validateCart = (state: State, data: Object): State => {
-  state = setUnAvailableProducts(state, data.unavailble_items);
+  state = setUnAvailableProducts(state, data.unavail_items);
   state.validationFailure = false;
   state.retailer.description = data.delivery_message;
   if (data.statusCode === 0) {
@@ -253,6 +256,7 @@ const cartReducer = createReducer(initialState(), {
       validateErrorMessage: "",
     };
   },
+
   [closeValidationErrorMessage]: (state: State): State => {
     return {
       ...state,
@@ -260,6 +264,17 @@ const cartReducer = createReducer(initialState(), {
       validationSuccessful: false,
       validationInProgress: false,
       validateError: false,
+    };
+  },
+
+  [resetValidation]: (state: State): State => {
+    return {
+      ...state,
+      validationFailure: false,
+      validationSuccessful: false,
+      validationInProgress: false,
+      validateError: false,
+      validateErrorMessage: "",
     };
   },
 });

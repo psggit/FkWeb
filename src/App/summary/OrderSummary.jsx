@@ -1,52 +1,120 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
+import PropTypes from "prop-types";
+
 import { ToolbarComponent } from "../common/toolbar";
 import { BottomNextComponent } from "../common/bottomNext";
 import { OrderAddressComponent, YouPayComponent } from "./components";
+import { SplashLoadingComponent } from "../common/splashLoading";
+import { drinksIcon } from "../../assets/images";
 import {
   OrderTotalComponent,
   AdditionalChargersComponent,
-  GstNumberComponent,
   CartTotalComponent,
 } from "../common/summary";
 
 import "./style.scss";
 import { infoIcon } from "../../assets/images";
 
-function OrderSummary() {
+RetryComponent.propTypes = {
+  fetchSummary: PropTypes.func,
+};
+
+function RetryComponent(props) {
+  const fetchSummary = props.fetchSummary;
+  return (
+    <>
+      <SplashLoadingComponent
+        motion={false}
+        icon={drinksIcon}
+        text="Something went wrong, please try again."
+        buttonFunc={() => fetchSummary(props)}
+        buttonText="Retry"
+      />
+    </>
+  );
+}
+
+function PartialDelivery() {
+  return (
+    <div className="partial-delivery-container">
+      <div className="accept-delivery-container">
+        <input
+          type="checkbox"
+          id="partialDelivery"
+          name="partialDelivery"
+          key="partialDelivery"
+        />
+        <div className="title">Accept Partial Delivery</div>
+      </div>
+      <img src={infoIcon} className="info-icon" />
+    </div>
+  );
+}
+
+SummaryComponent.propTypes = {
+  summary: PropTypes.object,
+};
+function SummaryComponent(props) {
+  let summary = props.summary.summaryDetails;
+  console.log(props);
   return (
     <div>
       <ToolbarComponent helpVisibility="true" title="Order Summary" />
       <div className="page-container summary-wrapper">
-        <OrderAddressComponent />
-        <OrderTotalComponent marginTop={true} total="Rs. 5,214.50" />
-        <CartTotalComponent cartTotal="Rs. 5,214.50" />
+        <OrderAddressComponent {...props} />
+        <OrderTotalComponent marginTop={true} total={summary.display_total} />
+        <CartTotalComponent cartTotal={summary.display_cart_total} />
         <AdditionalChargersComponent
+          key="additional-charges"
           label="Additional Charges"
-          charges="Rs. 5,214.50"
+          charges={summary.total_fee}
+          chargesList={summary.fee_details}
         />
-        <AdditionalChargersComponent label="Taxes" charges="Rs. 5,214.50" />
+        <AdditionalChargersComponent
+          key="taxes"
+          label="Taxes"
+          charges={summary.total_tax}
+          chargesList={summary.tax_details}
+        />
+        <YouPayComponent toPay={summary.display_balance} />
 
-        <GstNumberComponent gstNumber="15HBPD1973D6A7" />
-        <YouPayComponent toPay="Rs.120" />
-        <div className="partial-delivery-container">
-          <div className="accept-delivery-container">
-            <input
-              type="checkbox"
-              id="partialDelivery"
-              name="partialDelivery"
-              key="partialDelivery"
-            />
-            <div className="title">Accept Partial Delivery</div>
-          </div>
-          <img src={infoIcon} className="info-icon" />
-        </div>
-        <div className="summary-delivery-msg">
-          Delivery will be made between 12-4 pm tomorrow
-        </div>
+        <div className="summary-delivery-msg">{summary.delivery_message}</div>
       </div>
       <BottomNextComponent routePath="/payment/options" title="Pay Now" />
     </div>
   );
 }
 
-export default OrderSummary;
+OrderSummary.propTypes = {
+  summary: PropTypes.object,
+};
+
+function OrderSummary(props) {
+  let fetchSummarySuccess = props.summary.fetchSummarySuccess;
+  let fetchSummaryInProgress = props.summary.fetchSummaryInProgress;
+  let fetchSummaryFailed = props.summary.fetchSummaryFailed;
+  const trigger = !(
+    fetchSummarySuccess ||
+    fetchSummaryFailed ||
+    fetchSummaryInProgress
+  );
+  useLayoutEffect(() => {
+    if (trigger) {
+      console.log(props);
+      props.fetchSummary(props);
+    }
+  });
+
+  if (fetchSummaryInProgress) {
+    return (
+      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
+    );
+  } else if (fetchSummaryFailed) {
+    return <RetryComponent {...props} />;
+  } else if (fetchSummarySuccess) {
+    return <SummaryComponent {...props} />;
+  } else {
+    return <div />;
+  }
+}
+export { OrderSummary, PartialDelivery };
