@@ -27,9 +27,18 @@
     }
 
     .section-bottom{
+        box-sizing: content-box;
         background-color: $border-color;
+        height: 180px;
+        line-height: 180px;
         padding: 1rem;
         border-radius: 0 0 10px 10px;
+        display: table;
+    }
+
+    .section-content{
+        display: table-cell;
+        vertical-align: middle;
     }
 
     .carousel-inner{

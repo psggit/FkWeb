@@ -41,9 +41,11 @@ function CriticaladsComponent(props) {
                   <Carousel.Item key={"carousel-item-" + index}>
                     <img src={item.high_res_image} />
                     <div className="section-bottom">
-                        <p className="ad_title">{item.ad_title}</p>
-                        <p className="ad_description">{item.description}</p>
-                        <p className="ad_disclaimer">{item.disclaimer}</p>
+                        <div className="section-content">
+                          <p className="ad_title">{item.ad_title}</p>
+                          <p className="ad_description">{item.description}</p>
+                          <p className="ad_disclaimer">{item.disclaimer}</p>
+                        </div>
                     </div>
                   </Carousel.Item>
                   ))}
