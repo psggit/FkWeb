@@ -4,7 +4,7 @@ import CommonHeaders from "./common";
 const URL =
   "https://api." +
   config.BASE_DOMAIN +
-  "/orderman/api/2/consumer/order/summary/fk/delivery";
+  "/orderman/api/1/consumer/order/summary/fk/delivery";
 
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 

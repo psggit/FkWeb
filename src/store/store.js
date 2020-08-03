@@ -32,7 +32,7 @@ const store = configureStore({
     myOrders: myOrdersReducer,
     order: orderDetailReducer,
     stateCity: stateCityReducer,
-    summary: summaryReducer,
+    summaryDetails: summaryReducer,
   }),
   middleware: [thunk],
 });

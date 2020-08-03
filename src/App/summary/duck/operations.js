@@ -16,11 +16,12 @@ const reqBodyFromState = (summaryState) => {
     products.push(p);
   }
   return {
-    address_id: summaryState.selectAddress.id,
-    city_id: summaryState.selectAddress.city.id,
-    state_id: summaryState.selectAddress.state.id,
+    address_id: summaryState.selectedAddress.address_id,
+    city_id: summaryState.selectedAddress.city.id,
+    state_id: summaryState.selectedAddress.state.id,
     retailer_id: summaryState.retailer.id,
     products: products,
+    is_validation: false,
     order_type: "delivery",
   };
 };
@@ -51,8 +52,8 @@ const onError = (dispatch) => {
   };
 };
 
-const fetchSummary = (cartState) => {
-  let reqBody = reqBodyFromState(cartState);
+const fetchSummary = (summaryState) => {
+  let reqBody = reqBodyFromState(summaryState);
   return (dispatch) => {
     dispatch(fetchSummaryInProgress());
     fetchSummaryAPI(

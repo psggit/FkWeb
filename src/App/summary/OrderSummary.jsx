@@ -15,11 +15,6 @@ import {
 import "./style.scss";
 import { infoIcon } from "../../assets/images";
 
-OrderSummary.propTypes = {
-  summary: PropTypes.object,
-  fetchSummary: PropTypes.func,
-};
-
 RetryComponent.propTypes = {
   fetchSummary: PropTypes.func,
 };
@@ -39,10 +34,6 @@ function RetryComponent(props) {
   );
 }
 
-SummaryComponent.propTypes = {
-  summary: PropTypes.object,
-};
-
 function PartialDelivery() {
   return (
     <div className="partial-delivery-container">
@@ -60,21 +51,27 @@ function PartialDelivery() {
   );
 }
 
+SummaryComponent.propTypes = {
+  summary: PropTypes.object,
+};
 function SummaryComponent(props) {
-  let summary = props.summary;
+  let summary = props.summary.summaryDetails;
+  console.log(props);
   return (
     <div>
       <ToolbarComponent helpVisibility="true" title="Order Summary" />
       <div className="page-container summary-wrapper">
-        <OrderAddressComponent />
+        <OrderAddressComponent {...props} />
         <OrderTotalComponent marginTop={true} total={summary.display_total} />
         <CartTotalComponent cartTotal={summary.display_cart_total} />
         <AdditionalChargersComponent
+          key="additional-charges"
           label="Additional Charges"
           charges={summary.total_fee}
           chargesList={summary.fee_details}
         />
         <AdditionalChargersComponent
+          key="taxes"
           label="Taxes"
           charges={summary.total_tax}
           chargesList={summary.tax_details}
@@ -88,6 +85,10 @@ function SummaryComponent(props) {
   );
 }
 
+OrderSummary.propTypes = {
+  summary: PropTypes.object,
+};
+
 function OrderSummary(props) {
   let fetchSummarySuccess = props.summary.fetchSummarySuccess;
   let fetchSummaryInProgress = props.summary.fetchSummaryInProgress;
@@ -99,6 +100,7 @@ function OrderSummary(props) {
   );
   useLayoutEffect(() => {
     if (trigger) {
+      console.log(props);
       props.fetchSummary(props);
     }
   });
@@ -110,7 +112,7 @@ function OrderSummary(props) {
   } else if (fetchSummaryFailed) {
     return <RetryComponent {...props} />;
   } else if (fetchSummarySuccess) {
-    return SummaryComponent;
+    return <SummaryComponent {...props} />;
   } else {
     return <div />;
   }
