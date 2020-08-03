@@ -11,6 +11,7 @@ RetailerList.propTypes = {
 
 function RetailerTemplate(retailers) {
   return retailers.retailers.map((retailer) => {
+    console.log("retailers" + retailer);
     return (
       <div key={retailer.retailer_id} className="retailer_item">
         <div className="retailer_link">
