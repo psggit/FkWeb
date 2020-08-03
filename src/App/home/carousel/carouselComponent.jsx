@@ -5,12 +5,17 @@ import PropTypes from "prop-types";
 CarouselComponent.propTypes = {
   items: PropTypes.any,
   fetchHomeCarousel: PropTypes.any,
+  address: PropTypes.object,
 };
 
 function CarouselComponent(props) {
   useLayoutEffect(() => {
-    props.fetchHomeCarousel();
-  });
+    if (props.address) {
+      props.fetchHomeCarousel({
+        cityID: props.address.city.id,
+      });
+    }
+  }, []);
 
   const carouselItems = (props) => {
     return props.items.map((item, index) => {

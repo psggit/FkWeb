@@ -4,6 +4,7 @@ import { CarouselContainer } from "./carousel";
 import BottomNavigationComponent from "../common/bottomNavigation";
 import { CurretOrderComponent } from "./currentOrders";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 
 HomeComponent.propTypes = {
   getCurrentOrderInProgress: PropTypes.bool,
@@ -14,6 +15,8 @@ HomeComponent.propTypes = {
 };
 
 function HomeComponent(props) {
+  const history = useHistory();
+
   useLayoutEffect(() => {
     props.getCurrentOrdersFunc();
   }, []);
@@ -34,7 +37,7 @@ function HomeComponent(props) {
         <CurretOrderComponent
           title={props.currentOrder.status_message}
           msg={props.currentOrder.order_details.otp}
-          onClick={showOrderInfo}
+          onClickFunc={showOrderInfo}
         />
       );
     } else {
