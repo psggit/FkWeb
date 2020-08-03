@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { RetailerListContainer } from "./retailerList";
 import { CarouselContainer } from "./carousel";
+import { ChooseAddressComponent } from "./chooseAddress";
 import BottomNavigationComponent from "../common/bottomNavigation";
 import { CurretOrderComponent } from "./currentOrders";
 import PropTypes from "prop-types";
@@ -11,6 +12,7 @@ HomeComponent.propTypes = {
   getCurrentOrderFailed: PropTypes.bool,
   getCurrentOrderSuccess: PropTypes.bool,
   currentOrder: PropTypes.object,
+  address: PropTypes.object,
   getCurrentOrdersFunc: PropTypes.func,
 };
 
@@ -30,6 +32,8 @@ function HomeComponent(props) {
     });
   }
 
+  function showChooseAddress() {}
+
   function templateCurrentOrder(props) {
     console.log(props.currentOrder);
     if (props.currentOrder.order_details) {
@@ -47,6 +51,10 @@ function HomeComponent(props) {
 
   return (
     <>
+      <ChooseAddressComponent
+        address={props.address}
+        onClickFunc={showChooseAddress}
+      />
       <CarouselContainer />
       <RetailerListContainer />
       {props.currentOrder ? templateCurrentOrder(props) : <div />}

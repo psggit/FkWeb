@@ -1,0 +1,64 @@
+@import "../../../colors.scss";
+@import "../../../dimens.scss";
+
+.fixed {
+  position: fixed;
+  z-index: 1;
+}
+
+.choose-address-wrapper {
+  height: 56px;
+}
+
+.choose-address-container {
+  display: flex;
+  background-color: $bg;
+  flex-direction: row;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 16px;
+  padding-bottom: 12px;
+  width: 100%;
+
+  .choose-address-image {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+
+  .choose-address-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 36px;
+
+    .address-title-container {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+
+      .address-title {
+        font-size: 14px;
+        line-height: 16px;
+        font-family: MontserratBold;
+      }
+      .choose-address-right-arrow {
+        width: 8px;
+        height: 8px;
+        margin-left: 4px;
+      }
+    }
+    .address-sub-text {
+      font-size: 12px;
+      line-height: 14px;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}

@@ -18,7 +18,7 @@ const reqBodyFromState = (selectedAddress) => {
 const processResponse = (dispatch) => {
   return (res) => {
     if (res.ok) {
-      dispatch(fetchRetailersSuccessfull());
+      dispatch(fetchRetailersFailure());
       return res.json();
     }
     if (res.status === 400) {
@@ -31,8 +31,9 @@ const processResponse = (dispatch) => {
 };
 
 const onSuccess = (dispatch) => {
+  console.log("data from retailer");
   return (data) => {
-    console.log(data);
+    console.log("data from retailer" + data);
     dispatch(fetchRetailersSuccessfull(data.data));
   };
 };
@@ -46,6 +47,7 @@ const onError = (dispatch) => {
 const fetchRetailersOperation = (selectedAddress) => {
   let reqBody = reqBodyFromState(selectedAddress);
   return (dispatch) => {
+    console.log("retailer list fetch");
     dispatch(fetchRetailersInProgress());
     fetchRetailersAPI(
       reqBody,
