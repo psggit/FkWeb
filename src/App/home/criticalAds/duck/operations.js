@@ -1,4 +1,4 @@
-import { getCriticalAds, setPopupVisibility } from "./actions";
+import { getCriticalAds } from "./actions";
 import config from "../../../../config";
 
 const fetchAds = () => {
@@ -8,7 +8,6 @@ const fetchAds = () => {
   });
 };
 
-
 const fetchHomeCriticalAds = () => {
   return (dispatch) => {
     return fetchAds()
@@ -16,7 +15,11 @@ const fetchHomeCriticalAds = () => {
       .then((json) => {
         console.log(json);
         dispatch(getCriticalAds(json));
-      });
+      })
+      .catch(error => {
+        console.log("[Error fetching URL] /consumer/marketing/ads/critical_ads/15");
+        console.log(error);
+      })
   };
 };
 

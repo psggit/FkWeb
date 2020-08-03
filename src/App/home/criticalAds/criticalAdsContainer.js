@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
   return {
       ...state,
       items: state.home.criticalads.items,
-      isFirstView: state.home.criticalads.isFirstView
+      isViewed: state.home.criticalads.isViewed
     };
 };
 

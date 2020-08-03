@@ -54,12 +54,12 @@ const initialState = {
         "description": "3: Get your favourite drinks home delivered!",
         "disclaimer": "3: Drink responsibly"
     }],
-    isFirstView: true
+    isViewed: true
 }
 
 const criticalAdsReducer = createReducer(initialState, {
-    [getCriticalAds]:  (state, action) => ({...state}),
-    [setPopupVisibility]: (state, action) => ({...state, isFirstView: false})
+    [getCriticalAds]:  (state, action) => ({...state, items: action.payload.ads}),
+    [setPopupVisibility]: (state, action) => ({...state, isViewed: false})
 })
 
 export { criticalAdsReducer };
