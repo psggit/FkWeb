@@ -12,8 +12,7 @@ BottomNextComponent.propTypes = {
 };
 
 function BottomNextComponent(props) {
-  const { routePath } = props;
-  const { title, inActive, onClickFunc } = props;
+  const { routePath, title, inActive, onClickFunc } = props;
   const history = useHistory();
   function clickProcess() {
     if (inActive != true) {

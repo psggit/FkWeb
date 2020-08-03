@@ -14,3 +14,8 @@ export const validationSuccessful = createAction("validationSuccessful");
 
 // validation failed, need to retry
 export const validationFailure = createAction("validationFailure");
+
+// validateErrorOk
+export const closeValidationErrorMessage = createAction(
+  "closeValidationErrorMessage"
+);
