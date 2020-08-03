@@ -6,13 +6,13 @@ import {
 import { fetchRetailersAPI } from "../../../../utils";
 
 const reqBodyFromState = (selectedAddress) => {
-  return JSON.stringify({
+  return {
     city_id: selectedAddress.city.id,
     state_id: selectedAddress.state.id,
     gps: selectedAddress.gps,
     offset: 0,
-    limit: 30,
-  });
+    limit: 20,
+  };
 };
 
 const processResponse = (dispatch) => {
@@ -32,7 +32,8 @@ const processResponse = (dispatch) => {
 
 const onSuccess = (dispatch) => {
   return (data) => {
-    dispatch(fetchRetailersSuccessfull(data));
+    console.log(data);
+    dispatch(fetchRetailersSuccessfull(data.data));
   };
 };
 
