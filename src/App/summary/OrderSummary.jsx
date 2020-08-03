@@ -100,7 +100,6 @@ function OrderSummary(props) {
   );
   useLayoutEffect(() => {
     if (trigger) {
-      console.log(props);
       props.fetchSummary(props);
     }
   });

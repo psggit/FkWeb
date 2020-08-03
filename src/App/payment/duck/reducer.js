@@ -9,9 +9,11 @@ import {
   fetchPaymentOptionsInProgress,
   fetchPaymentOptionsFailed,
   fetchPaymentOptionsSuccess,
+  initialTrigger,
 } from "./actions";
 
 let initialState = {
+  initialTrigger: true,
   //Payment Options store
   fetchPaymentOptionsDetails: {},
   fetchPaymentOptionsInProgress: false,
@@ -52,8 +54,8 @@ const paymentReducer = createReducer(initialState, {
   [createOrderFailed]: (state) => {
     return {
       ...state,
-      createOrderInProgress: true,
-      createOrderFailed: false,
+      createOrderInProgress: false,
+      createOrderFailed: true,
       createOrderSuccess: false,
       createOrderError: false,
       createOrderErrorMessage: "",
@@ -63,9 +65,9 @@ const paymentReducer = createReducer(initialState, {
   [createOrderSuccess]: (state) => {
     return {
       ...state,
-      createOrderInProgress: true,
+      createOrderInProgress: false,
       createOrderFailed: false,
-      createOrderSuccess: false,
+      createOrderSuccess: true,
       createOrderError: false,
       createOrderErrorMessage: "",
     };
@@ -86,7 +88,7 @@ const paymentReducer = createReducer(initialState, {
   [createPaymentFailed]: (state) => {
     return {
       ...state,
-      createPaymentInProgress: true,
+      createPaymentInProgress: false,
       createPaymentFailed: true,
       createPaymentSuccess: false,
       createPaymentError: false,
@@ -97,7 +99,7 @@ const paymentReducer = createReducer(initialState, {
   [createPaymentSuccess]: (state) => {
     return {
       ...state,
-      createPaymentInProgress: true,
+      createPaymentInProgress: false,
       createPaymentFailed: false,
       createPaymentSuccess: true,
       createPaymentError: false,
@@ -136,6 +138,12 @@ const paymentReducer = createReducer(initialState, {
       fetchPaymentOptionsSuccess: true,
       fetchPaymentOptionsError: false,
       fetchPaymentOptionsErrorMessage: "",
+    };
+  },
+  [initialTrigger]: (state) => {
+    return {
+      ...state,
+      initialTrigger: false,
     };
   },
 });

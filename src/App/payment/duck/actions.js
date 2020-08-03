@@ -17,3 +17,5 @@ export const fetchPaymentOptionsSuccess = createAction(
 export const createPaymentInProgress = createAction("createPaymentInProgress");
 export const createPaymentFailed = createAction("createPaymentFailed");
 export const createPaymentSuccess = createAction("createPaymentSuccess");
+
+export const initialTrigger = createAction("initialTrigger");

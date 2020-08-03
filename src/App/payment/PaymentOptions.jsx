@@ -1,21 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
+import PropTypes from "prop-types";
+
 import { ToolbarComponent } from "../common/toolbar";
+import { BottomNextComponent } from "../common/bottomNext";
+import { SplashLoadingComponent } from "../common/splashLoading";
+import { drinksIcon } from "../../assets/images";
+
 import {
   CreditDebitCardsComponent,
   NetBankingComponent,
   OtherBanksComponent,
 } from "./components";
-import { BottomNextComponent } from "../common/bottomNext";
-import PropTypes from "prop-types";
 
 import "./style.scss";
 
-PaymentOptions.propTypes = {
-  bank: PropTypes.any,
+RetryComponent.propTypes = {
+  createOrder: PropTypes.func,
+  fetchPaymentOptions: PropTypes.func,
+  payment: PropTypes.object,
 };
 
-function PaymentOptions() {
+function RetryComponent(props) {
+  let retryAction;
+  if (props.payment.fetchPaymentOptionsFailed) {
+    retryAction = props.fetchPaymentOptions;
+  } else if (props.payment.createOrderFailed) {
+    retryAction = props.createOrder;
+  }
+  return (
+    <>
+      <SplashLoadingComponent
+        motion={false}
+        icon={drinksIcon}
+        text="Something went wrong, please try again."
+        buttonFunc={() => retryAction(props)}
+        buttonText="Retry"
+      />
+    </>
+  );
+}
+
+PaymentOptions.propTypes = {
+  bank: PropTypes.any,
+  payment: PropTypes.object,
+  initialise: PropTypes.func,
+};
+
+function PaymentOptions(props) {
   const [selectedBank, setSelectedBank] = useState("");
+
+  useLayoutEffect(() => {
+    if (props.payment.initialTrigger) {
+      props.initialise(props);
+    }
+  });
+
+  if (
+    props.payment.createOrderFailed ||
+    props.payment.fetchPaymentOptionsFailed
+  ) {
+    return <RetryComponent {...props} />;
+  }
 
   const openOtherBankOptions = () => {
     document.getElementById("otherBanksID").classList.remove("hide");
