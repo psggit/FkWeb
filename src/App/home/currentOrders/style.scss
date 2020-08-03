@@ -1,0 +1,61 @@
+@import "../../../colors.scss";
+@import "../../../dimens.scss";
+
+
+.current-image {
+  margin-left: 24px;
+  margin-right: 24px;
+  align-items: center;
+}
+
+.current-order-detail {
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+
+  .order-title {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .order-msg {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 14px;
+    font-family: MontserratBold;
+  }
+}
+
+.current-order-next {
+  width: 16px;
+  height: 8px;
+  margin-left: 8px;
+  margin-right: 16px;
+  align-self: center;
+}
+
+.current-order-bar {
+  display: flex;
+  flex-direction: row;
+  background: $secondary-bg;
+  backdrop-filter: blur(25px);
+  justify-content: center;
+  padding-right: 16px;
+  position: fixed;
+  bottom: 56px;
+  left: 0;
+  right: 0;
+}
+
+@media only screen and (max-height: $win-max-height) {
+  .current-order-height {
+    display: none;
+  }
+}
+
+
+.current-order-height {
+  height: 64px;
+}
