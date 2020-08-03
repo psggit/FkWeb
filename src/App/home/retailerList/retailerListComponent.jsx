@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import "./style.scss";
+import { rightArrowIcon } from "../../../assets/images";
 
 RetailerList.propTypes = {
   retailers: PropTypes.array,
@@ -18,6 +19,7 @@ function RetailerTemplate(retailers) {
           <div className="retailer_name">{retailer.retailer_name}</div>
           <div className="retailer_info">{retailer.store_info_msg}</div>
         </div>
+        <img src={rightArrowIcon} className="retailer_item_image" />
       </div>
     );
   });
@@ -42,6 +44,9 @@ function RetailerList(props) {
   useEffect(() => {
     fetchRetailersFunc(selectedAddress);
   }, []);
+
+  console.log("retailers" + props.retailers);
+
   return (
     <div className="retailer_list_wrap">
       {retailerFetchStatus === "inProgress" && (

@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
     getCurrentOrderSuccess: state.home.currentOrder.getCurrentOrderSuccess,
     getCurrentOrderFailed: state.home.currentOrder.getCurrentOrderFailed,
     currentOrder: state.home.currentOrder.order,
+    address: state.addressStore.selectedAddress,
   };
 };
 
