@@ -1,3 +1,4 @@
-import OrderSummary from "./OrderSummary";
+import { OrderSummaryContainer } from "./orderSummaryContainer";
 
-export default OrderSummary;
+export { OrderSummaryContainer };
+export { summaryReducer } from "./duck";
