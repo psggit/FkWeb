@@ -1,11 +1,8 @@
 import React, { useLayoutEffect } from "react";
 import { RetailerListContainer } from "./retailerList";
 import { CarouselContainer } from "./carousel";
-<<<<<<< HEAD
 import { CriticalAdsContainer } from "./criticalAds";
-=======
 import { ChooseAddressComponent } from "./chooseAddress";
->>>>>>> db415e7f35527facb549a99581fd19aee7fcfccc
 import BottomNavigationComponent from "../common/bottomNavigation";
 import { CurretOrderComponent } from "./currentOrders";
 import PropTypes from "prop-types";
