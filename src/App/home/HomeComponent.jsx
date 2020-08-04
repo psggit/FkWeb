@@ -37,7 +37,6 @@ function HomeComponent(props) {
   }
 
   function templateCurrentOrder(props) {
-    console.log(props.currentOrder);
     if (props.currentOrder.order_details) {
       return (
         <CurretOrderComponent

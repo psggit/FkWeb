@@ -15,7 +15,6 @@ function RetailerTemplate(retailers) {
   const history = useHistory();
 
   function showStoreDetails(retailer) {
-    console.log("retailer clicked" + retailer);
     history.push({
       pathname: "/storefront",
       state: {
@@ -25,7 +24,6 @@ function RetailerTemplate(retailers) {
   }
 
   return retailers.retailers.map((retailer) => {
-    console.log("retailers" + retailer);
     return (
       <div
         key={retailer.retailer_id}
@@ -63,8 +61,6 @@ function RetailerList(props) {
   useEffect(() => {
     fetchRetailersFunc(selectedAddress);
   }, []);
-
-  console.log("retailers" + props.retailers);
 
   return (
     <div className="retailer_list_wrap">

@@ -63,6 +63,7 @@ SearchByStoreComponent.propTypes = {
   data: PropTypes.array,
   pending: PropTypes.bool,
   getSearchByStore: PropTypes.func,
+  retailer: PropTypes.object,
 };
 
 export { SearchByStoreComponent };

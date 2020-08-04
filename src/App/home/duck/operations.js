@@ -7,7 +7,6 @@ import {
 
 const onSuccess = (dispatch) => {
   return (data) => {
-    console.log(data);
     dispatch(getCurrentOrderSuccess(data));
   };
 };
