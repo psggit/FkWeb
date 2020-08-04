@@ -40,8 +40,8 @@ const processResponse = () => {
 
 const onSuccess = (dispatch) => {
   return (data) => {
-    dispatch(createOrderFailed(data));
-    //dispatch(createOrderSuccess(data));
+    //dispatch(createOrderFailed(data));
+    dispatch(createOrderSuccess(data));
   };
 };
 

@@ -15,7 +15,7 @@ import {
 let initialState = {
   initialTrigger: true,
   //Payment Options store
-  fetchPaymentOptionsDetails: {},
+  paymentOptionsDetails: {},
   fetchPaymentOptionsInProgress: false,
   fetchPaymentOptionsFailed: false,
   fetchPaymentOptionsSuccess: false,
@@ -62,7 +62,7 @@ const paymentReducer = createReducer(initialState, {
     };
   },
 
-  [createOrderSuccess]: (state) => {
+  [createOrderSuccess]: (state, e) => {
     return {
       ...state,
       createOrderInProgress: false,
@@ -70,6 +70,7 @@ const paymentReducer = createReducer(initialState, {
       createOrderSuccess: true,
       createOrderError: false,
       createOrderErrorMessage: "",
+      orderDetails: e.payload,
     };
   },
 
@@ -122,7 +123,7 @@ const paymentReducer = createReducer(initialState, {
   [fetchPaymentOptionsFailed]: (state) => {
     return {
       ...state,
-      fetchPaymentOptionsInProgress: true,
+      fetchPaymentOptionsInProgress: false,
       fetchPaymentOptionsFailed: true,
       fetchPaymentOptionsSuccess: false,
       fetchPaymentOptionsError: false,
@@ -130,14 +131,15 @@ const paymentReducer = createReducer(initialState, {
     };
   },
 
-  [fetchPaymentOptionsSuccess]: (state) => {
+  [fetchPaymentOptionsSuccess]: (state, e) => {
     return {
       ...state,
-      fetchPaymentOptionsInProgress: true,
+      fetchPaymentOptionsInProgress: false,
       fetchPaymentOptionsFailed: false,
       fetchPaymentOptionsSuccess: true,
       fetchPaymentOptionsError: false,
       fetchPaymentOptionsErrorMessage: "",
+      paymentOptionsDetails: e.payload,
     };
   },
   [initialTrigger]: (state) => {
