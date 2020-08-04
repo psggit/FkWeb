@@ -3,33 +3,31 @@ import {
   validationInProgress,
   validationFailure,
 } from "./actions";
-import { updateCartAPI } from "../../../../utils";
+import { validateCartAPI } from "../../../../utils";
 
 const reqBodyFromState = (cartState) => {
   let products = [];
-  for (let prod in Object.values(cartState.products)) {
+  for (let prod of Object.values(cartState.products)) {
     let p = {
       count: prod.count,
       sku_id: prod.skuId,
     };
     products.push(p);
   }
-  return JSON.stringify({
-    city_id: 5,
+  return {
+    city_id: cartState.selectedAddress.city.id,
+    state_id: cartState.selectedAddress.state.id,
     retailer_id: cartState.retailer.id,
-    state_id: 4,
     products: products,
-  });
+  };
 };
 
-const processResponse = (dispatch) => {
+const processResponse = () => {
   return (res) => {
     if (res.ok) {
-      dispatch(validationFailure());
       return res.json();
     }
     if (res.status === 400) {
-      //TODO:@hl05 setup sentry here?
       throw new Error("invalid params");
     } else {
       throw new Error("Something went wrong, try again");
@@ -45,6 +43,7 @@ const onSuccess = (dispatch) => {
 
 const onError = (dispatch) => {
   return (err) => {
+    console.log(err);
     dispatch(validationFailure(err));
   };
 };
@@ -53,7 +52,7 @@ const validateCart = (cartState) => {
   let reqBody = reqBodyFromState(cartState);
   return (dispatch) => {
     dispatch(validationInProgress());
-    updateCartAPI(
+    validateCartAPI(
       reqBody,
       processResponse(dispatch),
       onSuccess(dispatch),

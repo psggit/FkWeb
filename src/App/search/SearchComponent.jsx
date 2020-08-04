@@ -1,4 +1,5 @@
 import React, {useRef, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import BottomNavigationComponent from "../common/bottomNavigation";
 import { SearchBox } from "./SearchBox";
 import { HeaderComponent } from "../common/toolbar";
@@ -46,5 +47,7 @@ function SearchComponent(props) {
     </>
   );
 }
-
+SearchComponent.propTypes = {
+  getSearchDrinks: PropTypes.func,
+};
 export { SearchComponent };

@@ -1,28 +1,43 @@
 import React from "react";
-import "../style.scss";
+import PropTypes from "prop-types";
+
 import { lockIcon } from "../../../assets/images";
 
-function SavedCardComponent() {
-  return (
-    <div className="saved-card-container">
-      <div className="card-details">
-        <div className="card-number">
-          <div className="card-mask">XXXX-XXXX-XXXX-</div>
-          <div className="card-last-digits">1234</div>
+import "../style.scss";
+
+SavedCardComponent.propTypes = {
+  payment: PropTypes.object,
+};
+
+function SavedCardComponent(props) {
+  const payment = props.payment.paymentOptionsDetails;
+
+  return payment.cards.map((card, index) => {
+    return (
+      <div key={"card" + index} className="saved-card-container">
+        <div className="card-details">
+          <div className="card-number">
+            <div className="card-mask">XXXX-XXXX-XXXX-</div>
+            <div className="card-last-digits">
+              {card.card_number.split("-")[3]}
+            </div>
+          </div>
+          <div className="card-expiry">
+            {card.card_exp_month}/{card.card_exp_year}
+          </div>
         </div>
-        <div className="card-expiry">01/23</div>
+        <div className="card-cvv-container">
+          <img src={lockIcon} className="card-cvv-image" />
+          <input
+            type="text"
+            id="cvvNumber"
+            placeholder="CVV Number"
+            className="card-cvv"
+          />
+        </div>
       </div>
-      <div className="card-cvv-container">
-        <img src={lockIcon} className="card-cvv-image" />
-        <input
-          type="text"
-          id="cvvNumber"
-          placeholder="CVV Number"
-          className="card-cvv"
-        />
-      </div>
-    </div>
-  );
+    );
+  });
 }
 
 export { SavedCardComponent };

@@ -3,7 +3,10 @@ import {
   addSkuToCart,
   removeSkuFromCart,
   validationSuccessful,
+  validationInProgress,
   validationFailure,
+  closeValidationErrorMessage,
+  resetValidation,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -26,11 +29,10 @@ declare type Product = {
   count: number,
   available: boolean,
   subText: string,
-  logoLowResImage: string,
 };
 
 declare type Products = {
-  skuId: Product,
+  [skuId: string]: Product,
 };
 
 declare type State = {
@@ -38,6 +40,11 @@ declare type State = {
   products: Products,
   retailerDiffers: boolean,
   validationFailure: boolean,
+  validationSuccessful: boolean,
+  validationInProgress: boolean,
+  validateError: boolean,
+  validateErrorMessage: string,
+  redirect: boolean,
 };
 
 declare type Sku = {
@@ -60,6 +67,11 @@ const getDefaultState = (): State => {
     products: {},
     retailerDiffers: false,
     validationFailure: false,
+    validationInProgress: false,
+    validationSuccessful: false,
+    validateError: false,
+    validateErrorMessage: "",
+    redirect: false,
   };
 };
 */
@@ -67,18 +79,23 @@ const getDefaultState = (): State => {
 let getTestState = (): State => {
   return {
     retailer: {
-      id: 436,
+      id: 446,
       name: "Gokul Arcade",
       description: "delivers very soon",
     },
     retailerDiffers: false,
     validationFailure: false,
+    validationInProgress: false,
+    validationSuccessful: false,
+    validateError: false,
+    validateErrorMessage: "",
+    redirect: false,
     products: {
-      "1276": {
-        skuId: 1276,
+      "1278": {
+        skuId: 1278,
         brandName: "Kf blue",
         brandId: 993,
-        logo_low_res_image:
+        image:
           "https://res.cloudinary.com/www-hipbar-com/image/upload/c_scale,h_300/v1557824990/Brand%20Logo's/TN/Beer.jpg",
         price: 150,
         volume: 650,
@@ -137,19 +154,19 @@ let addProduct = (state: State, sku: Sku): State => {
   } else {
     prod.count += 1;
   }
-  state.products[prod.skuId] = prod;
+  state.products[prod.skuId.toString()] = prod;
   return state;
 };
 
 let removeProduct = (state: State, sku: Sku): State => {
-  let prod = state.products[sku.sku_id];
+  let prod = state.products[sku.sku_id.toString()];
   if (prod === undefined) {
     return state;
   } else {
     prod.count -= 1;
   }
   if (prod.count === 0) {
-    delete state.products[prod.skuId];
+    delete state.products[prod.skuId.toString()];
   }
   if (isEmpty(state)) {
     return initialState();
@@ -159,14 +176,14 @@ let removeProduct = (state: State, sku: Sku): State => {
 
 let replaceProductInfo = (state: State, skus: Array<Sku>): State => {
   for (let sku of skus) {
-    state.products[sku.sku_id] = {
+    state.products[sku.sku_id.toString()] = {
       skuId: sku.sku_id,
       brandName: sku.brand_name,
       brandId: sku.brand_id,
       image: sku.logo_low_res_image,
       price: sku.price,
       volume: sku.volume,
-      count: state.products[sku.sku_id].count,
+      count: state.products[sku.sku_id.toString()].count,
       available: true,
       subText: unAvailableProductText,
     };
@@ -176,22 +193,33 @@ let replaceProductInfo = (state: State, skus: Array<Sku>): State => {
 
 let setUnAvailableProducts = (state: State, skus: Array<number>): State => {
   for (let id of skus) {
-    state.products[id].available = false;
+    state.products[id.toString()].available = false;
   }
   return state;
 };
 
 let validateCart = (state: State, data: Object): State => {
-  state = replaceProductInfo(state, data.products);
   state = setUnAvailableProducts(state, data.unavail_items);
   state.validationFailure = false;
   state.retailer.description = data.delivery_message;
+  if (data.statusCode === 0) {
+    state = replaceProductInfo(state, data.products);
+    state.validateError = false;
+    state.validateErrorMessage = "";
+    state.validationSuccessful = true;
+    state.validationInProgress = false;
+  } else {
+    state.validateError = true;
+    state.validateErrorMessage = data.message;
+    state.validationSuccessful = false;
+    state.validationInProgress = false;
+  }
   return state;
 };
 
 const cartTotal = (oldS: State): number => {
   let total: number = 0;
-  for (let prod of Object.values(oldS.products)) {
+  for (let prod: Product of Object.values(oldS.products)) {
     total = total + prod.price;
   }
   return total;
@@ -201,15 +229,53 @@ const cartReducer = createReducer(initialState(), {
   [addSkuToCart]: (state: State, e: Object) => {
     return void addProduct({ ...state }, e.payload);
   },
-
   [removeSkuFromCart]: (state: State, e: Object) => {
     return void removeProduct({ ...state }, e.payload);
   },
-  [validationSuccessful]: (state: State, data: Object) => {
-    return void validateCart(state, data);
+  [validationSuccessful]: (state: State, e: Object) => {
+    return void validateCart(state, e.payload);
   },
+  [validationInProgress]: (state: State): State => {
+    return {
+      ...state,
+      validationFailure: false,
+      validationSuccessful: false,
+      validationInProgress: true,
+      validateError: false,
+      validateErrorMessage: "",
+    };
+  },
+
   [validationFailure]: (state: State): State => {
-    return { ...state, validationFailure: true };
+    return {
+      ...state,
+      validationFailure: true,
+      validationSuccessful: false,
+      validationInProgress: false,
+      validateError: false,
+      validateErrorMessage: "",
+    };
+  },
+
+  [closeValidationErrorMessage]: (state: State): State => {
+    return {
+      ...state,
+      validationFailure: false,
+      validationSuccessful: false,
+      validationInProgress: false,
+      validateError: false,
+    };
+  },
+
+  [resetValidation]: (state: State): State => {
+    return {
+      ...state,
+      validationFailure: false,
+      validationSuccessful: false,
+      validationInProgress: false,
+      validateError: false,
+      validateErrorMessage: "",
+    };
   },
 });
 

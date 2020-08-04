@@ -5,6 +5,8 @@ import {
   removeSkuFromCart,
   isEmpty,
   validateCart,
+  closeValidationErrorMessage,
+  resetValidation,
 } from "../common/cart";
 
 const mapStateToProps = (state) => {
@@ -13,6 +15,11 @@ const mapStateToProps = (state) => {
     products: state.cart.products,
     retailerDiffers: state.cart.retailerDiffers,
     isEmpty: isEmpty(state.cart),
+    validationFailure: state.cart.validationFailure,
+    validateError: state.cart.validateError,
+    validateErrorMessage: state.cart.validateErrorMessage,
+    validationSuccessful: state.cart.validationSuccessful,
+    selectedAddress: state.addressStore.selectedAddress,
   };
 };
 
@@ -27,6 +34,8 @@ const mapDispatchToProps = (dispatch) => {
       return () => dispatch(removeSkuFromCart(e));
     },
     validateCart: (cs) => dispatch(validateCart(cs)),
+    closeValidationErrorMessage: () => dispatch(closeValidationErrorMessage()),
+    resetValidation: () => dispatch(resetValidation()),
   };
 };
 

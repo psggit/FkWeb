@@ -15,12 +15,24 @@ function EmptyAddressComponent() {
 
 AddressComponent.propTypes = {
   delelteAddressFunc: PropTypes.func,
+  selectedAddress: PropTypes.object,
+  savedUserAddresses: PropTypes.array,
+  selectAddressFunc: PropTypes.func,
 };
 
 function AddressComponent(props) {
   const addresses = props.savedUserAddresses;
-  function RadioClick() {
-    document.getElementByClassName("radiobtn");
+
+  function getAddressClass(address) {
+    if (props.selectedAddress) {
+      if (props.selectedAddress.address_id == address.address_id) {
+        return "selected radiobtn";
+      } else {
+        return "radiobtn";
+      }
+    } else {
+      return "radiobtn";
+    }
   }
 
   return (
@@ -34,13 +46,7 @@ function AddressComponent(props) {
               className="address-detail-container"
             >
               <div className="clickableComponent">
-                <div
-                  className={
-                    (props.selectedAddress.address_id == address.address_id
-                      ? "selected "
-                      : "") + "radiobtn"
-                  }
-                ></div>
+                <div className={getAddressClass(address)}></div>
                 <div className="title no-fold-text">{address.type}</div>
                 <div className="address line-clamp">
                   {address.flat_number + ", " + address.address}

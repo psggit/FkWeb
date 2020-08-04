@@ -5,4 +5,6 @@ export {
   removeSkuFromCart,
   isEmpty,
   validateCart,
+  closeValidationErrorMessage,
+  resetValidation,
 } from "./duck";

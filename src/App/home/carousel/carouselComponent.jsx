@@ -5,23 +5,32 @@ import PropTypes from "prop-types";
 CarouselComponent.propTypes = {
   items: PropTypes.any,
   fetchHomeCarousel: PropTypes.any,
+  address: PropTypes.object,
 };
 
 function CarouselComponent(props) {
   useLayoutEffect(() => {
-    props.fetchHomeCarousel();
-  });
+    if (props.address) {
+      props.fetchHomeCarousel({
+        cityID: props.address.city.id,
+      });
+    }
+  }, []);
+
+  const carouselItems = (props) => {
+    return props.items.map((item, index) => {
+      return (
+        <div key={"carousel-item-" + index} className="xc">
+          <img src={item.high_res_image} />
+        </div>
+      );
+    });
+  };
 
   return (
     <div className="m_wrap">
       <div className="s_wrap">
-        <div className="dx">
-          {props.items.map((item, index) => (
-            <div key={"carousel-item-" + index} className="xc">
-              <img src={item.high_res_image} />
-            </div>
-          ))}
-        </div>
+        <div className="dx">{props.items ? carouselItems(props) : <div />}</div>
       </div>
     </div>
   );

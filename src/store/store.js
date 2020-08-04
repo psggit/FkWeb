@@ -7,6 +7,7 @@ import { addressListReducer } from "../App/address";
 import { tcReducer } from "../App/agreeAndContinue";
 import { skuItemReducer } from "../App/common/brand";
 import { searchDrinkReducer } from "../App/search";
+import { searchByStoreReducer } from "../App/searchByStore";
 import { userInfoCreateReducer } from "../App/userBasicInfo";
 import { cartReducer } from "../App/common/cart";
 import thunk from "redux-thunk";
@@ -14,12 +15,15 @@ import { storeFrontReducer } from "../App/storeFront";
 import { myOrdersReducer } from "../App/myorders";
 import { orderDetailReducer } from "../App/order";
 import { stateCityReducer } from "../App/stateCity";
+import { summaryReducer } from "../App/summary";
+import { paymentReducer } from "../App/payment";
 
 const store = configureStore({
   reducer: combineReducers({
     home: homeReducer,
     tcStore: tcReducer,
     skuItem: skuItemReducer,
+    searchByStore: searchByStoreReducer,
     storeFront: storeFrontReducer,
     searchItem: searchDrinkReducer,
     ubiStore: userInfoCreateReducer,
@@ -29,6 +33,8 @@ const store = configureStore({
     myOrders: myOrdersReducer,
     order: orderDetailReducer,
     stateCity: stateCityReducer,
+    summaryDetails: summaryReducer,
+    payment: paymentReducer,
   }),
   middleware: [thunk],
 });
