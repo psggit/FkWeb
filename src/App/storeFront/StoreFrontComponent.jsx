@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import BottomNavigationComponent from "../common/bottomNavigation";
 import { ToolbarComponent } from "../common/toolbar";
 import SearchLayout from "../common/layout/SearchLayout";
 import { BrandComponent } from "../common/brand";
@@ -95,7 +94,6 @@ function StoreFrontComponent(props) {
             renderSku(brandItems.data)
           )}
         </div>
-        <BottomNavigationComponent />
       </SearchLayout>
     </>
   );
