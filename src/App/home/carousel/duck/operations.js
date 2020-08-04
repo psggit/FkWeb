@@ -7,7 +7,6 @@ import { getAdsAPI } from "../../../../utils";
 
 const onSuccess = (dispatch) => {
   return (data) => {
-    console.log(data);
     dispatch(getHomeCarouselSuccess(data));
   };
 };
