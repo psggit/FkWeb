@@ -9,3 +9,6 @@ export { getAddressFromGpsAPI } from "./getAddressFromGPS";
 export { getMyOrdersAPI } from "./getMyOrders";
 export { getOrdersDetailAPI } from "./orderDetail";
 export { getAvaialableCitiesAPI, getAvaialableStatesAPI } from "./stateCity";
+export { createAddressAPI } from "./createAddress";
+export { editAddressAPI } from "./editAddress";
+export { deleteAddressAPI } from "./deleteAddress";

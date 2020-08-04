@@ -6,4 +6,3 @@ export {
   getPlacesDetailsOperation,
 } from "./operations";
 
-export { getAddressFromGpsOperation } from "./getAddressFromGpsOperation";

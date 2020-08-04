@@ -1,7 +1,6 @@
 import {
   getPlacesDetailsAction,
   autoCompleteAction,
-  updateAddressFromGpsAction,
   //  getAddressFromGpsFailAction,
   //  getAddressFromGpsInProgressAction,
   storeMapGpsAction,
@@ -26,10 +25,6 @@ const chooseLocationReducer = createReducer(initialState, {
   [storeMapGpsAction]: (state, action) => ({
     ...state,
     selectedGps: action.payload,
-  }),
-  [updateAddressFromGpsAction]: (state, action) => ({
-    ...state,
-    selectedMapAddress: action.payload,
   }),
   [getPlacesDetailsAction]: (state, action) => ({
     ...state,

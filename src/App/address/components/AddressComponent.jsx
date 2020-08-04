@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.scss";
+import PropTypes from "prop-types";
 
 function EmptyAddressComponent() {
   return (
@@ -11,6 +12,11 @@ function EmptyAddressComponent() {
     </div>
   );
 }
+
+AddressComponent.propTypes = {
+  delelteAddressFunc: PropTypes.func,
+};
+
 function AddressComponent(props) {
   const addresses = props.savedUserAddresses;
   function RadioClick() {
@@ -44,7 +50,13 @@ function AddressComponent(props) {
                 <div onClick={(e) => e.stopPropagation()} className="edit">
                   EDIT
                 </div>
-                <div onClick={(e) => e.stopPropagation()} className="delete">
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    props.delelteAddressFunc(address.address_id);
+                  }}
+                  className="delete"
+                >
                   DELETE
                 </div>
               </div>

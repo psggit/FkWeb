@@ -15,7 +15,6 @@ ChooseLocationComponent.propTypes = {
   autoComplete: PropTypes.func,
   storeGpsFunc: PropTypes.func,
   getPlacesDetails: PropTypes.func,
-  getAddressFromGps: PropTypes.func,
 };
 
 function ChooseLocationComponent(props) {
@@ -44,7 +43,6 @@ function ChooseLocationComponent(props) {
           ) : (
             <MapWithMarkerComponent
               storeGpsFunc={props.storeGpsFunc}
-              onProceedFunc={() => props.getAddressFromGps(props.mapCenterGps)}
             />
           )}
         </div>
