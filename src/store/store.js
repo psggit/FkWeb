@@ -16,6 +16,7 @@ import { myOrdersReducer } from "../App/myorders";
 import { orderDetailReducer } from "../App/order";
 import { stateCityReducer } from "../App/stateCity";
 import { summaryReducer } from "../App/summary";
+import { paymentReducer } from "../App/payment";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -33,6 +34,7 @@ const store = configureStore({
     order: orderDetailReducer,
     stateCity: stateCityReducer,
     summaryDetails: summaryReducer,
+    payment: paymentReducer,
   }),
   middleware: [thunk],
 });
