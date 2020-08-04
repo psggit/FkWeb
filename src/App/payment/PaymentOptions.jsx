@@ -46,6 +46,7 @@ PaymentOptions.propTypes = {
   bank: PropTypes.any,
   payment: PropTypes.object,
   initialise: PropTypes.func,
+  summaryDetails: PropTypes.object,
 };
 
 function PaymentOptions(props) {
@@ -80,9 +81,12 @@ function PaymentOptions(props) {
   const payment = props.payment.paymentOptionsDetails;
   const banks = payment.netbanking;
 
+  let title =
+    "Pay " + props.summaryDetails.summaryDetails.display_total + " using";
+
   return (
     <>
-      <ToolbarComponent helpVisibility="true" title="Pay Rs 32.00 using" />
+      <ToolbarComponent helpVisibility="true" title={title} />
       <div className="page-container payment-option-container">
         {payment.is_upi_enabled && (
           <div>

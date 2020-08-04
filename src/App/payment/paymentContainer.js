@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
     products: state.cart.products,
     selectedAddress: state.addressStore.selectedAddress,
     payment: state.payment,
+    summaryDetails: state.summaryDetails,
   };
 };
 
