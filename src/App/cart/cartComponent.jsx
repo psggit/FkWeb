@@ -85,13 +85,18 @@ function NextComponent(props) {
   if (shouldValidate) {
     return (
       <BottomNextComponent
+        isNav={true}
         title="Checkout"
         onClickFunc={() => props.validateCart(validateParams)}
       />
     );
   } else {
     return (
-      <BottomNextComponent routePath="/address/select/osm" title="Checkout" />
+      <BottomNextComponent
+        isNav={true}
+        routePath="/address/select/osm"
+        title="Checkout"
+      />
     );
   }
 }
