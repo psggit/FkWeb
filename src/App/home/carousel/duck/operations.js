@@ -1,23 +1,46 @@
-import { getHomeCarousel } from "./actions";
-import config from "../../../../config";
+import {
+  getHomeCarouselInProgress,
+  getHomeCarouselSuccess,
+  getHomeCarouselFailure,
+} from "./actions";
+import { getAdsAPI } from "../../../../utils";
 
-const fetchAds = () => {
-  const URL =
-    "https://gremlin." +
-    config.BASE_DOMAIN +
-    "/consumer/marketing/ads/get_ads/15";
-  return fetch(URL, {
-    headers: { Authorization: "Bearer cb04d1e946864660a022c5c88d486fd0" },
-  });
+const onSuccess = (dispatch) => {
+  return (data) => {
+    dispatch(getHomeCarouselSuccess(data));
+  };
 };
 
-const fetchHomeCarousel = () => {
+const onError = (dispatch) => {
+  return (err) => {
+    dispatch(getHomeCarouselFailure(err));
+    alert(err);
+  };
+};
+
+const processResponse = (dispatch) => {
+  return (res) => {
+    if (res.ok) {
+      dispatch(getHomeCarouselFailure());
+      return res.json();
+    }
+    if (res.status === 400) {
+      throw new Error("invalid params");
+    } else {
+      throw new Error("Something went wrong, try again");
+    }
+  };
+};
+
+const fetchHomeCarousel = (value) => {
   return (dispatch) => {
-    return fetchAds()
-      .then((response) => response.json())
-      .then((json) => {
-        dispatch(getHomeCarousel(json));
-      });
+    dispatch(getHomeCarouselInProgress());
+    getAdsAPI(
+      value.cityID,
+      processResponse(dispatch),
+      onSuccess(dispatch),
+      onError(dispatch)
+    );
   };
 };
 

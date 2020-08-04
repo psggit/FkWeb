@@ -49,7 +49,7 @@ function SelectAddressComponent(props) {
       </div>
       <BottomNextComponent
         onClickFunc={onClickProcess}
-        inActive={props.selectedAddress.address_id == undefined}
+        inActive={props.selectedAddress == undefined}
         title="Proceed"
       />
     </>

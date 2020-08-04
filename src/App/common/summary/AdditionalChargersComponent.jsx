@@ -13,9 +13,12 @@ function AdditionalChargersComponent(props) {
   const charges = props.charges;
 
   const templateCharges = (props) => {
-    return props.chargesList.map((charge) => {
+    return props.chargesList.map((charge, index) => {
       return (
-        <div key={charge.display_name} className="detail-charges-container">
+        <div
+          key={charge.display_name + index}
+          className="detail-charges-container"
+        >
           <div>{charge.display_name}</div>
           <div>{charge.display_value}</div>
         </div>

@@ -6,6 +6,7 @@ import {
   isEmpty,
   validateCart,
   closeValidationErrorMessage,
+  resetValidation,
 } from "../common/cart";
 
 const mapStateToProps = (state) => {
@@ -17,6 +18,8 @@ const mapStateToProps = (state) => {
     validationFailure: state.cart.validationFailure,
     validateError: state.cart.validateError,
     validateErrorMessage: state.cart.validateErrorMessage,
+    validationSuccessful: state.cart.validationSuccessful,
+    selectedAddress: state.addressStore.selectedAddress,
   };
 };
 
@@ -32,6 +35,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     validateCart: (cs) => dispatch(validateCart(cs)),
     closeValidationErrorMessage: () => dispatch(closeValidationErrorMessage()),
+    resetValidation: () => dispatch(resetValidation()),
   };
 };
 

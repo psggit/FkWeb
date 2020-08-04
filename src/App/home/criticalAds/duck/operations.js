@@ -25,15 +25,12 @@ const onSuccess = (dispatch) => {
 };
 
 const onError = (dispatch) => {
-  
   return (err) => {
-    console.log("ERROR >>> "+err);
     dispatch(fetchCriticalAdsFailure(err));
   };
 };
 
 const fetchHomeCriticalAds = () => {
-  console.log("fetchHOMECRiticalads");
   return (dispatch) => {
     dispatch(fetchCriticalAdsInProgress());
     fetchCriticalAdsAPI(processResponse(dispatch), onSuccess(dispatch), onError(dispatch));

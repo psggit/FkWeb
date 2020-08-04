@@ -1,6 +1,8 @@
 import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 
+import { useHistory } from "react-router-dom";
+
 import "./style.scss";
 import { AddMoreComponent } from "./addMore";
 import { CartItemComponent } from "./cartItem";
@@ -10,17 +12,20 @@ import { BottomNextComponent } from "../common/bottomNext";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { drinksIcon } from "../../assets/images";
 import { Alert } from "../common/alert";
+import BottomNavigationComponent from "../common/bottomNavigation";
 
 RetryValidationComponent.propTypes = {
   products: PropTypes.object,
   retailer: PropTypes.object,
   validateCart: PropTypes.func,
+  selectedAddress: PropTypes.object,
 };
 
 function RetryValidationComponent(props) {
   let payload = {
     retailer: props.retailer,
     products: props.products,
+    selectedAddress: props.selectedAddress,
   };
   let validate = () => props.validateCart(payload);
   return (
@@ -75,17 +80,23 @@ function NextComponent(props) {
   let validateParams = {
     retailer: props.retailer,
     products: props.products,
+    selectedAddress: props.selectedAddress,
   };
   if (shouldValidate) {
     return (
       <BottomNextComponent
+        isNav={true}
         title="Checkout"
         onClickFunc={() => props.validateCart(validateParams)}
       />
     );
   } else {
     return (
-      <BottomNextComponent routePath="/address/select/osm" title="Checkout" />
+      <BottomNextComponent
+        isNav={true}
+        routePath="/address/select/osm"
+        title="Checkout"
+      />
     );
   }
 }
@@ -109,10 +120,14 @@ function AlertValidateErrorComponent(props) {
 CartComponent.propTypes = {
   validationFailure: PropTypes.bool,
   validateError: PropTypes.bool,
+  resetValidation: PropTypes.func,
+  validationSuccessful: PropTypes.bool,
 };
 
 function CartComponent(props) {
-  console.log(props);
+  useLayoutEffect(() => {
+    props.resetValidation();
+  }, []);
   let isEmpty = props.isEmpty;
   if (isEmpty) {
     return returnEmptyCart();
@@ -126,6 +141,11 @@ function CartComponent(props) {
     return <AlertValidateErrorComponent {...props} />;
   }
 
+  if (props.validationSuccessful) {
+    let history = useHistory();
+    history.push("/address/select/osm");
+  }
+
   return (
     <div className="cart">
       <div className="full-cart show-content">
@@ -136,6 +156,7 @@ function CartComponent(props) {
         </div>
         <NextComponent {...props} />
       </div>
+      <BottomNavigationComponent />
     </div>
   );
 }

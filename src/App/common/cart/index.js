@@ -6,4 +6,5 @@ export {
   isEmpty,
   validateCart,
   closeValidationErrorMessage,
+  resetValidation,
 } from "./duck";
