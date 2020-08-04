@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import "./style.scss";
 import { rightArrowIcon } from "../../../assets/images";
+import { useHistory } from "react-router-dom";
 
 RetailerList.propTypes = {
   retailers: PropTypes.array,
@@ -11,10 +12,28 @@ RetailerList.propTypes = {
 };
 
 function RetailerTemplate(retailers) {
+  const history = useHistory();
+
+  function showStoreDetails(retailer) {
+    console.log("retailer clicked" + retailer);
+    history.push({
+      pathname: "/storefront",
+      state: {
+        retailer: retailer,
+      },
+    });
+  }
+
   return retailers.retailers.map((retailer) => {
     console.log("retailers" + retailer);
     return (
-      <div key={retailer.retailer_id} className="retailer_item">
+      <div
+        key={retailer.retailer_id}
+        className="retailer_item"
+        onClick={() => {
+          showStoreDetails(retailer);
+        }}
+      >
         <div className="retailer_link">
           <div className="retailer_name">{retailer.retailer_name}</div>
           <div className="retailer_info">{retailer.store_info_msg}</div>

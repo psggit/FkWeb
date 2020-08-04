@@ -13,7 +13,6 @@ import { SearchContainer } from "./search";
 import { StoreFrontContainer } from "./storeFront";
 import { OrderSummaryContainer } from "./summary";
 import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
-import BottomNavigationComponent from "./common/bottomNavigation";
 import { ChooseLocationContainer } from "./address/chooseLocation";
 import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
 import { StateCityContainer } from "./stateCity";

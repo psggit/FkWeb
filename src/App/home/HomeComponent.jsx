@@ -32,7 +32,9 @@ function HomeComponent(props) {
     });
   }
 
-  function showChooseAddress() {}
+  function showChooseAddress() {
+    history.push("address/select/home");
+  }
 
   function templateCurrentOrder(props) {
     console.log(props.currentOrder);
