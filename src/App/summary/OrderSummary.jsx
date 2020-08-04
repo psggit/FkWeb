@@ -56,7 +56,6 @@ SummaryComponent.propTypes = {
 };
 function SummaryComponent(props) {
   let summary = props.summary.summaryDetails;
-  console.log(props);
   return (
     <div>
       <ToolbarComponent helpVisibility="true" title="Order Summary" />
@@ -100,7 +99,6 @@ function OrderSummary(props) {
   );
   useLayoutEffect(() => {
     if (trigger) {
-      console.log(props);
       props.fetchSummary(props);
     }
   });

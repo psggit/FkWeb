@@ -12,7 +12,7 @@ import { SelectAddressContainer, AddressEditContainer } from "./address";
 import { SearchContainer } from "./search";
 import { StoreFrontContainer } from "./storeFront";
 import { OrderSummaryContainer } from "./summary";
-import { PaymentOptions, AddCardAndProcessPayment } from "./payment";
+import { PaymentContainer, AddCardAndProcessPayment } from "./payment";
 import { ChooseLocationContainer } from "./address/chooseLocation";
 import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
 import { StateCityContainer } from "./stateCity";
@@ -65,7 +65,7 @@ function App() {
             )}
           />
           <Route path="/order/summary" component={OrderSummaryContainer} />
-          <Route path="/payment/options" component={PaymentOptions} />
+          <Route path="/payment/options" component={PaymentContainer} />
           <Route
             path="/payment/add/new/card"
             component={AddCardAndProcessPayment}
