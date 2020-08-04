@@ -4,6 +4,7 @@ import "./style.scss";
 import { OrderItem } from "./components";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+import BottomNavigationComponent from "../common/bottomNavigation";
 
 MyOrdersComponent.propTypes = {
   fetchOrderInProgress: PropTypes.bool,
@@ -49,6 +50,7 @@ function MyOrdersComponent(props) {
       <div className="page-container myorders-container">
         {orderItems(props)}
       </div>
+      <BottomNavigationComponent />
     </>
   );
 }

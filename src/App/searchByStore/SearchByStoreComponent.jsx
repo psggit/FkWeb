@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import BottomNavigationComponent from "../common/bottomNavigation";
 import { SearchBox } from "./SearchBox";
 import { ToolbarComponent } from "../common/toolbar";
 import { BrandComponent } from "../common/brand";
@@ -53,7 +52,6 @@ function SearchByStoreComponent(props) {
         <div className="accordion-container mar-zero">
           {pending ? <LoadingComponent /> : renderSku(data)}
         </div>
-        <BottomNavigationComponent />
       </SearchLayout>
     </>
   );
