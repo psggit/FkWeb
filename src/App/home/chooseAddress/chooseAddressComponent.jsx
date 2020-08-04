@@ -10,7 +10,7 @@ ChooseAddressComponent.propTypes = {
 
 function ChooseAddressComponent(props) {
   return (
-    <div className="choose-address-wrapper">
+    <div className="choose-address-wrapper" onClick={props.onClickFunc}>
       <div className="choose-address-container fixed">
         <img src={chooeLocationIcon} className="choose-address-image" />
         <div className="choose-address-group">
