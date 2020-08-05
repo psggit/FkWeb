@@ -43,7 +43,7 @@ function MapComponent(props) {
         }}
         mapContainerStyle={{
           width: "100%",
-          bottom: "120px",
+          bottom: "60px",
           top: "164px",
         }}
         center={center}

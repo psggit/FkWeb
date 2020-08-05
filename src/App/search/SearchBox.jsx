@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import {searchIcon} from "../../assets/images"
+import PropTypes from "prop-types";
 
+SearchBox.propTypes = {
+  onFocusOut: PropTypes.func,
+  onFocusIn: PropTypes.func,
+}
 function SearchBox(props) {
   const [inputType] = useState("search");
   const [inputValue, setInputValue] = useState("");
-  const{handleInput,cancelEnable, placeholder}=props
+  const{handleInput,cancelEnable, placeholder, onFocusIn, onFocusOut}=props
   function handleChange(event) {
     let value=event.target.value;
     setInputValue(value);
@@ -17,7 +22,8 @@ function SearchBox(props) {
         type={inputType}
         value={inputValue}
         name="input-form"
-        onFocus={() => cancelEnable(true)}
+        onFocus={() => onFocusIn()}
+	onBlur={() => onFocusOut()}
         onChange={handleChange}
         placeholder={placeholder}
         className="inputclass"
