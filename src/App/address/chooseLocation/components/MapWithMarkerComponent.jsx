@@ -8,16 +8,16 @@ const mapStyle = require("./styles.json");
 
 function MapComponent(props) {
   const mapRef = useRef(null);
-//  const [map, setMap] = React.useState(null);
+  const [map, setMap] = React.useState(null);
   const [center, setCenter] = useState({ lat: 13.006928, lng: 80.255516 });
 
   const onLoad = (map) => {
     mapRef.current = map;
   };
 
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null);
-  }, []);
+  const onUnmount = () => {
+    mapRef.current = null
+  };
 
   const onCenterChanged = () => {
     if (!mapRef.current) return;
@@ -43,7 +43,7 @@ function MapComponent(props) {
         }}
         mapContainerStyle={{
           width: "100%",
-          bottom: "120px",
+          bottom: "60px",
           top: "164px",
         }}
         center={center}
