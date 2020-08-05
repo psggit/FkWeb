@@ -17,7 +17,7 @@ const initialState = {
   fetchCityFailed: false,
   fetchCitySuccess: false,
   states: [],
-  cities: [{id:1}],
+  cities: [],
 };
 
 const stateCityReducer = createReducer(initialState, {

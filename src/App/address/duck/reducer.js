@@ -55,29 +55,29 @@ const addressListReducer = createReducer(initialState, {
     ...state,
     selectedMapAddress: { ...state.selectedMapAddress, ...action.payload },
   }),
-  [deleteAddressFailAction]: (state, action) => ({
+  [deleteAddressFailAction]: (state) => ({
     ...state,
     apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "failed" },
   }),
-  [deleteAddressSuccessAction]: (state, action) => ({
+  [deleteAddressSuccessAction]: (state) => ({
     ...state,
     selectedAddress: {},
     apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "success" },
   }),
-  [deleteAddressInProgressAction]: (state, action) => ({
+  [deleteAddressInProgressAction]: (state) => ({
     ...state,
     apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "inProgress" },
   }),
-  [createAddressFailAction]: (state, action) => ({
+  [createAddressFailAction]: (state) => ({
     ...state,
     apiCalls: { ...apiCallDefaultStatus, createAddressStatus: "failed" },
   }),
-  [createAddressSuccessAction]: (state, action) => ({
+  [createAddressSuccessAction]: (state) => ({
     ...state,
     selectedMapAddress: defaultAddressInputPageState,
     apiCalls: { ...apiCallDefaultStatus, createAddressStatus: "success" },
   }),
-  [createAddressInProgressAction]: (state, action) => ({
+  [createAddressInProgressAction]: (state) => ({
     ...state,
     apiCalls: { ...apiCallDefaultStatus, createAddressStatus: "inProgress" },
   }),

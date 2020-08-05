@@ -1,8 +1,7 @@
 import config from "../config";
 import CommonHeaders from "./common";
 
-const URL =
-  "https://api." + config.BASE_DOMAIN + "/consumer/api/1/address/add";
+const URL = "https://api." + config.BASE_DOMAIN + "/consumer/api/1/address/add";
 
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 
