@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import BottomNavigationComponent from "../common/bottomNavigation";
+import { BottomNavigationContainer } from "../common/bottomNavigation";
 import { SearchBox } from "./SearchBox";
 import { HeaderComponent } from "../common/toolbar";
 import SearchLayout from "../common/layout/SearchLayout";
@@ -42,7 +42,7 @@ function SearchComponent(props) {
       </HeaderComponent>
       <SearchLayout>
         <RetailerComponent query={query} {...props} />
-        <BottomNavigationComponent />
+        <BottomNavigationContainer />
       </SearchLayout>
     </>
   );

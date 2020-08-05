@@ -12,7 +12,7 @@ import { BottomNextComponent } from "../common/bottomNext";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { drinksIcon } from "../../assets/images";
 import { Alert } from "../common/alert";
-import BottomNavigationComponent from "../common/bottomNavigation";
+import { BottomNavigationContainer } from "../common/bottomNavigation";
 
 RetryValidationComponent.propTypes = {
   products: PropTypes.object,
@@ -156,7 +156,7 @@ function CartComponent(props) {
         </div>
         <NextComponent {...props} />
       </div>
-      <BottomNavigationComponent />
+      <BottomNavigationContainer />
     </div>
   );
 }

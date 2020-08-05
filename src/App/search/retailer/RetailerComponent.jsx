@@ -21,7 +21,7 @@ function RetailerComponent(props) {
     if(query.length <=2 ){
       return(<div className="initial-text">
       <div>What are you looking for today?</div>
-      <div className="mid-light-text">We'tell you where it's available !</div>
+      <div className="mid-light-text">We'll tell you where<br/>it's available!</div>
     </div>)
     }
     return (

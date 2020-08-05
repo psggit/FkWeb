@@ -14,6 +14,12 @@
   padding: 8px;
 }
 
+a.activeLink{
+  div{
+    color: $orange-color; 
+  }
+}
+
 @media only screen and (max-height: $win-max-height) {
   .navBar-height {
     display: none;
@@ -36,4 +42,16 @@
 
 .navText {
   font-size: 8px;
+  padding-top: 5px;
+}
+
+.navBadge{
+  position: absolute;
+  background-color: #F44336;
+  width: 14px;
+  height: 14px;
+  top: -5px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 10px;
 }
