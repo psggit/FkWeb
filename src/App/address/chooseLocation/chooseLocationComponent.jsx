@@ -47,6 +47,7 @@ function ChooseLocationComponent(props) {
         <div className="search-container">
           <SearchBox
             cancelEnable={props.isCancelButton}
+	    onChange={props.autoComplete}
             onFocusOut={() => setSearchMode(false)}
             onFocusIn={() => setSearchMode(true)}
             placeholder="Search Location"
