@@ -30,11 +30,11 @@ const chooseLocationReducer = createReducer(initialState, {
     autoCompletePlaces: action.payload,
     apiStatus: { ...apiStatusInitial, autocompleteAPIStatus: "waiting" },
   }),
-  [autoCompleteFailAction]: (state, action) => ({
+  [autoCompleteFailAction]: (state) => ({
     ...state,
     apiStatus: { ...apiStatusInitial, autocompleteAPIStatus: "failed" },
   }),
-  [autoCompleteInProgressAction]: (state, action) => ({
+  [autoCompleteInProgressAction]: (state) => ({
     ...state,
     apiStatus: { ...apiStatusInitial, autocompleteAPIStatus: "inProgress" },
   }),

@@ -24,9 +24,9 @@ AutoCompletePlacesComponent.propTypes = {
 function AutoCompletePlacesComponent(props) {
   const autoCompletePlaces = props.autoCompletePlaces;
   if (autoCompletePlaces) {
-    return <div className="flex hcenter vcenter" styleList="height: 100px">Search for your locality...</div>;
+    return <div className="flex hcenter vcenter">Search for your locality...</div>;
   } else if (autoComplete.length == 0) {
-    return <div className="flex hcenter vcenter" styleList="height: 100px">Sorry, No locations found...</div>;
+    return <div className="flex hcenter vcenter">Sorry, No locations found...</div>;
   } else {
     return <PlacesDetailComponent title="Adyar" address="Address of Adyar" />;
   }

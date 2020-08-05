@@ -25,13 +25,13 @@ const apiCallDefaultStatus = {
 };
 
 const defaultAddressInputPageState = {
-    address_id: null,
-    current_address: null,
-    pincode: null,
-    landmark: null,
-    flat_number: null,
-    address_type: "Home",
-}
+  address_id: null,
+  current_address: null,
+  pincode: null,
+  landmark: null,
+  flat_number: null,
+  address_type: "Home",
+};
 
 const initialState = {
   selectedMapAddress: defaultAddressInputPageState,
@@ -41,7 +41,6 @@ const initialState = {
   savedUserAddresses: [],
 };
 
-
 const addressListReducer = createReducer(initialState, {
   [selectAddressAction]: (state, action) => ({
     ...state,
@@ -50,7 +49,7 @@ const addressListReducer = createReducer(initialState, {
   [updateAddressListAction]: (state, action) => ({
     ...state,
     savedUserAddresses: action.payload,
-    apiCalls: { ...apiCallDefaultStatus, listAddressStatus: "success" }
+    apiCalls: { ...apiCallDefaultStatus, listAddressStatus: "success" },
   }),
   [updateAddressFromGpsAction]: (state, action) => ({
     ...state,
@@ -58,29 +57,29 @@ const addressListReducer = createReducer(initialState, {
   }),
   [deleteAddressFailAction]: (state, action) => ({
     ...state,
-    apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "failed" }
+    apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "failed" },
   }),
   [deleteAddressSuccessAction]: (state, action) => ({
     ...state,
     selectedAddress: {},
-    apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "success" }
+    apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "success" },
   }),
   [deleteAddressInProgressAction]: (state, action) => ({
     ...state,
-    apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "inProgress" }
+    apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "inProgress" },
   }),
   [createAddressFailAction]: (state, action) => ({
     ...state,
-    apiCalls: { ...apiCallDefaultStatus, createAddressStatus: "failed" }
+    apiCalls: { ...apiCallDefaultStatus, createAddressStatus: "failed" },
   }),
   [createAddressSuccessAction]: (state, action) => ({
     ...state,
     selectedMapAddress: defaultAddressInputPageState,
-    apiCalls: { ...apiCallDefaultStatus, createAddressStatus: "success" }
+    apiCalls: { ...apiCallDefaultStatus, createAddressStatus: "success" },
   }),
   [createAddressInProgressAction]: (state, action) => ({
     ...state,
-    apiCalls: { ...apiCallDefaultStatus, createAddressStatus: "inProgress" }
+    apiCalls: { ...apiCallDefaultStatus, createAddressStatus: "inProgress" },
   }),
 });
 
