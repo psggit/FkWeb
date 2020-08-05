@@ -1,6 +1,10 @@
 import { connect } from "react-redux";
 import { SelectAddressComponent } from "./selectAddressComponent";
-import { SelectAddressOperation, FetchAddressListOperation, deleteAddressOperation } from "../duck";
+import {
+  SelectAddressOperation,
+  FetchAddressListOperation,
+  deleteAddressOperation,
+} from "../duck";
 
 const mapStateToProps = (state, props) => {
   return {

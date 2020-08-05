@@ -3,13 +3,7 @@ export {
   SelectAddressOperation,
   FetchAddressListOperation,
 } from "./operations";
-export {
-  getAddressFromGpsOperation,
-} from "./getAddressFromGpsOperation"
-export {
-  createAddressOperation,
-} from "./createAddressOperation"
+export { getAddressFromGpsOperation } from "./getAddressFromGpsOperation";
+export { createAddressOperation } from "./createAddressOperation";
 
-export {
-  deleteAddressOperation,
-} from "./deleteAddressOperation"
+export { deleteAddressOperation } from "./deleteAddressOperation";

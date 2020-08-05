@@ -5,13 +5,13 @@ import {
 } from "./actions";
 
 import { deleteAddressAPI } from "../../../utils";
-import {FetchAddressListOperation} from "./"
+import { FetchAddressListOperation } from "./";
 
 const reqBodyFromState = (addressID) => {
   return {
-    address_id: addressID
-  }
-}
+    address_id: addressID,
+  };
+};
 const onSuccess = (dispatch) => {
   return (data) => {
     dispatch(deleteAddressSuccessAction(data));
@@ -39,7 +39,7 @@ const processResponse = () => {
 };
 
 const deleteAddressOperation = (addressID) => {
-  const reqParams = reqBodyFromState(addressID)
+  const reqParams = reqBodyFromState(addressID);
   return (dispatch) => {
     dispatch(deleteAddressInProgressAction());
     deleteAddressAPI(

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { AddressEditComponent } from "./addressEditComponent.jsx";
-import { getAddressFromGpsOperation, createAddressOperation } from "../duck"
-import { updateAddressFromGpsAction } from "../duck/actions"
+import { getAddressFromGpsOperation, createAddressOperation } from "../duck";
+import { updateAddressFromGpsAction } from "../duck/actions";
 const mapStateToProps = (state) => {
   return {
     address: state.addressStore.selectedMapAddress,

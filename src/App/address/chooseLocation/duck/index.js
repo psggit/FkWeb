@@ -1,11 +1,5 @@
 export { chooseLocationReducer } from "./reducer";
 
-export {
-  storeGpsOperation,
-  getPlacesDetailsOperation,
-} from "./operations";
+export { storeGpsOperation, getPlacesDetailsOperation } from "./operations";
 
-export {
-  autoCompleteOperation,
-} from "./autoCompleteOperation";
-
+export { autoCompleteOperation } from "./autoCompleteOperation";
