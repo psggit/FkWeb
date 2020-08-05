@@ -32,4 +32,4 @@ const autoCompleteOperation = (value) => {
   };
 };
 
-export { getPlacesDetailsOperation, storeGpsOperation, autoCompleteOperation };
+export { getPlacesDetailsOperation, storeGpsOperation };
