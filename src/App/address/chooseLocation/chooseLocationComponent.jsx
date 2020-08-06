@@ -44,16 +44,7 @@ function ChooseLocationComponent(props) {
     <>
       <div>
         <ToolbarComponent title="Add New Address" />
-        <div className="search-container">
-          <SearchBox
-            cancelEnable={props.isCancelButton}
-	    onChange={props.autoComplete}
-            onFocusOut={() => setSearchMode(false)}
-            onFocusIn={() => setSearchMode(true)}
-            placeholder="Search Location"
-          />
-          {props.isCancelButton ? <button>Cancel</button> : ""}
-        </div>
+        
         <div>
           <div className={(searchMode ? "" : "hide ") + "page-container"}>
               <AutoCompletePlacesComponent autoCompletePlaces={props.autoCompletePlaces}/>
@@ -68,3 +59,16 @@ function ChooseLocationComponent(props) {
 }
 
 export { ChooseLocationComponent };
+
+/*
+<div className="search-container">
+          <SearchBox
+            cancelEnable={props.isCancelButton}
+	          onChange={props.autoComplete}
+            onFocusOut={() => setSearchMode(false)}
+            onFocusIn={() => setSearchMode(true)}
+            placeholder="Search Location"
+          />
+          {props.isCancelButton ? <button>Cancel</button> : ""}
+        </div>
+        */

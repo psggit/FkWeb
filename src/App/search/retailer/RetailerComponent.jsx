@@ -4,26 +4,6 @@ import { LoadingComponent } from "../../common/loading";
 import { BrandContainer } from "../../common/brand";
 
 function RetailerComponent(props) {
-    const {query,data,pending}=props;
-    
-    const renderSku = (item) => {
-      return (
-        <>
-          {item.brands.map((item, index) => (
-            <BrandComponent key={index+'key'}  brandList={item} />
-          ))}
-        </>
-      );
-    };
-    if(pending){
-      return  <LoadingComponent />
-    }
-    if(query.length <=2 ){
-      return(<div className="initial-text">
-      <div>What are you looking for today?</div>
-      <div className="mid-light-text">We'll tell you where<br/>it's available!</div>
-    </div>)
-    }
   const { query, data, pending } = props;
 
   const renderSku = (retailer) => {
@@ -88,4 +68,3 @@ RetailerComponent.propTypes = {
 };
 
 export { RetailerComponent };
-
