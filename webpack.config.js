@@ -9,6 +9,7 @@ module.exports = (env, argv) => {
   const ARGS_SENTRY_RELEASE = JSON.stringify(env.SENTRY_RELEASE || "local");
   const ARGS_BUILD_ENV = JSON.stringify(env.BUILD_ENV || "local");
   const ARGS_BASE_DOMAIN = JSON.stringify(env.BASE_DOMAIN || "hipbar-dev.com");
+  const GMAPS_KEY = JSON.stringify(env.BASE_DOMAIN || "AIzaSyCHGLLAB117OiC9rDD9ON3gRP1LQLAAQmI");
   const config = {
     entry: ["react-hot-loader/patch", "./src/index.js"],
     output: {
@@ -88,6 +89,7 @@ module.exports = (env, argv) => {
         ARGS_SENTRY_RELEASE: ARGS_SENTRY_RELEASE,
         ARGS_BUILD_ENV: ARGS_BUILD_ENV,
         ARGS_BASE_DOMAIN: ARGS_BASE_DOMAIN,
+        GMAPS_KEY: GMAPS_KEY,
       }),
     ],
     optimization: {
