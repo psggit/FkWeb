@@ -6,7 +6,7 @@ import {
 } from "./action";
 
 const initialState = {
-  pending: false,
+  status: "waiting",
   data: [],
   error: "",
 };
@@ -15,16 +15,20 @@ function searchByStoreReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case getSearchByStoreInWaiting:
-      newState = { ...state, pending: true };
+      newState = { ...state, status: "waiting" };
       return newState;
     case getSearchByStoreInProgress:
-      newState = { ...state, pending: true };
+      newState = { ...state, status: "progress" };
       return newState;
     case getSearchByStoreSuccess:
-      newState = { ...state, data: action.payload.brand_list, pending: false };
+      newState = {
+        ...state,
+        data: action.payload.brand_list,
+        status: "success",
+      };
       return newState;
     case getSearchByStoreFailed:
-      newState = { ...state, error: action.payload, pending: false };
+      newState = { ...state, error: action.payload, status: "failed" };
       return newState;
     default:
       return state;
