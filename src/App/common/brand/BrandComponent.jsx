@@ -17,7 +17,7 @@ function getSkuFromProduct(brand, sku, retailer) {
     brand_id: brand.brand_id,
     price: sku.price,
     volume: sku.volume,
-    clearCart: true,
+    clearCart: false,
   };
 }
 

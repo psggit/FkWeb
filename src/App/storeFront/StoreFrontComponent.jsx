@@ -31,7 +31,6 @@ function StoreFrontComponent(props) {
   }, [generId]);
 
   const renderSku = (item) => {
-    console.log(props.retailer);
     return (
       <>
         {item.map((item, index) => (
