@@ -8,7 +8,7 @@ import { LoadingComponent } from "../common/loading";
 
 SearchByStoreComponent.propTypes = {
   data: PropTypes.array,
-  pending: PropTypes.bool,
+  status: PropTypes.string,
   getSearchByStore: PropTypes.func,
   retailer: PropTypes.object,
   selectedAddress: PropTypes.object,
@@ -17,7 +17,7 @@ SearchByStoreComponent.propTypes = {
 function SearchByStoreComponent(props) {
   const [cancelBtn, SetCancelBtn] = useState(false);
   const [query, SetQuery] = useState("");
-  const { getSearchByStore, data, pending } = props;
+  const { getSearchByStore, data, status } = props;
 
   const onFocus = () => {
     SetCancelBtn(true);
@@ -28,11 +28,14 @@ function SearchByStoreComponent(props) {
   };
 
   const handleInput = (val) => {
+    console.log("query", val);
     SetQuery(val);
   };
 
   useEffect(() => {
+    console.log("use effect 1");
     window.addEventListener("focusout", () => {
+      console.log("use effect 1 focusout event");
       SetCancelBtn(false);
     });
   });
@@ -40,16 +43,21 @@ function SearchByStoreComponent(props) {
   const isFirstRun = useRef(true);
 
   useEffect(() => {
-    //    if (isFirstRun.current) {
-    ///    isFirstRun.current = false;
-    //  return;
-    // }
+    console.log("use effect 2");
+    if (isFirstRun.current) {
+      console.log("use effect isFirstRun", isFirstRun);
+      isFirstRun.current = false;
+      return;
+    }
     if (query.length > 2) {
+      console.log("use effect query", query);
+
       getSearchByStore(query, props.selectedAddress, props.retailer);
     }
   }, [query]);
 
   const renderSku = (brands) => {
+    console.log("brand rendering is called");
     return (
       <>
         {brands.map((brand, index) => (
@@ -62,8 +70,17 @@ function SearchByStoreComponent(props) {
       </>
     );
   };
+  console.log("data in store" + data + status);
 
-  console.log("data in store" + data);
+  function searchUI() {
+    if (status == "waiting" || status == "failed") {
+      return <div />;
+    } else if (status == "progress") {
+      return <LoadingComponent />;
+    } else if (status == "success") {
+      return renderSku(data);
+    }
+  }
 
   return (
     <>
@@ -79,9 +96,7 @@ function SearchByStoreComponent(props) {
         </div>
       </ToolbarComponent>
       <SearchLayout custom="custom">
-        <div className="accordion-container mar-zero">
-          {pending ? <LoadingComponent /> : renderSku(data)}
-        </div>
+        <div className="accordion-container mar-zero">{searchUI()}</div>
       </SearchLayout>
     </>
   );

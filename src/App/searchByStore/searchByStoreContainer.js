@@ -5,12 +5,12 @@ import { getSearchByStore } from "./duck";
 const mapStateToProps = (state, props) => {
   console.log(state);
   const {
-    searchByStore: { data, pending },
+    searchByStore: { data, status },
     addressStore: { selectedAddress },
   } = state;
   return {
     data,
-    pending,
+    status,
     selectedAddress,
     retailer: props.location.state.retailer,
   };
