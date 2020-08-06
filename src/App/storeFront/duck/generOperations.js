@@ -5,12 +5,12 @@ import {
 } from "./action";
 import { searchGenresAPI } from "../../../utils";
 
-const reqBodyFromState = () => {
+const reqBodyFromState = (address, retailer) => {
   return JSON.stringify({
-    city_id: 5,
-    gps: "13.011557355101441,80.25409296154976",
-    retailer_id: 436,
-    state_id: 4,
+    city_id: address.city.id,
+    gps: address.gps,
+    retailer_id: retailer.retailer_id,
+    state_id: address.state.id,
   });
 };
 
@@ -40,8 +40,8 @@ const onError = (dispatch) => {
   };
 };
 
-const getGeners = (query) => {
-  let reqBody = reqBodyFromState(query);
+const getGeners = (address, retailer) => {
+  let reqBody = reqBodyFromState(address, retailer);
   return (dispatch) => {
     dispatch(getSearchGenresInProgress());
     searchGenresAPI(
