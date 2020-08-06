@@ -142,10 +142,7 @@ function PaymentOptions(props) {
             />
           </div>
         )}
-        <BottomNextComponent
-          routePath={"/order/placed/" + selectedBank}
-          title="Pay"
-        />
+        <BottomNextComponent routePath={"/payment"} title="Pay" />
       </div>
     </>
   );
