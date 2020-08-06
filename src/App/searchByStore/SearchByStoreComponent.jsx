@@ -35,7 +35,7 @@ function SearchByStoreComponent(props) {
     return (
       <>
         {item.map((item, index) => (
-          <BrandComponent key={item.brand_id} brandList={item} />
+          <BrandComponent key={item.brand_id} brand={item} />
         ))}
       </>
     );
