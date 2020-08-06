@@ -5,23 +5,18 @@ import PropTypes from "prop-types";
 SearchBox.propTypes = {
   onFocusOut: PropTypes.func,
   onFocusIn: PropTypes.func,
-  onChange: PropTypes.func,
+  handleInput: PropTypes.func,
+  placeholder: PropTypes.string,
 };
+
 function SearchBox(props) {
   const [inputType] = useState("search");
   //  const [inputValue, setInputValue] = useState("");
-  const {
-    handleInput,
-    onChange,
-    cancelEnable,
-    placeholder,
-    onFocusIn,
-    onFocusOut,
-  } = props;
+  const { handleInput, placeholder, onFocusIn, onFocusOut } = props;
 
   function handleChange(value) {
-//    setInputValue(value);
-    onChange(value);
+    //    setInputValue(value);
+    handleInput(value);
   }
   return (
     <>

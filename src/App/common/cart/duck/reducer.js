@@ -60,7 +60,6 @@ declare type Sku = {
   clearCart: boolean,
 };
 
-/*
 const getDefaultState = (): State => {
   return {
     retailer: {},
@@ -74,7 +73,6 @@ const getDefaultState = (): State => {
     redirect: false,
   };
 };
-*/
 
 let getTestState = (): State => {
   return {
@@ -107,7 +105,7 @@ let getTestState = (): State => {
   };
 };
 
-const initialState = getTestState;
+const initialState = getDefaultState;
 
 let setRetailer = (state: State, sku: Sku): State => {
   state["retailer"] = {
@@ -124,21 +122,20 @@ let isEmpty = (state: State): boolean => {
 
 let addProduct = (state: State, sku: Sku): State => {
   // handle existing retailer
-  console.log("add to cart" + state.products);
-  if (sku.retailerId !== state.retailer.id) {
+  if (isEmpty(state)) {
+    state = setRetailer(state, sku);
+  } else if (sku.retailerId !== state.retailer.id) {
     if (sku.clearCart === false) {
-      state["retailerDiffers"] = true;
+      state.retailerDiffers = true;
       return state;
     }
-    state = setRetailer(initialState(), sku);
-  }
-
-  if (isEmpty(state)) {
-    state = setRetailer(initialState(), sku);
+    state = setRetailer(state, sku);
+    state.products = {};
   }
 
   // set product details
-  let prod = state.products[sku.sku_id];
+  let prod = state.products[sku.sku_id.toString()];
+  // set product details
   //if doesn't exist, create one and add it to the map
   if (prod === undefined) {
     prod = {
@@ -156,7 +153,6 @@ let addProduct = (state: State, sku: Sku): State => {
     prod.count += 1;
   }
   state.products[prod.skuId.toString()] = prod;
-  console.log("add to cart" + state.products);
   return state;
 };
 
@@ -170,7 +166,6 @@ let removeProduct = (state: State, sku: Sku): State => {
   if (prod.count === 0) {
     delete state.products[prod.skuId.toString()];
   }
-  console.log("remove from cart" + state.products);
 
   if (isEmpty(state)) {
     return initialState();
@@ -231,10 +226,12 @@ const cartTotal = (oldS: State): number => {
 
 const cartReducer = createReducer(initialState(), {
   [addSkuToCart]: (state: State, e: Object) => {
-    return void addProduct({ ...state }, e.payload);
+    //let newS = addProduct({ ...state }, e.payload);
+    //return newS;
+    return void addProduct(state, e.payload);
   },
   [removeSkuFromCart]: (state: State, e: Object) => {
-    return void removeProduct({ ...state }, e.payload);
+    return void removeProduct(state, e.payload);
   },
   [validationSuccessful]: (state: State, e: Object) => {
     return void validateCart(state, e.payload);
