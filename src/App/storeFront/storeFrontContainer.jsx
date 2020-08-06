@@ -18,8 +18,9 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGeners: (value) => dispatch(getGeners(value)),
-    getBrands: (value) => dispatch(getBrands(value)),
+    getGeners: (address, retailer) => dispatch(getGeners(address, retailer)),
+    getBrands: (address, genreId, retailer) =>
+      dispatch(getBrands(address, genreId, retailer)),
   };
 };
 
