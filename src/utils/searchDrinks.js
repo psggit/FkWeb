@@ -2,7 +2,6 @@ import config from "../config";
 import CommonHeaders from "./common";
 
 const URL =
-  "https://cors-anywhere.herokuapp.com/" +
   "https://retailer." +
   config.BASE_DOMAIN +
   "/Api/stockandprice/search/locateDrinks";
