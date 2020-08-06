@@ -14,6 +14,7 @@ function EmptyAddressComponent() {
 }
 
 AddressComponent.propTypes = {
+  delelteAddressFunc: PropTypes.func,
   selectedAddress: PropTypes.object,
   savedUserAddresses: PropTypes.array,
   selectAddressFunc: PropTypes.func,
@@ -55,7 +56,13 @@ function AddressComponent(props) {
                 <div onClick={(e) => e.stopPropagation()} className="edit">
                   EDIT
                 </div>
-                <div onClick={(e) => e.stopPropagation()} className="delete">
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    props.delelteAddressFunc(address.address_id);
+                  }}
+                  className="delete"
+                >
                   DELETE
                 </div>
               </div>

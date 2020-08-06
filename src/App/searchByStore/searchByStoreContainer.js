@@ -2,17 +2,24 @@ import { connect } from "react-redux";
 import { SearchByStoreComponent } from "./SearchByStoreComponent";
 import { getSearchByStore } from "./duck";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   console.log(state);
   const {
-    searchByStore: { data, pending },
+    searchByStore: { data, status },
+    addressStore: { selectedAddress },
   } = state;
-  return { data, pending };
+  return {
+    data,
+    status,
+    selectedAddress,
+    retailer: props.location.state.retailer,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getSearchByStore: (value) => dispatch(getSearchByStore(value)),
+    getSearchByStore: (query, address, retailer) =>
+      dispatch(getSearchByStore(query, address, retailer)),
   };
 };
 

@@ -1,6 +1,10 @@
 @import "../../../colors.scss";
 @import "../../../dimens.scss";
 
+.bottom-bar-nav {
+  bottom: 56px !important;
+}
+
 .bottom-bar {
   display: flex;
   flex-direction: row;
@@ -9,7 +13,7 @@
   justify-content: flex-end;
   padding-right: 16px;
   position: fixed;
-  bottom: 56px;
+  bottom: 0px;
   left: 0;
   right: 0;
 }

@@ -12,6 +12,7 @@ import { BottomNextComponent } from "../common/bottomNext";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { drinksIcon } from "../../assets/images";
 import { Alert } from "../common/alert";
+import BottomNavigationComponent from "../common/bottomNavigation";
 
 RetryValidationComponent.propTypes = {
   products: PropTypes.object,
@@ -84,13 +85,18 @@ function NextComponent(props) {
   if (shouldValidate) {
     return (
       <BottomNextComponent
+        isNav={true}
         title="Checkout"
         onClickFunc={() => props.validateCart(validateParams)}
       />
     );
   } else {
     return (
-      <BottomNextComponent routePath="/address/select/osm" title="Checkout" />
+      <BottomNextComponent
+        isNav={true}
+        routePath="/address/select/osm"
+        title="Checkout"
+      />
     );
   }
 }
@@ -150,6 +156,7 @@ function CartComponent(props) {
         </div>
         <NextComponent {...props} />
       </div>
+      <BottomNavigationComponent />
     </div>
   );
 }

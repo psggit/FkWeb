@@ -9,6 +9,7 @@ BottomNextComponent.propTypes = {
   title: PropTypes.string,
   inActive: PropTypes.bool,
   onClickFunc: PropTypes.func,
+  isNav: PropTypes.bool,
 };
 
 function BottomNextComponent(props) {
@@ -23,9 +24,18 @@ function BottomNextComponent(props) {
       }
     }
   }
+
+  function getNextClassName() {
+    if (props.isNav) {
+      return "bottom-bar-nav bottom-bar bottom-bar-height";
+    } else {
+      return "bottom-bar bottom-bar-height";
+    }
+  }
+
   return (
     <div className="bottom-bar-height">
-      <div className="bottom-bar bottom-bar-height">
+      <div className={getNextClassName()}>
         <div
           className={(inActive == true ? "disable " : "") + "btn-general"}
           onClick={() => clickProcess()}
