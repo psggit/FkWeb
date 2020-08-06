@@ -124,6 +124,7 @@ let isEmpty = (state: State): boolean => {
 
 let addProduct = (state: State, sku: Sku): State => {
   // handle existing retailer
+  console.log("add to cart" + state.products);
   if (sku.retailerId !== state.retailer.id) {
     if (sku.clearCart === false) {
       state["retailerDiffers"] = true;
@@ -155,6 +156,7 @@ let addProduct = (state: State, sku: Sku): State => {
     prod.count += 1;
   }
   state.products[prod.skuId.toString()] = prod;
+  console.log("add to cart" + state.products);
   return state;
 };
 
@@ -168,6 +170,8 @@ let removeProduct = (state: State, sku: Sku): State => {
   if (prod.count === 0) {
     delete state.products[prod.skuId.toString()];
   }
+  console.log("remove from cart" + state.products);
+
   if (isEmpty(state)) {
     return initialState();
   }
