@@ -59,7 +59,7 @@ function BottomNavigationComponent(props) {
                 <span className="navImage">
                   {value.route == location ? <img src={value.activeIcon} /> : <img src={value.icon} />}
                 </span>
-                {value.label == "Cart" ? <div className="navText">{value.label.toUpperCase()} <span className="navBadge">{totalCartItems}</span></div> : <div className="navText">{value.label.toUpperCase()}</div>}
+                {value.label == "Cart" ? <div className="navText">{value.label.toUpperCase()} {(totalCartItems > 0) ? <span className="navBadge">{totalCartItems}</span> : null}</div> : <div className="navText">{value.label.toUpperCase()}</div>}
               </div>
             </NavLink>
           </div>
