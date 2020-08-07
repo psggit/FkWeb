@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 import { RetailerListContainer } from "./retailerList";
 import { CarouselContainer } from "./carousel";
 import { ChooseAddressComponent } from "./chooseAddress";
-import BottomNavigationComponent from "../common/bottomNavigation";
+import {BottomNavigationContainer} from "../common/bottomNavigation";
 import { CurretOrderComponent } from "./currentOrders";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
@@ -59,7 +59,7 @@ function HomeComponent(props) {
       <CarouselContainer />
       <RetailerListContainer />
       {props.currentOrder ? templateCurrentOrder(props) : <div />}
-      <BottomNavigationComponent />
+      <BottomNavigationContainer />
     </>
   );
 }

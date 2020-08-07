@@ -68,4 +68,3 @@ RetailerComponent.propTypes = {
 };
 
 export { RetailerComponent };
-
