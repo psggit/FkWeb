@@ -45,7 +45,7 @@ function ChooseLocationComponent(props) {
   return (
     <>
       <div>
-        <ToolbarComponent title="Add New Address" />
+        <ToolbarComponent helpVisibility={false} title="Add New Address" />
 
         <div>
           <div className={(searchMode ? "" : "hide ") + "page-container"}>
