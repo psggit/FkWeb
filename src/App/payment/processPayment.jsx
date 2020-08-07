@@ -14,6 +14,7 @@ ProcessPayment.propTypes = {
   summaryDetails: PropTypes.object,
 };
 
+/*
 function CardPayment() {
   return (
     <form className="juspay_inline_form" id="payment_form">
@@ -47,30 +48,19 @@ function CardPayment() {
     </form>
   );
 }
+*/
 
 function SavedCardPayment() {
   return (
     <>
       <form className="juspay_inline_form" id="payment_form1">
-        <input type="hidden" className="merchant_id" value="guest" />
+        <input type="hidden" className="merchant_id" value="hipbar" />
         <input type="hidden" className="order_id" value="guest_order" />
         <input type="hidden" className="card_token" />
         <input type="hidden" className="card_isin" />
         <div className="security_code_div"></div>
-        <input
-          type="radio"
-          className="auth_type"
-          value=""
-          name="auth_type"
-        />{" "}
+        <input type="radio" className="auth_type" value="" name="auth_type" />
         Verify with Secure Password
-        <input
-          type="radio"
-          className="auth_type"
-          value=""
-          name="auth_type"
-        />{" "}
-        Verify with ATM PIN
         <input type="hidden" className="redirect" value="true" />
       </form>
       <button type="button" className="make_payment">

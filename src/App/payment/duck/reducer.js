@@ -23,7 +23,7 @@ let initialState = {
   fetchPaymentOptionsErrorMessage: false,
 
   //Payment store
-  createPaymentDetails: {},
+  paymentDetails: {},
   createPaymentInProgress: false,
   createPaymentFailed: false,
   createPaymentSuccess: false,
@@ -97,7 +97,7 @@ const paymentReducer = createReducer(initialState, {
     };
   },
 
-  [createPaymentSuccess]: (state) => {
+  [createPaymentSuccess]: (state, e) => {
     return {
       ...state,
       createPaymentInProgress: false,
@@ -105,6 +105,7 @@ const paymentReducer = createReducer(initialState, {
       createPaymentSuccess: true,
       createPaymentError: false,
       createPaymentErrorMessage: "",
+      paymentDetails: e.payload,
     };
   },
 

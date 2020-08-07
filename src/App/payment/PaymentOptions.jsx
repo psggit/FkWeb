@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { ToolbarComponent } from "../common/toolbar";
@@ -19,6 +19,7 @@ import "./style.scss";
 RetryComponent.propTypes = {
   createOrder: PropTypes.func,
   fetchPaymentOptions: PropTypes.func,
+  createPayment: PropTypes.func,
   payment: PropTypes.object,
 };
 
@@ -28,17 +29,17 @@ function RetryComponent(props) {
     retryAction = props.fetchPaymentOptions;
   } else if (props.payment.createOrderFailed) {
     retryAction = props.createOrder;
+  } else if (props.payment.createPaymentFailed) {
+    retryAction = props.createPayment;
   }
   return (
-    <>
-      <SplashLoadingComponent
-        motion={false}
-        icon={drinksIcon}
-        text="Something went wrong, please try again."
-        buttonFunc={() => retryAction(props)}
-        buttonText="Retry"
-      />
-    </>
+    <SplashLoadingComponent
+      motion={false}
+      icon={drinksIcon}
+      text="Something went wrong, please try again."
+      buttonFunc={() => retryAction(props)}
+      buttonText="Retry"
+    />
   );
 }
 
@@ -47,27 +48,63 @@ PaymentOptions.propTypes = {
   payment: PropTypes.object,
   initialise: PropTypes.func,
   summaryDetails: PropTypes.object,
+  createPayment: PropTypes.func,
+  jpSavedCardsConf: PropTypes.func,
 };
 
 function PaymentOptions(props) {
   const [selectedBank, setSelectedBank] = useState("");
+  let triggerCreatePayment =
+    props.payment.createOrderSuccess &&
+    !(
+      props.payment.createPaymentInProgress ||
+      props.payment.createPaymentFailed ||
+      props.payment.createPaymentSuccess
+    );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (props.payment.initialTrigger) {
       props.initialise(props);
     }
+    console.log(triggerCreatePayment);
+    if (triggerCreatePayment) {
+      props.createPayment(props);
+    }
   });
+
+  const configureJuspay = () => {
+    let jp = window.Juspay;
+    props.jpSavedCardsConf(jp);
+  };
+
+  useEffect(() => {
+    const script = document.createElement("script");
+
+    script.src = "https://api.juspay.in/pay-v3.js";
+    script.type = "text/javascript";
+    script.async = true;
+    script.onload(configureJuspay);
+    document.body.appendChild(script);
+
+    /*
+    return () => {
+      document.body.removeChild(script);
+    };
+	  */
+  }, []);
 
   if (
     props.payment.createOrderFailed ||
-    props.payment.fetchPaymentOptionsFailed
+    props.payment.fetchPaymentOptionsFailed ||
+    props.payment.createPaymentFailed
   ) {
     return <RetryComponent {...props} />;
   }
 
   if (
     props.payment.createOrderInProgress ||
-    props.payment.fetchPaymentOptionsInProgress
+    props.payment.fetchPaymentOptionsInProgress ||
+    props.payment.createPaymentInProgress
   ) {
     return (
       <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
