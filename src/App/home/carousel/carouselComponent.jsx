@@ -10,7 +10,7 @@ CarouselComponent.propTypes = {
 
 function CarouselComponent(props) {
   useLayoutEffect(() => {
-    if (props.address) {
+    if ((props.address) && (props.items.length === 0)) {
       props.fetchHomeCarousel({
         cityID: props.address.city.id,
       });

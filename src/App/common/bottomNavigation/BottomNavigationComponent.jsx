@@ -23,7 +23,7 @@ const tabs = [
     route: "/search",
     icon: searchIcon,
     activeIcon: searchActiveIcon,
-    label: "Search Drinks",
+    label: "Search",
   },
   {
     route: "/cart",

@@ -56,7 +56,7 @@ const addressListReducer = createReducer(initialState, {
   }),
   [deleteAddressSuccessAction]: (state) => ({
     ...state,
-    selectedAddress: {},
+    selectedAddress: null,
     apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "success" },
   }),
   [deleteAddressInProgressAction]: (state) => ({

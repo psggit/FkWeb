@@ -63,7 +63,7 @@ function AgreeAndContinueComponent(props) {
   if (showTC) {
     return <TcComponent {...props} />;
   }
-  return <Redirect to="/user/login" />;
+  return <Redirect to="/statecity/select" />;
 }
 
 export { AgreeAndContinueComponent };
