@@ -115,6 +115,7 @@ function PaymentOptions(props) {
         {payment.is_nb_enabled && (
           <div>
             <NetBankingComponent
+              {...props}
               banks={banks}
               onBankSelected={openOtherBankOptions}
               onOtherBankSelected={openOtherBankOptions}
