@@ -25,10 +25,12 @@ const errorHandler = () => {
 export const jpSavedCardsConf = (JusPay) => {
   return () => {
     console.log(JusPay);
-    JusPay.Setup({
+    return JusPay.Setup({
       payment_form: "#payment_form",
+      type: "express",
       success_handler: successHandler(),
       error_handler: errorHandler(),
+
       iframe_elements: {
         security_code: {
           /* Class name of the <div> which will hold the iframe element for card security code. */
@@ -39,6 +41,7 @@ export const jpSavedCardsConf = (JusPay) => {
           },
         },
       },
+
       styles: {
         /* Add the styling for card security code input field here */
         ".security_code": {
@@ -69,7 +72,9 @@ export const jpSavedCardsConf = (JusPay) => {
          *  4. event.card_brand - MASTERCARD/VISA/MAESTRO/AMEX/DINERS/DISCOVER/JCB/RUPAY
          *
          */
+        console.log(event);
       },
     });
   };
 };
+

@@ -72,27 +72,6 @@ function PaymentOptions(props) {
     }
   });
 
-  const configureJuspay = () => {
-    let jp = window.Juspay;
-    props.jpSavedCardsConf(jp);
-  };
-
-  useEffect(() => {
-    const script = document.createElement("script");
-
-    script.src = "https://api.juspay.in/pay-v3.js";
-    script.type = "text/javascript";
-    script.async = true;
-    script.onload(configureJuspay);
-    document.body.appendChild(script);
-
-    /*
-    return () => {
-      document.body.removeChild(script);
-    };
-	  */
-  }, []);
-
   if (
     props.payment.createOrderFailed ||
     props.payment.fetchPaymentOptionsFailed ||
