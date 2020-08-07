@@ -3,14 +3,13 @@ import { BottomNavigationComponent } from "./BottomNavigationComponent";
 
 const mapStateToProps = (state) => {
   return {
-    cartProducts: state.cart.products
+    cartProducts: state.cart.products,
   };
 };
 
 const mapDispatchToProps = () => {
-    return {};
-  };
-
+  return {};
+};
 
 const BottomNavigationContainer = connect(
   mapStateToProps,

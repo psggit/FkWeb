@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ToolbarComponent } from "../../common/toolbar";
-import { SearchBox } from "../../search/SearchBox";
 import PropTypes from "prop-types";
 import { MapWithMarkerComponent, PlacesDetailComponent } from "./components";
 import "./style.scss";
@@ -24,9 +23,13 @@ AutoCompletePlacesComponent.propTypes = {
 function AutoCompletePlacesComponent(props) {
   const autoCompletePlaces = props.autoCompletePlaces;
   if (autoCompletePlaces) {
-    return <div className="flex hcenter vcenter">Search for your locality...</div>;
+    return (
+      <div className="flex hcenter vcenter">Search for your locality...</div>
+    );
   } else if (autoComplete.length == 0) {
-    return <div className="flex hcenter vcenter">Sorry, No locations found...</div>;
+    return (
+      <div className="flex hcenter vcenter">Sorry, No locations found...</div>
+    );
   } else {
     return <PlacesDetailComponent title="Adyar" address="Address of Adyar" />;
   }
@@ -39,16 +42,17 @@ function ChooseLocationComponent(props) {
     });
   });
   const [searchMode, setSearchMode] = useState(false);
-  const autoCompletePlaces = props.autoCompletePlaces;
   return (
     <>
       <div>
         <ToolbarComponent title="Add New Address" />
-        
+
         <div>
           <div className={(searchMode ? "" : "hide ") + "page-container"}>
-              <AutoCompletePlacesComponent autoCompletePlaces={props.autoCompletePlaces}/>
-           </div>
+            <AutoCompletePlacesComponent
+              autoCompletePlaces={props.autoCompletePlaces}
+            />
+          </div>
           <div className={searchMode ? "hide" : ""}>
             <MapWithMarkerComponent storeGpsFunc={props.storeGpsFunc} />
           </div>
@@ -59,16 +63,3 @@ function ChooseLocationComponent(props) {
 }
 
 export { ChooseLocationComponent };
-
-/*
-<div className="search-container">
-          <SearchBox
-            cancelEnable={props.isCancelButton}
-	          onChange={props.autoComplete}
-            onFocusOut={() => setSearchMode(false)}
-            onFocusIn={() => setSearchMode(true)}
-            placeholder="Search Location"
-          />
-          {props.isCancelButton ? <button>Cancel</button> : ""}
-        </div>
-        */
