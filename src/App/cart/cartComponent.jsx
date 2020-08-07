@@ -51,7 +51,7 @@ function returnEmptyCart() {
   return (
     <div className="cart">
       <EmptyCartComponent />
-      <BottomNavigationComponent />
+      <BottomNavigationContainer />
     </div>
   );
 }
@@ -153,7 +153,7 @@ function CartComponent(props) {
         <div className="padding-24">
           <CartHeaderComponent {...props} />
           {cartItems(props)}
-          <AddMoreComponent />
+          <AddMoreComponent retailer={props.retailer}/>
         </div>
         <NextComponent {...props} />
       </div>
