@@ -5,7 +5,7 @@ const BaseURL =
   "https://maps.googleapis.com/maps/api/place/autocomplete/json?sensor=false&key=" +
   config.GMAPS_KEY +
   "&input=";
-const headers = { };
+const headers = {};
 const autoCompleteLocationAPI = (searchTerm, process, onSuccess, onError) => {
   const URL = BaseURL + searchTerm;
   fetch(URL, {

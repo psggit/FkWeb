@@ -8,23 +8,23 @@ import { autoCompleteLocationAPI } from "../../../../utils";
 
 const onSuccess = (dispatch) => {
   return (data) => {
-    console.log(data)
+    console.log(data);
     dispatch(autoCompleteAction(data));
   };
 };
 
 const onError = (dispatch) => {
   return (err) => {
-    console.log(err)
+    console.log(err);
     dispatch(autoCompleteFailAction(err));
   };
 };
 
 const processResponse = () => {
   return (res) => {
-    console.log(res)
+    console.log(res);
     if (res.ok) {
-      console.log(res)
+      console.log(res);
       return res.json();
     }
     if (res.status === 400) {
