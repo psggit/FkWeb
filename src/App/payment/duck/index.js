@@ -19,3 +19,4 @@ export { fetchPaymentOptions } from "./fetchPaymentOptions";
 export { createPayment } from "./createPayment";
 export { jpSavedCardsConf } from "./jpSavedCards";
 export { jpUpiConf } from "./jpUpi";
+export { jpNetBankingConf } from "./jpNetBanking";
