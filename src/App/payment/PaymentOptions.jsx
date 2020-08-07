@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { ToolbarComponent } from "../common/toolbar";
@@ -33,15 +33,13 @@ function RetryComponent(props) {
     retryAction = props.createPayment;
   }
   return (
-    <>
-      <SplashLoadingComponent
-        motion={false}
-        icon={drinksIcon}
-        text="Something went wrong, please try again."
-        buttonFunc={() => retryAction(props)}
-        buttonText="Retry"
-      />
-    </>
+    <SplashLoadingComponent
+      motion={false}
+      icon={drinksIcon}
+      text="Something went wrong, please try again."
+      buttonFunc={() => retryAction(props)}
+      buttonText="Retry"
+    />
   );
 }
 
@@ -64,14 +62,16 @@ function PaymentOptions(props) {
       props.payment.createPaymentSuccess
     );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (props.payment.initialTrigger) {
       props.initialise(props);
     }
+    console.log(triggerCreatePayment);
     if (triggerCreatePayment) {
       props.createPayment(props);
     }
   });
+
   const configureJuspay = () => {
     let jp = window.Juspay;
     props.jpSavedCardsConf(jp);
@@ -83,11 +83,14 @@ function PaymentOptions(props) {
     script.src = "https://api.juspay.in/pay-v3.js";
     script.type = "text/javascript";
     script.async = true;
+    script.onload(configureJuspay);
     document.body.appendChild(script);
 
+    /*
     return () => {
       document.body.removeChild(script);
     };
+	  */
   }, []);
 
   if (
