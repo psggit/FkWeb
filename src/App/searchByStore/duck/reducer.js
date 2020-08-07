@@ -1,5 +1,12 @@
+import {
+  getSearchByStoreFailed,
+  getSearchByStoreSuccess,
+  getSearchByStoreInWaiting,
+  getSearchByStoreInProgress,
+} from "./action";
+
 const initialState = {
-  pending: false,
+  status: "waiting",
   data: [],
   error: "",
 };
@@ -7,14 +14,21 @@ const initialState = {
 function searchByStoreReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
-    case "PENDING":
-      newState = { ...state, pending: true };
+    case getSearchByStoreInWaiting:
+      newState = { ...state, status: "waiting" };
       return newState;
-    case "SUCCESS":
-      newState = { ...state, data: action.payload.brand_list, pending: false };
+    case getSearchByStoreInProgress:
+      newState = { ...state, status: "progress" };
       return newState;
-    case "FAILURE":
-      newState = { ...state, error: action.payload, pending: false };
+    case getSearchByStoreSuccess:
+      newState = {
+        ...state,
+        data: action.payload.brand_list,
+        status: "success",
+      };
+      return newState;
+    case getSearchByStoreFailed:
+      newState = { ...state, error: action.payload, status: "failed" };
       return newState;
     default:
       return state;

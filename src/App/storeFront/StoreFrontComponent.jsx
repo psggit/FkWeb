@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../common/toolbar";
 import SearchLayout from "../common/layout/SearchLayout";
-import { BrandComponent } from "../common/brand";
+import { BrandContainer} from "../common/brand";
 import fssaiImg from "../../assets/images/fssai.png";
 import { LoadingComponent } from "../common/loading";
 import searchIcon from "../../assets/images/search.svg";
@@ -11,8 +11,8 @@ import { useHistory } from "react-router-dom";
 StoreFrontComponent.propTypes = {
   getGeners: PropTypes.func,
   getBrands: PropTypes.func,
-  brandItems: PropTypes.array,
-  generItems: PropTypes.array,
+  brandItems: PropTypes.object,
+  generItems: PropTypes.object,
   selectedAddress: PropTypes.object,
   retailer: PropTypes.object,
 };
@@ -23,18 +23,22 @@ function StoreFrontComponent(props) {
   const { getGeners, getBrands, brandItems, generItems } = props;
   const [generId, setGenerId] = useState(4);
   useEffect(() => {
-    getGeners("gh");
+    getGeners(props.selectedAddress, props.retailer);
   }, []);
 
   useEffect(() => {
-    getBrands(generId);
+    getBrands(props.selectedAddress, generId, props.retailer);
   }, [generId]);
 
   const renderSku = (item) => {
     return (
       <>
         {item.map((item, index) => (
-          <BrandComponent key={item.brand_id} brandList={item} />
+          <BrandContainer
+            key={item.brand_id}
+            brand={item}
+            retailer={props.retailer}
+          />
         ))}
         <div className="fssai-img">
           <img src={fssaiImg} alt="fssai" />
@@ -52,9 +56,6 @@ function StoreFrontComponent(props) {
     });
   }
 
-  // if(brandItems.pending){
-  //   return  <LoadingComponent />
-  // }
   return (
     <>
       <ToolbarComponent title={props.retailer.retailer_name}>
@@ -77,7 +78,7 @@ function StoreFrontComponent(props) {
             <ul>
               {generItems.data.map((item, index) => (
                 <li
-                  key={index + item.id}
+                  key={item.id}
                   className={generId === item.id ? "activeBrand" : ""}
                   onClick={() => setGenerId(item.id)}
                 >

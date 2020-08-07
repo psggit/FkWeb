@@ -1,15 +1,15 @@
 import { getBrandSuccess, getBrandInProgress, getBrandFailed } from "./action";
 import { getBrandAPI } from "../../../utils";
 
-const reqBodyFromState = (id) => {
+const reqBodyFromState = (address, genreId, retailer) => {
   return JSON.stringify({
-    city_id: 5,
+    city_id: address.city.id,
     offset: 0,
-    genre_id: id,
-    gps: "13.011557355101441,80.25409296154976",
-    retailer_id: 436,
-    limit: 20,
-    state_id: 4,
+    genre_id: genreId,
+    gps: address.gps,
+    retailer_id: retailer.retailer_id,
+    limit: 30,
+    state_id: address.state.id,
   });
 };
 
@@ -39,8 +39,8 @@ const onError = (dispatch) => {
   };
 };
 
-const getBrands = (id) => {
-  let reqBody = reqBodyFromState(id);
+const getBrands = (address, genreId, retailer) => {
+  let reqBody = reqBodyFromState(address, genreId, retailer);
   return (dispatch) => {
     dispatch(getBrandInProgress());
     getBrandAPI(
