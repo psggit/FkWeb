@@ -2,7 +2,9 @@ import React, { useState, useRef } from "react";
 import { GoogleMap, LoadScript, Autocomplete } from "@react-google-maps/api";
 import { mapMarkerIcon } from "../../../../assets/images";
 import { BottomNextComponent } from "../../../common/bottomNext";
+import { searchIcon } from "../../../../assets/images";
 import "../style.scss";
+
 
 const mapStyle = require("./styles.json");
 
@@ -10,6 +12,7 @@ function MapComponent(props) {
   const mapRef = useRef(null);
   const [map, setMap] = React.useState(null);
   const [center, setCenter] = useState({ lat: 13.006928, lng: 80.255516 });
+  let [isCancelButton, setCancelButton] = useState(false);
 
   let [autocomplete, setAutoComplete] = useState(null);
 
@@ -24,27 +27,27 @@ function MapComponent(props) {
 
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
-      //console.log(autocomplete.getPlace())
-      const details = autocomplete.getPlace();
-      console.log(autocomplete);
-      // const geometry = autocomplete.geometry.location.lat();
-      const {formatted_address} = details;
-      console.log(details, formatted_address);
-      
+      let newPos = {
+        lat: autocomplete.getPlace().geometry.location.lat(),
+        lng: autocomplete.getPlace().geometry.location.lng()
+      }
+      setCenter(newPos);
+      props.storeGpsFunc(newPos);
     } else {
       console.log('Autocomplete is not loaded yet!')
     }
   }
 
   const onUnmount = () => {
-    mapRef.current = null
+    mapRef.current = null;
+    console.log("[onUnmounting]");
+    return null;
   };
 
   const onCenterChanged = () => {
     if (!mapRef.current) return;
     const newPos = mapRef.current.getCenter().toJSON();
     setCenter(newPos);
-    console.log(newPos);
     props.storeGpsFunc(newPos);
   };
 
@@ -53,26 +56,20 @@ function MapComponent(props) {
       <Autocomplete
         onLoad={onLoadAuto}
         onPlaceChanged={onPlaceChanged}
+        onUnmount={onUnmount}
       >
-        <input
-          type="text"
-          placeholder="Customized your placeholder"
-          style={{
-            boxSizing: `border-box`,
-            border: `1px solid transparent`,
-            width: `240px`,
-            height: `32px`,
-            padding: `0 12px`,
-            borderRadius: `3px`,
-            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-            fontSize: `14px`,
-            outline: `none`,
-            textOverflow: `ellipses`,
-            position: "absolute",
-            left: "50%",
-            marginLeft: "-120px"
-          }}
-        />
+        
+        <div className="search-container">
+        <img className="search-img" src={searchIcon} alt="searchIcon" />
+          <input
+            type="text"
+            placeholder="Search Location"
+            className="inputclass"
+            onFocus={() => setCancelButton(true)}
+            onBlur={() => setCancelButton(false)}
+          />
+          {isCancelButton ? <button>Cancel</button> : ""}
+        </div>
       </Autocomplete>
       <GoogleMap
         id="gmap"
