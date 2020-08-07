@@ -51,6 +51,7 @@ function returnEmptyCart() {
   return (
     <div className="cart">
       <EmptyCartComponent />
+      <BottomNavigationComponent />
     </div>
   );
 }

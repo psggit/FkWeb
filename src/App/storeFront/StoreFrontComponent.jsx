@@ -23,11 +23,11 @@ function StoreFrontComponent(props) {
   const { getGeners, getBrands, brandItems, generItems } = props;
   const [generId, setGenerId] = useState(4);
   useEffect(() => {
-    getGeners("gh");
+    getGeners(props.selectedAddress, props.retailer);
   }, []);
 
   useEffect(() => {
-    getBrands(generId);
+    getBrands(props.selectedAddress, generId, props.retailer);
   }, [generId]);
 
   const renderSku = (item) => {
@@ -56,9 +56,6 @@ function StoreFrontComponent(props) {
     });
   }
 
-  // if(brandItems.pending){
-  //   return  <LoadingComponent />
-  // }
   return (
     <>
       <ToolbarComponent title={props.retailer.retailer_name}>

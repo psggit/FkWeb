@@ -20,9 +20,7 @@ function SearchComponent(props) {
   };
 
   const handleInput = (val) => {
-    console.log("qeury" + val);
     SetQuery(val);
-    console.log("qeury" + query);
   };
 
   useEffect(() => {

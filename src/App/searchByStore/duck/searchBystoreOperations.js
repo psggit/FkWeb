@@ -5,15 +5,15 @@ import {
 } from "./action";
 import { searchByStoreAPI } from "../../../utils";
 
-const reqBodyFromState = (query) => {
+const reqBodyFromState = (query, address, retailer) => {
   return JSON.stringify({
-    city_id: 5,
-    lat_lng: "13.011557355101441,80.25409296154976",
-    limit: 9,
+    city_id: address.city.id,
+    lat_lng: address.gps,
+    limit: 30,
     offset: 0,
     query: query,
-    retailer_id: 436,
-    state_id: 4,
+    retailer_id: retailer.retailer_id,
+    state_id: address.state.id,
   });
 };
 
@@ -44,8 +44,8 @@ const onError = (dispatch) => {
   };
 };
 
-const getSearchByStore = (query) => {
-  let reqBody = reqBodyFromState(query);
+const getSearchByStore = (query, address, retailer) => {
+  let reqBody = reqBodyFromState(query, address, retailer);
   return (dispatch) => {
     dispatch(getSearchByStoreInProgress());
     searchByStoreAPI(
