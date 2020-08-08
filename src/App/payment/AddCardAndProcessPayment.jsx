@@ -4,6 +4,24 @@ import { ToolbarComponent } from "../common/toolbar";
 import { EditText } from "../common/editText";
 import { ButtonComponent } from "../common/bottomNext/BottomNextComponent";
 
+NewCardInput.propTypes = {
+  title: PropTypes.string, // Text about the input field
+  className: PropTypes.string,
+};
+
+function NewCardInput(props) {
+  return (
+    <>
+      <div className="input-component-label">{props.title}</div>
+      <div
+        className={
+          props.className + " inputComponentField input_field_100 input"
+        }
+      ></div>
+    </>
+  );
+}
+
 AddCardAndProcessPayment.propTypes = {
   bank: PropTypes.any,
   payment: PropTypes.object,
@@ -69,66 +87,16 @@ function AddCardAndProcessPayment(props) {
             className="order_id"
             value={paymentDetails.order_id}
           />
-          <div className="input_field_100 card_number_div"></div>
-          <div className="input_field_100 name_on_card_div"></div>
-          <div className="input_field_100 card_exp_month_div"></div> -{" "}
-          <div className="input_field_100 card_exp_year_div"></div>
-          <div className="input_field_100 security_code_div"></div>
+          <NewCardInput title="CARD NUMBER" className="card_number_div" />
+          <NewCardInput title="NAME ON CARD" className="name_on_card_div" />
+          <NewCardInput title="EXPIRY MONTH" className="card_exp_month_div" />
+          <NewCardInput title="EXPIRY YEAR" className="card_exp_year_div" />
+          <NewCardInput title="CVV" className="security_code_div" />
           <input type="hidden" className="payment_method_type" value="CARD" />
           <input type="checkbox" className="juspay_locker_save" /> Save card
-          information
           <input type="hidden" className="redirect" value="true" />
-          <input
-            type="radio"
-            className="auth_type"
-            value=""
-            name="auth_type"
-          />{" "}
-          Verify with Secure Password
-          <input
-            type="radio"
-            className="auth_type"
-            value="ATMPIN"
-            name="auth_type"
-          />{" "}
-          Verify with ATM PIN
-          <button type="submit" id="common_pay_btn">
-            Make Payment
-          </button>
+          <ButtonComponent onClickFunc={onSubmit} title="Pay" />
         </form>
-        <EditText
-          title="CARD NUMBER"
-          id="cardNumber"
-          inputMode="numeric"
-          autoComplete="section-cc cc-number"
-          maxLength="20"
-        />
-        <EditText
-          title="EXPIRY DATE (MM/YY)"
-          id="expiryDate"
-          inputType="month"
-          autoComplete="section-cc cc-exp"
-        />
-        <EditText
-          title="CVV"
-          id="cvvNumber"
-          inputType="password"
-          inputMode="numeric"
-          autoComplete="section-cc cc-csc"
-          maxLength="4"
-        />
-        <EditText
-          title="NAME ON CARD"
-          id="nameOfCard"
-          inputType="text"
-          autoComplete="section-cc cc-name"
-          maxLength="30"
-        />
-        <ButtonComponent
-          onClickFunc={onSubmit}
-          routePath={"/order/placed"}
-          title="Pay"
-        />
       </div>
     </>
   );

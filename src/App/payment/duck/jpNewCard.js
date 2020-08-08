@@ -68,27 +68,36 @@ export const jpNewCardConf = (JusPay) => {
         ".card_number": {
           "line-height": "10px",
           "font-size": "16px",
+          width: "100%",
+          color: "#d1d2dd",
         },
         ".name_on_card": {
           "line-height": "20px",
           "font-size": "16px",
+          width: "100%",
+          color: "#d1d2dd",
         },
         ".card_exp_month": {
           "line-height": "30px",
           "font-size": "16px",
-          width: "60px",
+          width: "100%",
+          color: "#d1d2dd",
         },
         ".card_exp_year": {
           "line-height": "40px",
           "font-size": "16px",
-          width: "60px",
+          width: "100%",
+          color: "#d1d2dd",
         },
         ".security_code": {
           "line-height": "50px",
           "font-size": "16px",
-          width: "60px",
+          width: "100%",
+          color: "#d1d2dd",
         },
-        ":focus": {},
+        ":focus": {
+          outline: "none",
+        },
       },
       iframe_element_callback: function (event) {
         console.log(event);
