@@ -5,6 +5,7 @@ import { SearchBox } from "./SearchBox";
 import { HeaderComponent } from "../common/toolbar";
 import SearchLayout from "../common/layout/SearchLayout";
 import { RetailerComponent } from "./retailer";
+import { AlertWithOptions } from "../common/alert";
 
 function SearchComponent(props) {
   const [cancelBtn, SetCancelBtn] = useState(false);
@@ -41,6 +42,21 @@ function SearchComponent(props) {
     }
   }, [query]);
 
+  if (props.retailerDiffers) {
+    return (
+      <AlertWithOptions
+        title={"Items already in cart"}
+        content={
+          "You can clear the cart & add items from another store or cancel and keep the current items"
+        }
+        option1={"CLEAR CART"}
+        option2={"CANCEL"}
+        handleOption1={props.clearCartAndAdd}
+        handleOption2={props.dontClearCart}
+      />
+    );
+  }
+
   return (
     <>
       <HeaderComponent title="Search Drinks">
@@ -61,7 +77,11 @@ function SearchComponent(props) {
     </>
   );
 }
+
 SearchComponent.propTypes = {
   getSearchDrinks: PropTypes.func,
+  retailerDiffers: PropTypes.bool,
+  clearCartAndAdd: PropTypes.func,
+  dontClearCart: PropTypes.func,
 };
 export { SearchComponent };
