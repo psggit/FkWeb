@@ -1,4 +1,9 @@
-import { getBrandSuccess, getBrandPaginationSuccess, getBrandInProgress, getBrandFailed } from "./action";
+import {
+  getBrandSuccess,
+  getBrandPaginationSuccess,
+  getBrandInProgress,
+  getBrandFailed,
+} from "./action";
 import { getBrandAPI } from "../../../utils";
 
 const reqBodyFromState = (address, genreId, retailer, limit, offset) => {
