@@ -21,8 +21,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getGeners: (address, retailer) => dispatch(getGeners(address, retailer)),
-    getBrands: (address, genreId, retailer) =>
-      dispatch(getBrands(address, genreId, retailer)),
+    getBrands: (address, genreId, retailer, limit, offset) =>
+      dispatch(getBrands(address, genreId, retailer, limit, offset)),
     clearCartAndAdd: () => dispatch(clearCartAndAdd()),
     dontClearCart: () => dispatch(dontClearCart()),
   };
