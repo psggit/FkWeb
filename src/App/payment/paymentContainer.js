@@ -9,6 +9,7 @@ import {
   createPayment,
   jpSavedCardsConf,
   jpUpiConf,
+  jpNetBankingConf,
 } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -29,6 +30,7 @@ const mapDispatchToProps = (dispatch) => {
     createPayment: (ps) => dispatch(createPayment(ps)),
     jpSavedCardsConf: (ps) => dispatch(jpSavedCardsConf(ps)),
     jpUpiConf: (ps) => dispatch(jpUpiConf(ps)),
+    jpNetBankingConf: (ps) => dispatch(jpNetBankingConf(ps)),
   };
 };
 

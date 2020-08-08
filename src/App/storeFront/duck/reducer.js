@@ -30,6 +30,14 @@ function brandGenerReducer(state = initialState, action) {
     case "BRANDSUCCESS":
       newState = { ...state, data: action.payload.brands, pending: false };
       return newState;
+    case "BRANDPAGINATIONSUCCESS":
+      newState = {
+        ...state,
+        data: [...state.data, ...action.payload.brands],
+        pending: false,
+      };
+
+      return newState;
     case "BRANDFAILURE":
       newState = { ...state, error: action.payload, pending: false };
       return newState;
