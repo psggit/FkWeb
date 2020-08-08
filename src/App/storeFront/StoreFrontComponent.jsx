@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../common/toolbar";
 import SearchLayout from "../common/layout/SearchLayout";
-import { BrandContainer} from "../common/brand";
+import { BrandContainer } from "../common/brand";
 import fssaiImg from "../../assets/images/fssai.png";
 import { LoadingComponent } from "../common/loading";
 import searchIcon from "../../assets/images/search.svg";
@@ -22,13 +22,24 @@ function StoreFrontComponent(props) {
 
   const { getGeners, getBrands, brandItems, generItems } = props;
   const [generId, setGenerId] = useState(4);
+  const limit = 10;
+  const [offset, setOffset] = useState(0);
   useEffect(() => {
     getGeners(props.selectedAddress, props.retailer);
   }, []);
 
   useEffect(() => {
-    getBrands(props.selectedAddress, generId, props.retailer);
+    if (offset === 0) {
+      getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
+    } else {
+      setOffset(0);
+    }
+    document.getElementById("brand_accordion").scroll(0, 0);
   }, [generId]);
+
+  useEffect(() => {
+    getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
+  }, [offset]);
 
   const renderSku = (item) => {
     return (
@@ -40,6 +51,16 @@ function StoreFrontComponent(props) {
             retailer={props.retailer}
           />
         ))}
+        {item.length >= offset && (
+          <div
+            className="flex hcenter vcenter loadMore"
+            onClick={() => {
+              setOffset(offset + limit);
+            }}
+          >
+            Load more...
+          </div>
+        )}
         <div className="fssai-img">
           <img src={fssaiImg} alt="fssai" />
         </div>
@@ -88,12 +109,9 @@ function StoreFrontComponent(props) {
             </ul>
           </div>
         </div>
-        <div className="accordion-container mar-zero">
-          {brandItems.pending ? (
-            <LoadingComponent />
-          ) : (
-            renderSku(brandItems.data)
-          )}
+        <div id="brand_accordion" className="accordion-container mar-zero">
+          {(brandItems.pending || (brandItems.data.length === 0)) && <LoadingComponent />}
+          {renderSku(brandItems.data)}
         </div>
       </SearchLayout>
     </>

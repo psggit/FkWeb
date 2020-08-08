@@ -23,6 +23,7 @@ const B_URL =
   "https://retailer." +
   config.BASE_DOMAIN +
   "/Api/stockandprice/listing/brands";
+
 const getBrandAPI = (reqBody, process, onSuccess, onError) => {
   fetch(B_URL, {
     method: "POST",
