@@ -128,7 +128,7 @@ function StoreFrontComponent(props) {
           </div>
         </div>
         <div id="brand_accordion" className="accordion-container mar-zero">
-          {(brandItems.pending || brandItems.data.length === 0) && (
+          {(brandItems.pending) && (
             <LoadingComponent />
           )}
           {renderSku(brandItems.data)}
