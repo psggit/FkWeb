@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { BrandComponent } from "./BrandComponent";
+
 import { addSkuToCart, removeSkuFromCart } from "../cart";
 
 const mapStateToProps = (state, props) => {
@@ -8,7 +9,6 @@ const mapStateToProps = (state, props) => {
     cartRetailer: state.cart.retailer,
     cartProducts: state.cart.products,
     brand: props.brand,
-    retailerDiffers: state.cart.retailerDiffers,
   };
 };
 

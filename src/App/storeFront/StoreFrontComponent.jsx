@@ -7,6 +7,7 @@ import fssaiImg from "../../assets/images/fssai.png";
 import { LoadingComponent } from "../common/loading";
 import searchIcon from "../../assets/images/search.svg";
 import { useHistory } from "react-router-dom";
+import { AlertWithOptions } from "../common/alert";
 
 StoreFrontComponent.propTypes = {
   getGeners: PropTypes.func,
@@ -15,6 +16,9 @@ StoreFrontComponent.propTypes = {
   generItems: PropTypes.object,
   selectedAddress: PropTypes.object,
   retailer: PropTypes.object,
+  retailerDiffers: PropTypes.bool,
+  clearCartAndAdd: PropTypes.func,
+  dontClearCart: PropTypes.func,
 };
 
 function StoreFrontComponent(props) {
@@ -36,10 +40,24 @@ function StoreFrontComponent(props) {
     }
     document.getElementById("brand_accordion").scroll(0, 0);
   }, [generId]);
-
   useEffect(() => {
     getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
   }, [offset]);
+
+  if (props.retailerDiffers) {
+    return (
+      <AlertWithOptions
+        title={"Items already in cart"}
+        content={
+          "You can clear the cart & add items from another store or cancel and keep the current items"
+        }
+        option1={"CLEAR CART"}
+        option2={"CANCEL"}
+        handleOption1={props.clearCartAndAdd}
+        handleOption2={props.dontClearCart}
+      />
+    );
+  }
 
   const renderSku = (item) => {
     return (
@@ -110,7 +128,9 @@ function StoreFrontComponent(props) {
           </div>
         </div>
         <div id="brand_accordion" className="accordion-container mar-zero">
-          {(brandItems.pending || (brandItems.data.length === 0)) && <LoadingComponent />}
+          {(brandItems.pending || brandItems.data.length === 0) && (
+            <LoadingComponent />
+          )}
           {renderSku(brandItems.data)}
         </div>
       </SearchLayout>
