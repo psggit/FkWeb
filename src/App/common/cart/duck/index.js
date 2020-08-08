@@ -4,5 +4,7 @@ export {
   removeSkuFromCart,
   resetValidation,
   closeValidationErrorMessage,
+  clearCartAndAdd,
+  dontClearCart,
 } from "./actions";
 export { validateCart } from "./validateCartOperations";

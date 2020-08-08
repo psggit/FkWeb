@@ -3,26 +3,24 @@ import "./style.scss";
 import PropTypes from "prop-types";
 
 AlertWithOptions.propTypes = {
-  handleOption1: PropTypes.func,
-  handleOption2: PropTypes.func,
-  show: PropTypes.bool,
   title: PropTypes.string,
   content: PropTypes.string,
   option1: PropTypes.string,
   option2: PropTypes.string,
+  handleOption1: PropTypes.func,
+  handleOption2: PropTypes.func,
 };
 
 function AlertWithOptions({
-  handleOption1,
-  handleOption2,
-  show,
   title,
   content,
   option1,
   option2,
+  handleOption1,
+  handleOption2,
 }) {
   return (
-    <div className={show ? "modal display-block" : "modal display-none"}>
+    <div className={"modal display-block"}>
       <section className="modal-main">
         <div className="modal-header"> {title}</div>
         <div className="modal-content"> {content}</div>
