@@ -13,18 +13,6 @@ BottomNextComponent.propTypes = {
 };
 
 function BottomNextComponent(props) {
-  const { routePath, title, inActive, onClickFunc } = props;
-  const history = useHistory();
-  function clickProcess() {
-    if (inActive != true) {
-      if (routePath === undefined) {
-        onClickFunc();
-      } else {
-        history.push(routePath);
-      }
-    }
-  }
-
   function getNextClassName() {
     if (props.isNav) {
       return "bottom-bar-nav bottom-bar bottom-bar-height";
@@ -36,16 +24,41 @@ function BottomNextComponent(props) {
   return (
     <div className="bottom-bar-height">
       <div className={getNextClassName()}>
-        <div
-          className={(inActive == true ? "disable " : "") + "btn-general"}
-          onClick={() => clickProcess()}
-        >
-          <div className="btn-label">{title}</div>
-          <img className="btn-arrow" src={nextIcon} />
-        </div>
+        <ButtonComponent {...props} />
       </div>
     </div>
   );
 }
 
-export { BottomNextComponent };
+ButtonComponent.propTypes = {
+  routePath: PropTypes.string,
+  title: PropTypes.string,
+  inActive: PropTypes.bool,
+  onClickFunc: PropTypes.func,
+};
+
+function ButtonComponent(props) {
+  const { routePath, title, inActive, onClickFunc } = props;
+  const history = useHistory();
+
+  function clickProcess() {
+    if (inActive != true) {
+      if (routePath === undefined) {
+        onClickFunc();
+      } else {
+        history.push(routePath);
+      }
+    }
+  }
+  return (
+    <div
+      className={(inActive == true ? "disable " : "") + "btn-general"}
+      onClick={() => clickProcess()}
+    >
+      <div className="btn-label">{title}</div>
+      <img className="btn-arrow" src={nextIcon} />
+    </div>
+  );
+}
+
+export { BottomNextComponent, ButtonComponent };

@@ -13,7 +13,7 @@ EditText.propTypes = {
   inputMode: PropTypes.string, // Pass numeric to show number keypad.
   autoComplete: PropTypes.string, // section-cc | cc-number, cc-name, cc-csc, cc-exp, cc-email
   maxLength: PropTypes.string, // To limit the number of characters
-  inActive:PropTypes.bool,
+  inActive: PropTypes.bool,
 };
 
 function EditText(props) {
@@ -31,7 +31,7 @@ function EditText(props) {
     onTextChanged,
     maxLength,
   } = props;
-  var input
+  var input;
   if (isTextArea === true) {
     input = (
       <textarea
@@ -63,7 +63,7 @@ function EditText(props) {
   }
 
   return (
-    <div className={ (inActive === true ? "inactive " :"" ) + "input-component"}>
+    <div className={(inActive === true ? "inactive " : "") + "input-component"}>
       <div className="input-component-label">{title}</div>
       <div className="inputComponentField input">{input}</div>
       <div className="edit-text-error">{errorMessage}</div>

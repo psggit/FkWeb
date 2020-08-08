@@ -21,6 +21,7 @@ import { ChooseLocationContainer } from "./address/chooseLocation";
 import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
 import { StateCityContainer } from "./stateCity";
 import { OrderInfoContainer } from "./order/info";
+import { AddCardAndProcessPaymentContainer } from "./payment/addCardAndProcessPaymentContainer";
 
 function App() {
   return (
@@ -72,7 +73,7 @@ function App() {
           <Route path="/payment/options" component={PaymentContainer} />
           <Route
             path="/payment/add/new/card"
-            component={AddCardAndProcessPayment}
+            component={AddCardAndProcessPaymentContainer}
           />
           <Route path="/order/detail" component={OrderDetailsContainer} />
           <Route path="/order/placed" component={OrderPlacedContainer} />
