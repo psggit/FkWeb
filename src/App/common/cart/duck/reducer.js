@@ -7,6 +7,8 @@ import {
   validationFailure,
   closeValidationErrorMessage,
   resetValidation,
+  clearCartAndAdd,
+  dontClearCart,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -45,6 +47,7 @@ declare type State = {
   validateError: boolean,
   validateErrorMessage: string,
   redirect: boolean,
+  pendingSku: Sku,
 };
 
 declare type Sku = {
@@ -71,6 +74,7 @@ const getDefaultState = (): State => {
     validateError: false,
     validateErrorMessage: "",
     redirect: false,
+    pendingSku: {},
   };
 };
 
@@ -88,6 +92,7 @@ let getTestState = (): State => {
     validateError: false,
     validateErrorMessage: "",
     redirect: false,
+    pendingSku: {},
     products: {
       "1278": {
         skuId: 1278,
@@ -116,8 +121,41 @@ let setRetailer = (state: State, sku: Sku): State => {
   return state;
 };
 
+let resetValidationState = (state: State): State => {
+  state.validationFailure = false;
+  state.validationInProgress = false;
+  state.validationSuccessful = false;
+  state.validateError = false;
+  state.validateErrorMessage = "";
+  state.redirect = false;
+  return state;
+};
+
+let resetState = (state: State): State => {
+  state.retailer = {};
+  state.products = {};
+  state.retailerDiffers = false;
+  state = resetValidationState(state);
+  state.pendingSku = {};
+  return state;
+};
+
 let isEmpty = (state: State): boolean => {
   return Object.keys(state.products).length === 0;
+};
+
+let getProductFromSku = (sku: Sku): Product => {
+  return {
+    skuId: sku.sku_id,
+    brandName: sku.brand_name,
+    brandId: sku.brand_id,
+    image: sku.logo_low_res_image,
+    price: sku.price,
+    volume: sku.volume,
+    count: 1,
+    available: true,
+    subText: unAvailableProductText,
+  };
 };
 
 let addProduct = (state: State, sku: Sku): State => {
@@ -127,10 +165,11 @@ let addProduct = (state: State, sku: Sku): State => {
   } else if (sku.retailerId !== state.retailer.id) {
     if (sku.clearCart === false) {
       state.retailerDiffers = true;
+      state.pendingSku = sku;
       return state;
     }
+    state = resetState(state);
     state = setRetailer(state, sku);
-    state.products = {};
   }
 
   // set product details
@@ -138,21 +177,12 @@ let addProduct = (state: State, sku: Sku): State => {
   // set product details
   //if doesn't exist, create one and add it to the map
   if (prod === undefined) {
-    prod = {
-      skuId: sku.sku_id,
-      brandName: sku.brand_name,
-      brandId: sku.brand_id,
-      image: sku.logo_low_res_image,
-      price: sku.price,
-      volume: sku.volume,
-      count: 1,
-      available: true,
-      subText: unAvailableProductText,
-    };
+    prod = getProductFromSku(sku);
   } else {
     prod.count += 1;
   }
   state.products[prod.skuId.toString()] = prod;
+  state = resetValidationState(state);
   return state;
 };
 
@@ -167,9 +197,7 @@ let removeProduct = (state: State, sku: Sku): State => {
     delete state.products[prod.skuId.toString()];
   }
 
-  if (isEmpty(state)) {
-    return initialState();
-  }
+  state = resetValidationState(state);
   return state;
 };
 
@@ -226,8 +254,6 @@ const cartTotal = (oldS: State): number => {
 
 const cartReducer = createReducer(initialState(), {
   [addSkuToCart]: (state: State, e: Object) => {
-    //let newS = addProduct({ ...state }, e.payload);
-    //return newS;
     return void addProduct(state, e.payload);
   },
   [removeSkuFromCart]: (state: State, e: Object) => {
@@ -269,13 +295,19 @@ const cartReducer = createReducer(initialState(), {
   },
 
   [resetValidation]: (state: State): State => {
+    return resetValidationState(state);
+  },
+
+  [clearCartAndAdd]: (state: State): State => {
+    state.pendingSku.clearCart = true;
+    return void addProduct(state, state.pendingSku);
+  },
+
+  [dontClearCart]: (state: State): State => {
     return {
       ...state,
-      validationFailure: false,
-      validationSuccessful: false,
-      validationInProgress: false,
-      validateError: false,
-      validateErrorMessage: "",
+      retailerDiffers: false,
+      pendingSku: {},
     };
   },
 });
