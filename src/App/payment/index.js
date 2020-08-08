@@ -1,4 +1,4 @@
 export { PaymentContainer } from "./paymentContainer";
+export { AddCardAndProcessPaymentContainer } from "./addCardAndProcessPaymentContainer";
 export { ProcessPaymentContainer } from "./processPaymentContainer";
-export { AddCardAndProcessPayment } from "./AddCardAndProcessPayment";
 export { paymentReducer } from "./duck";

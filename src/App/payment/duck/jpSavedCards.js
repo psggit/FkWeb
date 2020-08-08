@@ -37,7 +37,7 @@ export const jpSavedCardsConf = (JusPay) => {
           container: ".security_code_div",
           attributes: {
             /* Field Attributes, which you want to set for the <input> field inside the iframe element. */
-            placeholder: "123",
+            placeholder: "cvv",
           },
         },
       },
@@ -47,7 +47,9 @@ export const jpSavedCardsConf = (JusPay) => {
         ".security_code": {
           "line-height": "50px",
           "font-size": "16px",
-          width: "60px",
+          width: "100%",
+          outline: "none",
+          color: "#d1d2dd",
         },
         /* Add the styling to be added to input fields in focus state */
         ":focus": {},

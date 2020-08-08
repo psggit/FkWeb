@@ -16,6 +16,8 @@ function SavedCardComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
   let juspay_form;
 
+  const [selectedCard, SetSelectedCard] = useState("");
+
   const configureJuspay = () => {
     let jp = window.Juspay;
     juspay_form = props.jpSavedCardsConf(jp);
@@ -52,6 +54,14 @@ function SavedCardComponent(props) {
       error_handler: jp_error,
     });
     juspay_form.submit_form();
+  };
+
+  const onTextChanged = (val, token) => {
+    if (val.length > 0) {
+      SetSelectedCard(token);
+    } else {
+      SetSelectedCard("");
+    }
   };
 
   return payment.cards.map((card, index) => {
@@ -101,19 +111,26 @@ function SavedCardComponent(props) {
               <div
                 type="text"
                 id="cvvNumber"
+                onChange={(e) => {
+                  onTextChanged(e.target.value, card.card_token);
+                }}
                 placeholder="CVV Number"
                 className="card-cvv security_code_div"
               />
             </div>
           </div>
         </form>
-        <button
+        <div
           type="button"
-          className="make_payment"
+          className={
+            (selectedCard == card.card_token
+              ? "show-content"
+              : "show-content") + " make_payment card-pay-button"
+          }
           onClick={() => onSubmit()}
         >
-          Pay
-        </button>
+          Pay via Card
+        </div>
       </>
     );
   });

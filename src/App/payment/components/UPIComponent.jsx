@@ -15,6 +15,8 @@ function UPIComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
   let juspay_form;
 
+  const [payEnabled, SetPayEnabled] = useState(false);
+
   const configureJuspay = () => {
     let jp = window.Juspay;
     juspay_form = props.jpUpiConf(jp);
@@ -42,6 +44,11 @@ function UPIComponent(props) {
     juspay_form.submit_form();
   };
 
+  const onTextChanged = (val) => {
+    console.log(val);
+    SetPayEnabled(val.length > 0);
+  };
+
   return (
     <form className="juspay_inline_form" id="upi_payment_form">
       <input
@@ -62,7 +69,7 @@ function UPIComponent(props) {
       <div className="upi-component">
         <img src={upiIcon} className="upi-image" />
         <div className="upi-details">
-          <UPILowSuccessRate />
+          {props.payment.is_upi_low_success_rate && <UPILowSuccessRate />}
           <div className="upi-field-container">
             <input
               type="radio"
@@ -70,18 +77,24 @@ function UPIComponent(props) {
               id="upiradioinput"
               className="upi-radio"
             />
-            <input
-              type="text"
-              placeholder="Enter your UPI ID"
-              className="upi-id upi_vpa"
-            />
-            <button
-              type="submit"
-              className="make_payment"
-              onClick={() => onSubmit()}
-            >
-              Pay
-            </button>
+            <div className="upi-id">
+              <input
+                type="text"
+                placeholder="Enter your UPI ID"
+                className="upi_vpa vpa-input"
+                onChange={(e) => onTextChanged(e.target.value)}
+              />
+              <div
+                type="submit"
+                className={
+                  (payEnabled ? "show-content" : "hide-content") +
+                  " make_payment pay-button"
+                }
+                onClick={() => onSubmit()}
+              >
+                PAY
+              </div>
+            </div>
             <input type="hidden" className="redirect" value="true" />
           </div>
         </div>

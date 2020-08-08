@@ -20,3 +20,4 @@ export { createPayment } from "./createPayment";
 export { jpSavedCardsConf } from "./jpSavedCards";
 export { jpUpiConf } from "./jpUpi";
 export { jpNetBankingConf } from "./jpNetBanking";
+export { jpNewCardConf } from "./jpNewCard";
