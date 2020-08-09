@@ -44,7 +44,6 @@ PaymentOptions.propTypes = {
   bank: PropTypes.any,
   payment: PropTypes.object,
   initialise: PropTypes.func,
-  summaryDetails: PropTypes.object,
   createPayment: PropTypes.func,
   jpSavedCardsConf: PropTypes.func,
 };
@@ -94,8 +93,7 @@ function PaymentOptions(props) {
   const payment = props.payment.paymentOptionsDetails;
   const banks = payment.netbanking;
 
-  let title =
-    "Pay " + props.summaryDetails.summaryDetails.display_total + " using";
+  let title = "Pay ₹ " + payment.paymentDetails.amount + " using";
 
   return (
     <>
