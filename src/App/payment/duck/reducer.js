@@ -87,7 +87,7 @@ const paymentSuccessHandler = (state, data) => {
   }
   return {
     ...state,
-    verifyPaymentInProgress: true,
+    verifyPaymentInProgress: false,
     verifyPaymentSuccess: false,
     verifyPaymentFailed: false,
     verifyPaymentError: false,
@@ -101,8 +101,8 @@ const placeOrderSuccessHandler = (state, data) => {
     return {
       ...state,
       placeOrderInProgress: false,
-      placeOrderSuccess: false,
-      placeOrderFailed: true,
+      placeOrderSuccess: true,
+      placeOrderFailed: false,
       placeOrderError: false,
       placeOrderDetails: data,
       placeOrderRetryCount: 0,
@@ -112,7 +112,7 @@ const placeOrderSuccessHandler = (state, data) => {
     ...state,
     placeOrderInProgress: false,
     placeOrderSuccess: false,
-    placeOrderFailed: true,
+    placeOrderFailed: false,
     placeOrderError: false,
     placeOrderDetails: data,
     placeOrderRetryCount: state.placeOrderRetryCount + 1,
