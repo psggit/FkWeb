@@ -25,14 +25,18 @@ const processResponse = (dispatch) => {
       //TODO:@hl05 setup sentry here?
       throw new Error("invalid params");
     } else {
-      throw new Error("Something went wrong, try again");
+      if (res.status === 500) {
+        return res.json();
+      } else {
+        throw new Error("Something went wrong, try again");
+      }
     }
   };
 };
 
 const onSuccess = (dispatch) => {
   return (data) => {
-    dispatch(fetchRetailersSuccessfull(data.data));
+    dispatch(fetchRetailersSuccessfull(data));
   };
 };
 

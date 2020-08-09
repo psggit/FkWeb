@@ -4,14 +4,15 @@ import { getSearchByStore } from "./duck";
 import { clearCartAndAdd, dontClearCart } from "../common/cart";
 
 const mapStateToProps = (state, props) => {
-  console.log(state);
   const {
-    searchByStore: { data, status },
+    searchByStore: { data, status, limit, offset },
     addressStore: { selectedAddress },
   } = state;
   return {
     data,
     status,
+    limit,
+    offset,
     selectedAddress,
     retailer: props.location.state.retailer,
     retailerDiffers: state.cart.retailerDiffers,
@@ -20,8 +21,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getSearchByStore: (query, address, retailer) =>
-      dispatch(getSearchByStore(query, address, retailer)),
+    getSearchByStore: (query, address, retailer, limit, offset) =>
+      dispatch(getSearchByStore(query, address, retailer, limit, offset)),
     clearCartAndAdd: () => dispatch(clearCartAndAdd()),
     dontClearCart: () => dispatch(dontClearCart()),
   };

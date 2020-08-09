@@ -6,7 +6,13 @@
   .loading {
     height: 100px;
   }
-
+  .noRetailers {
+    text-align: center;
+    height: 400px;
+  }
+  .tryDifferentAddress {
+    color: $orange-color;
+  }
   .retailer_item {
     height: 72px;
     border-bottom: 1px solid $border-color;

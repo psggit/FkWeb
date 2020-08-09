@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { SearchBox } from "../search";
 import { ToolbarComponent } from "../common/toolbar";
-import { BrandComponent } from "../common/brand";
+import { BrandContainer } from "../common/brand";
 import SearchLayout from "../common/layout/SearchLayout";
 import { LoadingComponent } from "../common/loading";
 import { AlertWithOptions } from "../common/alert";
@@ -21,7 +21,7 @@ SearchByStoreComponent.propTypes = {
 function SearchByStoreComponent(props) {
   const [cancelBtn, SetCancelBtn] = useState(false);
   const [query, SetQuery] = useState("");
-  const { getSearchByStore, data, status } = props;
+  const { getSearchByStore, data, limit, offset, status } = props;
 
   const onFocus = () => {
     SetCancelBtn(true);
@@ -37,9 +37,7 @@ function SearchByStoreComponent(props) {
   };
 
   useEffect(() => {
-    console.log("use effect 1");
     window.addEventListener("focusout", () => {
-      console.log("use effect 1 focusout event");
       SetCancelBtn(false);
     });
   });
@@ -47,16 +45,18 @@ function SearchByStoreComponent(props) {
   const isFirstRun = useRef(true);
 
   useEffect(() => {
-    console.log("use effect 2");
     if (isFirstRun.current) {
-      console.log("use effect isFirstRun", isFirstRun);
       isFirstRun.current = false;
       return;
     }
     if (query.length > 2) {
-      console.log("use effect query", query);
-
-      getSearchByStore(query, props.selectedAddress, props.retailer);
+      getSearchByStore(
+        query,
+        props.selectedAddress,
+        props.retailer,
+        props.limit,
+        0
+      );
     }
   }, [query]);
 
@@ -77,28 +77,42 @@ function SearchByStoreComponent(props) {
 
   const renderSku = (brands) => {
     console.log("brand rendering is called");
+    console.log(brands.length);
+    console.log(props.offset);
     return (
-      <>
-        {brands.map((brand, index) => (
-          <BrandComponent
+      <div>
+        {brands.map((brand) => (
+          <BrandContainer
             key={brand.brand_id}
             brand={brand}
             retailer={props.retailer}
           />
         ))}
-      </>
+        {brands.length === props.offset + props.limit && (
+          <div
+            onClick={() => {
+              getSearchByStore(
+                query,
+                props.selectedAddress,
+                props.retailer,
+                props.limit,
+                props.offset + props.limit
+              );
+            }}
+          >
+            {" "}
+            Load More
+          </div>
+        )}
+      </div>
     );
   };
-  console.log("data in store" + data + status);
 
   function searchUI() {
-    if (status == "waiting" || status == "failed") {
-      return <div />;
-    } else if (status == "progress") {
-      return <LoadingComponent />;
-    } else if (status == "success") {
-      return renderSku(data);
-    }
+    return renderSku(data);
+  }
+  function SearchWaiting() {
+    return <div>WAITING</div>;
   }
 
   return (
@@ -115,7 +129,11 @@ function SearchByStoreComponent(props) {
         </div>
       </ToolbarComponent>
       <SearchLayout custom="custom">
-        <div className="accordion-container mar-zero">{searchUI()}</div>
+        {status === "waiting" && SearchWaiting()}
+        {status === "progress" && <LoadingComponent />}
+        <div id="searchRetailer" className="accordion-container mar-zero">
+          {searchUI()}
+        </div>
       </SearchLayout>
     </>
   );
