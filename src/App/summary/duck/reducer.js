@@ -10,6 +10,8 @@ let initialState = {
   fetchSummaryInProgress: false,
   fetchSummaryFailed: false,
   fetchSummarySuccess: false,
+  fetchSummaryError: false,
+  fetchSummaryErrorMessage: "",
 };
 
 const summaryReducer = createReducer(initialState, {
