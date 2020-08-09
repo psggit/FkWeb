@@ -24,6 +24,8 @@ StoreFrontComponent.propTypes = {
   retailerDiffers: PropTypes.bool,
   clearCartAndAdd: PropTypes.func,
   dontClearCart: PropTypes.func,
+  setGenre: PropTypes.func,
+  clearState: PropTypes.func,
 };
 
 function StoreFrontComponent(props) {
@@ -35,7 +37,7 @@ function StoreFrontComponent(props) {
     setGenre,
     brandItems,
     generItems,
-    clearState
+    clearState,
   } = props;
   const generId = generItems.selectedGenre;
   const limit = 10;
@@ -44,8 +46,8 @@ function StoreFrontComponent(props) {
   useEffect(() => {
     getGeners(props.selectedAddress, props.retailer);
     return () => {
-      clearState()
-    }
+      clearState();
+    };
   }, []);
 
   useEffect(() => {
@@ -96,7 +98,7 @@ function StoreFrontComponent(props) {
             retailer={props.retailer}
           />
         ))}
-        {(item.length >= offset && item.length!==0) && (
+        {item.length >= offset && item.length !== 0 && (
           <div
             className="flex hcenter vcenter loadMore"
             onClick={() => {

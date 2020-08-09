@@ -156,7 +156,7 @@ function SearchByStoreComponent(props) {
         />
         {cancelBtn ? <button>Cancel</button> : ""}
       </div>
-      <SearchLayout custom="custom">
+      <SearchLayout>
         {status === "waiting" && SearchWaiting()}
         {status === "progress" && <LoadingComponent />}
         <div id="searchRetailer" className="accordion-container mar-zero">
