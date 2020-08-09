@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../common/toolbar";
-import { EditText } from "../common/editText";
 import { ButtonComponent } from "../common/bottomNext/BottomNextComponent";
 
 NewCardInput.propTypes = {
@@ -12,7 +11,7 @@ NewCardInput.propTypes = {
 function NewCardInput(props) {
   return (
     <>
-      <div className="input-component-label">{props.title}</div>
+      <div className="input-component-label new-card-margin">{props.title}</div>
       <div
         className={
           props.className + " inputComponentField input_field_100 input"
@@ -72,6 +71,7 @@ function AddCardAndProcessPayment(props) {
     });
     juspay_form.submit_form();
   };
+
   return (
     <>
       <ToolbarComponent helpVisibility="false" title="Payment" />
@@ -89,13 +89,29 @@ function AddCardAndProcessPayment(props) {
           />
           <NewCardInput title="CARD NUMBER" className="card_number_div" />
           <NewCardInput title="NAME ON CARD" className="name_on_card_div" />
-          <NewCardInput title="EXPIRY MONTH" className="card_exp_month_div" />
-          <NewCardInput title="EXPIRY YEAR" className="card_exp_year_div" />
+          <NewCardInput
+            title="EXPIRY MONTH (MM)"
+            className="card_exp_month_div"
+          />
+          <NewCardInput
+            title="EXPIRY YEAR (YY)"
+            className="card_exp_year_div"
+          />
           <NewCardInput title="CVV" className="security_code_div" />
           <input type="hidden" className="payment_method_type" value="CARD" />
-          <input type="checkbox" className="juspay_locker_save" /> Save card
           <input type="hidden" className="redirect" value="true" />
-          <ButtonComponent onClickFunc={onSubmit} title="Pay" />
+          <div className="save-card-container">
+            <input
+              type="checkbox"
+              className="juspay_locker_save save-card-option"
+            />{" "}
+            <div className="save-card-title">
+              Save this card for faster checkouts
+            </div>
+          </div>
+          <div className="button-container">
+            <ButtonComponent onClickFunc={onSubmit} title="Pay" />
+          </div>
         </form>
       </div>
     </>

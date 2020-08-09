@@ -33,31 +33,31 @@ export const jpNewCardConf = (JusPay) => {
         card_number: {
           container: ".card_number_div",
           attributes: {
-            placeholder: "4111 1111 1111 1111",
+            //            placeholder: "4111 1111 1111 1111",
           },
         },
         name_on_card: {
           container: ".name_on_card_div",
           attributes: {
-            placeholder: "Cardholder Name",
+            //          placeholder: "Cardholder Name",
           },
         },
         card_exp_month: {
           container: ".card_exp_month_div",
           attributes: {
-            placeholder: "MM",
+            //        placeholder: "MM",
           },
         },
         card_exp_year: {
           container: ".card_exp_year_div",
           attributes: {
-            placeholder: "YY",
+            //      placeholder: "YY",
           },
         },
         security_code: {
           container: ".security_code_div",
           attributes: {
-            placeholder: "123",
+            //    placeholder: "123",
           },
         },
       },
