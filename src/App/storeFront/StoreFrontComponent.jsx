@@ -29,26 +29,46 @@ StoreFrontComponent.propTypes = {
 function StoreFrontComponent(props) {
   const history = useHistory();
 
-  const { getGeners, getBrands, brandItems, generItems } = props;
-  const [generId, setGenerId] = useState(4);
+  const {
+    getGeners,
+    getBrands,
+    setGenre,
+    brandItems,
+    generItems,
+    clearState
+  } = props;
+  const generId = generItems.selectedGenre;
   const limit = 10;
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     getGeners(props.selectedAddress, props.retailer);
+    return () => {
+      clearState()
+    }
   }, []);
 
   useEffect(() => {
-    if (offset === 0) {
-      getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
-    } else {
-      setOffset(0);
+    if (generId != undefined) {
+      if (offset === 0) {
+        getBrands(
+          props.selectedAddress,
+          generId,
+          props.retailer,
+          limit,
+          offset
+        );
+      } else {
+        setOffset(0);
+      }
+      document.getElementById("brand_accordion").scroll(0, 0);
     }
-    document.getElementById("brand_accordion").scroll(0, 0);
   }, [generId]);
 
   useEffect(() => {
-    getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
+    if (generId != undefined) {
+      getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
+    }
   }, [offset]);
 
   if (props.retailerDiffers) {
@@ -69,14 +89,14 @@ function StoreFrontComponent(props) {
   const renderSku = (item) => {
     return (
       <>
-        {item.map((item, index) => (
+        {item.map((i, index) => (
           <BrandContainer
-            key={item.brand_id}
-            brand={item}
+            key={i.brand_id}
+            brand={i}
             retailer={props.retailer}
           />
         ))}
-        {item.length >= offset && (
+        {(item.length >= offset && item.length!==0) && (
           <div
             className="flex hcenter vcenter loadMore"
             onClick={() => {
@@ -147,7 +167,7 @@ function StoreFrontComponent(props) {
                 <li
                   key={item.id}
                   className={generId === item.id ? "activeBrand" : ""}
-                  onClick={() => setGenerId(item.id)}
+                  onClick={() => setGenre(item.id)}
                 >
                   {item.name}
                 </li>

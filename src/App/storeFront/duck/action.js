@@ -20,3 +20,6 @@ export const getBrandPaginationSuccess = createAction("BRANDPAGINATIONSUCCESS");
 
 //getBrandFailed get the error message
 export const getBrandFailed = createAction("BRANDFAILURE");
+
+export const changeGenreAction = createAction("CHANGE_GENRE");
+export const clearStateAction = createAction("CLEAR_STATE");

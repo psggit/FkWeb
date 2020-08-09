@@ -1,16 +1,17 @@
 import {
   getSearchByStoreSuccess,
   getSearchByStoreInProgress,
+  getSearchByStorePaginationSuccess,
   getSearchByStoreFailed,
 } from "./action";
 import { searchByStoreAPI } from "../../../utils";
 
-const reqBodyFromState = (query, address, retailer) => {
+const reqBodyFromState = (query, address, retailer, limit, offset) => {
   return JSON.stringify({
     city_id: address.city.id,
     lat_lng: address.gps,
-    limit: 30,
-    offset: 0,
+    limit: limit,
+    offset: offset,
     query: query,
     retailer_id: retailer.retailer_id,
     state_id: address.state.id,
@@ -32,9 +33,14 @@ const processResponse = (dispatch) => {
   };
 };
 
-const onSuccess = (dispatch) => {
+const onSuccess = (dispatch, offset) => {
   return (data) => {
-    dispatch(getSearchByStoreSuccess(data));
+    data.NewOffset = offset;
+    if (offset === 0) {
+      dispatch(getSearchByStoreSuccess(data));
+    } else {
+      dispatch(getSearchByStorePaginationSuccess(data));
+    }
   };
 };
 
@@ -44,14 +50,14 @@ const onError = (dispatch) => {
   };
 };
 
-const getSearchByStore = (query, address, retailer) => {
-  let reqBody = reqBodyFromState(query, address, retailer);
+const getSearchByStore = (query, address, retailer, limit, offset) => {
+  let reqBody = reqBodyFromState(query, address, retailer, limit, offset);
   return (dispatch) => {
     dispatch(getSearchByStoreInProgress());
     searchByStoreAPI(
       reqBody,
       processResponse(dispatch),
-      onSuccess(dispatch),
+      onSuccess(dispatch, offset),
       onError(dispatch)
     );
   };
