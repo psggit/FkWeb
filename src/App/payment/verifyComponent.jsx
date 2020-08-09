@@ -159,6 +159,9 @@ function VerifyComponent(props) {
   if (payment.tryPayingAgain) {
     history.push("/payment/options");
   }
+  if (payment.placeOrderSuccess) {
+    history.push("/order/placed")
+  }
 
   return <div />;
 }
