@@ -93,7 +93,7 @@ function PaymentOptions(props) {
   const payment = props.payment.paymentOptionsDetails;
   const banks = payment.netbanking;
 
-  let title = "Pay ₹ " + payment.paymentDetails.amount + " using";
+  let title = "Pay ₹ " + props.payment.paymentDetails.amount + " using";
 
   return (
     <>
