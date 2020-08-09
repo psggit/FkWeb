@@ -7,7 +7,12 @@ const mapStateToProps = (state) => {
   const {
     searchItem: { data, pending },
   } = state;
-  return { data, pending, retailerDiffers: state.cart.retailerDiffers };
+  return {
+    data,
+    pending,
+    cartProducts: state.cart.products,
+    retailerDiffers: state.cart.retailerDiffers,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
