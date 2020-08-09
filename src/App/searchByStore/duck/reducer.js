@@ -2,7 +2,7 @@ const initialState = {
   status: "waiting",
   data: [],
   limit: 10,
-  offset:0,
+  offset: 0,
   error: "",
 };
 

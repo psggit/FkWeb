@@ -14,7 +14,7 @@ function genersReducer(state = genreInitialState, action) {
     case "CLEAR_STATE":
       return genreInitialState;
     case "CHANGE_GENRE":
-      newState = { ...state, selectedGenre: action.payload};
+      newState = { ...state, selectedGenre: action.payload };
       return newState;
     case "SUCCESS":
       if (action.payload.genres.length > 0) {
