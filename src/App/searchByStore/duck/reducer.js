@@ -12,6 +12,8 @@ function searchByStoreReducer(state = initialState, action) {
     case "searchRetailerWaiting":
       newState = { ...state, status: "waiting" };
       return newState;
+    case "searchRetailerReset":
+      return initialState;
     case "searchRetailerPending":
       newState = { ...state, status: "progress" };
       return newState;

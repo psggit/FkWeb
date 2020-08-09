@@ -14,9 +14,13 @@ MyOrdersComponent.propTypes = {
   getMyOrdersFunc: PropTypes.func,
 };
 
+
 function MyOrdersComponent(props) {
   const history = useHistory();
-
+  function launchHelp() {
+    window.fcWidget.open()
+    window.fcWidget.show()
+  }
   function showOrderDetail(order) {
     history.push({ pathname: "/order/detail", state: { order: order } });
   }
@@ -47,6 +51,9 @@ function MyOrdersComponent(props) {
   return (
     <>
       <HeaderComponent title="My Orders" />
+      <div onClick={() => launchHelp()} className="needHelp">
+        Need help
+      </div>
       <div className="page-container myorders-container">
         {orderItems(props)}
       </div>
