@@ -12,18 +12,22 @@ import {
   ArrivingComponent,
   OrderSummaryComponent,
   OrderSuccessComponent,
-  TellAFriendComponent,
 } from "../components";
 
 OrderPlacedComponent.propTypes = {
-  fetchOrderDetailInProgress: PropTypes.bool,
-  fetchOrderDetailSuccess: PropTypes.bool,
-  fetchOrderDetailFailed: PropTypes.bool,
-  order: PropTypes.object,
+  payment: PropTypes.object,
+};
+
+const getSummaryProps = (orderDetails) => {
+  return {
+    ...orderDetails,
+    display_total_paid: orderDetails.display_order_total,
+  };
 };
 
 function OrderPlacedComponent(props) {
   const history = useHistory();
+  let order = props.payment.placeOrderDetails.order_details;
 
   useLayoutEffect(() => {}, []);
 
@@ -41,17 +45,20 @@ function OrderPlacedComponent(props) {
 
   function RenderOrderSuccess() {
     return (
-      <OrderSuccessComponent orderPrice="Rs 50000" retailerName="Kloud Bar" />
+      <OrderSuccessComponent
+        orderPrice={order.display_order_total}
+        retailerName={order.retailer_name}
+      />
     );
   }
 
   function RenderArrivingComponent() {
-    return <ArrivingComponent arrivalTime="Arrving Today" otp="864753" />;
+    return (
+      <ArrivingComponent arrivalTime={order.delivery_status} otp={order.otp} />
+    );
   }
 
-  function RenderTellAFriendComponent() {
-    return <TellAFriendComponent />;
-  }
+  const summayProps = getSummaryProps(order);
 
   return (
     <>
@@ -59,29 +66,16 @@ function OrderPlacedComponent(props) {
       <div className="page-container">
         <RenderOrderSuccess />
         <OrderPlacedHeaderComponent
-          purchasedOn={props.order.created_at}
-          orderID={"#" + props.order.order_id}
+          purchasedOn={order.transacted_on}
+          orderID={"#" + order.order_id}
         />
         <RenderArrivingComponent />
-        <RenderTellAFriendComponent />
-        {props.order ? (
-          <OrderDrinksComponent items={props.order.items} />
-        ) : (
-          <div />
-        )}
-        {props.order ? (
-          <DeliveryAddressComponent
-            address={props.order.address.address}
-            addressType={props.order.address.type}
-          />
-        ) : (
-          <div />
-        )}
-        {props.order ? (
-          <OrderSummaryComponent orderDetail={props.order.order_detail} />
-        ) : (
-          <div />
-        )}
+        <OrderDrinksComponent items={order.pdt_details} />
+        <DeliveryAddressComponent
+          address={order.delivery_address}
+          addressType={order.address_type}
+        />
+        <OrderSummaryComponent orderDetail={summayProps} />
       </div>
       <RenderBottomNext />
     </>
