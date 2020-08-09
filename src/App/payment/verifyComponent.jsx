@@ -160,7 +160,7 @@ function VerifyComponent(props) {
     history.push("/payment/options");
   }
   if (payment.placeOrderSuccess) {
-    history.push("/order/placed")
+    history.push("/order/placed");
   }
 
   return <div />;
