@@ -1,6 +1,11 @@
 import { connect } from "react-redux";
 import { StoreFrontComponent } from "./StoreFrontComponent";
-import { getGeners, getBrands, changeGenreAction, clearStateAction } from "./duck";
+import {
+  getGeners,
+  getBrands,
+  changeGenreAction,
+  clearStateAction,
+} from "./duck";
 import { clearCartAndAdd, dontClearCart } from "../common/cart";
 
 const mapStateToProps = (state, props) => {

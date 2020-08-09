@@ -1,4 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
+import {
+  BottomNextComponent,
+  CartContentComponent,
+} from "../common/bottomNext";
 import PropTypes from "prop-types";
 import { SearchBox } from "../search";
 import { ToolbarComponent } from "../common/toolbar";
@@ -11,6 +15,7 @@ SearchByStoreComponent.propTypes = {
   data: PropTypes.array,
   status: PropTypes.string,
   getSearchByStore: PropTypes.func,
+  cartProducts: PropTypes.object,
   retailer: PropTypes.object,
   selectedAddress: PropTypes.object,
   retailerDiffers: PropTypes.bool,
@@ -109,14 +114,36 @@ function SearchByStoreComponent(props) {
     return renderSku(data);
   }
   function SearchWaiting() {
-    return (<div className="hcenter vcenter flex searchHome">
-        <div className="heading">
-          What are you looking for today?
-        </div>
+    return (
+      <div className="hcenter vcenter flex searchHome">
+        <div className="heading">What are you looking for today?</div>
         <div className="subHeading">
-          Search for available drinks at <br/>{props.retailer.retailer_name}.
+          Search for available drinks at <br />
+          {props.retailer.retailer_name}.
         </div>
-      </div>);
+      </div>
+    );
+  }
+
+  function renderBottomComponent() {
+    let totalCartItems = 0;
+    let total = 0;
+    console.log("totalCartItems" + totalCartItems);
+    Object.keys(props.cartProducts).forEach(function (key) {
+      total =
+        total + props.cartProducts[key].price * props.cartProducts[key].count;
+      totalCartItems += props.cartProducts[key].count;
+    });
+    console.log("totalCartItems" + totalCartItems);
+    if (totalCartItems > 0) {
+      return (
+        <BottomNextComponent redirectPath="/cart" title="View Cart">
+          <CartContentComponent
+            content={totalCartItems + " ITEMS | ₹ " + total}
+          />
+        </BottomNextComponent>
+      );
+    }
   }
 
   return (
@@ -138,6 +165,7 @@ function SearchByStoreComponent(props) {
         <div id="searchRetailer" className="accordion-container mar-zero">
           {searchUI()}
         </div>
+        {renderBottomComponent()}
       </SearchLayout>
     </>
   );
