@@ -9,7 +9,7 @@ import {
   homeActiveIcon,
   cartActiveIcon,
   searchActiveIcon,
-  myOrdersActiveIcon
+  myOrdersActiveIcon,
 } from "../../../assets/images";
 
 const tabs = [
@@ -34,17 +34,17 @@ const tabs = [
   {
     route: "/myorders",
     icon: myOrdersIcon,
-    activeIcon:myOrdersActiveIcon,
+    activeIcon: myOrdersActiveIcon,
     label: "My Orders",
   },
 ];
 
 function BottomNavigationComponent(props) {
   let location = useLocation().pathname;
-  const {cartProducts} = props;
+  const { cartProducts } = props;
   let totalCartItems = 0;
 
-  Object.keys(cartProducts).forEach(function(key) {
+  Object.keys(cartProducts).forEach(function (key) {
     totalCartItems += cartProducts[key].count;
   });
 
@@ -52,14 +52,26 @@ function BottomNavigationComponent(props) {
     <div className="navBar-height">
       <div className="navBar navBar-height">
         {tabs.map((value, index) => (
-
           <div key={"navTouch" + index} className="col-3">
             <NavLink to={value.route} activeClassName="activeLink">
               <div className="navItem">
                 <span className="navImage">
-                  {value.route == location ? <img src={value.activeIcon} /> : <img src={value.icon} />}
+                  {value.route == location ? (
+                    <img src={value.activeIcon} />
+                  ) : (
+                    <img src={value.icon} />
+                  )}
                 </span>
-                {value.label == "Cart" ? <div className="navText">{value.label.toUpperCase()} {(totalCartItems > 0) ? <span className="navBadge">{totalCartItems}</span> : null}</div> : <div className="navText">{value.label.toUpperCase()}</div>}
+                {value.label == "Cart" ? (
+                  <div className="navText">
+                    {value.label.toUpperCase()}{" "}
+                    {totalCartItems > 0 ? (
+                      <span className="navBadge">{totalCartItems}</span>
+                    ) : null}
+                  </div>
+                ) : (
+                  <div className="navText">{value.label.toUpperCase()}</div>
+                )}
               </div>
             </NavLink>
           </div>

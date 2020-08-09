@@ -1,1 +1,5 @@
-export { BottomNextComponent } from "./BottomNextComponent";
+export {
+  BottomNextComponent,
+  ButtonComponent,
+  CartContentComponent,
+} from "./BottomNextComponent";
