@@ -16,12 +16,15 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-const retryHandler = (count, retry, error) => {
+const retryHandler = (count, inProgress, retry, error) => {
   const jitter = getRandomInt(1000, 3000);
+  console.log(count);
   if (count === 0) {
+    inProgress();
     retry();
   } else if (count > 0 && count < 3) {
-    setInterval(() => retry, jitter);
+    inProgress();
+    setTimeout(retry, jitter);
   } else {
     error();
   }
@@ -87,6 +90,54 @@ function RetryComponent(props) {
   );
 }
 
+let triggerVerifyPayment = (props, oid, txn_id) => {
+  let payment = props.payment;
+  let trigger =
+    !payment.verifyPaymentError &&
+    !(
+      payment.verifyPaymentInProgress ||
+      payment.verifyPaymentSuccess ||
+      payment.verifyPaymentFailed
+    );
+  console.log(trigger);
+
+  if (trigger) {
+    retryHandler(
+      payment.paymentRetryCount,
+      props.verifyPaymentInProgress,
+      () => {
+        props.verifyPayment(txn_id);
+      },
+      props.verifyPaymentError
+    );
+  }
+};
+
+let triggerPlaceOrder = (props, oid, txn_id) => {
+  let payment = props.payment;
+  let trigger =
+    payment.verifyPaymentSuccess &&
+    !(
+      payment.placeOrderInProgress ||
+      payment.placeOrderSuccess ||
+      payment.placeOrderFailed
+    );
+  if (trigger) {
+    retryHandler(
+      payment.placeOrderRetryCount,
+      props.placeOrderInProgress,
+      () => {
+        props.placeOrder(oid, txn_id);
+      },
+      props.placeOrderError
+    );
+  }
+};
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 VerifyComponent.propTypes = {
   payment: PropTypes.object,
   verifyPayment: PropTypes.func,
@@ -96,11 +147,6 @@ VerifyComponent.propTypes = {
   takeMeHome: PropTypes.func,
   tryPayingAgain: PropTypes.func,
 };
-
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-
 function VerifyComponent(props) {
   const oid = useParams().order_id;
   const txn_id = useQuery().get("order_id");
@@ -108,42 +154,13 @@ function VerifyComponent(props) {
   console.log(oid, txn_id);
 
   let payment = props.payment;
-  let triggerVerifyPayment =
-    !props.payment.verifyPaymentError &&
-    !(
-      props.payment.verifyPaymentInProgress ||
-      props.payment.verifyPaymentSuccess ||
-      props.payment.verifyPaymentFailed
-    );
 
-  let triggerPlaceOrder =
-    props.payment.verifyPaymentSuccess &&
-    !(
-      props.payment.placeOrderInProgress ||
-      props.payment.placeOrderSuccess ||
-      props.payment.placeOrderFailed
-    );
-
+  console.log(props);
   useEffect(() => {
-    if (triggerVerifyPayment) {
-      retryHandler(
-        payment.placeOrderRetryCount,
-        () => {
-          props.verifyPayment(txn_id);
-        },
-        props.verifyPaymentError
-      );
-    }
-    if (triggerPlaceOrder) {
-      retryHandler(
-        payment.placeOrderRetryCount,
-        () => {
-          props.placeOrder(oid, txn_id);
-        },
-        props.placeOrderError
-      );
-    }
+    triggerVerifyPayment(props, oid, txn_id);
+    triggerPlaceOrder(props, oid, txn_id);
   });
+  useEffect(() => {});
 
   if (payment.verifyPaymentInProgress || payment.placeOrderInProgress) {
     return (

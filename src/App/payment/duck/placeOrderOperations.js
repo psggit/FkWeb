@@ -35,7 +35,7 @@ const onError = (dispatch) => {
 
 const placeOrder = (oid, txn_id) => {
   return (dispatch) => {
-    dispatch(placeOrderInProgress());
+    //dispatch(placeOrderInProgress());
     finalizeOrderAPI(
       { order_id: oid, txn_id: txn_id },
       processResponse(dispatch),

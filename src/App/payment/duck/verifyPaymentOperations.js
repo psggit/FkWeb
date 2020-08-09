@@ -35,7 +35,6 @@ const onError = (dispatch) => {
 
 const verifyPayment = (oid) => {
   return (dispatch) => {
-    dispatch(verifyPaymentInProgress());
     verifyPaymentAPI(
       oid,
       processResponse(dispatch),
