@@ -4,16 +4,6 @@ import PropTypes from "prop-types";
 import { drinksIcon } from "../../../assets/images";
 import "./style.scss";
 
-CartItemComponent.protoTypes = {
-  product: PropTypes.object,
-  brandName: PropTypes.string,
-  price: PropTypes.number,
-  volume: PropTypes.number,
-  addItem: PropTypes.function,
-  removeItem: PropTypes.function,
-  retailer: PropTypes.object,
-};
-
 //TODO:@hl05 figure out the icons here!
 
 function getSkuFromProduct(product, retailer) {
@@ -31,6 +21,16 @@ function getSkuFromProduct(product, retailer) {
   };
 }
 
+CartItemComponent.protoTypes = {
+  product: PropTypes.object,
+  brandName: PropTypes.string,
+  price: PropTypes.number,
+  volume: PropTypes.number,
+  addItem: PropTypes.function,
+  removeItem: PropTypes.function,
+  retailer: PropTypes.object,
+};
+
 function CartItemComponent({ product, addItem, removeItem, retailer }) {
   let sku = getSkuFromProduct(product, retailer);
   return (
@@ -43,11 +43,11 @@ function CartItemComponent({ product, addItem, removeItem, retailer }) {
             {product.volume}ml | Rs {product.price}
           </div>
           <div className="cart-counter">
-            <div className="symbol" onClick={removeItem(sku)}>
+            <div className="symbol" onClick={() => removeItem(sku)}>
               -
             </div>
             <div>{product.count}</div>
-            <div className="symbol" onClick={addItem(sku)}>
+            <div className="symbol" onClick={() => addItem(sku)}>
               +
             </div>
           </div>

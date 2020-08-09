@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { useHistory } from "react-router-dom";
@@ -27,13 +27,12 @@ function RetryValidationComponent(props) {
     products: props.products,
     selectedAddress: props.selectedAddress,
   };
-  let validate = () => props.validateCart(payload);
   return (
     <SplashLoadingComponent
       motion={false}
       icon={drinksIcon}
       text="Something went wrong, please try again."
-      buttonFunc={validate}
+      buttonFunc={() => props.validateCart(payload)}
       buttonText="Retry"
     />
   );
@@ -47,7 +46,7 @@ CartComponent.propTypes = {
   validateCart: PropTypes.func,
 };
 
-function returnEmptyCart() {
+function ReturnEmptyCart() {
   return (
     <div className="cart">
       <EmptyCartComponent />
@@ -56,7 +55,11 @@ function returnEmptyCart() {
   );
 }
 
-const cartItems = (props) => {
+CartItems.propTypes = {
+  products: PropTypes.object,
+};
+
+function CartItems(props) {
   return Object.entries(props.products).map((k) => {
     return (
       <CartItemComponent
@@ -68,38 +71,29 @@ const cartItems = (props) => {
       />
     );
   });
-};
+}
 
 NextComponent.propTypes = {
   retailer: PropTypes.object,
   products: PropTypes.object,
   validateCart: PropTypes.func,
+  selectedAddress: PropTypes.object,
 };
 
 function NextComponent(props) {
-  let shouldValidate = !props.validationSuccessful;
+  //let shouldValidate = !props.validationSuccessful;
   let validateParams = {
     retailer: props.retailer,
     products: props.products,
     selectedAddress: props.selectedAddress,
   };
-  if (shouldValidate) {
-    return (
-      <BottomNextComponent
-        isNav={true}
-        title="Checkout"
-        onClickFunc={() => props.validateCart(validateParams)}
-      />
-    );
-  } else {
-    return (
-      <BottomNextComponent
-        isNav={true}
-        routePath="/address/select/osm"
-        title="Checkout"
-      />
-    );
-  }
+  return (
+    <BottomNextComponent
+      isNav={true}
+      title="Checkout"
+      onClickFunc={() => props.validateCart(validateParams)}
+    />
+  );
 }
 
 AlertValidateErrorComponent.propTypes = {
@@ -110,7 +104,7 @@ AlertValidateErrorComponent.propTypes = {
 function AlertValidateErrorComponent(props) {
   return (
     <Alert
-      handleOption={props.closeValidationErrorMessage}
+      handleOption={() => props.closeValidationErrorMessage()}
       show={true}
       title={props.validateErrorMessage}
       option={"Ok"}
@@ -121,18 +115,24 @@ function AlertValidateErrorComponent(props) {
 CartComponent.propTypes = {
   validationFailure: PropTypes.bool,
   validateError: PropTypes.bool,
-  resetValidation: PropTypes.func,
   validationSuccessful: PropTypes.bool,
+  validationInProgress: PropTypes.bool,
   resetOnUnmount: PropTypes.func,
 };
 
 function CartComponent(props) {
-  useLayoutEffect(() => {
-    return props.resetOnUnmount;
+  useEffect(() => {
+    return () => props.resetOnUnmount();
   }, []);
+
+  let history = useHistory();
+  if (props.validationSuccessful) {
+    history.push("/address/select/osm");
+  }
+
   let isEmpty = props.isEmpty;
   if (isEmpty) {
-    return returnEmptyCart();
+    return <ReturnEmptyCart />;
   }
 
   if (props.validationFailure) {
@@ -143,9 +143,10 @@ function CartComponent(props) {
     return <AlertValidateErrorComponent {...props} />;
   }
 
-  if (props.validationSuccessful) {
-    let history = useHistory();
-    history.push("/address/select/osm");
+  if (props.validationInProgress) {
+    return (
+      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
+    );
   }
 
   return (
@@ -153,7 +154,7 @@ function CartComponent(props) {
       <div className="full-cart show-content">
         <div className="padding-24">
           <CartHeaderComponent {...props} />
-          {cartItems(props)}
+          <CartItems {...props} />
           <AddMoreComponent retailer={props.retailer} />
         </div>
         <NextComponent {...props} />

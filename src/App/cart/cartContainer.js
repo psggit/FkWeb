@@ -25,14 +25,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addSKUToCart: (e) => {
-      return () => {
-        dispatch(addSkuToCart(e));
-      };
-    },
-    removeSKUFromCart: (e) => {
-      return () => dispatch(removeSkuFromCart(e));
-    },
+    addSKUToCart: (e) => dispatch(addSkuToCart(e)),
+    removeSKUFromCart: (e) => dispatch(removeSkuFromCart(e)),
     validateCart: (cs) => dispatch(validateCart(cs)),
     closeValidationErrorMessage: () => dispatch(closeValidationErrorMessage()),
     resetOnUnmount: () => dispatch(resetOnUnmount()),
