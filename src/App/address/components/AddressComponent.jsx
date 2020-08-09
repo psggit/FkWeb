@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.scss";
 import PropTypes from "prop-types";
+import { AlertWithOptions } from "../../common/alert";
 
 function EmptyAddressComponent() {
   return (
@@ -21,7 +22,17 @@ AddressComponent.propTypes = {
 };
 
 function AddressComponent(props) {
+  let [hideModal, setHideModal] = useState(false);
+  let [deleteAddressId, setDeleteAddressId] = useState(0);
   const addresses = props.savedUserAddresses;
+  const alertDetails = {
+    title: "Confirmation deletion",
+    content: "Do you want to delete the selected address?",
+    option1: "Yes",
+    option2: "No",
+    handleOption1: fnDeleteAddress,
+    handleOption2: FnHideModal,
+  };
 
   function getAddressClass(address) {
     if (props.selectedAddress) {
@@ -33,6 +44,21 @@ function AddressComponent(props) {
     } else {
       return "radiobtn";
     }
+  }
+
+  function FnHideModal() {
+    setDeleteAddressId(0);
+    setHideModal(false);
+  }
+
+  function fnDeleteAddress() {
+    setHideModal(false);
+    props.delelteAddressFunc(deleteAddressId);
+  }
+
+  function displayPrompt(_addressId) {
+    setDeleteAddressId(_addressId);
+    setHideModal(true);
   }
 
   return (
@@ -59,7 +85,7 @@ function AddressComponent(props) {
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.delelteAddressFunc(address.address_id);
+                    displayPrompt(address.address_id);
                   }}
                   className="delete"
                 >
@@ -70,6 +96,7 @@ function AddressComponent(props) {
           </div>
         );
       })}
+      {hideModal == true ? <AlertWithOptions {...alertDetails} /> : null}
     </div>
   );
 }

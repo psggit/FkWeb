@@ -50,6 +50,7 @@ function ButtonComponent(props) {
       }
     }
   }
+
   return (
     <div
       className={(inActive == true ? "disable " : "") + "btn-general"}

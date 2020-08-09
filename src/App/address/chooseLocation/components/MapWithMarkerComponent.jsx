@@ -8,7 +8,7 @@ import "../style.scss";
 
 const mapStyle = require("./styles.json");
 
-MapComponent.PropTypes = {
+MapComponent.propTypes = {
   storeGpsFunc: PropTypes.func,
 };
 

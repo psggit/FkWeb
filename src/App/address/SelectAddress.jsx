@@ -8,7 +8,7 @@ import "./style.scss";
 function SelectAddress() {
   return (
     <div>
-      <ToolbarComponent helpVisibility="true" title="Choose Address" />
+      <ToolbarComponent helpVisibility="true" title="" />
       <div className="address-container">
         <AddressComponent />
         <div className="add-new-address">
