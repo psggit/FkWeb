@@ -13,6 +13,7 @@ module.exports = (env, argv) => {
     entry: ["react-hot-loader/patch", "./src/index.js"],
     output: {
       path: path.resolve(__dirname, "dist"),
+      publicPath: "/",
       filename: "[name].[contenthash].js",
     },
     module: {
