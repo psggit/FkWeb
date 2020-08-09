@@ -3,7 +3,6 @@ import { ChooseLocationComponent } from "./chooseLocationComponent";
 import {
   autoCompleteOperation,
   getPlacesDetailsOperation,
-  getAddressFromGpsOperation,
   storeGpsOperation,
 } from "./duck";
 
@@ -22,7 +21,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     autoComplete: (value) => dispatch(autoCompleteOperation(value)),
     getPlacesDetails: (value) => dispatch(getPlacesDetailsOperation(value)),
-    getAddressFromGps: (value) => dispatch(getAddressFromGpsOperation(value)),
     storeGpsFunc: (value) => dispatch(storeGpsOperation(value)),
   };
 };

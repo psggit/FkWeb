@@ -2,7 +2,7 @@ import config from "../config";
 import CommonHeaders from "./common";
 
 const URL =
-  "https://api." + config.BASE_DOMAIN + "/payments/api/1/jp/creat/nodal";
+  "https://api." + config.BASE_DOMAIN + "/payments/api/1/jp/create/nodal";
 
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 

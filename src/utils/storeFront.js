@@ -2,7 +2,6 @@ import config from "../config";
 import CommonHeaders from "./common";
 
 const URL =
-  "https://cors-anywhere.herokuapp.com/" +
   "https://retailer." +
   config.BASE_DOMAIN +
   "/Api/stockandprice/listing/genres";
@@ -21,10 +20,10 @@ const searchGenresAPI = (reqBody, process, onSuccess, onError) => {
 };
 
 const B_URL =
-  "https://cors-anywhere.herokuapp.com/" +
   "https://retailer." +
   config.BASE_DOMAIN +
   "/Api/stockandprice/listing/brands";
+
 const getBrandAPI = (reqBody, process, onSuccess, onError) => {
   fetch(B_URL, {
     method: "POST",

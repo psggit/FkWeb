@@ -6,16 +6,16 @@ import { useHistory } from "react-router-dom";
 
 RetailerList.propTypes = {
   retailers: PropTypes.array,
+  message: PropTypes.string,
   retailerFetchStatus: PropTypes.string,
   fetchRetailersFunc: PropTypes.func,
   selectedAddress: PropTypes.object,
 };
 
-function RetailerTemplate(retailers) {
-  const history = useHistory();
-
+function RetailerTemplate(retailers, history) {
+  const ht = history;
   function showStoreDetails(retailer) {
-    history.push({
+    ht.push({
       pathname: "/storefront",
       state: {
         retailer: retailer,
@@ -23,7 +23,7 @@ function RetailerTemplate(retailers) {
     });
   }
 
-  return retailers.retailers.map((retailer) => {
+  return retailers.map((retailer) => {
     return (
       <div
         key={retailer.retailer_id}
@@ -41,8 +41,18 @@ function RetailerTemplate(retailers) {
     );
   });
 }
-function NoRetailerTemplate() {
-  return <div>NO RETAILERS FOUND...</div>
+function NoRetailerTemplate(text, history) {
+  function showChooseAddress() {
+    history.push("address/select/home");
+  }
+  return (
+    <div className="noRetailers hcenter vcenter flex">
+      {text}
+      <div onClick={() => showChooseAddress()} className="tryDifferentAddress">
+        Try a different address...
+      </div>
+    </div>
+  );
 }
 
 function FetchFailedTemplate() {
@@ -54,7 +64,9 @@ function ServiceUnavailableTemplate() {
 }
 
 function RetailerList(props) {
+  const history = useHistory();
   const retailers = props.retailers;
+  const message = props.message;
   const retailerFetchStatus = props.retailerFetchStatus;
   const fetchRetailersFunc = props.fetchRetailersFunc;
   const selectedAddress = props.selectedAddress;
@@ -70,12 +82,12 @@ function RetailerList(props) {
           <div className="loader"></div>
         </div>
       )}
-      {retailers.length !== 0 && retailerFetchStatus === "success" && (
-        <RetailerTemplate retailers={retailers} />
-      )}
-      {retailers.length === 0 && retailerFetchStatus === "success" && (
-        <NoRetailerTemplate />
-      )}
+      {retailers.length !== 0 && retailerFetchStatus === "success" &&
+        RetailerTemplate(retailers, history)
+      }
+      {retailers.length === 0 &&
+        retailerFetchStatus === "success" &&
+        NoRetailerTemplate(message, history)}
       {retailerFetchStatus === "failed" && <FetchFailedTemplate />}
     </div>
   );

@@ -1,15 +1,20 @@
-import { getBrandSuccess, getBrandInProgress, getBrandFailed } from "./action";
+import {
+  getBrandSuccess,
+  getBrandPaginationSuccess,
+  getBrandInProgress,
+  getBrandFailed,
+} from "./action";
 import { getBrandAPI } from "../../../utils";
 
-const reqBodyFromState = (id) => {
+const reqBodyFromState = (address, genreId, retailer, limit, offset) => {
   return JSON.stringify({
-    city_id: 5,
-    offset: 0,
-    genre_id: id,
-    gps: "13.011557355101441,80.25409296154976",
-    retailer_id: 436,
-    limit: 20,
-    state_id: 4,
+    city_id: address.city.id,
+    offset: offset,
+    genre_id: genreId,
+    gps: address.gps,
+    retailer_id: retailer.retailer_id,
+    limit: limit,
+    state_id: address.state.id,
   });
 };
 
@@ -27,9 +32,14 @@ const processResponse = () => {
   };
 };
 
-const onSuccess = (dispatch) => {
+const onInitialSuccess = (dispatch) => {
   return (data) => {
     dispatch(getBrandSuccess(data));
+  };
+};
+const onPaginationSuccess = (dispatch) => {
+  return (data) => {
+    dispatch(getBrandPaginationSuccess(data));
   };
 };
 
@@ -39,16 +49,25 @@ const onError = (dispatch) => {
   };
 };
 
-const getBrands = (id) => {
-  let reqBody = reqBodyFromState(id);
+const getBrands = (address, genreId, retailer, limit, offset) => {
+  let reqBody = reqBodyFromState(address, genreId, retailer, limit, offset);
   return (dispatch) => {
     dispatch(getBrandInProgress());
-    getBrandAPI(
-      reqBody,
-      processResponse(dispatch),
-      onSuccess(dispatch),
-      onError(dispatch)
-    );
+    if (offset === 0) {
+      getBrandAPI(
+        reqBody,
+        processResponse(dispatch),
+        onInitialSuccess(dispatch),
+        onError(dispatch)
+      );
+    } else {
+      getBrandAPI(
+        reqBody,
+        processResponse(dispatch),
+        onPaginationSuccess(dispatch),
+        onError(dispatch)
+      );
+    }
   };
 };
 

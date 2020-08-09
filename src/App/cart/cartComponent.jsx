@@ -12,7 +12,7 @@ import { BottomNextComponent } from "../common/bottomNext";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { drinksIcon } from "../../assets/images";
 import { Alert } from "../common/alert";
-import BottomNavigationComponent from "../common/bottomNavigation";
+import { BottomNavigationContainer } from "../common/bottomNavigation";
 
 RetryValidationComponent.propTypes = {
   products: PropTypes.object,
@@ -51,6 +51,7 @@ function returnEmptyCart() {
   return (
     <div className="cart">
       <EmptyCartComponent />
+      <BottomNavigationContainer />
     </div>
   );
 }
@@ -107,6 +108,7 @@ AlertValidateErrorComponent.propTypes = {
 };
 
 function AlertValidateErrorComponent(props) {
+
   return (
     <Alert
       handleOption={props.closeValidationErrorMessage}
@@ -115,6 +117,7 @@ function AlertValidateErrorComponent(props) {
       option={"Ok"}
     />
   );
+
 }
 
 CartComponent.propTypes = {
@@ -152,11 +155,11 @@ function CartComponent(props) {
         <div className="padding-24">
           <CartHeaderComponent {...props} />
           {cartItems(props)}
-          <AddMoreComponent />
+          <AddMoreComponent retailer={props.retailer}/>
         </div>
         <NextComponent {...props} />
       </div>
-      <BottomNavigationComponent />
+      <BottomNavigationContainer />
     </div>
   );
 }

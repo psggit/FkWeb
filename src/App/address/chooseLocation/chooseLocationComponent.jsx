@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ToolbarComponent } from "../../common/toolbar";
-import { SearchBox } from "../../search/SearchBox";
 import PropTypes from "prop-types";
 import { MapWithMarkerComponent, PlacesDetailComponent } from "./components";
 import "./style.scss";
@@ -15,8 +14,26 @@ ChooseLocationComponent.propTypes = {
   autoComplete: PropTypes.func,
   storeGpsFunc: PropTypes.func,
   getPlacesDetails: PropTypes.func,
-  getAddressFromGps: PropTypes.func,
 };
+
+AutoCompletePlacesComponent.propTypes = {
+  autoCompletePlaces: PropTypes.array,
+};
+
+function AutoCompletePlacesComponent(props) {
+  const autoCompletePlaces = props.autoCompletePlaces;
+  if (autoCompletePlaces) {
+    return (
+      <div className="flex hcenter vcenter">Search for your locality...</div>
+    );
+  } else if (autoComplete.length == 0) {
+    return (
+      <div className="flex hcenter vcenter">Sorry, No locations found...</div>
+    );
+  } else {
+    return <PlacesDetailComponent title="Adyar" address="Address of Adyar" />;
+  }
+}
 
 function ChooseLocationComponent(props) {
   useEffect(() => {
@@ -24,29 +41,21 @@ function ChooseLocationComponent(props) {
       //SetCancelBtn(false);
     });
   });
-
+  const [searchMode, setSearchMode] = useState(false);
   return (
     <>
       <div>
-        <ToolbarComponent title="Add New Address" />
-        <div className="search-container">
-          <SearchBox
-            cancelEnable={props.isCancelButton}
-            placeholder="Search Location"
-          />
-          {props.isCancelButton ? <button>Cancel</button> : ""}
-        </div>
+        <ToolbarComponent helpVisibility={false} title="Add New Address" />
+
         <div>
-          {props.isSearchMode ? (
-            <div className="page-container">
-              <PlacesDetailComponent title="Adyar" address="Address of Adyar" />
-            </div>
-          ) : (
-            <MapWithMarkerComponent
-              storeGpsFunc={props.storeGpsFunc}
-              onProceedFunc={() => props.getAddressFromGps(props.mapCenterGps)}
+          <div className={(searchMode ? "" : "hide ") + "page-container"}>
+            <AutoCompletePlacesComponent
+              autoCompletePlaces={props.autoCompletePlaces}
             />
-          )}
+          </div>
+          <div className={searchMode ? "hide" : ""}>
+            <MapWithMarkerComponent storeGpsFunc={props.storeGpsFunc} />
+          </div>
         </div>
       </div>
     </>

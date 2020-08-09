@@ -306,7 +306,7 @@ function UserBasicInfoComponent(props) {
     if (collectUserDetails) {
       return <CollectInfoComponent {...props} />;
     } else {
-      return <Redirect to="/statecity/select" />;
+      return <Redirect to="/address/select/sf" />;
     }
   } else {
     return <div> </div>;

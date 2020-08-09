@@ -1,6 +1,5 @@
 import {
   getPlacesDetailsAction,
-  autoCompleteAction,
   storeMapGpsAction,
 } from "./actions";
 
@@ -21,15 +20,5 @@ const storeGpsOperation = (value) => {
   };
 };
 
-const autoCompleteOperation = (value) => {
-  return (dispatch, getState) => {
-    var autoCompletePlaces = getState().chooseLocation.autoCompletePlaces.find(
-      (data) => {
-        return data == value;
-      }
-    );
-    dispatch(autoCompleteAction(autoCompletePlaces));
-  };
-};
 
-export { getPlacesDetailsOperation, storeGpsOperation, autoCompleteOperation };
+export { getPlacesDetailsOperation, storeGpsOperation };

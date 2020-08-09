@@ -21,3 +21,7 @@ export const resetValidation = createAction("resetValidation");
 export const closeValidationErrorMessage = createAction(
   "closeValidationErrorMessage"
 );
+
+export const clearCartAndAdd = createAction("clearCartAndAdd");
+
+export const dontClearCart = createAction("dontClearCart");

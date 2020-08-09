@@ -1,17 +1,14 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { ToolbarComponent } from "../common/toolbar";
-import { BottomNextComponent } from "../common/bottomNext";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { drinksIcon } from "../../assets/images";
 
 import {
   CreditDebitCardsComponent,
   NetBankingComponent,
-  OtherBanksComponent,
   UPIComponent,
-  UPILowSuccessRate,
 } from "./components";
 
 import "./style.scss";
@@ -19,6 +16,7 @@ import "./style.scss";
 RetryComponent.propTypes = {
   createOrder: PropTypes.func,
   fetchPaymentOptions: PropTypes.func,
+  createPayment: PropTypes.func,
   payment: PropTypes.object,
 };
 
@@ -28,17 +26,17 @@ function RetryComponent(props) {
     retryAction = props.fetchPaymentOptions;
   } else if (props.payment.createOrderFailed) {
     retryAction = props.createOrder;
+  } else if (props.payment.createPaymentFailed) {
+    retryAction = props.createPayment;
   }
   return (
-    <>
-      <SplashLoadingComponent
-        motion={false}
-        icon={drinksIcon}
-        text="Something went wrong, please try again."
-        buttonFunc={() => retryAction(props)}
-        buttonText="Retry"
-      />
-    </>
+    <SplashLoadingComponent
+      motion={false}
+      icon={drinksIcon}
+      text="Something went wrong, please try again."
+      buttonFunc={() => retryAction(props)}
+      buttonText="Retry"
+    />
   );
 }
 
@@ -47,27 +45,42 @@ PaymentOptions.propTypes = {
   payment: PropTypes.object,
   initialise: PropTypes.func,
   summaryDetails: PropTypes.object,
+  createPayment: PropTypes.func,
+  jpSavedCardsConf: PropTypes.func,
 };
 
 function PaymentOptions(props) {
   const [selectedBank, setSelectedBank] = useState("");
+  let triggerCreatePayment =
+    props.payment.createOrderSuccess &&
+    !(
+      props.payment.createPaymentInProgress ||
+      props.payment.createPaymentFailed ||
+      props.payment.createPaymentSuccess
+    );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (props.payment.initialTrigger) {
       props.initialise(props);
+    }
+    console.log(triggerCreatePayment);
+    if (triggerCreatePayment) {
+      props.createPayment(props);
     }
   });
 
   if (
     props.payment.createOrderFailed ||
-    props.payment.fetchPaymentOptionsFailed
+    props.payment.fetchPaymentOptionsFailed ||
+    props.payment.createPaymentFailed
   ) {
     return <RetryComponent {...props} />;
   }
 
   if (
     props.payment.createOrderInProgress ||
-    props.payment.fetchPaymentOptionsInProgress
+    props.payment.fetchPaymentOptionsInProgress ||
+    props.payment.createPaymentInProgress
   ) {
     return (
       <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
@@ -90,7 +103,6 @@ function PaymentOptions(props) {
       <div className="page-container payment-option-container">
         {payment.is_upi_enabled && (
           <div>
-            {payment.is_upi_low_success_rate && <UPILowSuccessRate />}
             <UPIComponent {...props} />
           </div>
         )}
@@ -99,19 +111,13 @@ function PaymentOptions(props) {
         {payment.is_nb_enabled && (
           <div>
             <NetBankingComponent
+              {...props}
               banks={banks}
               onBankSelected={openOtherBankOptions}
               onOtherBankSelected={openOtherBankOptions}
             />
-            <OtherBanksComponent
-              onBankSelected={(bank) => setSelectedBank(bank)}
-            />
           </div>
         )}
-        <BottomNextComponent
-          routePath={"/order/placed/" + selectedBank}
-          title="Pay"
-        />
       </div>
     </>
   );

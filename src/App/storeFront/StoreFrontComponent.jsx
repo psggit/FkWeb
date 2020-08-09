@@ -2,40 +2,103 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../common/toolbar";
 import SearchLayout from "../common/layout/SearchLayout";
-import { BrandComponent } from "../common/brand";
+import { BrandContainer } from "../common/brand";
 import fssaiImg from "../../assets/images/fssai.png";
 import { LoadingComponent } from "../common/loading";
 import searchIcon from "../../assets/images/search.svg";
 import { useHistory } from "react-router-dom";
+import { AlertWithOptions } from "../common/alert";
 
 StoreFrontComponent.propTypes = {
   getGeners: PropTypes.func,
   getBrands: PropTypes.func,
-  brandItems: PropTypes.array,
-  generItems: PropTypes.array,
+  brandItems: PropTypes.object,
+  generItems: PropTypes.object,
   selectedAddress: PropTypes.object,
   retailer: PropTypes.object,
+  retailerDiffers: PropTypes.bool,
+  clearCartAndAdd: PropTypes.func,
+  dontClearCart: PropTypes.func,
 };
 
 function StoreFrontComponent(props) {
   const history = useHistory();
 
-  const { getGeners, getBrands, brandItems, generItems } = props;
-  const [generId, setGenerId] = useState(4);
+  const {
+    getGeners,
+    getBrands,
+    setGenre,
+    brandItems,
+    generItems,
+    clearState
+  } = props;
+  const generId = generItems.selectedGenre;
+  const limit = 10;
+  const [offset, setOffset] = useState(0);
   useEffect(() => {
-    getGeners("gh");
+    getGeners(props.selectedAddress, props.retailer);
+    return () => {
+      clearState()
+    }
   }, []);
 
   useEffect(() => {
-    getBrands(generId);
+    if (generId != undefined) {
+      if (offset === 0) {
+        getBrands(
+          props.selectedAddress,
+          generId,
+          props.retailer,
+          limit,
+          offset
+        );
+      } else {
+        setOffset(0);
+      }
+      document.getElementById("brand_accordion").scroll(0, 0);
+    }
   }, [generId]);
+  useEffect(() => {
+    if (generId != undefined) {
+      getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
+    }
+  }, [offset]);
+
+  if (props.retailerDiffers) {
+    return (
+      <AlertWithOptions
+        title={"Items already in cart"}
+        content={
+          "You can clear the cart & add items from another store or cancel and keep the current items"
+        }
+        option1={"CLEAR CART"}
+        option2={"CANCEL"}
+        handleOption1={props.clearCartAndAdd}
+        handleOption2={props.dontClearCart}
+      />
+    );
+  }
 
   const renderSku = (item) => {
     return (
       <>
-        {item.map((item, index) => (
-          <BrandComponent key={item.brand_id} brandList={item} />
+        {item.map((i, index) => (
+          <BrandContainer
+            key={i.brand_id}
+            brand={i}
+            retailer={props.retailer}
+          />
         ))}
+        {(item.length >= offset && item.length!==0) && (
+          <div
+            className="flex hcenter vcenter loadMore"
+            onClick={() => {
+              setOffset(offset + limit);
+            }}
+          >
+            Load more...
+          </div>
+        )}
         <div className="fssai-img">
           <img src={fssaiImg} alt="fssai" />
         </div>
@@ -52,9 +115,6 @@ function StoreFrontComponent(props) {
     });
   }
 
-  // if(brandItems.pending){
-  //   return  <LoadingComponent />
-  // }
   return (
     <>
       <ToolbarComponent title={props.retailer.retailer_name}>
@@ -77,9 +137,9 @@ function StoreFrontComponent(props) {
             <ul>
               {generItems.data.map((item, index) => (
                 <li
-                  key={index + item.id}
+                  key={item.id}
                   className={generId === item.id ? "activeBrand" : ""}
-                  onClick={() => setGenerId(item.id)}
+                  onClick={() => setGenre(item.id)}
                 >
                   {item.name}
                 </li>
@@ -87,12 +147,9 @@ function StoreFrontComponent(props) {
             </ul>
           </div>
         </div>
-        <div className="accordion-container mar-zero">
-          {brandItems.pending ? (
-            <LoadingComponent />
-          ) : (
-            renderSku(brandItems.data)
-          )}
+        <div id="brand_accordion" className="accordion-container mar-zero">
+          {brandItems.pending && <LoadingComponent />}
+          {renderSku(brandItems.data)}
         </div>
       </SearchLayout>
     </>

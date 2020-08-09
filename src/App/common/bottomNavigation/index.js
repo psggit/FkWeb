@@ -1,3 +1,3 @@
-import BottomNavigationComponent from "./BottomNavigationComponent";
+export { BottomNavigationComponent } from "./BottomNavigationComponent";
 
-export default BottomNavigationComponent;
+export { BottomNavigationContainer } from "./BottomNavigationContainer";
