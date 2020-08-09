@@ -4,7 +4,9 @@ import { VerifyComponent } from "./verifyComponent";
 import {
   verifyPayment,
   placeOrder,
+  verifyPaymentInProgress,
   verifyPaymentError,
+  placeOrderInProgress,
   placeOrderError,
   takeMeHome,
   tryPayingAgain,
@@ -18,9 +20,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    verifyPayment: (ps) => dispatch(verifyPayment(ps)),
+    verifyPayment: (oid) => dispatch(verifyPayment(oid)),
     placeOrder: (ps) => dispatch(placeOrder(ps)),
+    verifyPaymentInProgress: () => dispatch(verifyPaymentInProgress()),
     verifyPaymentError: () => dispatch(verifyPaymentError()),
+    placeOrderInProgress: () => dispatch(placeOrderInProgress()),
     placeOrderError: () => dispatch(placeOrderError()),
     tryPayingAgain: () => dispatch(tryPayingAgain()),
     takeMeHome: () => dispatch(takeMeHome()),

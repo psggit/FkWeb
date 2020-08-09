@@ -7,6 +7,8 @@ import { drinksIcon } from "../../assets/images";
 import { Alert } from "../common/alert";
 import { AlertWithOptions } from "../common/alert";
 
+import { useParams, useLocation } from "react-router-dom";
+
 //I have no idea how or why this works, love copy pasting code
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -14,12 +16,14 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-const retryHandler = (count, retry, error) => {
+const retryHandler = (count, inProgress, retry, error) => {
   const jitter = getRandomInt(1000, 3000);
   if (count === 0) {
+    inProgress();
     retry();
   } else if (count > 0 && count < 3) {
-    setInterval(() => retry, jitter);
+    inProgress();
+    setTimeout(retry, jitter);
   } else {
     error();
   }
@@ -85,6 +89,53 @@ function RetryComponent(props) {
   );
 }
 
+let triggerVerifyPayment = (props, oid, txn_id) => {
+  let payment = props.payment;
+  let trigger =
+    !payment.verifyPaymentError &&
+    !(
+      payment.verifyPaymentInProgress ||
+      payment.verifyPaymentSuccess ||
+      payment.verifyPaymentFailed
+    );
+
+  if (trigger) {
+    retryHandler(
+      payment.paymentRetryCount,
+      props.verifyPaymentInProgress,
+      () => {
+        props.verifyPayment(txn_id);
+      },
+      props.verifyPaymentError
+    );
+  }
+};
+
+let triggerPlaceOrder = (props, oid, txn_id) => {
+  let payment = props.payment;
+  let trigger =
+    payment.verifyPaymentSuccess &&
+    !(
+      payment.placeOrderInProgress ||
+      payment.placeOrderSuccess ||
+      payment.placeOrderFailed
+    );
+  if (trigger) {
+    retryHandler(
+      payment.placeOrderRetryCount,
+      props.placeOrderInProgress,
+      () => {
+        props.placeOrder(oid, txn_id);
+      },
+      props.placeOrderError
+    );
+  }
+};
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 VerifyComponent.propTypes = {
   payment: PropTypes.object,
   verifyPayment: PropTypes.func,
@@ -94,45 +145,17 @@ VerifyComponent.propTypes = {
   takeMeHome: PropTypes.func,
   tryPayingAgain: PropTypes.func,
 };
-
 function VerifyComponent(props) {
-  let payment = props.payment;
-  let triggerVerifyPayment =
-    !props.payment.verifyPaymentError &&
-    !(
-      props.payment.verifyPaymentInProgress ||
-      props.payment.verifyPaymentSuccess ||
-      props.payment.verifyPaymentFailed
-    );
+  const oid = useParams().order_id;
+  const txn_id = useQuery().get("order_id");
 
-  let triggerPlaceOrder =
-    props.payment.verifyPaymentSuccess &&
-    !(
-      props.payment.placeOrderInProgress ||
-      props.payment.placeOrderSuccess ||
-      props.payment.placeOrderFailed
-    );
+  let payment = props.payment;
 
   useEffect(() => {
-    if (triggerVerifyPayment) {
-      retryHandler(
-        payment.placeOrderRetryCount,
-        () => {
-          props.verifyPayment(props);
-        },
-        props.verifyPaymentError
-      );
-    }
-    if (triggerPlaceOrder) {
-      retryHandler(
-        payment.placeOrderRetryCount,
-        () => {
-          props.placeOrder(props);
-        },
-        props.placeOrderError
-      );
-    }
+    triggerVerifyPayment(props, oid, txn_id);
+    triggerPlaceOrder(props, oid, txn_id);
   });
+  useEffect(() => {});
 
   if (payment.verifyPaymentInProgress || payment.placeOrderInProgress) {
     return (

@@ -82,7 +82,7 @@ const paymentSuccessHandler = (state, data) => {
       verifyPaymentFailed: false,
       verifyPaymentError: false,
       verifyPaymentDetails: data,
-      paymentRetryCount: 0,
+      paymentRetryCount: state.paymentRetryCount + 1,
     };
   }
   return {
@@ -105,7 +105,7 @@ const placeOrderSuccessHandler = (state, data) => {
       placeOrderFailed: false,
       placeOrderError: false,
       placeOrderDetails: data,
-      placeOrderRetryCount: 0,
+      placeOrderRetryCount: state.placeOrderRetryCount + 1,
     };
   }
   return {
@@ -236,8 +236,6 @@ const paymentReducer = createReducer(initialState, {
       verifyPaymentInProgress: true,
       verifyPaymentFailed: false,
       verifyPaymentSuccess: false,
-      verifyPaymentError: false,
-      verifyPaymentErrorMessage: "",
     };
   },
   [verifyPaymentSuccess]: (state, e) => {
@@ -250,7 +248,7 @@ const paymentReducer = createReducer(initialState, {
       verifyPaymentInProgress: false,
       verifyPaymentSuccess: false,
       verifyPaymentFailed: false,
-      verifyPaymentError: false,
+      paymentRetryCount: state.paymentRetryCount + 1,
     };
   },
 
@@ -284,6 +282,7 @@ const paymentReducer = createReducer(initialState, {
       placeOrderSuccess: false,
       placeOrderFailed: false,
       placeOrderError: false,
+      placeOrderRetryCount: state.placeOrderRetryCount + 1,
     };
   },
 
