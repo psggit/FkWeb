@@ -6,9 +6,9 @@ import {
   validationInProgress,
   validationFailure,
   closeValidationErrorMessage,
-  resetValidation,
   clearCartAndAdd,
   dontClearCart,
+  resetOnUnmount,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -67,24 +67,7 @@ const getDefaultState = (): State => {
   return {
     retailer: {},
     products: {},
-    retailerDiffers: false,
-    validationFailure: false,
-    validationInProgress: false,
-    validationSuccessful: false,
-    validateError: false,
-    validateErrorMessage: "",
-    redirect: false,
-    pendingSku: {},
-  };
-};
 
-let getTestState = (): State => {
-  return {
-    retailer: {
-      id: 446,
-      name: "Gokul Arcade",
-      description: "delivers very soon",
-    },
     retailerDiffers: false,
     validationFailure: false,
     validationInProgress: false,
@@ -93,20 +76,6 @@ let getTestState = (): State => {
     validateErrorMessage: "",
     redirect: false,
     pendingSku: {},
-    products: {
-      "1278": {
-        skuId: 1278,
-        brandName: "Kf blue",
-        brandId: 993,
-        image:
-          "https://res.cloudinary.com/www-hipbar-com/image/upload/c_scale,h_300/v1557824990/Brand%20Logo's/TN/Beer.jpg",
-        price: 150,
-        volume: 650,
-        count: 2,
-        available: true,
-        subText: unAvailableProductText,
-      },
-    },
   };
 };
 
@@ -122,12 +91,14 @@ let setRetailer = (state: State, sku: Sku): State => {
 };
 
 let resetValidationState = (state: State): State => {
+  state.retailerDiffers = false;
   state.validationFailure = false;
   state.validationInProgress = false;
   state.validationSuccessful = false;
   state.validateError = false;
   state.validateErrorMessage = "";
   state.redirect = false;
+  state.pendingSku = {};
   return state;
 };
 
@@ -294,11 +265,7 @@ const cartReducer = createReducer(initialState(), {
     };
   },
 
-  [resetValidation]: (state: State): State => {
-    return resetValidationState(state);
-  },
-
-  [clearCartAndAdd]: (state: State): State => {
+  [clearCartAndAdd]: (state: State) => {
     state.pendingSku.clearCart = true;
     return void addProduct(state, state.pendingSku);
   },
@@ -309,6 +276,10 @@ const cartReducer = createReducer(initialState(), {
       retailerDiffers: false,
       pendingSku: {},
     };
+  },
+
+  [resetOnUnmount]: (state: State): State => {
+    return resetValidationState(state);
   },
 });
 

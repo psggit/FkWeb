@@ -6,7 +6,7 @@ import {
   isEmpty,
   validateCart,
   closeValidationErrorMessage,
-  resetValidation,
+  resetOnUnmount,
 } from "../common/cart";
 
 const mapStateToProps = (state) => {
@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     validateCart: (cs) => dispatch(validateCart(cs)),
     closeValidationErrorMessage: () => dispatch(closeValidationErrorMessage()),
-    resetValidation: () => dispatch(resetValidation()),
+    resetOnUnmount: () => dispatch(resetOnUnmount()),
   };
 };
 

@@ -108,7 +108,6 @@ AlertValidateErrorComponent.propTypes = {
 };
 
 function AlertValidateErrorComponent(props) {
-
   return (
     <Alert
       handleOption={props.closeValidationErrorMessage}
@@ -117,7 +116,6 @@ function AlertValidateErrorComponent(props) {
       option={"Ok"}
     />
   );
-
 }
 
 CartComponent.propTypes = {
@@ -125,11 +123,12 @@ CartComponent.propTypes = {
   validateError: PropTypes.bool,
   resetValidation: PropTypes.func,
   validationSuccessful: PropTypes.bool,
+  resetOnUnmount: PropTypes.func,
 };
 
 function CartComponent(props) {
   useLayoutEffect(() => {
-    props.resetValidation();
+    return props.resetOnUnmount;
   }, []);
   let isEmpty = props.isEmpty;
   if (isEmpty) {
@@ -155,7 +154,7 @@ function CartComponent(props) {
         <div className="padding-24">
           <CartHeaderComponent {...props} />
           {cartItems(props)}
-          <AddMoreComponent retailer={props.retailer}/>
+          <AddMoreComponent retailer={props.retailer} />
         </div>
         <NextComponent {...props} />
       </div>
