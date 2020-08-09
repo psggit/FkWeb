@@ -46,11 +46,11 @@ function SearchByStoreComponent(props) {
     });
   });
 
-  const isFirstRun = useRef(true);
+  const isStoreFirstRun = useRef(true);
 
   useEffect(() => {
-    if (isFirstRun.current) {
-      isFirstRun.current = false;
+    if (isStoreFirstRun.current) {
+      isStoreFirstRun.current = false;
       return;
     }
     if (query.length > 2) {
@@ -128,13 +128,11 @@ function SearchByStoreComponent(props) {
   function renderBottomComponent() {
     let totalCartItems = 0;
     let total = 0;
-    console.log("totalCartItems" + totalCartItems);
     Object.keys(props.cartProducts).forEach(function (key) {
       total =
         total + props.cartProducts[key].price * props.cartProducts[key].count;
       totalCartItems += props.cartProducts[key].count;
     });
-    console.log("totalCartItems" + totalCartItems);
     if (totalCartItems > 0) {
       return (
         <BottomNextComponent redirectPath="/cart" title="View Cart">
@@ -148,17 +146,16 @@ function SearchByStoreComponent(props) {
 
   return (
     <>
-      <ToolbarComponent title="Search Drinks">
-        <div className="search-container">
-          <SearchBox
-            handleInput={handleInput}
-            placeholder="Search Drinks"
-            onFocusIn={onFocus}
-            onFocusOut={onBlur}
-          />
-          {cancelBtn ? <button>Cancel</button> : ""}
-        </div>
-      </ToolbarComponent>
+      <ToolbarComponent title="Search Drinks"></ToolbarComponent>
+      <div className="search-container">
+        <SearchBox
+          handleInput={handleInput}
+          placeholder="Search Drinks"
+          onFocusIn={onFocus}
+          onFocusOut={onBlur}
+        />
+        {cancelBtn ? <button>Cancel</button> : ""}
+      </div>
       <SearchLayout custom="custom">
         {status === "waiting" && SearchWaiting()}
         {status === "progress" && <LoadingComponent />}
