@@ -76,7 +76,10 @@ function App() {
             path="/payment/add/new/card"
             component={AddCardAndProcessPaymentContainer}
           />
-          <Route path="/payment/verify" component={PaymentVerifyContainer} />
+          <Route
+            path="/payment/verify/order/:order_id"
+            component={PaymentVerifyContainer}
+          />
           <Route path="/order/detail" component={OrderDetailsContainer} />
           <Route path="/order/placed" component={OrderPlacedContainer} />
           <Route path="/order/info" component={OrderInfoContainer} />

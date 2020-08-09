@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    verifyPayment: (ps) => dispatch(verifyPayment(ps)),
+    verifyPayment: (oid) => dispatch(verifyPayment(oid)),
     placeOrder: (ps) => dispatch(placeOrder(ps)),
     verifyPaymentError: () => dispatch(verifyPaymentError()),
     placeOrderError: () => dispatch(placeOrderError()),

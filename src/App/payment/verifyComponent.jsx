@@ -7,6 +7,8 @@ import { drinksIcon } from "../../assets/images";
 import { Alert } from "../common/alert";
 import { AlertWithOptions } from "../common/alert";
 
+import { useParams, useLocation } from "react-router-dom";
+
 //I have no idea how or why this works, love copy pasting code
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -95,7 +97,16 @@ VerifyComponent.propTypes = {
   tryPayingAgain: PropTypes.func,
 };
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 function VerifyComponent(props) {
+  const oid = useParams().order_id;
+  const txn_id = useQuery().get("order_id");
+
+  console.log(oid, txn_id);
+
   let payment = props.payment;
   let triggerVerifyPayment =
     !props.payment.verifyPaymentError &&
@@ -118,7 +129,7 @@ function VerifyComponent(props) {
       retryHandler(
         payment.placeOrderRetryCount,
         () => {
-          props.verifyPayment(props);
+          props.verifyPayment(txn_id);
         },
         props.verifyPaymentError
       );
@@ -127,7 +138,7 @@ function VerifyComponent(props) {
       retryHandler(
         payment.placeOrderRetryCount,
         () => {
-          props.placeOrder(props);
+          props.placeOrder(oid, txn_id);
         },
         props.placeOrderError
       );
