@@ -153,6 +153,17 @@ function VerifyComponent(props) {
 
   let payment = props.payment;
 
+  const history = useHistory();
+  if (payment.takeMeHome) {
+    history.push("/home");
+  }
+  if (payment.tryPayingAgain) {
+    history.push("/payment/options");
+  }
+  if (payment.placeOrderSuccess) {
+    history.push("/order/placed");
+  }
+
   useEffect(() => {
     triggerVerifyPayment(props, oid, txn_id);
     triggerPlaceOrder(props, oid, txn_id);
@@ -177,16 +188,7 @@ function VerifyComponent(props) {
     return <OrderFailedComponent {...props} />;
   }
 
-  const history = useHistory();
-  if (payment.takeMeHome) {
-    history.push("/home");
-  }
-  if (payment.tryPayingAgain) {
-    history.push("/payment/options");
-  }
-  if (payment.placeOrderSuccess) {
-    history.push("/order/placed");
-  }
+  console.log(payment);
 
   return <div />;
 }
