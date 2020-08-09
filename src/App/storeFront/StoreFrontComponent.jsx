@@ -127,13 +127,11 @@ function StoreFrontComponent(props) {
   function renderBottomComponent() {
     let totalCartItems = 0;
     let total = 0;
-    console.log("totalCartItems" + totalCartItems);
     Object.keys(props.cartProducts).forEach(function (key) {
       total =
         total + props.cartProducts[key].price * props.cartProducts[key].count;
       totalCartItems += props.cartProducts[key].count;
     });
-    console.log("totalCartItems" + totalCartItems);
     if (totalCartItems > 0) {
       return (
         <BottomNextComponent redirectPath="/cart" title="View Cart">
