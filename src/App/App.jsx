@@ -14,7 +14,6 @@ import { StoreFrontContainer } from "./storeFront";
 import { OrderSummaryContainer } from "./summary";
 import {
   PaymentContainer,
-  AddCardAndProcessPayment,
   ProcessPaymentContainer,
   PaymentVerifyContainer,
 } from "./payment";

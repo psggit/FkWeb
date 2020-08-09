@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../common/toolbar";
+import {
+  BottomNextComponent,
+  CartContentComponent,
+} from "../common/bottomNext";
 import SearchLayout from "../common/layout/SearchLayout";
 import { BrandContainer } from "../common/brand";
 import fssaiImg from "../../assets/images/fssai.png";
@@ -14,6 +18,7 @@ StoreFrontComponent.propTypes = {
   getBrands: PropTypes.func,
   brandItems: PropTypes.object,
   generItems: PropTypes.object,
+  cartProducts: PropTypes.object,
   selectedAddress: PropTypes.object,
   retailer: PropTypes.object,
   retailerDiffers: PropTypes.bool,
@@ -24,24 +29,46 @@ StoreFrontComponent.propTypes = {
 function StoreFrontComponent(props) {
   const history = useHistory();
 
-  const { getGeners, getBrands, brandItems, generItems } = props;
-  const [generId, setGenerId] = useState(4);
+  const {
+    getGeners,
+    getBrands,
+    setGenre,
+    brandItems,
+    generItems,
+    clearState
+  } = props;
+  const generId = generItems.selectedGenre;
   const limit = 10;
   const [offset, setOffset] = useState(0);
+
   useEffect(() => {
     getGeners(props.selectedAddress, props.retailer);
+    return () => {
+      clearState()
+    }
   }, []);
 
   useEffect(() => {
-    if (offset === 0) {
-      getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
-    } else {
-      setOffset(0);
+    if (generId != undefined) {
+      if (offset === 0) {
+        getBrands(
+          props.selectedAddress,
+          generId,
+          props.retailer,
+          limit,
+          offset
+        );
+      } else {
+        setOffset(0);
+      }
+      document.getElementById("brand_accordion").scroll(0, 0);
     }
-    document.getElementById("brand_accordion").scroll(0, 0);
   }, [generId]);
+
   useEffect(() => {
-    getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
+    if (generId != undefined) {
+      getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
+    }
   }, [offset]);
 
   if (props.retailerDiffers) {
@@ -62,14 +89,14 @@ function StoreFrontComponent(props) {
   const renderSku = (item) => {
     return (
       <>
-        {item.map((item, index) => (
+        {item.map((i, index) => (
           <BrandContainer
-            key={item.brand_id}
-            brand={item}
+            key={i.brand_id}
+            brand={i}
             retailer={props.retailer}
           />
         ))}
-        {item.length >= offset && (
+        {(item.length >= offset && item.length!==0) && (
           <div
             className="flex hcenter vcenter loadMore"
             onClick={() => {
@@ -93,6 +120,27 @@ function StoreFrontComponent(props) {
         retailer: props.retailer,
       },
     });
+  }
+
+  function renderBottomComponent() {
+    let totalCartItems = 0;
+    let total = 0;
+    console.log("totalCartItems" + totalCartItems);
+    Object.keys(props.cartProducts).forEach(function (key) {
+      total =
+        total + props.cartProducts[key].price * props.cartProducts[key].count;
+      totalCartItems += props.cartProducts[key].count;
+    });
+    console.log("totalCartItems" + totalCartItems);
+    if (totalCartItems > 0) {
+      return (
+        <BottomNextComponent redirectPath="/cart" title="View Cart">
+          <CartContentComponent
+            content={totalCartItems + " ITEMS | ₹ " + total}
+          />
+        </BottomNextComponent>
+      );
+    }
   }
 
   return (
@@ -119,7 +167,7 @@ function StoreFrontComponent(props) {
                 <li
                   key={item.id}
                   className={generId === item.id ? "activeBrand" : ""}
-                  onClick={() => setGenerId(item.id)}
+                  onClick={() => setGenre(item.id)}
                 >
                   {item.name}
                 </li>
@@ -128,11 +176,10 @@ function StoreFrontComponent(props) {
           </div>
         </div>
         <div id="brand_accordion" className="accordion-container mar-zero">
-          {(brandItems.pending) && (
-            <LoadingComponent />
-          )}
+          {brandItems.pending && <LoadingComponent />}
           {renderSku(brandItems.data)}
         </div>
+        {renderBottomComponent()}
       </SearchLayout>
     </>
   );

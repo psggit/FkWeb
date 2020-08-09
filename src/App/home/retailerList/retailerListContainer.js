@@ -5,6 +5,7 @@ import { fetchRetailersOperation } from "./duck";
 const mapStateToProps = (state) => {
   return {
     retailers: state.home.retailerList.retailers,
+    message: state.home.retailerList.message,
     retailerFetchStatus: state.home.retailerList.retailerFetchStatus,
     selectedAddress: state.addressStore.selectedAddress,
   };
