@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import "./style.scss";
 import PropTypes from "prop-types";
@@ -9,6 +9,7 @@ ToolbarComponent.propTypes = {
   helpVisibility: PropTypes.any,
   title: PropTypes.string,
   onClick: PropTypes.func,
+  children: PropTypes.node,
 };
 
 function ToolbarComponent(props) {

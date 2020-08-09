@@ -13,6 +13,7 @@ const mapStateToProps = (state, props) => {
     generItems,
     brandItems,
     selectedAddress,
+    cartProducts: state.cart.products,
     retailer: props.location.state.retailer,
     retailerDiffers: state.cart.retailerDiffers,
   };

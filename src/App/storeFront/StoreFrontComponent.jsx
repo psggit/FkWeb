@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../common/toolbar";
+import {
+  BottomNextComponent,
+  CartContentComponent,
+} from "../common/bottomNext";
 import SearchLayout from "../common/layout/SearchLayout";
 import { BrandContainer } from "../common/brand";
 import fssaiImg from "../../assets/images/fssai.png";
@@ -14,6 +18,7 @@ StoreFrontComponent.propTypes = {
   getBrands: PropTypes.func,
   brandItems: PropTypes.object,
   generItems: PropTypes.object,
+  cartProducts: PropTypes.object,
   selectedAddress: PropTypes.object,
   retailer: PropTypes.object,
   retailerDiffers: PropTypes.bool,
@@ -35,6 +40,7 @@ function StoreFrontComponent(props) {
   const generId = generItems.selectedGenre;
   const limit = 10;
   const [offset, setOffset] = useState(0);
+
   useEffect(() => {
     getGeners(props.selectedAddress, props.retailer);
     return () => {
@@ -58,6 +64,7 @@ function StoreFrontComponent(props) {
       document.getElementById("brand_accordion").scroll(0, 0);
     }
   }, [generId]);
+
   useEffect(() => {
     if (generId != undefined) {
       getBrands(props.selectedAddress, generId, props.retailer, limit, offset);
@@ -115,6 +122,27 @@ function StoreFrontComponent(props) {
     });
   }
 
+  function renderBottomComponent() {
+    let totalCartItems = 0;
+    let total = 0;
+    console.log("totalCartItems" + totalCartItems);
+    Object.keys(props.cartProducts).forEach(function (key) {
+      total =
+        total + props.cartProducts[key].price * props.cartProducts[key].count;
+      totalCartItems += props.cartProducts[key].count;
+    });
+    console.log("totalCartItems" + totalCartItems);
+    if (totalCartItems > 0) {
+      return (
+        <BottomNextComponent redirectPath="/cart" title="View Cart">
+          <CartContentComponent
+            content={totalCartItems + " ITEMS | ₹ " + total}
+          />
+        </BottomNextComponent>
+      );
+    }
+  }
+
   return (
     <>
       <ToolbarComponent title={props.retailer.retailer_name}>
@@ -151,6 +179,7 @@ function StoreFrontComponent(props) {
           {brandItems.pending && <LoadingComponent />}
           {renderSku(brandItems.data)}
         </div>
+        {renderBottomComponent()}
       </SearchLayout>
     </>
   );
