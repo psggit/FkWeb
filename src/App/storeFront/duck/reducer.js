@@ -1,17 +1,33 @@
-const initialState = {
+const genreInitialState = {
   pending: false,
   data: [],
+  selectedGenre: null,
   error: "",
 };
 
-function genersReducer(state = initialState, action) {
+function genersReducer(state = genreInitialState, action) {
   let newState;
   switch (action.type) {
     case "PENDING":
       newState = { ...state, pending: true };
       return newState;
+    case "CLEAR_STATE":
+      return genreInitialState;
+    case "CHANGE_GENRE":
+      newState = { ...state, selectedGenre: action.payload};
+      return newState;
     case "SUCCESS":
-      newState = { ...state, data: action.payload.genres, pending: false };
+      if (action.payload.genres.length > 0) {
+        let selectedGenre = action.payload.genres[0].id;
+        newState = {
+          ...state,
+          data: action.payload.genres,
+          selectedGenre: selectedGenre,
+          pending: false,
+        };
+      } else {
+        newState = { ...state, data: action.payload.genres, pending: false };
+      }
       return newState;
     case "FAILURE":
       newState = { ...state, error: action.payload, pending: false };
@@ -21,12 +37,20 @@ function genersReducer(state = initialState, action) {
   }
 }
 
-function brandGenerReducer(state = initialState, action) {
+const brandInitialState = {
+  pending: false,
+  data: [],
+  error: "",
+};
+
+function brandGenerReducer(state = brandInitialState, action) {
   let newState;
   switch (action.type) {
     case "BRANDPENDING":
       newState = { ...state, pending: true };
       return newState;
+    case "CLEAR_STATE":
+      return brandInitialState;
     case "BRANDSUCCESS":
       newState = { ...state, data: action.payload.brands, pending: false };
       return newState;

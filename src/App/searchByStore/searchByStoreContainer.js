@@ -3,14 +3,15 @@ import { SearchByStoreComponent } from "./SearchByStoreComponent";
 import { getSearchByStore } from "./duck";
 
 const mapStateToProps = (state, props) => {
-  console.log(state);
   const {
-    searchByStore: { data, status },
+    searchByStore: { data, status, limit, offset },
     addressStore: { selectedAddress },
   } = state;
   return {
     data,
     status,
+    limit,
+    offset,
     selectedAddress,
     retailer: props.location.state.retailer,
   };
@@ -18,8 +19,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getSearchByStore: (query, address, retailer) =>
-      dispatch(getSearchByStore(query, address, retailer)),
+    getSearchByStore: (query, address, retailer, limit, offset) =>
+      dispatch(getSearchByStore(query, address, retailer, limit, offset)),
   };
 };
 
