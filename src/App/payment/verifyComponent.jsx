@@ -18,7 +18,6 @@ const getRandomInt = (min, max) => {
 
 const retryHandler = (count, inProgress, retry, error) => {
   const jitter = getRandomInt(1000, 3000);
-  console.log(count);
   if (count === 0) {
     inProgress();
     retry();
@@ -99,7 +98,6 @@ let triggerVerifyPayment = (props, oid, txn_id) => {
       payment.verifyPaymentSuccess ||
       payment.verifyPaymentFailed
     );
-  console.log(trigger);
 
   if (trigger) {
     retryHandler(
@@ -151,11 +149,8 @@ function VerifyComponent(props) {
   const oid = useParams().order_id;
   const txn_id = useQuery().get("order_id");
 
-  console.log(oid, txn_id);
-
   let payment = props.payment;
 
-  console.log(props);
   useEffect(() => {
     triggerVerifyPayment(props, oid, txn_id);
     triggerPlaceOrder(props, oid, txn_id);
