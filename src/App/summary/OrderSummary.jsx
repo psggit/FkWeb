@@ -1,6 +1,8 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 
+import { Alert } from "../common/alert";
 import { ToolbarComponent } from "../common/toolbar";
 import { BottomNextComponent } from "../common/bottomNext";
 import { OrderAddressComponent, YouPayComponent } from "./components";
@@ -84,24 +86,61 @@ function SummaryComponent(props) {
   );
 }
 
+SummaryFailedComponent.propTypes = {
+  summary: PropTypes.object,
+};
+
+function SummaryFailedComponent(props) {
+  let fetchSummaryError = props.summary.fetchSummaryError;
+  let fetchSummaryLocationError = props.summary.fetchSummaryLocationError;
+  let message = props.summary.fetchSummaryErrorMessage;
+  const history = useHistory();
+  let handleAction;
+  if (fetchSummaryError) {
+    handleAction = () => {
+      history.push("/cart");
+    };
+  } else if (fetchSummaryLocationError) {
+    handleAction = () => {
+      history.goBack();
+    };
+  }
+
+  return (
+    <Alert
+      handleOption={handleAction}
+      show={true}
+      title={message}
+      option={"Ok"}
+    />
+  );
+}
+
 OrderSummary.propTypes = {
   summary: PropTypes.object,
+  resetOnUnmount: PropTypes.func,
 };
 
 function OrderSummary(props) {
   let fetchSummarySuccess = props.summary.fetchSummarySuccess;
   let fetchSummaryInProgress = props.summary.fetchSummaryInProgress;
   let fetchSummaryFailed = props.summary.fetchSummaryFailed;
+  let fetchSummaryError = props.summary.fetchSummaryError;
+  let fetchSummaryLocationError = props.summary.fetchSummaryLocationError;
   const trigger = !(
     fetchSummarySuccess ||
     fetchSummaryFailed ||
     fetchSummaryInProgress
   );
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (trigger) {
       props.fetchSummary(props);
     }
   });
+
+  useEffect(() => {
+    return props.resetOnUnmount;
+  }, []);
 
   if (fetchSummaryInProgress) {
     return (
@@ -109,6 +148,8 @@ function OrderSummary(props) {
     );
   } else if (fetchSummaryFailed) {
     return <RetryComponent {...props} />;
+  } else if (fetchSummaryError || fetchSummaryLocationError) {
+    return <SummaryFailedComponent {...props} />;
   } else if (fetchSummarySuccess) {
     return <SummaryComponent {...props} />;
   } else {
