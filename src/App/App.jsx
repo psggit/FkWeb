@@ -16,6 +16,7 @@ import {
   PaymentContainer,
   AddCardAndProcessPayment,
   ProcessPaymentContainer,
+  PaymentVerifyContainer,
 } from "./payment";
 import { ChooseLocationContainer } from "./address/chooseLocation";
 import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
@@ -75,6 +76,7 @@ function App() {
             path="/payment/add/new/card"
             component={AddCardAndProcessPaymentContainer}
           />
+          <Route path="/payment/verify" component={PaymentVerifyContainer} />
           <Route path="/order/detail" component={OrderDetailsContainer} />
           <Route path="/order/placed" component={OrderPlacedContainer} />
           <Route path="/order/info" component={OrderInfoContainer} />
