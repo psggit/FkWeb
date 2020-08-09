@@ -115,6 +115,7 @@ let triggerPlaceOrder = (props, oid, txn_id) => {
   let payment = props.payment;
   let trigger =
     payment.verifyPaymentSuccess &&
+    !payment.placeOrderError &&
     !(
       payment.placeOrderInProgress ||
       payment.placeOrderSuccess ||
@@ -145,6 +146,7 @@ VerifyComponent.propTypes = {
   takeMeHome: PropTypes.func,
   tryPayingAgain: PropTypes.func,
 };
+
 function VerifyComponent(props) {
   const oid = useParams().order_id;
   const txn_id = useQuery().get("order_id");
