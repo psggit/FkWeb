@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { OrderSummary } from "./OrderSummary";
-import { fetchSummary } from "./duck";
+import { fetchSummary, resetOnUnmount } from "./duck";
 
 const mapStateToProps = (state) => {
   return {
@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchSummary: (ss) => dispatch(fetchSummary(ss)),
+    resetOnUnmount: () => dispatch(resetOnUnmount()),
   };
 };
 

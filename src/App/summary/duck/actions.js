@@ -6,4 +6,11 @@ const fetchSummaryFailed = createAction("fetchSummaryFailed");
 
 const fetchSummarySuccess = createAction("fetchSummarySuccess");
 
-export { fetchSummaryInProgress, fetchSummaryFailed, fetchSummarySuccess };
+const resetOnUnmount = createAction("resetOnUnmount");
+
+export {
+  fetchSummaryInProgress,
+  fetchSummaryFailed,
+  fetchSummarySuccess,
+  resetOnUnmount,
+};

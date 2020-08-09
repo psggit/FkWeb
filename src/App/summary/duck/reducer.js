@@ -3,6 +3,7 @@ import {
   fetchSummaryInProgress,
   fetchSummaryFailed,
   fetchSummarySuccess,
+  resetOnUnmount,
 } from "./actions";
 
 let initialState = {
@@ -11,7 +12,46 @@ let initialState = {
   fetchSummaryFailed: false,
   fetchSummarySuccess: false,
   fetchSummaryError: false,
+  fetchSummaryLocationError: false,
   fetchSummaryErrorMessage: "",
+};
+
+const handleSummarySuccess = (state, data) => {
+  if (data.statusCode === 0) {
+    state = {
+      ...state,
+      summaryDetails: data.summary_details,
+      fetchSummaryInProgress: false,
+      fetchSummaryFailed: false,
+      fetchSummarySuccess: true,
+      fetchSummaryError: false,
+      fetchSummaryLocationError: false,
+      fetchSummaryErrorMessage: "",
+    };
+  } else if (data.statusCode === 30003) {
+    state = {
+      ...state,
+      summaryDetails: data.summary_details,
+      fetchSummaryInProgress: false,
+      fetchSummaryFailed: false,
+      fetchSummarySuccess: true,
+      fetchSummaryError: false,
+      fetchSummaryLocationError: true,
+      fetchSummaryErrorMessage: data.message,
+    };
+  } else {
+    state = {
+      ...state,
+      summaryDetails: data.summary_details,
+      fetchSummaryInProgress: false,
+      fetchSummaryFailed: false,
+      fetchSummarySuccess: true,
+      fetchSummaryError: true,
+      fetchSummaryLocationError: false,
+      fetchSummaryErrorMessage: data.message,
+    };
+  }
+  return state;
 };
 
 const summaryReducer = createReducer(initialState, {
@@ -23,6 +63,7 @@ const summaryReducer = createReducer(initialState, {
       fetchSummarySuccess: false,
     };
   },
+
   [fetchSummaryFailed]: (state) => {
     return {
       ...state,
@@ -32,12 +73,17 @@ const summaryReducer = createReducer(initialState, {
     };
   },
   [fetchSummarySuccess]: (state, e) => {
+    return handleSummarySuccess(state, e.payload);
+  },
+  [resetOnUnmount]: (state) => {
     return {
       ...state,
-      summaryDetails: e.payload.summary_details,
       fetchSummaryInProgress: false,
       fetchSummaryFailed: false,
-      fetchSummarySuccess: true,
+      fetchSummarySuccess: false,
+      fetchSummaryError: false,
+      fetchSummaryLocationError: false,
+      fetchSummaryErrorMessage: "",
     };
   },
 });
