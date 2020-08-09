@@ -32,7 +32,6 @@ function SearchByStoreComponent(props) {
   };
 
   const handleInput = (val) => {
-    console.log("query", val);
     SetQuery(val);
   };
 
@@ -76,9 +75,6 @@ function SearchByStoreComponent(props) {
   }
 
   const renderSku = (brands) => {
-    console.log("brand rendering is called");
-    console.log(brands.length);
-    console.log(props.offset);
     return (
       <div>
         {brands.map((brand) => (
@@ -90,6 +86,7 @@ function SearchByStoreComponent(props) {
         ))}
         {brands.length === props.offset + props.limit && (
           <div
+            className="loadMore hcenter vcenter flex"
             onClick={() => {
               getSearchByStore(
                 query,
@@ -112,7 +109,14 @@ function SearchByStoreComponent(props) {
     return renderSku(data);
   }
   function SearchWaiting() {
-    return <div>WAITING</div>;
+    return (<div className="hcenter vcenter flex searchHome">
+        <div className="heading">
+          What are you looking for today?
+        </div>
+        <div className="subHeading">
+          Search for available drinks at <br/>{props.retailer.retailer_name}.
+        </div>
+      </div>);
   }
 
   return (

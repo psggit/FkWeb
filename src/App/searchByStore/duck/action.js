@@ -14,5 +14,8 @@ export const getSearchByStorePaginationSuccess = createAction(
   "searchRetailerPaginationSuccess"
 );
 
+//getSearchByStorePaginationSuccess got the array of data
+export const resetState = createAction("searchRetailerReset");
+
 //fetch search by store failed
 export const getSearchByStoreFailed = createAction("searchRetailerFailure");
