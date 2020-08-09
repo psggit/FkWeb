@@ -108,6 +108,7 @@ AlertValidateErrorComponent.propTypes = {
 };
 
 function AlertValidateErrorComponent(props) {
+
   return (
     <Alert
       handleOption={props.closeValidationErrorMessage}
@@ -116,6 +117,7 @@ function AlertValidateErrorComponent(props) {
       option={"Ok"}
     />
   );
+
 }
 
 CartComponent.propTypes = {

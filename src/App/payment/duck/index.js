@@ -9,6 +9,10 @@ export {
   createPaymentFailed,
   createPaymentSuccess,
   initialTrigger,
+  verifyPaymentError,
+  placeOrderError,
+  takeMeHome,
+  tryPayingAgain,
 } from "./actions";
 
 export { initialise } from "./operations";
@@ -20,3 +24,6 @@ export { createPayment } from "./createPayment";
 export { jpSavedCardsConf } from "./jpSavedCards";
 export { jpUpiConf } from "./jpUpi";
 export { jpNetBankingConf } from "./jpNetBanking";
+export { jpNewCardConf } from "./jpNewCard";
+export { verifyPayment } from "./verifyPaymentOperations";
+export { placeOrder } from "./placeOrderOperations";

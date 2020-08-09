@@ -93,25 +93,25 @@ function NetBankingComponent(props) {
         />
         <input type="hidden" className="payment_method_type" value="NB" />
         <div className="bank-list-container">
-          <select className="payment_method">
+          <select className="payment_method nb-select">
             {banks.map((bank) => (
               <option
                 key={bank.payment_method}
                 value={bank.payment_method}
                 label={bank.description}
-                className="bn-options"
+                className="nb-options"
               ></option>
             ))}
           </select>
         </div>
 
-        <button
+        <div
           type="submit"
-          className="make_payment"
+          className="make_payment nb-pay-button"
           onClick={() => onSubmit()}
         >
-          Pay
-        </button>
+          Pay via Net Banking
+        </div>
         <input type="hidden" className="redirect" value="true" />
       </form>
     </div>

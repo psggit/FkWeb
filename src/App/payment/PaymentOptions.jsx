@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { ToolbarComponent } from "../common/toolbar";
-import { BottomNextComponent } from "../common/bottomNext";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { drinksIcon } from "../../assets/images";
 
 import {
   CreditDebitCardsComponent,
   NetBankingComponent,
-  OtherBanksComponent,
   UPIComponent,
-  UPILowSuccessRate,
 } from "./components";
 
 import "./style.scss";
@@ -106,7 +103,6 @@ function PaymentOptions(props) {
       <div className="page-container payment-option-container">
         {payment.is_upi_enabled && (
           <div>
-            {payment.is_upi_low_success_rate && <UPILowSuccessRate />}
             <UPIComponent {...props} />
           </div>
         )}
@@ -120,12 +116,8 @@ function PaymentOptions(props) {
               onBankSelected={openOtherBankOptions}
               onOtherBankSelected={openOtherBankOptions}
             />
-            <OtherBanksComponent
-              onBankSelected={(bank) => setSelectedBank(bank)}
-            />
           </div>
         )}
-        <BottomNextComponent routePath={"/payment"} title="Pay" />
       </div>
     </>
   );

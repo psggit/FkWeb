@@ -46,9 +46,9 @@ function AddItemComponent(props) {
   const cartSku = cartProducts[sku.sku_id.toString()];
   if (cartSku === undefined || retailer.retailer_id !== cartRetailer.id) {
     return (
-      <button className="add-item" onClick={addItem(brand, sku)}>
-        Add
-      </button>
+      <div className="cart-counter" onClick={addItem(brand, sku)}>
+        ADD
+      </div>
     );
   }
   return (
@@ -58,7 +58,7 @@ function AddItemComponent(props) {
           <div className="symbol" onClick={removeItem(props.brand, sku)}>
             -
           </div>
-          <div>{cartSku.count}</div>
+          <div className="cart-count">{cartSku.count}</div>
           <div className="symbol" onClick={addItem(brand, sku)}>
             +
           </div>

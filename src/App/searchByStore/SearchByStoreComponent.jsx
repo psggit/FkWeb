@@ -5,6 +5,7 @@ import { ToolbarComponent } from "../common/toolbar";
 import { BrandContainer } from "../common/brand";
 import SearchLayout from "../common/layout/SearchLayout";
 import { LoadingComponent } from "../common/loading";
+import { AlertWithOptions } from "../common/alert";
 
 SearchByStoreComponent.propTypes = {
   data: PropTypes.array,
@@ -12,6 +13,9 @@ SearchByStoreComponent.propTypes = {
   getSearchByStore: PropTypes.func,
   retailer: PropTypes.object,
   selectedAddress: PropTypes.object,
+  retailerDiffers: PropTypes.bool,
+  clearCartAndAdd: PropTypes.func,
+  dontClearCart: PropTypes.func,
 };
 
 function SearchByStoreComponent(props) {
@@ -55,6 +59,21 @@ function SearchByStoreComponent(props) {
       );
     }
   }, [query]);
+
+  if (props.retailerDiffers) {
+    return (
+      <AlertWithOptions
+        title={"Items already in cart"}
+        content={
+          "You can clear the cart & add items from another store or cancel and keep the current items"
+        }
+        option1={"CLEAR CART"}
+        option2={"CANCEL"}
+        handleOption1={props.clearCartAndAdd}
+        handleOption2={props.dontClearCart}
+      />
+    );
+  }
 
   const renderSku = (brands) => {
     console.log("brand rendering is called");
