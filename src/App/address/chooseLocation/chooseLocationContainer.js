@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
     autoCompletePlaces: state.chooseLocation.autoCompletePlaces,
     placesInfo: state.chooseLocation.placesInfo,
     address: state.chooseLocation.selectedMapAddress,
+    selectedCity: state.stateCity.selectedCity,
     mapCenterGps: state.chooseLocation.selectedGps,
   };
 };

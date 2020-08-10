@@ -1,8 +1,14 @@
 import React from "react";
 import { emptyCartIcon } from "../../../assets/images";
+import { useHistory } from "react-router-dom";
 import "./style.scss";
 
 function EmptyCartComponent() {
+  let history = useHistory();
+  function redirect() {
+    history.push("/search");
+  }
+
   return (
     <div className="empty-cart">
       <img src={emptyCartIcon} width="120" height="120" />
@@ -12,7 +18,14 @@ function EmptyCartComponent() {
         Get your favourite drinks in a
       </div>
       <div className="favorite-drinks">jiffy!</div>
-      <div className="search-drinks">Search Drinks</div>
+      <div
+        onClick={() => {
+          redirect();
+        }}
+        className="search-drinks"
+      >
+        Search Drinks
+      </div>
     </div>
   );
 }

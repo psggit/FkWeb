@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useState } from "react";
 import { ToolbarComponent } from "../common/toolbar";
+import { SplashLoadingComponent } from "../common/splashLoading";
 import "./style.scss";
 import { StateCityItem } from "./components";
 import { useHistory } from "react-router-dom";
@@ -17,11 +18,14 @@ StateCityComponent.propTypes = {
   cities: PropTypes.array,
   getAvailableCities: PropTypes.func,
   getAvailableStates: PropTypes.func,
+  selectCityFunc: PropTypes.func,
+  selectStateFunc: PropTypes.func,
 };
 
 function StateCityComponent(props) {
   const history = useHistory();
   const [mode, setMode] = useState("state");
+  const [selectedState, setSelectedState] = useState(null);
 
   function showAddressSelection(city) {
     history.push({
@@ -31,6 +35,8 @@ function StateCityComponent(props) {
   }
 
   function selectState(state) {
+    setSelectedState(state);
+    props.selectStateFunc(state);
     setMode("city");
     props.getAvailableCities({
       state_id: state.id,
@@ -38,6 +44,7 @@ function StateCityComponent(props) {
   }
 
   function selectCity(city) {
+    props.selectCityFunc(city);
     showAddressSelection(city);
   }
 
@@ -56,7 +63,6 @@ function StateCityComponent(props) {
   };
 
   const stateItems = (props) => {
-    console.log(props.states);
     return props.states.map((state) => {
       return (
         <StateCityItem
@@ -82,14 +88,31 @@ function StateCityComponent(props) {
     }
   }
 
+  console.log(props.fetchCityFailed)
   return (
     <>
       <ToolbarComponent onClick={goBack} />
+      {props.fetchStateFailed === true && (
+        <SplashLoadingComponent
+          motion={false}
+          text="Something went wrong, please try again."
+          buttonFunc={() => props.getAvailableStates()}
+          buttonText="Retry"
+        />
+      )}
+      {props.fetchCityFailed === true && (
+        <SplashLoadingComponent
+          motion={false}
+          text={"CITY Something went wrong, please try again."}
+          buttonFunc={() => selectState(selectedState)}
+          buttonText={"Retry"}
+        />
+      )}
       <div className="page-container ">
         <img src={appIcon} className="location-app-image" />
         <div className="location-msg">
-          Hey there! Browse HipBar by selecting any of the below listed {mode}{" "}
-          locations:
+          Hey there! Browse HipBar by selecting any of the below listed{" "}
+          {mode === "state" ? "states" : "cities"}:
         </div>
         {mode == "state" && props.states ? stateItems(props) : <div />}
         {mode == "city" && props.cities ? cityItems(props) : <div />}

@@ -1,5 +1,6 @@
 import {
   updateAddressFromGpsAction,
+  getAddressFromGpsInProgressAction,
   selectAddressAction,
   updateAddressListAction,
   createAddressInProgressAction,
@@ -8,6 +9,7 @@ import {
   deleteAddressInProgressAction,
   deleteAddressFailAction,
   deleteAddressSuccessAction,
+  resetAddressAction,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -17,6 +19,7 @@ const apiCallDefaultStatus = {
   deleteAddressStatus: "waiting",
   editAddressStatus: "waiting",
   listAddressStatus: "waiting",
+  fetchAddressFromGPSStatus: "waiting",
 };
 
 const defaultAddressInputPageState = {
@@ -49,6 +52,15 @@ const addressListReducer = createReducer(initialState, {
   [updateAddressFromGpsAction]: (state, action) => ({
     ...state,
     selectedMapAddress: { ...state.selectedMapAddress, ...action.payload },
+    apiCalls: { ...state.apiCalls, fetchAddressFromGPSStatus: "success" },
+  }),
+  [getAddressFromGpsInProgressAction]: (state) => ({
+    ...state,
+    apiCalls: { ...state.apiCalls, fetchAddressFromGPSStatus: "inProgress" },
+  }),
+  [resetAddressAction]: (state) => ({
+    ...state,
+    selectedMapAddress: defaultAddressInputPageState,
   }),
   [deleteAddressFailAction]: (state) => ({
     ...state,

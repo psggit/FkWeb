@@ -46,13 +46,19 @@ function SelectAddressComponent(props) {
     <>
       <ToolbarComponent helpVisibility={false} title="Choose Address" />
       <div className="page-container">
-        <AddressComponent {...props} />
-        {(listAddressApiStatus === "inProgress" ||
-          deleteAddressApiStatus === "inProgress") && <LoadingComponent />}
-        <div className="add-new-address" onClick={showAddAddress}>
-          <div className="title">Add New Address</div>
-          <img src={addAddressIcon} className="add-image" />
-        </div>
+        {listAddressApiStatus === "inProgress" ||
+        listAddressApiStatus === "waiting" ||
+        deleteAddressApiStatus === "inProgress" ? (
+          <LoadingComponent />
+        ) : (
+          <>
+            <AddressComponent {...props} />
+            <div className="add-new-address" onClick={showAddAddress}>
+              <div className="title">Add New Address</div>
+              <img src={addAddressIcon} className="add-image" />
+            </div>
+          </>
+        )}
       </div>
       <BottomNextComponent
         onClickFunc={onClickProcess}

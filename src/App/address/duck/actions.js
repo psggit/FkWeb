@@ -16,6 +16,7 @@ const getAddressFromGpsFailAction = createAction("getAddressFromGpsFailAction");
 const getAddressFromGpsInProgressAction = createAction(
   "getAddressFromGpsInProgressAction"
 );
+const resetAddressAction = createAction("resetAddressFromGps")
 
 // Create Address Actions
 const createAddressSuccessAction = createAction("createAddressSuccessAction");
@@ -32,6 +33,7 @@ const deleteAddressInProgressAction = createAction(
 );
 
 export {
+  resetAddressAction,
   createAddressSuccessAction,
   createAddressInProgressAction,
   createAddressFailAction,
