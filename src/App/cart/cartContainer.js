@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
     products: state.cart.products,
     retailerDiffers: state.cart.retailerDiffers,
     isEmpty: isEmpty(state.cart),
+    validationInProgress: state.cart.validationInProgress,
     validationFailure: state.cart.validationFailure,
     validateError: state.cart.validateError,
     validateErrorMessage: state.cart.validateErrorMessage,
