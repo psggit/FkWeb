@@ -46,6 +46,7 @@ PaymentOptions.propTypes = {
   initialise: PropTypes.func,
   createPayment: PropTypes.func,
   jpSavedCardsConf: PropTypes.func,
+  resetPaymentOnUnmount: PropTypes.func,
 };
 
 function PaymentOptions(props) {
@@ -57,6 +58,10 @@ function PaymentOptions(props) {
       props.payment.createPaymentFailed ||
       props.payment.createPaymentSuccess
     );
+
+  useEffect(() => {
+    return props.resetPaymentOnUnmount;
+  }, []);
 
   useEffect(() => {
     if (props.payment.initialTrigger) {

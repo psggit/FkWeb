@@ -20,6 +20,8 @@ import {
   placeOrderError,
   takeMeHome,
   tryPayingAgain,
+  resetPaymentOnUnmount,
+  resetVerifyPaymentOnUnmount,
 } from "./actions";
 
 const paymentFailureMessage = "Payment failed";
@@ -33,7 +35,7 @@ let initialState = {
   fetchPaymentOptionsFailed: false,
   fetchPaymentOptionsSuccess: false,
   fetchPaymentOptionsError: false,
-  fetchPaymentOptionsErrorMessage: false,
+  fetchPaymentOptionsErrorMessage: "",
 
   //Payment store
   paymentDetails: {},
@@ -41,7 +43,7 @@ let initialState = {
   createPaymentFailed: false,
   createPaymentSuccess: false,
   createPaymentError: false,
-  createPaymentErrorMessage: false,
+  createPaymentErrorMessage: "",
 
   //Order store
   orderDetails: {},
@@ -307,6 +309,62 @@ const paymentReducer = createReducer(initialState, {
     return {
       ...state,
       tryPayingAgain: true,
+    };
+  },
+
+  [resetPaymentOnUnmount]: (state) => {
+    return {
+      ...state,
+      initialTrigger: true,
+      //Payment Options store
+      fetchPaymentOptionsInProgress: false,
+      fetchPaymentOptionsFailed: false,
+      fetchPaymentOptionsSuccess: false,
+      fetchPaymentOptionsError: false,
+      fetchPaymentOptionsErrorMessage: "",
+
+      //Payment store
+      createPaymentInProgress: false,
+      createPaymentFailed: false,
+      createPaymentSuccess: false,
+      createPaymentError: false,
+      createPaymentErrorMessage: "",
+
+      //Order store
+      createOrderInProgress: false,
+      createOrderSuccess: false,
+      createOrderFailed: false,
+      createOrderError: false,
+      createOrderErrorMessage: "",
+
+      //verify payments
+      verifyPaymentInProgress: false,
+      verifyPaymentSuccess: false,
+      verifyPaymentFailed: false,
+      verifyPaymentError: false,
+      verifyPaymentErrorMessage: paymentFailureMessage,
+    };
+  },
+
+  [resetVerifyPaymentOnUnmount]: (state) => {
+    return {
+      ...state,
+      verifyPaymentInProgress: false,
+      verifyPaymentSuccess: false,
+      verifyPaymentFailed: false,
+      verifyPaymentError: false,
+      verifyPaymentErrorMessage: paymentFailureMessage,
+      paymentRetryCount: 0,
+
+      placeOrderInProgress: false,
+      placeOrderFailed: false,
+      placeOrderSuccess: false,
+      placeOrderError: false,
+      placeOrderErrorMessage: placeOrderFailureMessage,
+      placeOrderRetryCount: 0,
+
+      takeMeHome: false,
+      tryPayingAgain: false,
     };
   },
 });

@@ -10,6 +10,7 @@ import {
   placeOrderError,
   takeMeHome,
   tryPayingAgain,
+  resetVerifyPaymentOnUnmount,
 } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -28,6 +29,7 @@ const mapDispatchToProps = (dispatch) => {
     placeOrderError: () => dispatch(placeOrderError()),
     tryPayingAgain: () => dispatch(tryPayingAgain()),
     takeMeHome: () => dispatch(takeMeHome()),
+    resetVerifyPaymentOnUnmount: () => dispatch(resetVerifyPaymentOnUnmount()),
   };
 };
 

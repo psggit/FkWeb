@@ -15,6 +15,8 @@ export {
   placeOrderError,
   takeMeHome,
   tryPayingAgain,
+  resetPaymentOnUnmount,
+  resetVerifyPaymentOnUnmount,
 } from "./actions";
 
 export { initialise } from "./operations";
