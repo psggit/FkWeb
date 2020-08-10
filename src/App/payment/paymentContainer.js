@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchPaymentOptions: (ps) => dispatch(fetchPaymentOptions(ps)),
     createPayment: (ps) => dispatch(createPayment(ps)),
     jpUpiConf: (ps) => dispatch(jpUpiConf(ps)),
-    jpSavedCardsConf: (ps, formID) => dispatch(jpSavedCardsConf(ps, formID)),
+    jpSavedCardsConf: (ps, index) => dispatch(jpSavedCardsConf(ps, index)),
     jpNewCardConf: (ps) => dispatch(jpNewCardConf(ps)),
     jpNetBankingConf: (ps) => dispatch(jpNetBankingConf(ps)),
     resetPaymentOnUnmount: (ps) => dispatch(resetPaymentOnUnmount(ps)),
