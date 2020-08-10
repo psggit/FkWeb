@@ -10,6 +10,7 @@ import {
   jpSavedCardsConf,
   jpUpiConf,
   jpNetBankingConf,
+  resetPaymentOnUnmount,
 } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -31,6 +32,7 @@ const mapDispatchToProps = (dispatch) => {
     jpSavedCardsConf: (ps) => dispatch(jpSavedCardsConf(ps)),
     jpUpiConf: (ps) => dispatch(jpUpiConf(ps)),
     jpNetBankingConf: (ps) => dispatch(jpNetBankingConf(ps)),
+    resetPaymentOnUnmount: (ps) => dispatch(resetPaymentOnUnmount(ps)),
   };
 };
 

@@ -145,6 +145,7 @@ VerifyComponent.propTypes = {
   placeOrderError: PropTypes.func,
   takeMeHome: PropTypes.func,
   tryPayingAgain: PropTypes.func,
+  resetVerifyPaymentOnUnmount: PropTypes.func,
 };
 
 function VerifyComponent(props) {
@@ -165,10 +166,13 @@ function VerifyComponent(props) {
   }
 
   useEffect(() => {
+    props.resetVerifyPaymentOnUnmount;
+  }, []);
+
+  useEffect(() => {
     triggerVerifyPayment(props, oid, txn_id);
     triggerPlaceOrder(props, oid, txn_id);
   });
-  useEffect(() => {});
 
   if (payment.verifyPaymentInProgress || payment.placeOrderInProgress) {
     return (
@@ -187,8 +191,6 @@ function VerifyComponent(props) {
   if (payment.placeOrderError) {
     return <OrderFailedComponent {...props} />;
   }
-
-  console.log(payment);
 
   return <div />;
 }

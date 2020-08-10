@@ -32,3 +32,8 @@ export const placeOrderError = createAction("placeOrderError");
 
 export const takeMeHome = createAction("takeMeHome");
 export const tryPayingAgain = createAction("tryPayingAgain");
+
+export const resetPaymentOnUnmount = createAction("resetPaymentOnUnmount");
+export const resetVerifyPaymentOnUnmount = createAction(
+  "resetVerifyPaymentOnUnmount"
+);
