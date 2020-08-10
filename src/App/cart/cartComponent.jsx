@@ -120,14 +120,18 @@ CartComponent.propTypes = {
   resetOnUnmount: PropTypes.func,
 };
 
+function historyPush(path) {
+  let history = useHistory();
+  history.push(path);
+}
+
 function CartComponent(props) {
   useEffect(() => {
     return () => props.resetOnUnmount();
   }, []);
 
-  let history = useHistory();
   if (props.validationSuccessful) {
-    history.push("/address/select/osm");
+    historyPush("/address/select/osm");
   }
 
   let isEmpty = props.isEmpty;
