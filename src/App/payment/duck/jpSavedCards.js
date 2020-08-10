@@ -23,11 +23,11 @@ const errorHandler = () => {
   };
 };
 
-export const jpSavedCardsConf = (JusPay) => {
+export const jpSavedCardsConf = (JusPay, formID) => {
   return (dispatch) => {
-    console.log(JusPay);
+    console.log("Juspay: formID=" + formID);
     return JusPay.Setup({
-      payment_form: "#payment_form",
+      payment_form: formID,
       type: "express",
       success_handler: successHandler(),
       error_handler: errorHandler(),
