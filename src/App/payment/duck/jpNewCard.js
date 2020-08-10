@@ -114,9 +114,15 @@ export const jpNewCardConf = (JusPay) => {
             dispatch(newCardNameValid(event.valid));
             break;
           case "card_exp_month":
+            if (event.type === "onready") {
+              break;
+            }
             dispatch(newCardExpiryValid(event.expiry_valid));
             break;
           case "card_exp_year":
+            if (event.type === "onready") {
+              break;
+            }
             dispatch(newCardExpiryValid(event.expiry_valid));
             break;
           case "security_code":
