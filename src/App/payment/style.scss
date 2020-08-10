@@ -289,10 +289,15 @@
 
 .card-pay-button {
   @extend .pay-button;
-  width: 100%;
-  text-align: initial;
+  width: 80px;
+  text-align: center;
   height: 40px;
   padding: 14px 0px 4px 0px;
+}
+
+.card-form {
+  height: 100%;
+  width: 100%;
 }
 
 .other-banks {

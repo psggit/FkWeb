@@ -83,7 +83,7 @@ let initialState = {
 
   //payment control flow
   addNewCard: false,
-  savedCardValid: true,
+  savedCardValid: {},
 
   newCardNumberValid: true,
   newCardNameValid: true,
@@ -384,7 +384,7 @@ const paymentReducer = createReducer(initialState, {
 
       //payment control flow
       addNewCard: false,
-      savedCardValid: true,
+      savedCardValid: {},
 
       newCardNumberValid: true,
       newCardNameValid: true,
