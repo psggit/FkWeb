@@ -59,8 +59,8 @@
 .custom_fc_frame {
   position: fixed !important;
   left: 0 !important;
-  right:0 !important;
-  bottom:0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   background: #000;
 }
 
@@ -373,6 +373,14 @@ input[type="radio"]:checked {
   height: 40px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
+}
+
+.error-message {
+  color: $error-color;
+  line-height: 12px;
+  font-size: 10px;
+  margin-top: 2px;
+  height: 12px;
 }
 
 /* Safari */

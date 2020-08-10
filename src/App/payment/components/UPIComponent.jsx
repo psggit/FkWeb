@@ -17,6 +17,7 @@ function UPIComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
 
   const [payEnabled, SetPayEnabled] = useState(false);
+  const [upiValid, SetUpiValid] = useState(true);
 
   const configureJuspay = () => {
     let jp = window.Juspay;
@@ -32,12 +33,6 @@ function UPIComponent(props) {
     script.async = true;
     script.onload = configureJuspay;
     document.body.appendChild(script);
-
-    /*
-    return () => {
-      document.body.removeChild(script);
-    };
-	  */
   }, []);
 
   const onSubmit = () => {
@@ -47,7 +42,22 @@ function UPIComponent(props) {
 
   const onTextChanged = (val) => {
     console.log(val);
-    SetPayEnabled(val.length > 0);
+    if (val.length > 3) {
+      console.log(
+        "Val is ",
+        val.match("[A-Za-z0-9_.-]{3,}@[A-Za-z0-9_.-]{3,}")
+      );
+      if (val.match("[A-Za-z0-9_.-]{3,}@[A-Za-z0-9_.-]{3,}")) {
+        SetUpiValid(true);
+        SetPayEnabled(val.length > 0);
+      } else {
+        SetUpiValid(false);
+        SetPayEnabled(false);
+      }
+    } else {
+      SetUpiValid(true);
+      SetPayEnabled(false);
+    }
   };
 
   return (
@@ -98,6 +108,9 @@ function UPIComponent(props) {
             </div>
             <input type="hidden" className="redirect" value="true" />
           </div>
+        </div>
+        <div className="error-message">
+          {upiValid ? "" : "Please enter a valid vpa"}
         </div>
       </div>
     </form>
