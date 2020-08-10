@@ -37,6 +37,7 @@ const initialState = {
   createAddressStatus: "waiting",
   selectedAddress: null,
   savedUserAddresses: [],
+  dontDeleteCurrentAddress: false,
 };
 
 const addressListReducer = createReducer(initialState, {
@@ -68,7 +69,6 @@ const addressListReducer = createReducer(initialState, {
   }),
   [deleteAddressSuccessAction]: (state) => ({
     ...state,
-    selectedAddress: null,
     apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "success" },
   }),
   [deleteAddressInProgressAction]: (state) => ({

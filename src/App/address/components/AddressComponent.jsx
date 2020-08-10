@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.scss";
 import PropTypes from "prop-types";
 import { AlertWithOptions } from "../../common/alert";
+import { Alert } from "../../common/alert";
 
 function EmptyAddressComponent() {
   return (
@@ -33,7 +34,6 @@ function AddressComponent(props) {
     handleOption1: fnDeleteAddress,
     handleOption2: FnHideModal,
   };
-
   function getAddressClass(address) {
     if (props.selectedAddress) {
       if (props.selectedAddress.address_id == address.address_id) {
@@ -65,6 +65,11 @@ function AddressComponent(props) {
     <div className="address-container">
       {addresses.length == 0 && <EmptyAddressComponent />}
       {props.savedUserAddresses.map((address) => {
+        let canModifyAddress = true;
+        if (props.selectedAddress) {
+          canModifyAddress =
+            props.selectedAddress.address_id !== address.address_id;
+        }
         return (
           <div key={address.address_id} className="address-wrap">
             <div
@@ -82,15 +87,17 @@ function AddressComponent(props) {
                 <div onClick={(e) => e.stopPropagation()} className="edit">
                   EDIT
                 </div>
-                <div
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    displayPrompt(address.address_id);
-                  }}
-                  className="delete"
-                >
-                  DELETE
-                </div>
+                {canModifyAddress && (
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      displayPrompt(address.address_id);
+                    }}
+                    className="delete"
+                  >
+                    DELETE
+                  </div>
+                )}
               </div>
             </div>
           </div>
