@@ -1,4 +1,4 @@
-import { fetchCriticalAdsAPI } from '../../../../utils';
+import { fetchCriticalAdsAPI } from "../../../../utils";
 import {
   fetchCriticalAdsSuccess,
   fetchCriticalAdsFailure,

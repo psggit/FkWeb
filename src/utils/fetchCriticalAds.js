@@ -9,15 +9,14 @@ const URL =
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 
 const fetchCriticalAdsAPI = (process, onSuccess, onError) => {
-  console.log("fetchCriticalAdsAPI");
   fetch(URL, {
     method: "GET",
     credentials: "include",
     headers: headers,
   })
-  .then((res) => process(res))
-  .then((data) => onSuccess(data))
-  .catch((err) => onError(err));
+    .then((res) => process(res))
+    .then((data) => onSuccess(data))
+    .catch((err) => onError(err));
 };
 
 export { fetchCriticalAdsAPI };
