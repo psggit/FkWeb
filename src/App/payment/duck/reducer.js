@@ -25,6 +25,10 @@ import {
   addNewCard,
   cancelAddNewCard,
   savedCardValid,
+  newCardNumberValid,
+  newCardNameValid,
+  newCardExpiryValid,
+  newCardCvvValid,
 } from "./actions";
 
 const paymentFailureMessage = "Payment failed";
@@ -79,7 +83,12 @@ let initialState = {
 
   //payment control flow
   addNewCard: false,
-  savedCardValid: false,
+  savedCardValid: true,
+
+  newCardNumberValid: true,
+  newCardNameValid: true,
+  newCardExpiryValid: true,
+  newCardCvvValid: true,
 };
 
 const paymentSuccessHandler = (state, data) => {
@@ -375,12 +384,28 @@ const paymentReducer = createReducer(initialState, {
 
       //payment control flow
       addNewCard: false,
-      savedCardValid: false,
+      savedCardValid: true,
+
+      newCardNumberValid: true,
+      newCardNameValid: true,
+      newCardExpiryValid: true,
+      newCardCvvValid: true,
     };
   },
   [addNewCard]: (state) => ({ ...state, addNewCard: true }),
   [cancelAddNewCard]: (state) => ({ ...state, addNewCard: false }),
   [savedCardValid]: (state, e) => ({ ...state, savedCardValid: e.payload }),
+
+  [newCardNumberValid]: (state, e) => ({
+    ...state,
+    newCardNumberValid: e.payload,
+  }),
+  [newCardNameValid]: (state, e) => ({ ...state, newCardNameValid: e.payload }),
+  [newCardExpiryValid]: (state, e) => ({
+    ...state,
+    newCardExpiryValid: e.payload,
+  }),
+  [newCardCvvValid]: (state, e) => ({ ...state, newCardCvvValid: e.payload }),
 });
 
 export { paymentReducer };

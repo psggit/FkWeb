@@ -31,9 +31,9 @@ AddCardAndProcessPayment.propTypes = {
   cancelAddNewCard: PropTypes.func,
 };
 
+let juspay_form;
 function AddCardAndProcessPayment(props) {
   const paymentDetails = props.payment.paymentDetails;
-  let juspay_form;
 
   const configureJuspay = () => {
     let jp = window.Juspay;
@@ -51,19 +51,7 @@ function AddCardAndProcessPayment(props) {
     document.body.appendChild(script);
   }, []);
 
-  const jp_success = (response) => {
-    console.log(response);
-  };
-  const jp_error = (response) => {
-    console.log(response);
-  };
-
   const onSubmit = () => {
-    console.log(juspay_form);
-    juspay_form.tokenize({
-      success_handler: jp_success,
-      error_handler: jp_error,
-    });
     juspay_form.submit_form();
   };
 
