@@ -23,11 +23,10 @@ const errorHandler = () => {
   };
 };
 
-export const jpSavedCardsConf = (JusPay, formID) => {
+export const jpSavedCardsConf = (JusPay, index) => {
   return (dispatch) => {
-    console.log("Juspay: formID=" + formID);
     return JusPay.Setup({
-      payment_form: formID,
+      payment_form: "#payment_form" + index,
       type: "express",
       success_handler: successHandler(),
       error_handler: errorHandler(),
@@ -57,7 +56,20 @@ export const jpSavedCardsConf = (JusPay, formID) => {
       },
 
       iframe_element_callback: function (event) {
-        dispatch(savedCardValid(event.valid));
+        let savedCardProp = {
+          isValid: event.valid,
+          index: index,
+        };
+        switch (event.type) {
+          case "onready":
+            savedCardProp.isValid = false;
+            dispatch(savedCardValid(savedCardProp));
+            break;
+          default:
+            savedCardProp.isValid = event.valid;
+            dispatch(savedCardValid(savedCardProp));
+            break;
+        }
       },
     });
   };

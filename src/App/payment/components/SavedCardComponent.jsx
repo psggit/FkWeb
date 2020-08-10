@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 
 import { lockIcon } from "../../../assets/images";
@@ -9,6 +9,7 @@ SavedCardComponent.propTypes = {
   payment: PropTypes.object,
   jpSavedCardsConf: PropTypes.func,
   paymentDetails: PropTypes.object,
+  savedCardValid: PropTypes.object,
 };
 
 let juspay_forms = [];
@@ -26,7 +27,7 @@ function Form(props) {
 
   const configureJuspay = () => {
     let jp = window.Juspay;
-    var form = props.jpSavedCardsConf(jp, "#payment_form" + props.index);
+    var form = props.jpSavedCardsConf(jp, props.index);
     juspay_forms[props.index] = form;
   };
 
@@ -39,7 +40,7 @@ function Form(props) {
   return (
     <form
       key={props.card.card_token}
-      className="juspay_inline_form"
+      className="juspay_inline_form card-form"
       id={"payment_form" + props.index}
     >
       <input
@@ -76,7 +77,9 @@ function Form(props) {
 
 function SavedCardComponent(props) {
   const payment = props.payment.paymentOptionsDetails;
+  const savedCardValid = props.payment.savedCardValid;
 
+  console.log(savedCardValid);
   const [jpLoaded, SetjpLoaded] = useState(false);
 
   useLayoutEffect(() => {
@@ -94,6 +97,18 @@ function SavedCardComponent(props) {
     selectedForm.submit_form();
   };
 
+  function showPayCss(index) {
+    if (
+      props.payment.savedCardValid &&
+      index == props.payment.savedCardValid.index &&
+      props.payment.savedCardValid.isValid
+    ) {
+      return "show-content make_payment card-pay-button";
+    } else {
+      return "hide-content make_payment card-pay-button";
+    }
+  }
+
   return payment.cards.map((card, index) => {
     const formProps = {
       card: card,
@@ -102,7 +117,6 @@ function SavedCardComponent(props) {
       paymentDetails: props.payment.paymentDetails,
       jpLoaded: jpLoaded,
     };
-    console.log(" Juspay:", payment.cards);
     return (
       <div key={"dcard" + index} className="saved-card-container">
         <div className="card-details">
@@ -121,10 +135,10 @@ function SavedCardComponent(props) {
           <Form {...formProps} />
           <div
             type="button"
-            className={" make_payment card-pay-button"}
+            className={showPayCss(index)}
             onClick={() => onSubmit(index)}
           >
-            Pay
+            PAY
           </div>
         </div>
       </div>
