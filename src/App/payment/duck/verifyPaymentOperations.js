@@ -1,17 +1,6 @@
-import {
-  verifyPaymentInProgress,
-  verifyPaymentSuccess,
-  verifyPaymentFailed,
-} from "./actions";
+import { verifyPaymentSuccess, verifyPaymentFailed } from "./actions";
 
 import { verifyPaymentAPI } from "../../../utils";
-const reqBodyFromState = (paymentState) => {
-  return {
-    city_id: paymentState.selectedAddress.city.id,
-    retailer_id: paymentState.retailer.id,
-    state_id: paymentState.selectedAddress.state.id,
-  };
-};
 
 const processResponse = () => {
   return (res) => {
@@ -40,13 +29,10 @@ const onError = (dispatch) => {
   };
 };
 
-const verifyPayment = (paymentState, oid) => {
-  let reqBody = reqBodyFromState(paymentState);
+const verifyPayment = (oid) => {
   return (dispatch) => {
-    dispatch(verifyPaymentInProgress());
     verifyPaymentAPI(
       oid,
-      reqBody,
       processResponse(dispatch),
       onSuccess(dispatch),
       onError(dispatch)

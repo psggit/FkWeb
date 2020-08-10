@@ -4,10 +4,13 @@ import { VerifyComponent } from "./verifyComponent";
 import {
   verifyPayment,
   placeOrder,
+  verifyPaymentInProgress,
   verifyPaymentError,
+  placeOrderInProgress,
   placeOrderError,
   takeMeHome,
   tryPayingAgain,
+  resetVerifyPaymentOnUnmount,
 } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -18,12 +21,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    verifyPayment: (ps) => dispatch(verifyPayment(ps)),
-    placeOrder: (ps) => dispatch(placeOrder(ps)),
+    verifyPayment: (txn_id) => dispatch(verifyPayment(txn_id)),
+    placeOrder: (oid, txn_id) => dispatch(placeOrder(oid, txn_id)),
+    verifyPaymentInProgress: () => dispatch(verifyPaymentInProgress()),
     verifyPaymentError: () => dispatch(verifyPaymentError()),
+    placeOrderInProgress: () => dispatch(placeOrderInProgress()),
     placeOrderError: () => dispatch(placeOrderError()),
     tryPayingAgain: () => dispatch(tryPayingAgain()),
     takeMeHome: () => dispatch(takeMeHome()),
+    resetVerifyPaymentOnUnmount: () => dispatch(resetVerifyPaymentOnUnmount()),
   };
 };
 

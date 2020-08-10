@@ -4,6 +4,45 @@
   margin-top: 76px;
 }
 
+.past-orders {
+  margin-top: 24px;
+  font-size: 16px;
+  font-family: MontserratBold;
+  padding-bottom: 4px;
+  border-bottom: 1px solid $border-color;
+}
+
+.need-help-container {
+  //  border-bottom: 1px solid $border-color;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-between;
+  border-bottom: 1px solid $border-color;
+
+  .help-content-container {
+    display: flex;
+    flex-direction: column;
+
+    .help-title {
+      font-family: MontserratSemiBold;
+      font-size: 12px;
+    }
+
+    .help-sub-content {
+      margin-top: 4px;
+      font-size: 10px;
+      color: $edit-color;
+    }
+  }
+  .help-next-icon {
+    width: 10px;
+    height: 10px;
+    align-self: center;
+  }
+}
+
 .order-item {
   display: flex;
   flex-direction: column;
@@ -18,7 +57,7 @@
     align-items: center;
 
     .item-display-title {
-      font-family: MontserratBold;
+      font-family: MontserratSemiBold;
       font-size: 16px;
       line-height: 16px;
     }

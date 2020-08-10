@@ -11,10 +11,11 @@ SavedCardComponent.propTypes = {
   paymentDetails: PropTypes.object,
 };
 
+let juspay_form;
+
 function SavedCardComponent(props) {
   const payment = props.payment.paymentOptionsDetails;
   const paymentDetails = props.payment.paymentDetails;
-  let juspay_form;
 
   const [selectedCard, SetSelectedCard] = useState("");
 
@@ -40,19 +41,7 @@ function SavedCardComponent(props) {
 	  */
   }, []);
 
-  const jp_success = (response) => {
-    console.log(response);
-  };
-  const jp_error = (response) => {
-    console.log(response);
-  };
-
   const onSubmit = () => {
-    console.log(juspay_form);
-    juspay_form.tokenize({
-      success_handler: jp_success,
-      error_handler: jp_error,
-    });
     juspay_form.submit_form();
   };
 

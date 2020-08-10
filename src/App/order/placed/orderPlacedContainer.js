@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import { OrderPlacedComponent } from "./orderPlacedComponent";
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return {
-    order: props.location.state.order,
+    payment: state.payment,
   };
 };
 

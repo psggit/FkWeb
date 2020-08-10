@@ -9,7 +9,7 @@ import {
   homeActiveIcon,
   cartActiveIcon,
   searchActiveIcon,
-  myOrdersActiveIcon
+  myOrdersActiveIcon,
 } from "../../../assets/images";
 
 const tabs = [
@@ -34,14 +34,14 @@ const tabs = [
   {
     route: "/myorders",
     icon: myOrdersIcon,
-    activeIcon:myOrdersActiveIcon,
+    activeIcon: myOrdersActiveIcon,
     label: "My Orders",
   },
 ];
 
 function BottomNavigationComponent(props) {
   let location = useLocation().pathname;
-  const {cartProducts} = props;
+  const { cartProducts } = props;
   let totalCartItems = 0;
 
   Object.keys(cartProducts).forEach(function (key) {
@@ -52,7 +52,6 @@ function BottomNavigationComponent(props) {
     <div className="navBar-height">
       <div className="navBar navBar-height">
         {tabs.map((value, index) => (
-
           <div key={"navTouch" + index} className="col-3">
             <NavLink to={value.route} activeClassName="activeLink">
               <div className="navItem">

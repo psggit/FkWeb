@@ -1,3 +1,9 @@
+import {
+  newCardNumberValid,
+  newCardNameValid,
+  newCardExpiryValid,
+  newCardCvvValid,
+} from "../duck";
 const successHandler = () => {
   return (status) => {
     console.log(status);
@@ -23,7 +29,7 @@ const errorHandler = () => {
 };
 
 export const jpNewCardConf = (JusPay) => {
-  return () => {
+  return (dispatch) => {
     console.log(JusPay);
     return JusPay.Setup({
       payment_form: "#new_card_payment_form",
@@ -100,7 +106,25 @@ export const jpNewCardConf = (JusPay) => {
         },
       },
       iframe_element_callback: function (event) {
-        console.log(event);
+        switch (event.target_element) {
+          case "card_number":
+            dispatch(newCardNumberValid(event.valid));
+            break;
+          case "name_on_card":
+            dispatch(newCardNameValid(event.valid));
+            break;
+          case "card_exp_month":
+            dispatch(newCardExpiryValid(event.expiry_valid));
+            break;
+          case "card_exp_year":
+            dispatch(newCardExpiryValid(event.expiry_valid));
+            break;
+          case "security_code":
+            dispatch(newCardCvvValid(event.valid));
+            break;
+          default:
+            break;
+        }
       },
     });
   };
