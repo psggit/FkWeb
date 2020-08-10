@@ -59,9 +59,20 @@
 .custom_fc_frame {
   position: fixed !important;
   left: 0 !important;
-  right:0 !important;
-  bottom:0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   background: #000;
+}
+
+.fc-open.custom_fc_frame::before {
+  background: #151515f2;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  bottom: 0;
 }
 
 body {
