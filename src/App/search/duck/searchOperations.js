@@ -5,14 +5,14 @@ import {
 } from "./action";
 import { searchDrinkAPI } from "../../../utils";
 
-const reqBodyFromState = (query) => {
+const reqBodyFromState = (query, address, limit, offset) => {
   return JSON.stringify({
-    city_id: 5,
-    offset: 0,
-    gps: "13.011557355101441,80.25409296154976",
+    city_id: address.city.id,
+    offset: offset,
+    gps: address.gps,
     query: query,
-    limit: 5,
-    state_id: 4,
+    limit: limit,
+    state_id: address.state.id,
   });
 };
 
@@ -42,8 +42,8 @@ const onError = (dispatch) => {
   };
 };
 
-const getSearchDrinks = (query) => {
-  let reqBody = reqBodyFromState(query);
+const getSearchDrinks = (query, address, limit, offset) => {
+  let reqBody = reqBodyFromState(query, address, limit, offset);
   return (dispatch) => {
     dispatch(getSearchDrinksInProgress());
     searchDrinkAPI(

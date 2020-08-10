@@ -14,7 +14,7 @@ import { AlertWithOptions } from "../common/alert";
 function SearchComponent(props) {
   const [cancelBtn, SetCancelBtn] = useState(false);
   const [query, SetQuery] = useState("");
-  const { getSearchDrinks } = props;
+  const { getSearchDrinks, selectedAddress } = props;
 
   const onFocus = () => {
     SetCancelBtn(true);
@@ -42,7 +42,7 @@ function SearchComponent(props) {
       return;
     }
     if (query.length > 2) {
-      getSearchDrinks(query);
+      getSearchDrinks(query, selectedAddress, 10, 0);
     }
   }, [query]);
 
@@ -82,17 +82,16 @@ function SearchComponent(props) {
 
   return (
     <>
-      <HeaderComponent title="Search Drinks">
-        <div className="search-container">
-          <SearchBox
-            handleInput={handleInput}
-            placeholder="Search Drinks"
-            onFocusIn={onFocus}
-            onFocusOut={onBlur}
-          />
-          {cancelBtn ? <button>Cancel</button> : ""}
-        </div>
-      </HeaderComponent>
+      <HeaderComponent title="Search Drinks"></HeaderComponent>
+      <div className="search-container">
+        <SearchBox
+          handleInput={handleInput}
+          placeholder="Search Drinks"
+          onFocusIn={onFocus}
+          onFocusOut={onBlur}
+        />
+        {cancelBtn ? <button>Cancel</button> : ""}
+      </div>
       <SearchLayout>
         <RetailerComponent query={query} {...props} />
         {renderBottomComponent()}
@@ -105,6 +104,8 @@ function SearchComponent(props) {
 SearchComponent.propTypes = {
   getSearchDrinks: PropTypes.func,
   retailerDiffers: PropTypes.bool,
+  data: PropTypes.array,
+  selectedAddress: PropTypes.object,
   clearCartAndAdd: PropTypes.func,
   cartProducts: PropTypes.object,
   dontClearCart: PropTypes.func,
