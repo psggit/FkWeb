@@ -107,7 +107,7 @@ function PaymentOptions(props) {
 
   return (
     <>
-      <ToolbarComponent helpVisibility="true" title={title} />
+      <ToolbarComponent helpVisibility={false} title={title} />
       <div className="page-container payment-option-container">
         {payment.is_upi_enabled && (
           <div>

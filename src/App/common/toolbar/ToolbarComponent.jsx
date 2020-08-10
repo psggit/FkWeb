@@ -6,7 +6,8 @@ import { backIcon } from "../../../assets/images";
 import { helpIcon } from "../../../assets/images";
 
 ToolbarComponent.propTypes = {
-  helpVisibility: PropTypes.any,
+  backVisibility: PropTypes.bool,
+  helpVisibility: PropTypes.bool,
   title: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node,
@@ -29,7 +30,11 @@ function ToolbarComponent(props) {
       <div className="tool-bar fixed">
         <div className="toolbar-layout">
           <img
-            className="back-arrow"
+            className={
+              props.backVisibility == false
+                ? "back-arrow hide-content"
+                : "back-arrow show-content"
+            }
             src={backIcon}
             onClick={onClick != null ? onClick : goBack}
           />

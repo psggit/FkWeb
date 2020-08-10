@@ -79,7 +79,7 @@ function ProcessPayment(props) {
 
   return (
     <>
-      <ToolbarComponent helpVisibility="true" title="Payment" />
+      <ToolbarComponent helpVisibility={false} title="Payment" />
       <div className="page-container payment-option-container">
         <SavedCardPayment />
         <BottomNextComponent routePath={"/order/placed"} title="Pay" />

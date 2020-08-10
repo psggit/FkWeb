@@ -84,7 +84,7 @@ function StateCityComponent(props) {
 
   return (
     <>
-      <ToolbarComponent onClick={goBack} />
+      <ToolbarComponent onClick={goBack} backVisibility={mode != "state"} />
       <div className="page-container ">
         <img src={appIcon} className="location-app-image" />
         <div className="location-msg">
