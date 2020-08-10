@@ -19,7 +19,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getSearchDrinks: (query, address, limit, offset) => dispatch(getSearchDrinks(query, address, limit, offset)),
+    getSearchDrinks: (query, address, limit, offset) =>
+      dispatch(getSearchDrinks(query, address, limit, offset)),
     clearCartAndAdd: () => dispatch(clearCartAndAdd()),
     dontClearCart: () => dispatch(dontClearCart()),
   };
