@@ -19,6 +19,7 @@ export {
   resetVerifyPaymentOnUnmount,
   addNewCard,
   cancelAddNewCard,
+  savedCardValid,
 } from "./actions";
 
 export { initialise } from "./operations";

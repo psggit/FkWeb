@@ -24,6 +24,7 @@ import {
   resetVerifyPaymentOnUnmount,
   addNewCard,
   cancelAddNewCard,
+  savedCardValid,
 } from "./actions";
 
 const paymentFailureMessage = "Payment failed";
@@ -78,6 +79,7 @@ let initialState = {
 
   //payment control flow
   addNewCard: false,
+  savedCardValid: false,
 };
 
 const paymentSuccessHandler = (state, data) => {
@@ -373,10 +375,12 @@ const paymentReducer = createReducer(initialState, {
 
       //payment control flow
       addNewCard: false,
+      savedCardValid: false,
     };
   },
   [addNewCard]: (state) => ({ ...state, addNewCard: true }),
   [cancelAddNewCard]: (state) => ({ ...state, addNewCard: false }),
+  [savedCardValid]: (state, e) => ({ ...state, savedCardValid: e.payload }),
 });
 
 export { paymentReducer };

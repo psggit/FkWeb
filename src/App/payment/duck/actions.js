@@ -40,3 +40,5 @@ export const resetVerifyPaymentOnUnmount = createAction(
 
 export const addNewCard = createAction("addNewCard");
 export const cancelAddNewCard = createAction("cancelAddNewCard");
+
+export const savedCardValid = createAction("savedCardValid");
