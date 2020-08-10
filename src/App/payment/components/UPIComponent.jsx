@@ -11,9 +11,10 @@ UPIComponent.propTypes = {
   paymentDetails: PropTypes.object,
 };
 
+let juspay_form;
+
 function UPIComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
-  let juspay_form;
 
   const [payEnabled, SetPayEnabled] = useState(false);
 

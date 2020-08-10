@@ -59,7 +59,7 @@ function AddCardAndProcessPayment(props) {
     <>
       <ToolbarComponent
         onClick={() => props.cancelAddNewCard()}
-        helpVisibility="false"
+        helpVisibility={false}
         title="Payment"
       />
       <div className="page-container">

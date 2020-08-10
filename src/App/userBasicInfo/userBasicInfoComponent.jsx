@@ -249,7 +249,7 @@ function CollectInfoComponent(props) {
 
   return (
     <div className="page-container userBasicInfoComponent">
-      <ToolbarComponent helpVisibility="true" title="Let's Get Started!" />
+      <ToolbarComponent helpVisibility={false} title="Let's Get Started!" />
       <InfoComponent {...props} />
       <YearOfBirthInputComponent {...props} />
       <GenderSelectionComponent {...props} />

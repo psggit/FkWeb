@@ -60,7 +60,7 @@ function SummaryComponent(props) {
   let summary = props.summary.summaryDetails;
   return (
     <div>
-      <ToolbarComponent helpVisibility="true" title="Order Summary" />
+      <ToolbarComponent helpVisibility={false} title="Order Summary" />
       <div className="page-container summary-wrapper">
         <OrderAddressComponent {...props} />
         <OrderTotalComponent marginTop={true} total={summary.display_total} />
