@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchHomeCriticalAds: () => dispatch(fetchHomeCriticalAds()),
-    setPopupVisibility: () => dispatch(setPopupVisibility())
+    setPopupVisibility: () => dispatch(setPopupVisibility()),
   };
 };
 
