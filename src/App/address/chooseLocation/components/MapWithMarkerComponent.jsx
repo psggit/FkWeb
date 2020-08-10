@@ -8,14 +8,16 @@ import "../style.scss";
 
 const mapStyle = require("./styles.json");
 
-MapComponent.PropTypes = {
+MapComponent.propTypes = {
+  center: PropTypes.string,
   storeGpsFunc: PropTypes.func,
 };
 
 function MapComponent(props) {
+  const gps = props.center.split(",")
   const mapRef = useRef(null);
   const [map, setMap] = React.useState(null);
-  const [center, setCenter] = useState({ lat: 13.006928, lng: 80.255516 });
+  const [center, setCenter] = useState({ lat: parseFloat(gps[0]), lng: parseFloat(gps[1]) });
   let [isCancelButton, setCancelButton] = useState(false);
 
   let [autocomplete, setAutoComplete] = useState(null);
@@ -105,10 +107,14 @@ function MapComponent(props) {
   );
 }
 
+MapWithMarkerComponent.propTypes = {
+  center: PropTypes.string,
+  storeGpsFunc: PropTypes.func,
+}
 function MapWithMarkerComponent(props) {
   return (
     <>
-      <MapComponent storeGpsFunc={props.storeGpsFunc} />
+      <MapComponent center={props.center} storeGpsFunc={props.storeGpsFunc} />
       <img src={mapMarkerIcon} className="marker" />
       <BottomNextComponent routePath="/address/create" title="Set Location" />
     </>

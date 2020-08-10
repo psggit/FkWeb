@@ -5,6 +5,8 @@ import {
   fetchCityInProgress,
   fetchCityFailed,
   fetchCitySuccess,
+  selectState,
+  selectCity,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -17,6 +19,8 @@ const initialState = {
   fetchCityFailed: false,
   fetchCitySuccess: false,
   states: [],
+  selectedState: null,
+  selectedCity: null,
   cities: [],
 };
 
@@ -26,6 +30,14 @@ const stateCityReducer = createReducer(initialState, {
     fetchStateInProgress: true,
     fetchStateFailed: false,
     fetchStateSuccess: false,
+  }),
+  [selectState]: (state, action) => ({
+    ...state,
+    selectedState: action.payload,
+  }),
+  [selectCity]: (state, action) => ({
+    ...state,
+    selectedCity: action.payload,
   }),
   [fetchStateSuccess]: (state, action) => ({
     ...state,

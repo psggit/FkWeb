@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { EditText } from "../../common/editText";
 import { ToolbarComponent } from "../../common/toolbar";
+import { SplashLoadingComponent } from "../../common/splashLoading";
 import { BottomNextComponent } from "../../common/bottomNext";
 import { Redirect } from "react-router-dom";
 import "./style.scss";
@@ -58,7 +59,9 @@ AddressInputComponent.propTypes = {
   address: PropTypes.object,
   updateField: PropTypes.func,
   reqStatus: PropTypes.string,
+  getAddressStatus: PropTypes.string,
   createAddressFunc: PropTypes.func,
+  resetAddressFunc: PropTypes.func,
 };
 
 function AddressInputComponent(props) {
@@ -69,9 +72,6 @@ function AddressInputComponent(props) {
   const address_type = props.address.address_type;
   const createAddressFunc = props.createAddressFunc;
   const reqStatus = props.reqStatus;
-  useEffect(() => {
-    props.getAddressFromGps(props.mapCenterGps);
-  }, []);
   return (
     <div id="addressEditPage" className="page-container">
       <ToolbarComponent title="Your Address" />
@@ -108,14 +108,21 @@ function AddressInputComponent(props) {
         onTextChanged={(id, value) => {
           props.updateField({ landmark: value });
         }}
-        title="LANDMARKS(OPTIONAL)"
+        title="LANDMARKS"
         value={landmark ? landmark : ""}
         inputType="text"
       />
       <SaveAddressCheckBoxComponent {...props} />
       <BottomNextComponent
         inActive={
-          reqStatus == "inProgress" || reqStatus == "success" ? true : false
+          reqStatus == "inProgress" ||
+          reqStatus == "success" ||
+          landmark == "" ||
+          landmark == null ||
+          flatNumber == "" ||
+          flatNumber == null
+            ? true
+            : false
         }
         onClickFunc={() => {
           createAddressFunc(props);
@@ -129,15 +136,28 @@ function AddressInputComponent(props) {
 AddressEditComponent.propTypes = {
   mapCenterGps: PropTypes.object,
   reqStatus: PropTypes.string,
+  getAddressStatus: PropTypes.string,
+  getAddressFromGps: PropTypes.func,
+  resetAddressFunc: PropTypes.func,
 };
 
 function AddressEditComponent(props) {
+  useEffect(() => {
+    props.getAddressFromGps(props.mapCenterGps);
+    return () => props.resetAddressFunc();
+  }, []);
   const gpsSelected = props.mapCenterGps ? true : false;
   const reqStatus = props.reqStatus;
+  const loading =
+    props.reqStatus === "inProgress" || props.getAddressStatus === "inProgress";
+  console.log(props.reqStatus)
+  console.log(props.getAddressStatus)
   if (gpsSelected === false) {
     return <Redirect to="/choose/location" />;
   } else if (reqStatus === "success") {
     return <Redirect to="/address/select/sf" />;
+  } else if (loading === true) {
+    return <SplashLoadingComponent motion={true} text="Finding Address" />;
   } else {
     return <AddressInputComponent {...props} />;
   }

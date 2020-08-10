@@ -56,11 +56,11 @@ function NoRetailerTemplate(text, history) {
 }
 
 function FetchFailedTemplate() {
-  return <div>Failed to Fetch...</div>;
+  return <div>Failed to Fetch...</div>
 }
 
 function ServiceUnavailableTemplate() {
-  return <div>Service Unavailable in your city...</div>;
+  return <div>Service Unavailable in your city...</div>
 }
 
 function RetailerList(props) {

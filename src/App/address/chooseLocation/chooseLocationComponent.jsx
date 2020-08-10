@@ -11,6 +11,7 @@ ChooseLocationComponent.propTypes = {
   placesInfo: PropTypes.object,
   address: PropTypes.object,
   mapCenterGps: PropTypes.object,
+  selectedCity: PropTypes.object,
   autoComplete: PropTypes.func,
   storeGpsFunc: PropTypes.func,
   getPlacesDetails: PropTypes.func,
@@ -54,7 +55,10 @@ function ChooseLocationComponent(props) {
             />
           </div>
           <div className={searchMode ? "hide" : ""}>
-            <MapWithMarkerComponent storeGpsFunc={props.storeGpsFunc} />
+            <MapWithMarkerComponent
+              center={props.selectedCity.gps}
+              storeGpsFunc={props.storeGpsFunc}
+            />
           </div>
         </div>
       </div>
