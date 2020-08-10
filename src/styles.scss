@@ -386,6 +386,14 @@ input[type="radio"]:checked {
   animation: spin 2s linear infinite;
 }
 
+.error-message {
+  color: $error-color;
+  line-height: 12px;
+  font-size: 10px;
+  margin-top: 2px;
+  height: 12px;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% {

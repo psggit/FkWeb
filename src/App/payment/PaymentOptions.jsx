@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { ToolbarComponent } from "../common/toolbar";
@@ -51,7 +51,6 @@ PaymentOptions.propTypes = {
 };
 
 function PaymentOptions(props) {
-  const [selectedBank, setSelectedBank] = useState("");
   let triggerCreatePayment =
     props.payment.createOrderSuccess &&
     !(
