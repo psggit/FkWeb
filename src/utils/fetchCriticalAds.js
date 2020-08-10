@@ -1,7 +1,10 @@
 import config from "../config";
 import CommonHeaders from "./common";
 
-const URL = "https://gremlin." + config.BASE_DOMAIN + "/consumer/marketing/ads/critical_ads/15";
+const URL =
+  "https://gremlin." +
+  config.BASE_DOMAIN +
+  "/consumer/marketing/ads/critical_ads/15";
 
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 

@@ -8,8 +8,8 @@ const fetchCriticalAdsFailure = createAction("fetchCriticalAdsFailure");
 const fetchCriticalAdsInProgress = createAction("fetchCriticalAdsInProgress");
 
 export {
-    setPopupVisibility,
-    fetchCriticalAdsSuccess,
-    fetchCriticalAdsFailure,
-    fetchCriticalAdsInProgress
+  setPopupVisibility,
+  fetchCriticalAdsSuccess,
+  fetchCriticalAdsFailure,
+  fetchCriticalAdsInProgress,
 };

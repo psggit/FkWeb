@@ -2,7 +2,7 @@ import { fetchCriticalAdsAPI } from '../../../../utils';
 import {
   fetchCriticalAdsSuccess,
   fetchCriticalAdsFailure,
-  fetchCriticalAdsInProgress
+  fetchCriticalAdsInProgress,
 } from "./actions";
 
 const processResponse = () => {
@@ -33,8 +33,12 @@ const onError = (dispatch) => {
 const fetchHomeCriticalAds = () => {
   return (dispatch) => {
     dispatch(fetchCriticalAdsInProgress());
-    fetchCriticalAdsAPI(processResponse(dispatch), onSuccess(dispatch), onError(dispatch));
+    fetchCriticalAdsAPI(
+      processResponse(dispatch),
+      onSuccess(dispatch),
+      onError(dispatch)
+    );
   };
-}
+};
 
 export { fetchHomeCriticalAds };

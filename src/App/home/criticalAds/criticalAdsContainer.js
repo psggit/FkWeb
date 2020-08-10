@@ -2,13 +2,12 @@ import { connect } from "react-redux";
 import { CriticaladsComponent } from "./criticaladsComponent";
 import { fetchHomeCriticalAds, setPopupVisibility } from "./duck";
 
-
 const mapStateToProps = (state) => {
   return {
-      ...state,
-      items: state.home.criticalads.items,
-      isViewed: state.home.criticalads.isViewed
-    };
+    ...state,
+    items: state.home.criticalads.items,
+    isViewed: state.home.criticalads.isViewed,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -24,4 +23,3 @@ const CriticalAdsContainer = connect(
 )(CriticaladsComponent);
 
 export { CriticalAdsContainer };
-
