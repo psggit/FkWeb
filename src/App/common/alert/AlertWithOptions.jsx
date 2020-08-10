@@ -28,7 +28,7 @@ function AlertWithOptions({
           <button className="modal-button-one" onClick={handleOption1}>
             {option1}
           </button>
-          <button className="modal-button-one" onClick={handleOption2}>
+          <button className="modal-button-two" onClick={handleOption2}>
             {option2}
           </button>
         </div>
