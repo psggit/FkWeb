@@ -30,9 +30,10 @@ function RetailerComponent(props) {
       </div>
     );
   }
+  console.log(data)
   return (
     <>
-      {data.length ? (
+      {data ? (
         <div className="accordion-container">
           {data.map((retailer, index) => (
             <React.Fragment key={index + "s"}>
