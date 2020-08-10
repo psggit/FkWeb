@@ -10,6 +10,7 @@ import {
   NetBankingComponent,
   UPIComponent,
 } from "./components";
+import { AddCardAndProcessPayment } from "./components";
 
 import "./style.scss";
 
@@ -44,9 +45,9 @@ PaymentOptions.propTypes = {
   bank: PropTypes.any,
   payment: PropTypes.object,
   initialise: PropTypes.func,
-  summaryDetails: PropTypes.object,
   createPayment: PropTypes.func,
   jpSavedCardsConf: PropTypes.func,
+  resetPaymentOnUnmount: PropTypes.func,
 };
 
 function PaymentOptions(props) {
@@ -58,6 +59,10 @@ function PaymentOptions(props) {
       props.payment.createPaymentFailed ||
       props.payment.createPaymentSuccess
     );
+
+  useEffect(() => {
+    return props.resetPaymentOnUnmount;
+  }, []);
 
   useEffect(() => {
     if (props.payment.initialTrigger) {
@@ -94,12 +99,15 @@ function PaymentOptions(props) {
   const payment = props.payment.paymentOptionsDetails;
   const banks = payment.netbanking;
 
-  let title =
-    "Pay " + props.summaryDetails.summaryDetails.display_total + " using";
+  let title = "Pay ₹ " + props.payment.paymentDetails.amount + " using";
+
+  if (props.payment.addNewCard) {
+    return <AddCardAndProcessPayment {...props} />;
+  }
 
   return (
     <>
-      <ToolbarComponent helpVisibility="true" title={title} />
+      <ToolbarComponent helpVisibility={false} title={title} />
       <div className="page-container payment-option-container">
         {payment.is_upi_enabled && (
           <div>

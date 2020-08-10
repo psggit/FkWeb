@@ -8,8 +8,12 @@ import {
   createOrder,
   createPayment,
   jpSavedCardsConf,
+  jpNewCardConf,
   jpUpiConf,
   jpNetBankingConf,
+  resetPaymentOnUnmount,
+  addNewCard,
+  cancelAddNewCard,
 } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -28,9 +32,13 @@ const mapDispatchToProps = (dispatch) => {
     createOrder: (ps) => dispatch(createOrder(ps)),
     fetchPaymentOptions: (ps) => dispatch(fetchPaymentOptions(ps)),
     createPayment: (ps) => dispatch(createPayment(ps)),
-    jpSavedCardsConf: (ps) => dispatch(jpSavedCardsConf(ps)),
     jpUpiConf: (ps) => dispatch(jpUpiConf(ps)),
+    jpSavedCardsConf: (ps) => dispatch(jpSavedCardsConf(ps)),
+    jpNewCardConf: (ps) => dispatch(jpNewCardConf(ps)),
     jpNetBankingConf: (ps) => dispatch(jpNetBankingConf(ps)),
+    resetPaymentOnUnmount: (ps) => dispatch(resetPaymentOnUnmount(ps)),
+    addNewCard: () => dispatch(addNewCard()),
+    cancelAddNewCard: () => dispatch(cancelAddNewCard()),
   };
 };
 

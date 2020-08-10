@@ -1,3 +1,4 @@
+import { savedCardValid } from "./actions";
 const successHandler = () => {
   return (status) => {
     console.log(status);
@@ -23,7 +24,7 @@ const errorHandler = () => {
 };
 
 export const jpSavedCardsConf = (JusPay) => {
-  return () => {
+  return (dispatch) => {
     console.log(JusPay);
     return JusPay.Setup({
       payment_form: "#payment_form",
@@ -54,27 +55,9 @@ export const jpSavedCardsConf = (JusPay) => {
         /* Add the styling to be added to input fields in focus state */
         ":focus": {},
       },
-      /*
-       * This function will be called with an event object as parameter in two cases:
-       * 1. When some event occurs on the security_code field inside iframe element.
-       * 2. The user clicks on the submit button and the values in some of the input fields are invalid. (In second case, we will send the event object with state of the first invalid field in checkout form, which is security_code here.)
-       *
-       * This event object will contain the state of the input field. You should use this event object to show validation messages in your checkout form.
-       *
-       */
+
       iframe_element_callback: function (event) {
-        /*
-         *  The following information will be available in the event object:
-         *  1. event.target_element - (security_code) Name of the field field which generated this event.
-         *
-         *  2. event.valid - (true/false) This explains whether the value inside the input field of target_element is valid or not.
-         *
-         *  3. event.empty - (true/false) This explains whether the input field of target_element is empty or not.
-         *
-         *  4. event.card_brand - MASTERCARD/VISA/MAESTRO/AMEX/DINERS/DISCOVER/JCB/RUPAY
-         *
-         */
-        console.log(event);
+        dispatch(savedCardValid(event.valid));
       },
     });
   };

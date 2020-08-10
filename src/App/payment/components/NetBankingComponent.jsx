@@ -43,11 +43,11 @@ function BankComponent(props) {
   );
 }
 
+let juspay_form;
+
 function NetBankingComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
   const { banks, onBankSelected } = props;
-
-  let juspay_form;
 
   const configureJuspay = () => {
     let jp = window.Juspay;

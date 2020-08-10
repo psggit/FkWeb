@@ -1,8 +1,9 @@
 import React, { useLayoutEffect } from "react";
 import { RetailerListContainer } from "./retailerList";
 import { CarouselContainer } from "./carousel";
+import { CriticalAdsContainer } from "./criticalAds";
 import { ChooseAddressComponent } from "./chooseAddress";
-import {BottomNavigationContainer} from "../common/bottomNavigation";
+import { BottomNavigationContainer } from "../common/bottomNavigation";
 import { CurretOrderComponent } from "./currentOrders";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
@@ -52,6 +53,7 @@ function HomeComponent(props) {
 
   return (
     <>
+      <CriticalAdsContainer />
       <ChooseAddressComponent
         address={props.address}
         onClickFunc={showChooseAddress}

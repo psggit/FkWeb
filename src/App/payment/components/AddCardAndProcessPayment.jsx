@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { ToolbarComponent } from "../common/toolbar";
-import { ButtonComponent } from "../common/bottomNext/BottomNextComponent";
+import { ToolbarComponent } from "../../common/toolbar";
+import { ButtonComponent } from "../../common/bottomNext/BottomNextComponent";
 
 NewCardInput.propTypes = {
   title: PropTypes.string, // Text about the input field
@@ -28,11 +28,12 @@ AddCardAndProcessPayment.propTypes = {
   summaryDetails: PropTypes.object,
   createPayment: PropTypes.func,
   jpNewCardConf: PropTypes.func,
+  cancelAddNewCard: PropTypes.func,
 };
 
+let juspay_form;
 function AddCardAndProcessPayment(props) {
   const paymentDetails = props.payment.paymentDetails;
-  let juspay_form;
 
   const configureJuspay = () => {
     let jp = window.Juspay;
@@ -48,33 +49,19 @@ function AddCardAndProcessPayment(props) {
     script.async = true;
     script.onload = configureJuspay;
     document.body.appendChild(script);
-
-    /*
-    return () => {
-      document.body.removeChild(script);
-    };
-	  */
   }, []);
 
-  const jp_success = (response) => {
-    console.log(response);
-  };
-  const jp_error = (response) => {
-    console.log(response);
-  };
-
   const onSubmit = () => {
-    console.log(juspay_form);
-    juspay_form.tokenize({
-      success_handler: jp_success,
-      error_handler: jp_error,
-    });
     juspay_form.submit_form();
   };
 
   return (
     <>
-      <ToolbarComponent helpVisibility="false" title="Payment" />
+      <ToolbarComponent
+        onClick={() => props.cancelAddNewCard()}
+        helpVisibility={false}
+        title="Payment"
+      />
       <div className="page-container">
         <form className="juspay_inline_form" id="new_card_payment_form">
           <input

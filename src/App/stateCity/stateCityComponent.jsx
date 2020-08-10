@@ -91,7 +91,7 @@ function StateCityComponent(props) {
   console.log(props.fetchCityFailed)
   return (
     <>
-      <ToolbarComponent onClick={goBack} />
+      <ToolbarComponent onClick={goBack} backVisibility={mode != "state"} />
       {props.fetchStateFailed === true && (
         <SplashLoadingComponent
           motion={false}

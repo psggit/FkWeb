@@ -11,25 +11,21 @@ import "../style.scss";
 
 CreditDebitCardsComponent.propTypes = {
   payment: PropTypes.object,
+  addNewCard: PropTypes.func,
 };
 
 function CreditDebitCardsComponent(props) {
-  const history = useHistory();
-
-  function showAddNewCard() {
-    history.push("/payment/add/new/card");
-  }
   const payment = props.payment.paymentOptionsDetails;
 
   return (
     <div className="card-container">
       <div className="card-title">Credit/Debit Cards</div>
       {payment.cards.length === 0 ? (
-        <NewCardComponent onclick={showAddNewCard} />
+        <NewCardComponent onclick={() => props.addNewCard()} />
       ) : (
         <div>
           <SavedCardComponent {...props} />
-          <AddNewCardComponent onclick={showAddNewCard} />{" "}
+          <AddNewCardComponent onclick={() => props.addNewCard()} />
         </div>
       )}
     </div>

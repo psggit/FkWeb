@@ -1,16 +1,6 @@
-import {
-  placeOrderInProgress,
-  placeOrderSuccess,
-  placeOrderFailed,
-} from "./actions";
+import { placeOrderSuccess, placeOrderFailed } from "./actions";
 
 import { finalizeOrderAPI } from "../../../utils";
-const reqBodyFromState = (paymentState) => {
-  return {
-    order_id: paymentState.payment.orderDetails.order_id,
-    txn_id: paymentState.payment.paymentDetails.order_id,
-  };
-};
 
 const processResponse = () => {
   return (res) => {
@@ -39,13 +29,10 @@ const onError = (dispatch) => {
   };
 };
 
-const placeOrder = (paymentState, oid) => {
-  let reqBody = reqBodyFromState(paymentState);
+const placeOrder = (oid, txn_id) => {
   return (dispatch) => {
-    dispatch(placeOrderInProgress());
     finalizeOrderAPI(
-      oid,
-      reqBody,
+      { order_id: oid, txn_id: txn_id },
       processResponse(dispatch),
       onSuccess(dispatch),
       onError(dispatch)

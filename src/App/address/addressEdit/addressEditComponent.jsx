@@ -108,14 +108,21 @@ function AddressInputComponent(props) {
         onTextChanged={(id, value) => {
           props.updateField({ landmark: value });
         }}
-        title="LANDMARKS(OPTIONAL)"
+        title="LANDMARKS"
         value={landmark ? landmark : ""}
         inputType="text"
       />
       <SaveAddressCheckBoxComponent {...props} />
       <BottomNextComponent
         inActive={
-          reqStatus == "inProgress" || reqStatus == "success" ? true : false
+          reqStatus == "inProgress" ||
+          reqStatus == "success" ||
+          landmark == "" ||
+          landmark == null ||
+          flatNumber == "" ||
+          flatNumber == null
+            ? true
+            : false
         }
         onClickFunc={() => {
           createAddressFunc(props);

@@ -25,7 +25,7 @@ try {
 var scopeReq = [
   { scope: "user.email", isMandatory: false, shouldVerify: false },
   { scope: "user.mobile", isMandatory: true, shouldVerify: true },
-  { scope: "user.name", isMandatory: true, shouldVerify: false },
+  { scope: "user.name", isMandatory: true, shouldVerify: true },
 ];
 
 const processResponse = () => {
