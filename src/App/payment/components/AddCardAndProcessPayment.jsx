@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { ToolbarComponent } from "../common/toolbar";
-import { ButtonComponent } from "../common/bottomNext/BottomNextComponent";
+import { ToolbarComponent } from "../../common/toolbar";
+import { ButtonComponent } from "../../common/bottomNext/BottomNextComponent";
 
 NewCardInput.propTypes = {
   title: PropTypes.string, // Text about the input field
@@ -28,6 +28,7 @@ AddCardAndProcessPayment.propTypes = {
   summaryDetails: PropTypes.object,
   createPayment: PropTypes.func,
   jpNewCardConf: PropTypes.func,
+  cancelAddNewCard: PropTypes.func,
 };
 
 function AddCardAndProcessPayment(props) {
@@ -48,12 +49,6 @@ function AddCardAndProcessPayment(props) {
     script.async = true;
     script.onload = configureJuspay;
     document.body.appendChild(script);
-
-    /*
-    return () => {
-      document.body.removeChild(script);
-    };
-	  */
   }, []);
 
   const jp_success = (response) => {
@@ -74,7 +69,11 @@ function AddCardAndProcessPayment(props) {
 
   return (
     <>
-      <ToolbarComponent helpVisibility="false" title="Payment" />
+      <ToolbarComponent
+        onClick={() => props.cancelAddNewCard()}
+        helpVisibility="false"
+        title="Payment"
+      />
       <div className="page-container">
         <form className="juspay_inline_form" id="new_card_payment_form">
           <input
