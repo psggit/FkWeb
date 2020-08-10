@@ -6,45 +6,65 @@ import PropTypes from "prop-types";
 
 BottomNextComponent.propTypes = {
   routePath: PropTypes.string,
+  redirectPath: PropTypes.string,
   title: PropTypes.string,
   inActive: PropTypes.bool,
   onClickFunc: PropTypes.func,
   isNav: PropTypes.bool,
+  children: PropTypes.node,
 };
 
 function BottomNextComponent(props) {
   function getNextClassName() {
     if (props.isNav) {
-      return "bottom-bar-nav bottom-bar bottom-bar-height";
+      return (
+        (props.children ? "bottom-bar-space-btwn " : "") +
+        "bottom-bar-nav bottom-bar bottom-bar-height"
+      );
     } else {
-      return "bottom-bar bottom-bar-height";
+      return (
+        (props.children ? "bottom-bar-space-btwn " : "") +
+        "bottom-bar bottom-bar-height"
+      );
     }
   }
 
   return (
     <div className="bottom-bar-height">
       <div className={getNextClassName()}>
+        {props.children}
         <ButtonComponent {...props} />
       </div>
     </div>
   );
 }
 
+CartContentComponent.propTypes = {
+  content: PropTypes.string,
+};
+
+function CartContentComponent(props) {
+  return <div className="bottom-cart-content">{props.content}</div>;
+}
+
 ButtonComponent.propTypes = {
   routePath: PropTypes.string,
+  redirectPath: PropTypes.string,
   title: PropTypes.string,
   inActive: PropTypes.bool,
   onClickFunc: PropTypes.func,
 };
 
 function ButtonComponent(props) {
-  const { routePath, title, inActive, onClickFunc } = props;
+  const { routePath, redirectPath, title, inActive, onClickFunc } = props;
   const history = useHistory();
 
   function clickProcess() {
     if (inActive != true) {
-      if (routePath === undefined) {
+      if (routePath === undefined && redirectPath === undefined) {
         onClickFunc();
+      } else if (redirectPath != undefined) {
+        history.replace(redirectPath);
       } else {
         history.push(routePath);
       }
@@ -62,4 +82,4 @@ function ButtonComponent(props) {
   );
 }
 
-export { BottomNextComponent, ButtonComponent };
+export { BottomNextComponent, ButtonComponent, CartContentComponent };

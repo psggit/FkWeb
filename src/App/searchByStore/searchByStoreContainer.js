@@ -14,6 +14,7 @@ const mapStateToProps = (state, props) => {
     limit,
     offset,
     selectedAddress,
+    cartProducts: state.cart.products,
     retailer: props.location.state.retailer,
     retailerDiffers: state.cart.retailerDiffers,
   };

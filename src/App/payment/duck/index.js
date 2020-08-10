@@ -9,10 +9,21 @@ export {
   createPaymentFailed,
   createPaymentSuccess,
   initialTrigger,
+  verifyPaymentInProgress,
   verifyPaymentError,
+  placeOrderInProgress,
   placeOrderError,
   takeMeHome,
   tryPayingAgain,
+  resetPaymentOnUnmount,
+  resetVerifyPaymentOnUnmount,
+  addNewCard,
+  cancelAddNewCard,
+  savedCardValid,
+  newCardNumberValid,
+  newCardNameValid,
+  newCardExpiryValid,
+  newCardCvvValid,
 } from "./actions";
 
 export { initialise } from "./operations";

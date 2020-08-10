@@ -20,6 +20,15 @@ import {
   placeOrderError,
   takeMeHome,
   tryPayingAgain,
+  resetPaymentOnUnmount,
+  resetVerifyPaymentOnUnmount,
+  addNewCard,
+  cancelAddNewCard,
+  savedCardValid,
+  newCardNumberValid,
+  newCardNameValid,
+  newCardExpiryValid,
+  newCardCvvValid,
 } from "./actions";
 
 const paymentFailureMessage = "Payment failed";
@@ -33,7 +42,7 @@ let initialState = {
   fetchPaymentOptionsFailed: false,
   fetchPaymentOptionsSuccess: false,
   fetchPaymentOptionsError: false,
-  fetchPaymentOptionsErrorMessage: false,
+  fetchPaymentOptionsErrorMessage: "",
 
   //Payment store
   paymentDetails: {},
@@ -41,7 +50,7 @@ let initialState = {
   createPaymentFailed: false,
   createPaymentSuccess: false,
   createPaymentError: false,
-  createPaymentErrorMessage: false,
+  createPaymentErrorMessage: "",
 
   //Order store
   orderDetails: {},
@@ -71,6 +80,15 @@ let initialState = {
 
   takeMeHome: false,
   tryPayingAgain: false,
+
+  //payment control flow
+  addNewCard: false,
+  savedCardValid: true,
+
+  newCardNumberValid: true,
+  newCardNameValid: true,
+  newCardExpiryValid: true,
+  newCardCvvValid: true,
 };
 
 const paymentSuccessHandler = (state, data) => {
@@ -82,7 +100,7 @@ const paymentSuccessHandler = (state, data) => {
       verifyPaymentFailed: false,
       verifyPaymentError: false,
       verifyPaymentDetails: data,
-      paymentRetryCount: 0,
+      paymentRetryCount: state.paymentRetryCount + 1,
     };
   }
   return {
@@ -105,7 +123,7 @@ const placeOrderSuccessHandler = (state, data) => {
       placeOrderFailed: false,
       placeOrderError: false,
       placeOrderDetails: data,
-      placeOrderRetryCount: 0,
+      placeOrderRetryCount: state.placeOrderRetryCount + 1,
     };
   }
   return {
@@ -236,8 +254,6 @@ const paymentReducer = createReducer(initialState, {
       verifyPaymentInProgress: true,
       verifyPaymentFailed: false,
       verifyPaymentSuccess: false,
-      verifyPaymentError: false,
-      verifyPaymentErrorMessage: "",
     };
   },
   [verifyPaymentSuccess]: (state, e) => {
@@ -250,7 +266,7 @@ const paymentReducer = createReducer(initialState, {
       verifyPaymentInProgress: false,
       verifyPaymentSuccess: false,
       verifyPaymentFailed: false,
-      verifyPaymentError: false,
+      paymentRetryCount: state.paymentRetryCount + 1,
     };
   },
 
@@ -284,6 +300,7 @@ const paymentReducer = createReducer(initialState, {
       placeOrderSuccess: false,
       placeOrderFailed: false,
       placeOrderError: false,
+      placeOrderRetryCount: state.placeOrderRetryCount + 1,
     };
   },
 
@@ -310,6 +327,85 @@ const paymentReducer = createReducer(initialState, {
       tryPayingAgain: true,
     };
   },
+
+  [resetPaymentOnUnmount]: (state) => {
+    return {
+      ...state,
+      initialTrigger: true,
+      //Payment Options store
+      fetchPaymentOptionsInProgress: false,
+      fetchPaymentOptionsFailed: false,
+      fetchPaymentOptionsSuccess: false,
+      fetchPaymentOptionsError: false,
+      fetchPaymentOptionsErrorMessage: "",
+
+      //Payment store
+      createPaymentInProgress: false,
+      createPaymentFailed: false,
+      createPaymentSuccess: false,
+      createPaymentError: false,
+      createPaymentErrorMessage: "",
+
+      //Order store
+      createOrderInProgress: false,
+      createOrderSuccess: false,
+      createOrderFailed: false,
+      createOrderError: false,
+      createOrderErrorMessage: "",
+
+      //verify payments
+      verifyPaymentInProgress: false,
+      verifyPaymentSuccess: false,
+      verifyPaymentFailed: false,
+      verifyPaymentError: false,
+      verifyPaymentErrorMessage: paymentFailureMessage,
+    };
+  },
+
+  [resetVerifyPaymentOnUnmount]: (state) => {
+    return {
+      ...state,
+      verifyPaymentInProgress: false,
+      verifyPaymentSuccess: false,
+      verifyPaymentFailed: false,
+      verifyPaymentError: false,
+      verifyPaymentErrorMessage: paymentFailureMessage,
+      paymentRetryCount: 0,
+
+      placeOrderInProgress: false,
+      placeOrderFailed: false,
+      placeOrderSuccess: false,
+      placeOrderError: false,
+      placeOrderErrorMessage: placeOrderFailureMessage,
+      placeOrderRetryCount: 0,
+
+      takeMeHome: false,
+      tryPayingAgain: false,
+
+      //payment control flow
+      addNewCard: false,
+      savedCardValid: true,
+
+      newCardNumberValid: true,
+      newCardNameValid: true,
+      newCardExpiryValid: true,
+      newCardCvvValid: true,
+    };
+  },
+  [addNewCard]: (state) => ({ ...state, addNewCard: true }),
+  [cancelAddNewCard]: (state) => ({ ...state, addNewCard: false }),
+  [savedCardValid]: (state, e) => ({ ...state, savedCardValid: e.payload }),
+
+  [newCardNumberValid]: (state, e) => ({
+    ...state,
+    newCardNumberValid: e.payload,
+  }),
+  [newCardNameValid]: (state, e) => ({ ...state, newCardNameValid: e.payload }),
+  [newCardExpiryValid]: (state, e) => ({
+    ...state,
+    newCardExpiryValid: e.payload,
+  }),
+  [newCardCvvValid]: (state, e) => ({ ...state, newCardCvvValid: e.payload }),
 });
 
 export { paymentReducer };

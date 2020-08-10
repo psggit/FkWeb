@@ -1,6 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { BottomNavigationContainer } from "../common/bottomNavigation";
+import {
+  BottomNextComponent,
+  CartContentComponent,
+} from "../common/bottomNext";
 import { SearchBox } from "./SearchBox";
 import { HeaderComponent } from "../common/toolbar";
 import SearchLayout from "../common/layout/SearchLayout";
@@ -57,6 +61,25 @@ function SearchComponent(props) {
     );
   }
 
+  function renderBottomComponent() {
+    let totalCartItems = 0;
+    let total = 0;
+    Object.keys(props.cartProducts).forEach(function (key) {
+      total =
+        total + props.cartProducts[key].price * props.cartProducts[key].count;
+      totalCartItems += props.cartProducts[key].count;
+    });
+    if (totalCartItems > 0) {
+      return (
+        <BottomNextComponent redirectPath="/cart" title="View Cart">
+          <CartContentComponent
+            content={totalCartItems + " ITEMS | ₹ " + total}
+          />
+        </BottomNextComponent>
+      );
+    }
+  }
+
   return (
     <>
       <HeaderComponent title="Search Drinks">
@@ -72,6 +95,7 @@ function SearchComponent(props) {
       </HeaderComponent>
       <SearchLayout>
         <RetailerComponent query={query} {...props} />
+        {renderBottomComponent()}
         <BottomNavigationContainer />
       </SearchLayout>
     </>
@@ -82,6 +106,7 @@ SearchComponent.propTypes = {
   getSearchDrinks: PropTypes.func,
   retailerDiffers: PropTypes.bool,
   clearCartAndAdd: PropTypes.func,
+  cartProducts: PropTypes.object,
   dontClearCart: PropTypes.func,
 };
 export { SearchComponent };

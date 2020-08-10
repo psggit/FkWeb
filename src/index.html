@@ -2142,9 +2142,8 @@
                       n,
                       s,
                       r,
-                      d = 5
-                      h =
-                        -1 !== ["Station"].indexOf(u.default.getAgent.appName);
+                      d = 5;
+                    h = -1 !== ["Station"].indexOf(u.default.getAgent.appName);
                     if (d && !h && !this.isInitialized()) {
                       var p = e && e.token;
                       p &&
@@ -2568,7 +2567,16 @@
         window.fcWidget.init({
           token: "3a3ec830-f702-4f77-a001-b8e939438956",
           host: "https://wchat.freshchat.com",
+          config: {
+            headerProperty: {
+              hideChatButton: true,
+            },
+            cssNames: {
+              widget: "custom_fc_frame",
+            },
+          },
         });
+        window.fcWidget.hide();
       }
       function initialize(i, t) {
         console.log("HI Againe");

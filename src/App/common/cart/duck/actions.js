@@ -15,8 +15,6 @@ export const validationSuccessful = createAction("validationSuccessful");
 // validation failed, need to retry
 export const validationFailure = createAction("validationFailure");
 
-export const resetValidation = createAction("resetValidation");
-
 // validateErrorOk
 export const closeValidationErrorMessage = createAction(
   "closeValidationErrorMessage"
@@ -25,3 +23,5 @@ export const closeValidationErrorMessage = createAction(
 export const clearCartAndAdd = createAction("clearCartAndAdd");
 
 export const dontClearCart = createAction("dontClearCart");
+
+export const resetOnUnmount = createAction("resetOnUnmount");

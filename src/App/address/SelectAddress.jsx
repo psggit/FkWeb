@@ -8,13 +8,13 @@ import "./style.scss";
 function SelectAddress() {
   return (
     <div>
-      <ToolbarComponent helpVisibility="true" title="" />
+      <ToolbarComponent helpVisibility={false} title="Choose Address" />
       <div className="address-container">
-        <AddressComponent />
         <div className="add-new-address">
           <div className="title">Add New Address</div>
           <img src={addAddressIcon} className="add-image" />
         </div>
+        <AddressComponent />
       </div>
       <BottomNextComponent routePath="/order/summary" title="Proceed" />
     </div>

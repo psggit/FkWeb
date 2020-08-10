@@ -1,4 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
+import {
+  BottomNextComponent,
+  CartContentComponent,
+} from "../common/bottomNext";
 import PropTypes from "prop-types";
 import { SearchBox } from "../search";
 import { ToolbarComponent } from "../common/toolbar";
@@ -11,6 +15,7 @@ SearchByStoreComponent.propTypes = {
   data: PropTypes.array,
   status: PropTypes.string,
   getSearchByStore: PropTypes.func,
+  cartProducts: PropTypes.object,
   retailer: PropTypes.object,
   selectedAddress: PropTypes.object,
   retailerDiffers: PropTypes.bool,
@@ -32,7 +37,6 @@ function SearchByStoreComponent(props) {
   };
 
   const handleInput = (val) => {
-    console.log("query", val);
     SetQuery(val);
   };
 
@@ -42,11 +46,11 @@ function SearchByStoreComponent(props) {
     });
   });
 
-  const isFirstRun = useRef(true);
+  const isStoreFirstRun = useRef(true);
 
   useEffect(() => {
-    if (isFirstRun.current) {
-      isFirstRun.current = false;
+    if (isStoreFirstRun.current) {
+      isStoreFirstRun.current = false;
       return;
     }
     if (query.length > 2) {
@@ -76,9 +80,6 @@ function SearchByStoreComponent(props) {
   }
 
   const renderSku = (brands) => {
-    console.log("brand rendering is called");
-    console.log(brands.length);
-    console.log(props.offset);
     return (
       <div>
         {brands.map((brand) => (
@@ -90,6 +91,7 @@ function SearchByStoreComponent(props) {
         ))}
         {brands.length === props.offset + props.limit && (
           <div
+            className="loadMore hcenter vcenter flex"
             onClick={() => {
               getSearchByStore(
                 query,
@@ -112,28 +114,55 @@ function SearchByStoreComponent(props) {
     return renderSku(data);
   }
   function SearchWaiting() {
-    return <div>WAITING</div>;
+    return (
+      <div className="hcenter vcenter flex searchHome">
+        <div className="heading">What are you looking for today?</div>
+        <div className="subHeading">
+          Search for available drinks at <br />
+          {props.retailer.retailer_name}.
+        </div>
+      </div>
+    );
+  }
+
+  function renderBottomComponent() {
+    let totalCartItems = 0;
+    let total = 0;
+    Object.keys(props.cartProducts).forEach(function (key) {
+      total =
+        total + props.cartProducts[key].price * props.cartProducts[key].count;
+      totalCartItems += props.cartProducts[key].count;
+    });
+    if (totalCartItems > 0) {
+      return (
+        <BottomNextComponent redirectPath="/cart" title="View Cart">
+          <CartContentComponent
+            content={totalCartItems + " ITEMS | ₹ " + total}
+          />
+        </BottomNextComponent>
+      );
+    }
   }
 
   return (
     <>
-      <ToolbarComponent title="Search Drinks">
-        <div className="search-container">
-          <SearchBox
-            handleInput={handleInput}
-            placeholder="Search Drinks"
-            onFocusIn={onFocus}
-            onFocusOut={onBlur}
-          />
-          {cancelBtn ? <button>Cancel</button> : ""}
-        </div>
-      </ToolbarComponent>
-      <SearchLayout custom="custom">
+      <ToolbarComponent title="Search Drinks"></ToolbarComponent>
+      <div className="search-container">
+        <SearchBox
+          handleInput={handleInput}
+          placeholder="Search Drinks"
+          onFocusIn={onFocus}
+          onFocusOut={onBlur}
+        />
+        {cancelBtn ? <button>Cancel</button> : ""}
+      </div>
+      <SearchLayout>
         {status === "waiting" && SearchWaiting()}
         {status === "progress" && <LoadingComponent />}
         <div id="searchRetailer" className="accordion-container mar-zero">
           {searchUI()}
         </div>
+        {renderBottomComponent()}
       </SearchLayout>
     </>
   );
