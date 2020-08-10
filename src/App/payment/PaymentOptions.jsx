@@ -10,6 +10,7 @@ import {
   NetBankingComponent,
   UPIComponent,
 } from "./components";
+import { AddCardAndProcessPayment } from "./components";
 
 import "./style.scss";
 
@@ -99,6 +100,10 @@ function PaymentOptions(props) {
   const banks = payment.netbanking;
 
   let title = "Pay ₹ " + props.payment.paymentDetails.amount + " using";
+
+  if (props.payment.addNewCard) {
+    return <AddCardAndProcessPayment {...props} />;
+  }
 
   return (
     <>

@@ -1,7 +1,4 @@
-import {
-  getPlacesDetailsAction,
-  storeMapGpsAction,
-} from "./actions";
+import { getPlacesDetailsAction, storeMapGpsAction } from "./actions";
 
 const getPlacesDetailsOperation = (value) => {
   return (dispatch, getState) => {
@@ -19,6 +16,5 @@ const storeGpsOperation = (value) => {
     dispatch(storeMapGpsAction(value));
   };
 };
-
 
 export { getPlacesDetailsOperation, storeGpsOperation };

@@ -24,11 +24,13 @@ const errorHandler = () => {
 
 export const jpUpiConf = (JusPay) => {
   return () => {
-    console.log(JusPay);
     return JusPay.Setup({
       payment_form: "#upi_payment_form",
-      success_handler: successHandler,
-      error_handler: errorHandler,
+      success_handler: successHandler(),
+      error_handler: errorHandler(),
+      iframe_element_callback: function (event) {
+        console.log(event);
+      },
     });
   };
 };

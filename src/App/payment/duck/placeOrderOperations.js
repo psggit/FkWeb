@@ -1,8 +1,4 @@
-import {
-  placeOrderInProgress,
-  placeOrderSuccess,
-  placeOrderFailed,
-} from "./actions";
+import { placeOrderSuccess, placeOrderFailed } from "./actions";
 
 import { finalizeOrderAPI } from "../../../utils";
 
@@ -35,7 +31,6 @@ const onError = (dispatch) => {
 
 const placeOrder = (oid, txn_id) => {
   return (dispatch) => {
-    //dispatch(placeOrderInProgress());
     finalizeOrderAPI(
       { order_id: oid, txn_id: txn_id },
       processResponse(dispatch),

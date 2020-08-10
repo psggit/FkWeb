@@ -37,3 +37,13 @@ export const resetPaymentOnUnmount = createAction("resetPaymentOnUnmount");
 export const resetVerifyPaymentOnUnmount = createAction(
   "resetVerifyPaymentOnUnmount"
 );
+
+export const addNewCard = createAction("addNewCard");
+export const cancelAddNewCard = createAction("cancelAddNewCard");
+
+export const savedCardValid = createAction("savedCardValid");
+
+export const newCardNumberValid = createAction("newCardNumberValid");
+export const newCardNameValid = createAction("newCardNameValid");
+export const newCardExpiryValid = createAction("newCardExpiryValid");
+export const newCardCvvValid = createAction("newCardCvvValid");
