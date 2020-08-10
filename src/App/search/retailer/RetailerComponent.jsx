@@ -30,9 +30,10 @@ function RetailerComponent(props) {
       </div>
     );
   }
+  console.log(data)
   return (
     <>
-      {data.length ? (
+      {data ? (
         <div className="accordion-container">
           {data.map((retailer, index) => (
             <React.Fragment key={index + "s"}>
@@ -62,6 +63,7 @@ function RetailerComponent(props) {
 
 RetailerComponent.propTypes = {
   query: PropTypes.string,
+  address: PropTypes.object,
   getSearchDrinks: PropTypes.func,
   data: PropTypes.array,
   pending: PropTypes.bool,

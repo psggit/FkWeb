@@ -9,6 +9,7 @@ CriticaladsComponent.propTypes = {
   fetchHomeCriticalAds: PropTypes.any,
   setPopupVisibility: PropTypes.any,
   isViewed: PropTypes.any,
+  address: PropTypes.object,
 };
 
 function CriticaladsComponent(props) {
@@ -24,10 +25,14 @@ function CriticaladsComponent(props) {
   };
 
   useEffect(() => {
-    props.fetchHomeCriticalAds();
+    if (props.address && props.items.length === 0) {
+      props.fetchHomeCriticalAds({
+        cityID: props.address.city.id,
+      });
+    }
   }, []);
 
-  if (!isVisible) {
+  if (!isVisible || props.items.length === 0) {
     return null;
   }
 
