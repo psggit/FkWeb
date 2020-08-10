@@ -1,5 +1,4 @@
 import config from "../config";
-import CommonHeaders from "./common";
 
 const BaseURL =
   "https://maps.googleapis.com/maps/api/place/autocomplete/json?sensor=false&key=" +

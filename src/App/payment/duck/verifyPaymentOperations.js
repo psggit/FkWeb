@@ -1,8 +1,4 @@
-import {
-  verifyPaymentInProgress,
-  verifyPaymentSuccess,
-  verifyPaymentFailed,
-} from "./actions";
+import { verifyPaymentSuccess, verifyPaymentFailed } from "./actions";
 
 import { verifyPaymentAPI } from "../../../utils";
 
