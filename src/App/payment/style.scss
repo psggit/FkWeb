@@ -183,6 +183,7 @@
   .add-new-container {
     width: 100%;
     height: 48px;
+    margin-top: 12px;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -260,6 +261,24 @@
 
 .new-card-margin {
   margin-top: 8px;
+}
+
+.new-card-expiry-container {
+  display: flex;
+  flex-direction: column;
+  .new-card-expiry {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    .new-card-month {
+      margin-right: 8px;
+    }
+
+    .new-card-year {
+      margin-left: 8px;
+    }
+  }
 }
 
 .save-card-container {
