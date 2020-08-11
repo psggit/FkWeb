@@ -22,6 +22,7 @@ function RetailerComponent(props) {
   if (pending) {
     return <LoadingComponent />;
   }
+
   if (query.length <= 2) {
     return (
       <div className="initial-text search-initial-text-padding">
@@ -32,7 +33,7 @@ function RetailerComponent(props) {
   }
   return (
     <>
-      {data ? (
+      {data.length > 0 ? (
         <div className="accordion-container">
           {data.map((retailer, index) => (
             <React.Fragment key={index + "s"}>

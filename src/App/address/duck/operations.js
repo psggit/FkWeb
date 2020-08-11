@@ -66,7 +66,6 @@ const ValidateAddressOperation = (address) => {
 
 const onSuccessHandler = (dispatch, address) => {
   return (value) => {
-    console.log(value);
     dispatch(validateAddressAction("success"));
     dispatch(selectAddressAction(address));
   };
@@ -74,7 +73,6 @@ const onSuccessHandler = (dispatch, address) => {
 
 const onErrorHandler = (dispatch) => {
   return (err) => {
-    console.log(err);
     dispatch(validateAddressAction("failed"));
   };
 };

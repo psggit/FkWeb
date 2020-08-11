@@ -26,13 +26,13 @@ function BrandComponent(props) {
     <React.Fragment>
       <div className={activeClass}>
         <div className="accordionItem" onClick={toggle}>
-          <div>
+          <div className="accordionTitleContainer">
             <img className="thumbnail" src={brand.logo_low_res_image} alt="" />
             <span className="summary">{brand.brand_name}</span>
-          </div>
-          <span className="">
-            <img src={active ? UpArrow : DownArrow} alt="upDown Arrow" />
+            <span className="arrowIcon">
+                <img src={active ? UpArrow : DownArrow} alt="upDown Arrow" />
           </span>
+          </div>
         </div>
         {brand.sku.map((sku, i) => (
           <React.Fragment key={sku.sku_id}>
