@@ -74,7 +74,7 @@ function AddressComponent(props) {
   }
 
   return (
-    <div className="address-container">
+    <div className={"address-container "+ props.redirect}>
       {addresses.length == 0 && <EmptyAddressComponent />}
       {props.savedUserAddresses.map((address) => {
         let canModifyAddress = true;

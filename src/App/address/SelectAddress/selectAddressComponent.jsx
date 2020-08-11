@@ -23,7 +23,7 @@ SelectAddressComponent.propTypes = {
 
 function SelectAddressComponent(props) {
   useEffect(() => {
-    props.onMountFunc();
+    props.onMountFunc(props.selectedAddress);
   }, []);
 
   useEffect(() => {

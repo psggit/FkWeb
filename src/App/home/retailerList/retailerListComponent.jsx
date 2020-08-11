@@ -59,8 +59,15 @@ function NoRetailerTemplate(text, history) {
   );
 }
 
-function FetchFailedTemplate() {
-  return <div>Failed to Fetch...</div>;
+function FetchFailedTemplate(selectedAddress) {
+  return (
+    <div
+      className="noRetailers hcenter vcenter flex"
+      onClick={() => fetchRetailersFunc(selectedAddress)}
+    >
+      Failed to Fetch...
+    </div>
+  );
 }
 
 function ServiceUnavailableTemplate() {
@@ -93,7 +100,9 @@ function RetailerList(props) {
       {retailers.length === 0 &&
         retailerFetchStatus === "success" &&
         NoRetailerTemplate(message, history)}
-      {retailerFetchStatus === "failed" && <FetchFailedTemplate />}
+      {retailerFetchStatus === "failed" && (
+        <FetchFailedTemplate selectedAddress={selectedAddress} />
+      )}
     </div>
   );
 }
