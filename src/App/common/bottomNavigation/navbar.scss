@@ -16,7 +16,7 @@
 
 a.activeLink{
   div{
-    color: $orange-color; 
+    color: $orange-color;
   }
 }
 
@@ -48,6 +48,7 @@ a.activeLink{
 .navBadge{
   position: absolute;
   background-color: #F44336;
+  color: white;
   width: 14px;
   height: 14px;
   top: -5px;
