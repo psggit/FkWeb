@@ -19,7 +19,6 @@ SelectAddressComponent.propTypes = {
   flow: PropTypes.string,
   redirect: PropTypes.string,
   apiStatus: PropTypes.object,
-  isEmpty: PropTypes.object,
 };
 
 function SelectAddressComponent(props) {
@@ -65,14 +64,8 @@ function SelectAddressComponent(props) {
     });
   }
 
-  
   function onClickProcess() {
     if (props.redirect === "sf") {
-      // if (Object.keys(props.isEmpty).length == 0) {
-      //   history.push("/home");
-      // } else {
-      //   props.validateAddressFunc(props.selectedAddress);
-      // }
       history.push("/home");
     } else if (props.redirect === "osm") {
       props.validateAddressFunc(props.selectedAddress);

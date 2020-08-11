@@ -80,12 +80,13 @@ function RetailerList(props) {
 
   return (
     <div className="retailer_list_wrap">
-      {(retailerFetchStatus === "inProgress" && retailerFetchStatus === "waiting") && (
-        <div className="flex hcenter vcenter loading">
-          {" "}
-          <div className="loader"></div>
-        </div>
-      )}
+      {retailerFetchStatus === "inProgress" &&
+        retailerFetchStatus === "waiting" && (
+          <div className="flex hcenter vcenter loading">
+            {" "}
+            <div className="loader"></div>
+          </div>
+        )}
       {retailers.length !== 0 &&
         retailerFetchStatus === "success" &&
         RetailerTemplate(retailers, history)}

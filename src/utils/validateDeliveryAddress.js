@@ -1,8 +1,6 @@
 import config from "../config";
 import CommonHeaders from "./common";
 
-// const URL =  "https://api." +  config.BASE_DOMAIN +  "/locality/cityAndLocalityFromPoint";
-
 const URL =
   "https://loki." + config.BASE_DOMAIN + "/locality/cityAndLocalityFromPoint";
 
