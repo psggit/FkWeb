@@ -7,3 +7,4 @@ export { resetAddressAction } from "./actions";
 export { getAddressFromGpsOperation } from "./getAddressFromGpsOperation";
 export { createAddressOperation } from "./createAddressOperation";
 export { deleteAddressOperation } from "./deleteAddressOperation";
+export { addressLocalStorageHandler } from "./addressLocalStorageHandler";
