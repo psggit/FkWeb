@@ -130,6 +130,7 @@ function MapWithMarkerComponent(props) {
   const [current, setCurrent] = React.useState(null);
   const [currentLoading, setCurrentLoading] = React.useState(false);
   const [locationError, setLocationError] = React.useState(false);
+
   const useCurrentLocation = () => {
     setCurrentLoading(true);
     navigator.geolocation.getCurrentPosition(
@@ -137,13 +138,13 @@ function MapWithMarkerComponent(props) {
         setCurrent({ lat: loc.coords.latitude, lng: loc.coords.longitude });
         setCurrentLoading(false);
       },
-      (err) => {
-        console.log("err", err);
+      () => {
         setCurrentLoading(false);
         setLocationError(true);
       }
     );
   };
+
   function editAddress(address) {
     history.push({
       pathname: "/address/create/" + props.redirect,
