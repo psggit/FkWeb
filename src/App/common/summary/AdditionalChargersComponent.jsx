@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { rightArrowIcon } from "../../../assets/images";
+import { upIndicatorIcon, downIndicatorIcon } from "../../../assets/images";
 
 AdditionalChargersComponent.propTypes = {
   label: PropTypes.any,
@@ -11,6 +11,8 @@ AdditionalChargersComponent.propTypes = {
 function AdditionalChargersComponent(props) {
   const label = props.label;
   const charges = props.charges;
+
+  const [expanded, SetEmpanded] = useState(false);
 
   const templateCharges = (props) => {
     return props.chargesList.map((charge, index) => {
@@ -27,15 +29,22 @@ function AdditionalChargersComponent(props) {
   };
 
   return (
-    <div>
+    <div
+      onClick={() => {
+        SetEmpanded(!expanded);
+      }}
+    >
       <div className="charges-container">
         <div className="label-container">
           <div>{label}</div>
-          <img src={rightArrowIcon} className="icon" />
+          <img
+            src={expanded ? upIndicatorIcon : downIndicatorIcon}
+            className="icon"
+          />
         </div>
         <div>{charges}</div>
       </div>
-      {templateCharges(props)}
+      {expanded && templateCharges(props)}
     </div>
   );
 }
