@@ -2,39 +2,58 @@
 
 .cart-item {
   display: flex;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   flex-direction: row;
   border-bottom: 1px solid $border-color;
+
   .cart-image {
-    width: 60px;
-    height: 60px;
+    width: 48px;
+    height: 48px;
+    align-self: center;
   }
+
   .cart-content {
     display: flex;
     width: 100%;
+    margin-top: 8px;
     margin-left: 8px;
     flex-direction: column;
+
+    .cart-brand-name {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
     .sub-item {
-      margin-top: 20px;
+      margin-top: 8px;
+      align-items: center;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+
       .cart-volume {
-        font-family: Montserrat-Medium;
+        font-size: 14px;
+        line-height: 18px;
       }
+
       .cart-counter {
         display: flex;
         flex-direction: row;
-        font-size: 16px;
+        font-size: 12px;
+        line-height: 16px;
         justify-content: space-evenly;
+        font-family: MontserratBold;
         border: 1px solid $primary-color;
         box-sizing: border-box;
         border-radius: 14px;
         width: 80px;
         height: 28px;
       }
+
       .symbol {
+        font-family: MontserratSemiBold;
         text-align: center;
         width: 30px;
         font-size: 18px;

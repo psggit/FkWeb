@@ -6,6 +6,7 @@ function getSkuFromProduct(brand, sku, retailer) {
     retailerId: retailer.retailer_id,
     retailerName: retailer.retailer_name,
     retailerDescription: retailer.retailer_address,
+    retailerFssaiNo: retailer.fssai_no,
     sku_id: sku.sku_id,
     brand_name: brand.brand_name,
     logo_low_res_image: brand.logo_low_res_image,
