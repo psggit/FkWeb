@@ -16,6 +16,7 @@ import {
 
 OrderPlacedComponent.propTypes = {
   payment: PropTypes.object,
+  clearCart: PropTypes.func,
 };
 
 const getSummaryProps = (orderDetails) => {
@@ -29,7 +30,9 @@ function OrderPlacedComponent(props) {
   const history = useHistory();
   let order = props.payment.placeOrderDetails.order_details;
 
-  useLayoutEffect(() => {}, []);
+  useLayoutEffect(() => {
+    props.clearCart();
+  }, []);
 
   function handleBack() {
     history.replace("/");

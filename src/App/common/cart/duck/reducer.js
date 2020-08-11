@@ -9,6 +9,7 @@ import {
   clearCartAndAdd,
   dontClearCart,
   resetOnUnmount,
+  clearCart,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -288,6 +289,13 @@ const cartReducer = createReducer(initialState(), {
 
   [resetOnUnmount]: (state: State): State => {
     return resetValidationState(state);
+  },
+  [clearCart]: (state: State): State => {
+    return {
+      ...state,
+      retailer: {},
+      products: {},
+    };
   },
 });
 
