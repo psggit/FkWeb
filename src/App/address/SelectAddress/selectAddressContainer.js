@@ -22,7 +22,8 @@ const mapDispatchToProps = (dispatch) => {
     delelteAddressFunc: (value) => dispatch(deleteAddressOperation(value)),
     selectAddressFunc: (value) => dispatch(SelectAddressOperation(value)),
     validateAddressFunc: (value) => dispatch(ValidateAddressOperation(value)),
-    onMountFunc: () => dispatch(FetchAddressListOperation()),
+    onMountFunc: (selectedAddress) =>
+      dispatch(FetchAddressListOperation(selectedAddress)),
   };
 };
 
