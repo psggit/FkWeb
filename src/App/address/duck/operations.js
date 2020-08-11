@@ -1,11 +1,13 @@
 import {
   selectAddressAction,
+  validateAddressAction,
   fetchAddressListSuccessAction,
   fetchAddressListFailAction,
   updateAddressListAction,
 } from "./actions";
 
 import { fetchAddressListAPI } from "../../../utils/fetchAddress";
+import { validateDeliveryAddressAPI } from "../../../utils/validateDeliveryAddress";
 
 const SelectAddressOperation = (value) => {
   return (dispatch) => {
@@ -49,4 +51,36 @@ const FetchAddressListOperation = () => {
   };
 };
 
-export { SelectAddressOperation, FetchAddressListOperation };
+const ValidateAddressOperation = (address) => {
+  const reqBody = { gps: address.gps };
+  // const reqBody = { gps: "test data" };
+  return (dispatch) => {
+    validateDeliveryAddressAPI(
+      reqBody,
+      processResponse(dispatch),
+      onSuccessHandler(dispatch, address),
+      onErrorHandler(dispatch)
+    );
+  };
+};
+
+const onSuccessHandler = (dispatch, address) => {
+  return (value) => {
+    console.log(value);
+    dispatch(validateAddressAction("success"));
+    dispatch(selectAddressAction(address));
+  };
+};
+
+const onErrorHandler = (dispatch) => {
+  return (err) => {
+    console.log(err);
+    dispatch(validateAddressAction("failed"));
+  };
+};
+
+export {
+  SelectAddressOperation,
+  FetchAddressListOperation,
+  ValidateAddressOperation,
+};
