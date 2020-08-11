@@ -159,7 +159,7 @@ function VerifyComponent(props) {
     history.push("/home");
   }
   if (payment.tryPayingAgain) {
-    history.push("/payment/options");
+    history.push("/order/summary");
   }
   if (payment.placeOrderSuccess) {
     history.push("/order/placed");

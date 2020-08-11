@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { OrderPlacedComponent } from "./orderPlacedComponent";
+import { clearCart } from "../../common/cart";
 
 const mapStateToProps = (state) => {
   return {
@@ -7,6 +8,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-const OrderPlacedContainer = connect(mapStateToProps)(OrderPlacedComponent);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clearCart: () => dispatch(clearCart()),
+  };
+};
+
+const OrderPlacedContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OrderPlacedComponent);
 
 export { OrderPlacedContainer };
