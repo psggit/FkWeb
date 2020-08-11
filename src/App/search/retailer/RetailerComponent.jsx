@@ -30,7 +30,6 @@ function RetailerComponent(props) {
       </div>
     );
   }
-  console.log(data)
   return (
     <>
       {data ? (

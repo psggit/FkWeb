@@ -22,7 +22,6 @@ function UPIComponent(props) {
   const configureJuspay = () => {
     let jp = window.Juspay;
     juspay_form = props.jpUpiConf(jp);
-    console.log(juspay_form);
   };
 
   useEffect(() => {
@@ -36,17 +35,11 @@ function UPIComponent(props) {
   }, []);
 
   const onSubmit = () => {
-    console.log(juspay_form);
     juspay_form.submit_form();
   };
 
   const onTextChanged = (val) => {
-    console.log(val);
     if (val.length > 3) {
-      console.log(
-        "Val is ",
-        val.match("[A-Za-z0-9_.-]{3,}@[A-Za-z0-9_.-]{3,}")
-      );
       if (val.match("[A-Za-z0-9_.-]{3,}@[A-Za-z0-9_.-]{3,}")) {
         SetUpiValid(true);
         SetPayEnabled(val.length > 0);

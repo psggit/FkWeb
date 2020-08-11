@@ -48,7 +48,6 @@ const GetAvailableStatesOperation = () => {
 
 const onCitySuccess = (dispatch) => {
   return (data) => {
-    console.log(data);
     dispatch(fetchCitySuccess(data.data));
   };
 };

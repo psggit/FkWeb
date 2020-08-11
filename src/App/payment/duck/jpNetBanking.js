@@ -24,7 +24,6 @@ const errorHandler = () => {
 
 export const jpNetBankingConf = (JusPay) => {
   return () => {
-    console.log(JusPay);
     return JusPay.Setup({
       payment_form: "#nb_payment_form",
       success_handler: successHandler,

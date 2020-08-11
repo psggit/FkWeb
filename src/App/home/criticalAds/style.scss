@@ -10,11 +10,13 @@
   max-width: 90%;
   margin: 0 auto;
 
-  img {
+  .critical-ad-image {
     object-fit: fill;
-    height: min-content;
-    max-width: 100%;
+    max-width: 300px;
+    min-height: 250px;
+    max-height: 300px;
   }
+
   .ad-card {
     border-radius: 10px 10px 0;
     margin-right: 16px;

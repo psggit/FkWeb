@@ -88,7 +88,6 @@ function StateCityComponent(props) {
     }
   }
 
-  console.log(props.fetchCityFailed);
   return (
     <>
       <ToolbarComponent onClick={goBack} backVisibility={mode != "state"} />

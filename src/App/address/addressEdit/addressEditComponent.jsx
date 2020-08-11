@@ -150,8 +150,6 @@ function AddressEditComponent(props) {
   const reqStatus = props.reqStatus;
   const loading =
     props.reqStatus === "inProgress" || props.getAddressStatus === "inProgress";
-  console.log(props.reqStatus)
-  console.log(props.getAddressStatus)
   if (gpsSelected === false) {
     return <Redirect to="/choose/location" />;
   } else if (reqStatus === "success") {

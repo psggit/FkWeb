@@ -49,7 +49,6 @@ function AddCardAndProcessPayment(props) {
   const configureJuspay = () => {
     let jp = window.Juspay;
     juspay_form = props.jpNewCardConf(jp);
-    console.log(juspay_form);
   };
 
   useEffect(() => {
