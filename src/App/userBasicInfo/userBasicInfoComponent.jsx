@@ -312,4 +312,5 @@ function UserBasicInfoComponent(props) {
     return <div> </div>;
   }
 }
+
 export { UserBasicInfoComponent };

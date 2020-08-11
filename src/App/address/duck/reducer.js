@@ -11,7 +11,6 @@ import {
   deleteAddressSuccessAction,
   resetAddressAction,
 } from "./actions";
-
 import { createReducer } from "@reduxjs/toolkit";
 // Default Api Call status
 const apiCallDefaultStatus = {
@@ -68,6 +67,7 @@ const addressListReducer = createReducer(initialState(), {
     ...state,
     selectedAddress: action.payload,
   }),
+
   [updateAddressListAction]: (state, action) => ({
     ...state,
     savedUserAddresses: action.payload,

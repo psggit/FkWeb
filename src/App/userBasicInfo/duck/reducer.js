@@ -13,18 +13,8 @@ import {
 
 import { createReducer } from "@reduxjs/toolkit";
 
-const getUserIdFromStorage = () => {
-  let uid = localStorage.getItem("HbUserID");
-  try {
-    return parseInt(uid);
-  } catch {
-    return null;
-  }
-};
-
 const initialState = () => {
   return {
-    userID: getUserIdFromStorage(),
     loginInProgress: false,
     loginSuccess: false,
     loginFailed: false,
