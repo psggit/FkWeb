@@ -52,7 +52,6 @@ function NetBankingComponent(props) {
   const configureJuspay = () => {
     let jp = window.Juspay;
     juspay_form = props.jpNetBankingConf(jp);
-    console.log(juspay_form);
   };
 
   useEffect(() => {
@@ -72,7 +71,6 @@ function NetBankingComponent(props) {
   }, []);
 
   const onSubmit = () => {
-    console.log(juspay_form);
     juspay_form.submit_form();
   };
 

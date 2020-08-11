@@ -12,8 +12,9 @@
 
   .critical-ad-image {
     object-fit: fill;
-    width: 300px;
-    height: 300px;
+    max-width: 300px;
+    min-height: 250px;
+    max-height: 300px;
   }
 
   .ad-card {

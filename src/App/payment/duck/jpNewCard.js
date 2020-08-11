@@ -30,7 +30,6 @@ const errorHandler = () => {
 
 export const jpNewCardConf = (JusPay) => {
   return (dispatch) => {
-    console.log(JusPay);
     return JusPay.Setup({
       payment_form: "#new_card_payment_form",
       success_handler: successHandler,

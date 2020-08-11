@@ -79,7 +79,6 @@ function SavedCardComponent(props) {
   const payment = props.payment.paymentOptionsDetails;
   const savedCardValid = props.payment.savedCardValid;
 
-  console.log(savedCardValid);
   const [jpLoaded, SetjpLoaded] = useState(false);
 
   useLayoutEffect(() => {
