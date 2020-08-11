@@ -1,2 +1,2 @@
 export { StateCityContainer } from "./stateCityContainer";
-export { stateCityReducer } from "./duck";
+export { stateCityReducer, locationLocalStorageHandler } from "./duck";
