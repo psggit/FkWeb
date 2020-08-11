@@ -139,6 +139,7 @@ AddressEditComponent.propTypes = {
   getAddressStatus: PropTypes.string,
   getAddressFromGps: PropTypes.func,
   resetAddressFunc: PropTypes.func,
+  redirect: PropTypes.string,
 };
 
 function AddressEditComponent(props) {
@@ -153,7 +154,7 @@ function AddressEditComponent(props) {
   if (gpsSelected === false) {
     return <Redirect to="/choose/location" />;
   } else if (reqStatus === "success") {
-    return <Redirect to="/address/select/sf" />;
+    return <Redirect to={"/address/select/" + props.redirect} />;
   } else if (loading === true) {
     return <SplashLoadingComponent motion={true} text="Finding Address" />;
   } else {

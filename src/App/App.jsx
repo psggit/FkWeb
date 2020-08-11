@@ -31,7 +31,7 @@ function App() {
           <Route path="/search" component={SearchContainer} />
           <Route path="/searchbystore" component={SearchByStoreContainer} />
           <Route path="/cart" component={CartContainer} />
-          <Route path="/address/create" component={AddressEditContainer} />
+          <Route path="/address/create/:redirect" component={AddressEditContainer} />
           <Route path="/myorders" component={MyOrdersContainer} />
           <Route
             path="/address/select/:redirect"
@@ -39,7 +39,7 @@ function App() {
           />
           <Route path="/home" component={HomeContainer} />
           <Route path="/statecity/select" component={StateCityContainer} />
-          <Route path="/choose/location" component={ChooseLocationContainer} />
+          <Route path="/choose/location/:redirect" component={ChooseLocationContainer} />
           <Route path="/storefront" component={StoreFrontContainer} />
           <Route
             path="/user-terms"

@@ -38,8 +38,11 @@ const loginSuccess = createAction("loginSuccess");
 //On login failure, retry in specific conditions
 const loginFailed = createAction("loginFailed");
 
+const kycUpdate = createAction("kycUpdated");
+
 export {
   changeDocumentValueAction,
+  kycUpdate,
   birthYearEntered,
   selectIDTypeAction,
   changeGenderAction,
