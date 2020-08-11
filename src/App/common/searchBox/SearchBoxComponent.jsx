@@ -21,6 +21,15 @@ function SearchBoxComponent(props) {
           props.onChangeFunc(e.target.value);
         }}
       />
+      <div
+        className="inputCross"
+        onClick={() => {
+          props.onChangeFunc("");
+        }}
+      >
+        {" "}
+        x{" "}
+      </div>
       <div onClick={() => props.onCancelFunc()} className="search-cancel">
         Cancel
       </div>

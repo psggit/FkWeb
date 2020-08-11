@@ -4,3 +4,4 @@ export {
   GetAvailableStatesOperation,
 } from "./operations";
 export { selectState, selectCity } from "./actions";
+export { locationLocalStorageHandler } from "./locationLocalStorageHandler";

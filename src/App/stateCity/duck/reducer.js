@@ -11,17 +11,39 @@ import {
 
 import { createReducer } from "@reduxjs/toolkit";
 
-const initialState = {
-  fetchStateInProgress: false,
-  fetchStateFailed: false,
-  fetchStateSuccess: false,
-  fetchCityInProgress: false,
-  fetchCityFailed: false,
-  fetchCitySuccess: false,
-  states: [],
-  selectedState: null,
-  selectedCity: null,
-  cities: [],
+const getSelectedCityFromStorage = () => {
+  try {
+    let city = localStorage.getItem("selectedCity");
+    return JSON.parse(city);
+  } catch {
+    return null;
+  }
+};
+
+const getSelectedStateFromStorage = () => {
+  try {
+    let state = localStorage.getItem("selectedState");
+    return JSON.parse(state);
+  } catch {
+    return null;
+  }
+};
+
+const initialState = () => {
+  let city = getSelectedCityFromStorage();
+  let state = getSelectedStateFromStorage();
+  return {
+    fetchStateInProgress: false,
+    fetchStateFailed: false,
+    fetchStateSuccess: false,
+    fetchCityInProgress: false,
+    fetchCityFailed: false,
+    fetchCitySuccess: false,
+    states: [],
+    selectedState: state,
+    selectedCity: city,
+    cities: [],
+  };
 };
 
 const stateCityReducer = createReducer(initialState, {

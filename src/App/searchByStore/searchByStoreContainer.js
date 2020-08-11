@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { SearchByStoreComponent } from "./SearchByStoreComponent";
-import { getSearchByStore } from "./duck";
+import { getSearchByStore, resetData } from "./duck";
 import { clearCartAndAdd, dontClearCart } from "../common/cart";
 
 const mapStateToProps = (state, props) => {
@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getSearchByStore(query, address, retailer, limit, offset)),
     clearCartAndAdd: () => dispatch(clearCartAndAdd()),
     dontClearCart: () => dispatch(dontClearCart()),
+    resetData: () => dispatch(resetData()),
   };
 };
 

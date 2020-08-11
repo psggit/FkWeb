@@ -206,7 +206,14 @@ let setUnAvailableProducts = (state: State, skus: Array<number>): State => {
 };
 
 let validateCart = (state: State, data: Object): State => {
-  state = setUnAvailableProducts(state, data.unavail_items);
+  let unAvailableItems = [];
+  if (data.unavailableItems !== undefined) {
+    unAvailableItems = data.unavailableItems;
+  } else if (data.unavail_items !== undefined) {
+    state = setUnAvailableProducts(state, data.unavail_items);
+  }
+  console.log(unAvailableItems);
+
   state.validationFailure = false;
   state.retailer.description = data.delivery_message;
   if (data.statusCode === 0) {

@@ -58,9 +58,17 @@ SummaryComponent.propTypes = {
 };
 function SummaryComponent(props) {
   let summary = props.summary.summaryDetails;
+  const history = useHistory();
+  const goBack = () => {
+    history.push("/cart");
+  };
   return (
     <div>
-      <ToolbarComponent helpVisibility={false} title="Order Summary" />
+      <ToolbarComponent
+        helpVisibility={false}
+        title="Order Summary"
+        onClick={() => goBack()}
+      />
       <div className="page-container">
         <OrderAddressComponent {...props} />
         <OrderTotalComponent marginTop={true} total={summary.display_total} />
