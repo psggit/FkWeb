@@ -120,7 +120,8 @@ function AddressInputComponent(props) {
           landmark == "" ||
           landmark == null ||
           flatNumber == "" ||
-          flatNumber == null
+          flatNumber == null ||
+          (address_type != "home" && address_type.length < 3)
             ? true
             : false
         }
