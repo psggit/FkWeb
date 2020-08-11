@@ -35,9 +35,9 @@ function CartItemComponent({ product, addItem, removeItem, retailer }) {
   let sku = getSkuFromProduct(product, retailer);
   return (
     <div className="cart-item">
-      <img src={drinksIcon} className="cart-image" />
+      <img src={product.image} className="cart-image" />
       <div className="cart-content">
-        <div>{product.brandName}</div>
+        <div className="cart-brand-name">{product.brandName}</div>
         <div className="sub-item">
           <div className="cart-volume">
             {product.volume}ml | Rs {product.price}
