@@ -1,7 +1,7 @@
 @import "../../../colors.scss";
 
 
-.modal-content{
+.ad-modal-content{
     flex-direction: column !important;
     box-sizing: content-box;
     color: #fff;
@@ -11,9 +11,11 @@
     overflow: hidden;
     max-width: 90%;
     margin: 0 auto;
-    
-    
+
+
     img{
+        object-fit: fill;
+        height: min-content;
         max-width: 100%;
     }
     .ad-card{
@@ -44,7 +46,7 @@
     .carousel-inner{
         border-radius: 10px;
     }
-    
+
 }
 
 .ad_title{
@@ -84,7 +86,7 @@
         margin: 0 0.2em;
         background-color: $primary-color;
     }
-    
+
     .indicator.active{
         background-color: $orange-color;
     }
