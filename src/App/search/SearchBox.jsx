@@ -11,26 +11,31 @@ SearchBox.propTypes = {
 
 function SearchBox(props) {
   const [inputType] = useState("search");
+  const [inputValue, setInputValue] = useState("");
   //  const [inputValue, setInputValue] = useState("");
   const { handleInput, placeholder, onFocusIn, onFocusOut } = props;
 
   function handleChange(value) {
-    //    setInputValue(value);
+    setInputValue(value);
     handleInput(value);
   }
   return (
     <>
-      <img className="search-img" src={searchIcon} alt="searchIcon" />
-      <input
-        type={inputType}
-        name="input-form"
-        onFocus={() => onFocusIn()}
-        onBlur={() => onFocusOut()}
-        onChange={(e) => handleChange(e.target.value)}
-        placeholder={placeholder}
-        className="inputclass"
-        autoComplete="off"
-      />
+      <div className="inputWrap">
+        <img className="search-img" src={searchIcon} alt="searchIcon" />
+        <input
+          id="inpt-search"
+          type={inputType}
+          name="input-form"
+          onFocus={() => onFocusIn()}
+          onBlur={() => onFocusOut()}
+          value={inputValue}
+          onChange={(e) => handleChange(e.target.value)}
+          placeholder={placeholder}
+          className="inputclass"
+          autoComplete="off"
+        />
+      </div>
     </>
   );
 }

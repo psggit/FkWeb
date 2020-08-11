@@ -8,11 +8,21 @@
   display: flex;
   justify-content: center;
   margin: 10px 24px;
-  .search-img{
+  position: relative;
+  .inputWrap {
+     position: relative;
+     width: 100%;
+  }
+  .search-img {
     position: absolute;
-    padding: 7px;
-    left: 27px;
-
+    top: 9px;
+    left: 9px;
+  }
+  .inputCross {
+    position: absolute;
+    padding:10px;
+    right: 3px;
+    top: -4px;
   }
   input {
     padding: 7px 7px;
@@ -24,15 +34,13 @@
     outline: none;
     text-indent: 30px;
   }
-  button{
+  button {
     background: none;
     border: none;
     outline: none;
     color: white;
     padding-right: 0;
   }
-
-
 }
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
