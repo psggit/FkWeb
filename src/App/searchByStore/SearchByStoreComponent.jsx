@@ -26,7 +26,7 @@ SearchByStoreComponent.propTypes = {
 function SearchByStoreComponent(props) {
   const [cancelBtn, SetCancelBtn] = useState(false);
   const [query, SetQuery] = useState("");
-  const { getSearchByStore, data, limit, offset, status } = props;
+  const { getSearchByStore, resetData, data, limit, offset, status } = props;
 
   const onFocus = () => {
     SetCancelBtn(true);
@@ -62,6 +62,9 @@ function SearchByStoreComponent(props) {
         0
       );
     }
+    return () => {
+      props.resetData();
+    };
   }, [query]);
 
   if (props.retailerDiffers) {
