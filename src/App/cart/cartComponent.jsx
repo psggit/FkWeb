@@ -48,7 +48,7 @@ CartComponent.propTypes = {
 
 function ReturnEmptyCart() {
   return (
-    <div className="cart">
+    <div className="cart hcenter">
       <EmptyCartComponent />
       <BottomNavigationContainer />
     </div>
