@@ -9,4 +9,6 @@ export {
   clearCartAndAdd,
   dontClearCart,
   resetOnUnmount,
+  clearCart,
+  cartLocalStorageHandler,
 } from "./duck";
