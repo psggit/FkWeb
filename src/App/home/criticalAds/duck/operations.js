@@ -30,10 +30,11 @@ const onError = (dispatch) => {
   };
 };
 
-const fetchHomeCriticalAds = () => {
+const fetchHomeCriticalAds = (cityId) => {
   return (dispatch) => {
     dispatch(fetchCriticalAdsInProgress());
     fetchCriticalAdsAPI(
+      cityId.cityID,
       processResponse(dispatch),
       onSuccess(dispatch),
       onError(dispatch)
