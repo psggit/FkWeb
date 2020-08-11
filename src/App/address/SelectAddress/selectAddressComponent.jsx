@@ -57,10 +57,15 @@ function SelectAddressComponent(props) {
   }
 
   function showAddAddress() {
-    history.push("/choose/location");
+    history.push({
+      pathname: "/choose/location/" + props.redirect,
+      state: {
+        address: null,
+      },
+    });
   }
 
-
+  
   function onClickProcess() {
     if (props.redirect === "sf") {
       // if (Object.keys(props.isEmpty).length == 0) {

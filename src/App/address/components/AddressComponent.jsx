@@ -3,6 +3,7 @@ import "./style.scss";
 import PropTypes from "prop-types";
 import { AlertWithOptions } from "../../common/alert";
 import { Alert } from "../../common/alert";
+import { useHistory } from "react-router-dom";
 
 function EmptyAddressComponent() {
   return (
@@ -20,12 +21,13 @@ AddressComponent.propTypes = {
   selectedAddress: PropTypes.object,
   savedUserAddresses: PropTypes.array,
   selectAddressFunc: PropTypes.func,
-  validateAddressFunc: PropTypes.func,
+  redirect: PropTypes.string,
 };
 
 function AddressComponent(props) {
   let [hideModal, setHideModal] = useState(false);
   let [deleteAddressId, setDeleteAddressId] = useState(0);
+  const history = useHistory();
   const addresses = props.savedUserAddresses;
   const alertDetails = {
     title: "Confirmation deletion",
@@ -35,6 +37,15 @@ function AddressComponent(props) {
     handleOption1: fnDeleteAddress,
     handleOption2: fnHideModal,
   };
+
+  function editAddress(address) {
+    history.push({
+      pathname: "/choose/location/" + props.redirect,
+      state: {
+        address: address,
+      },
+    });
+  }
   function getAddressClass(address) {
     if (props.selectedAddress) {
       if (props.selectedAddress.address_id == address.address_id) {
@@ -85,7 +96,13 @@ function AddressComponent(props) {
                 </div>
               </div>
               <div className="modify-container">
-                <div onClick={(e) => e.stopPropagation()} className="edit">
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    editAddress(address);
+                  }}
+                  className="edit"
+                >
                   EDIT
                 </div>
                 {canModifyAddress && (

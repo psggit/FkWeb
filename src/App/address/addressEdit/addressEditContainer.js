@@ -5,12 +5,13 @@ import {
   updateAddressFromGpsAction,
   resetAddressAction,
 } from "../duck/actions";
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     address: state.addressStore.selectedMapAddress,
     reqStatus: state.addressStore.apiCalls.createAddressStatus,
     getAddressStatus: state.addressStore.apiCalls.fetchAddressFromGPSStatus,
     mapCenterGps: state.chooseLocation.selectedGps,
+    redirect: props.match.params.redirect,
   };
 };
 

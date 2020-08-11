@@ -1,5 +1,5 @@
 const genreInitialState = {
-  pending: false,
+  status: "waiting",
   data: [],
   selectedGenre: null,
   error: "",
@@ -9,7 +9,7 @@ function genersReducer(state = genreInitialState, action) {
   let newState;
   switch (action.type) {
     case "PENDING":
-      newState = { ...state, pending: true };
+      newState = { ...state, status: "inProgress" };
       return newState;
     case "CLEAR_STATE":
       return genreInitialState;
@@ -23,14 +23,14 @@ function genersReducer(state = genreInitialState, action) {
           ...state,
           data: action.payload.genres,
           selectedGenre: selectedGenre,
-          pending: false,
+          status: "success",
         };
       } else {
-        newState = { ...state, data: action.payload.genres, pending: false };
+        newState = { ...state, data: action.payload.genres, status: "success" };
       }
       return newState;
     case "FAILURE":
-      newState = { ...state, error: action.payload, pending: false };
+      newState = { ...state, error: action.payload, status: "failed" };
       return newState;
     default:
       return state;
@@ -38,7 +38,7 @@ function genersReducer(state = genreInitialState, action) {
 }
 
 const brandInitialState = {
-  pending: false,
+  status: "waiting",
   data: [],
   error: "",
 };
@@ -47,23 +47,23 @@ function brandGenerReducer(state = brandInitialState, action) {
   let newState;
   switch (action.type) {
     case "BRANDPENDING":
-      newState = { ...state, pending: true };
+      newState = { ...state, status: "inProgress" };
       return newState;
     case "CLEAR_STATE":
       return brandInitialState;
     case "BRANDSUCCESS":
-      newState = { ...state, data: action.payload.brands, pending: false };
+      newState = { ...state, data: action.payload.brands, status: "success" };
       return newState;
     case "BRANDPAGINATIONSUCCESS":
       newState = {
         ...state,
         data: [...state.data, ...action.payload.brands],
-        pending: false,
+        status: "success",
       };
 
       return newState;
     case "BRANDFAILURE":
-      newState = { ...state, error: action.payload, pending: false };
+      newState = { ...state, error: action.payload, status: "failed" };
       return newState;
     default:
       return state;
