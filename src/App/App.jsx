@@ -2,7 +2,7 @@ import React from "react";
 import { hot } from "react-hot-loader/root";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { HomeContainer } from "./home";
-import { IframeContainer } from "./iframe";
+import { IframeComponent } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 import { UserBasicInfoContainer } from "./userBasicInfo";
 import { CartContainer } from "./cart";
@@ -21,6 +21,9 @@ import { ChooseLocationContainer } from "./address/chooseLocation";
 import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
 import { StateCityContainer } from "./stateCity";
 import { OrderInfoContainer } from "./order/info";
+import config from "../config";
+
+const DOMAIN = config.BASE_DOMAIN;
 
 function App() {
   return (
@@ -31,7 +34,10 @@ function App() {
           <Route path="/search" component={SearchContainer} />
           <Route path="/searchbystore" component={SearchByStoreContainer} />
           <Route path="/cart" component={CartContainer} />
-          <Route path="/address/create/:redirect" component={AddressEditContainer} />
+          <Route
+            path="/address/create/:redirect"
+            component={AddressEditContainer}
+          />
           <Route path="/myorders" component={MyOrdersContainer} />
           <Route
             path="/address/select/:redirect"
@@ -39,13 +45,16 @@ function App() {
           />
           <Route path="/home" component={HomeContainer} />
           <Route path="/statecity/select" component={StateCityContainer} />
-          <Route path="/choose/location/:redirect" component={ChooseLocationContainer} />
+          <Route
+            path="/choose/location/:redirect"
+            component={ChooseLocationContainer}
+          />
           <Route path="/storefront" component={StoreFrontContainer} />
           <Route
             path="/user-terms"
             component={() => (
-              <IframeContainer
-                url={"https://hipbar.com/user-terms"}
+              <IframeComponent
+                url={"https://" + DOMAIN + "/user-terms"}
                 title={`Terms And Condition`}
               />
             )}
@@ -53,8 +62,8 @@ function App() {
           <Route
             path="/privacy-policy"
             component={() => (
-              <IframeContainer
-                url={"https://hipbar.com/user-terms"}
+              <IframeComponent
+                url={"https://" + DOMAIN + "/privacy"}
                 title={`Privacy Policy`}
               />
             )}
@@ -62,8 +71,8 @@ function App() {
           <Route
             path="/grievance-policy"
             component={() => (
-              <IframeContainer
-                url={"https://hipbar.com/user-terms"}
+              <IframeComponent
+                url={"https://" + DOMAIN + "/grievance-policy"}
                 title={`Grievance Policy`}
               />
             )}

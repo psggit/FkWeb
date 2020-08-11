@@ -9,8 +9,7 @@ IframeComponent.propTypes = {
 };
 
 function IframeComponent(props) {
-  const { title } = props;
-  const { url } = props;
+  const { url, title } = props;
   return (
     <div className="iFrameWrap">
       <ToolbarComponent title={title} />
