@@ -29,6 +29,9 @@ function BrandComponent(props) {
           <div>
             <img className="thumbnail" src={brand.logo_low_res_image} alt="" />
             <span className="summary">{brand.brand_name}</span>
+            <span className="origin no-fold-text">
+              {brand.country_of_origin}
+            </span>
           </div>
           <span className="">
             <img src={active ? UpArrow : DownArrow} alt="upDown Arrow" />
