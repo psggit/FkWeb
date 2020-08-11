@@ -28,6 +28,9 @@ OrderInfoComponent.propTypes = {
 function OrderInfoComponent(props) {
   const history = useHistory();
   let order = props.order.order_details;
+  let productDetails = order.pdt_details.map((item) => {
+    return { ...item, reserved_price: item.display_price };
+  });
 
   function handleBack() {
     if (props.order == null) {
@@ -88,7 +91,7 @@ function OrderInfoComponent(props) {
           orderID={"#" + order.order_id}
         />
         <RenderArrivingComponent />
-        <OrderDrinksComponent items={order.pdt_details} />
+        <OrderDrinksComponent items={productDetails} />
         <DeliveryAddressComponent
           address={order.delivery_address}
           addressType={order.address_type}

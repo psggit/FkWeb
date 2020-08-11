@@ -29,6 +29,9 @@ const getSummaryProps = (orderDetails) => {
 function OrderPlacedComponent(props) {
   const history = useHistory();
   let order = props.payment.placeOrderDetails.order_details;
+  let productDetails = order.pdt_details.map((item) => {
+    return { ...item, reserved_price: item.display_price };
+  });
 
   useLayoutEffect(() => {
     props.clearCart();
@@ -73,7 +76,7 @@ function OrderPlacedComponent(props) {
           orderID={"#" + order.order_id}
         />
         <RenderArrivingComponent />
-        <OrderDrinksComponent items={order.pdt_details} />
+        <OrderDrinksComponent items={productDetails} />
         <DeliveryAddressComponent
           address={order.delivery_address}
           addressType={order.address_type}
