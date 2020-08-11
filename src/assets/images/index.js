@@ -31,3 +31,4 @@ export const crossIcon = require("./cross.svg");
 export const fssaiIcon = require("./fssai.svg");
 export const upIndicatorIcon = require("./upIndicator.svg");
 export const downIndicatorIcon = require("./downIndicator.svg");
+export const currentLocationIcon = require("./current_location.svg");

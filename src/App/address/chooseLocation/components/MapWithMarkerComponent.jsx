@@ -1,27 +1,39 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { GoogleMap, LoadScript, Autocomplete } from "@react-google-maps/api";
-import { mapMarkerIcon } from "../../../../assets/images";
+import { mapMarkerIcon, currentLocationIcon } from "../../../../assets/images";
 import { BottomNextComponent } from "../../../common/bottomNext";
+import { Alert } from "../../../common/alert";
 import { searchIcon } from "../../../../assets/images";
 import { useHistory } from "react-router-dom";
 import "../style.scss";
+
+import { LoadingComponent } from "../../../common/loading";
 
 const mapStyle = require("./styles.json");
 
 MapComponent.propTypes = {
   center: PropTypes.string,
   storeGpsFunc: PropTypes.func,
+  current: PropTypes.object,
 };
 
 function MapComponent(props) {
   const gps = props.center.split(",");
   const mapRef = useRef(null);
-  const [map, setMap] = React.useState(null);
   const [center, setCenter] = useState({
     lat: parseFloat(gps[0]),
     lng: parseFloat(gps[1]),
   });
+
+  useEffect(() => {
+    if (mapRef.current && props.current) {
+      mapRef.current.setCenter(props.current);
+      setCenter(props.current);
+      props.storeGpsFunc(props.current);
+    }
+  }, [props.current]);
+
   let [isCancelButton, setCancelButton] = useState(false);
 
   let [autocomplete, setAutoComplete] = useState(null);
@@ -115,6 +127,24 @@ MapWithMarkerComponent.propTypes = {
 };
 function MapWithMarkerComponent(props) {
   const history = useHistory();
+  const [current, setCurrent] = React.useState(null);
+  const [currentLoading, setCurrentLoading] = React.useState(false);
+  const [locationError, setLocationError] = React.useState(false);
+
+  const useCurrentLocation = () => {
+    setCurrentLoading(true);
+    navigator.geolocation.getCurrentPosition(
+      (loc) => {
+        setCurrent({ lat: loc.coords.latitude, lng: loc.coords.longitude });
+        setCurrentLoading(false);
+      },
+      () => {
+        setCurrentLoading(false);
+        setLocationError(true);
+      }
+    );
+  };
+
   function editAddress(address) {
     history.push({
       pathname: "/address/create/" + props.redirect,
@@ -125,8 +155,28 @@ function MapWithMarkerComponent(props) {
   }
   return (
     <>
-      <MapComponent center={props.center} storeGpsFunc={props.storeGpsFunc} />
+      {locationError && (
+        <Alert
+          handleOption={() => setLocationError(false)}
+          show={true}
+          content={
+            "Unable to fetch your current location, please check location permission"
+          }
+          option={"Ok"}
+        />
+      )}
+      {currentLoading && <LoadingComponent />}
+      <MapComponent
+        center={props.center}
+        current={current}
+        storeGpsFunc={props.storeGpsFunc}
+      />
       <img src={mapMarkerIcon} className="marker" />
+      <img
+        src={currentLocationIcon}
+        className="current-location"
+        onClick={useCurrentLocation}
+      />
       <BottomNextComponent
         onClickFunc={() => editAddress(props.editAddress)}
         title="Set Location"
