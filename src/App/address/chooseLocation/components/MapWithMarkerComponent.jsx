@@ -4,6 +4,7 @@ import { GoogleMap, LoadScript, Autocomplete } from "@react-google-maps/api";
 import { mapMarkerIcon } from "../../../../assets/images";
 import { BottomNextComponent } from "../../../common/bottomNext";
 import { searchIcon } from "../../../../assets/images";
+import { useHistory } from "react-router-dom";
 import "../style.scss";
 
 const mapStyle = require("./styles.json");
@@ -27,7 +28,6 @@ function MapComponent(props) {
   };
 
   const onLoadAuto = (autocomplete) => {
-    console.log("autocomplete ", autocomplete);
     setAutoComplete(autocomplete);
   };
 
@@ -46,7 +46,6 @@ function MapComponent(props) {
 
   const onUnmount = () => {
     mapRef.current = null;
-    console.log("[onUnmounting]");
     return null;
   };
 
@@ -109,14 +108,26 @@ function MapComponent(props) {
 
 MapWithMarkerComponent.propTypes = {
   center: PropTypes.string,
+  redirect: PropTypes.string,
   storeGpsFunc: PropTypes.func,
+  editAddress: PropTypes.object,
 }
 function MapWithMarkerComponent(props) {
+
+  const history = useHistory();
+  function editAddress(address) {
+    history.push({
+      pathname: "/address/create/" + props.redirect,
+      state: {
+        editAddress: address,
+      },
+    });
+  }
   return (
     <>
       <MapComponent center={props.center} storeGpsFunc={props.storeGpsFunc} />
       <img src={mapMarkerIcon} className="marker" />
-      <BottomNextComponent routePath="/address/create" title="Set Location" />
+      <BottomNextComponent onClickFunc={() => editAddress(props.editAddress)} title="Set Location" />
     </>
   );
 }

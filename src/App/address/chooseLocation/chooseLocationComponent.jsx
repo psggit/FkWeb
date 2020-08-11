@@ -10,11 +10,13 @@ ChooseLocationComponent.propTypes = {
   autoCompletePlaces: PropTypes.array,
   placesInfo: PropTypes.object,
   address: PropTypes.object,
+  editAddress: PropTypes.object,
   mapCenterGps: PropTypes.object,
   selectedCity: PropTypes.object,
   autoComplete: PropTypes.func,
   storeGpsFunc: PropTypes.func,
   getPlacesDetails: PropTypes.func,
+  redirect: PropTypes.string,
 };
 
 AutoCompletePlacesComponent.propTypes = {
@@ -37,16 +39,24 @@ function AutoCompletePlacesComponent(props) {
 }
 
 function ChooseLocationComponent(props) {
+  var center, title;
   useEffect(() => {
     window.addEventListener("focusout", () => {
       //SetCancelBtn(false);
     });
   });
+  if (props.editAddress === null) {
+    center = props.selectedCity.gps;
+    title = "Add New Address";
+  } else {
+    center = props.editAddress.gps;
+    title = "Edit Address";
+  }
   const [searchMode, setSearchMode] = useState(false);
   return (
     <>
       <div>
-        <ToolbarComponent helpVisibility={false} title="Add New Address" />
+        <ToolbarComponent helpVisibility={false} title={title} />
 
         <div>
           <div className={(searchMode ? "" : "hide ") + "page-container"}>
@@ -56,7 +66,9 @@ function ChooseLocationComponent(props) {
           </div>
           <div className={searchMode ? "hide" : ""}>
             <MapWithMarkerComponent
-              center={props.selectedCity.gps}
+              redirect={props.redirect}
+              editAddress={props.editAddress}
+              center={center}
               storeGpsFunc={props.storeGpsFunc}
             />
           </div>

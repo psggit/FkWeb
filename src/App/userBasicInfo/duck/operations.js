@@ -1,6 +1,7 @@
 import {
   birthYearEntered,
   changeGenderAction,
+  kycUpdate,
   showCheckboxAction,
   checkCheckboxAction,
   selectIDTypeAction,
@@ -72,9 +73,9 @@ const FinaliseIDProofValueOperation = (selectedDocument) => {
   };
 };
 
-const onSuccess = () => {
-  return () => {
-    history.pushState("/choose/location");
+const onSuccess = (dispatch) => {
+  return (dispatch) => {
+    dispatch(kycUpdate())
   };
 };
 
@@ -109,7 +110,7 @@ const UpdateKYCOperation = (value) => {
     updateBasicKYCAPI(
       reqBody,
       processResponse(dispatch),
-      onSuccess(),
+      onSuccess(dispatch),
       onError(dispatch)
     );
   };

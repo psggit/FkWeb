@@ -6,6 +6,7 @@ import {
   changeGenderAction,
   selectIDTypeAction,
   finaliseIDTypeAction,
+  kycUpdate,
   changeDocumentValueAction,
   showCheckboxAction,
   checkCheckboxAction,
@@ -60,6 +61,10 @@ const userInfoCreateReducer = createReducer(initialState, {
   [birthYearEntered]: (state, action) => ({
     ...state,
     birthYear: action.payload,
+  }),
+  [kycUpdate]: (state) => ({
+    ...state,
+    collectUserDetails: false,
   }),
   [changeGenderAction]: (state, action) => ({
     ...state,

@@ -76,7 +76,7 @@ function RetailerList(props) {
 
   return (
     <div className="retailer_list_wrap">
-      {retailerFetchStatus === "inProgress" && (
+      {(retailerFetchStatus === "inProgress" && retailerFetchStatus === "waiting") && (
         <div className="flex hcenter vcenter loading">
           {" "}
           <div className="loader"></div>
