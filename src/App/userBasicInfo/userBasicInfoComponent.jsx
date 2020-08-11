@@ -282,6 +282,7 @@ UserBasicInfoComponent.propTypes = {
   loginSuccess: PropTypes.bool,
   collectUserDetails: PropTypes.bool,
   login: PropTypes.func,
+  selectedAddress: PropTypes.object,
 };
 
 function UserBasicInfoComponent(props) {
@@ -305,6 +306,8 @@ function UserBasicInfoComponent(props) {
   } else if (loginSuccess) {
     if (collectUserDetails) {
       return <CollectInfoComponent {...props} />;
+    } else if (props.selectedAddress !== null) {
+      return <Redirect to="/home" />;
     } else {
       return <Redirect to="/address/select/sf" />;
     }
