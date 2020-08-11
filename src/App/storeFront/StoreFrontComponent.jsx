@@ -7,9 +7,8 @@ import {
 } from "../common/bottomNext";
 import SearchLayout from "../common/layout/SearchLayout";
 import { BrandContainer } from "../common/brand";
-import fssaiImg from "../../assets/images/fssai.png";
 import { LoadingComponent } from "../common/loading";
-import searchIcon from "../../assets/images/search.svg";
+import { searchIcon, fssaiIcon } from "../../assets/images";
 import { useHistory } from "react-router-dom";
 import { AlertWithOptions } from "../common/alert";
 
@@ -108,8 +107,14 @@ function StoreFrontComponent(props) {
             Load more...
           </div>
         )}
-        <div className="fssai-img">
-          <img src={fssaiImg} alt="fssai" />
+        <div className="fssai-container">
+          <img src={fssaiIcon} alt="fssai" className="fssai-img" />
+          <div className="fssai-license-container">
+            <div className="fssai-license">License No:</div>
+            <div className="fssai-license-no">
+              {props.retailer.fssai_no ? props.retailer.fssai_no : " -"}
+            </div>
+          </div>
         </div>
       </>
     );

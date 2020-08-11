@@ -1,21 +1,12 @@
 import { connect } from "react-redux";
 import { OrderInfoComponent } from "./orderInfoComponent";
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return {
-    order: props.location.state.order,
+    order: state.home.currentOrder.order,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getOrderDetailsFunc: (value) => dispatch(value),
-  };
-};
-
-const OrderInfoContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OrderInfoComponent);
+const OrderInfoContainer = connect(mapStateToProps)(OrderInfoComponent);
 
 export { OrderInfoContainer };

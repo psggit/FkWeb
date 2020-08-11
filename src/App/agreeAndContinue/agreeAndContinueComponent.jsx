@@ -55,6 +55,7 @@ function TcComponent(props) {
 
 AgreeAndContinueComponent.propTypes = {
   showTC: PropTypes.bool,
+  selectedAddress: PropTypes.object,
 };
 
 function AgreeAndContinueComponent(props) {
@@ -62,6 +63,8 @@ function AgreeAndContinueComponent(props) {
 
   if (showTC) {
     return <TcComponent {...props} />;
+  } else if (props.selectedAddress !== null) {
+    return <Redirect to="/user/login" />;
   }
   return <Redirect to="/statecity/select" />;
 }

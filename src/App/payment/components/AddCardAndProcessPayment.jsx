@@ -6,18 +6,29 @@ import { ButtonComponent } from "../../common/bottomNext/BottomNextComponent";
 NewCardInput.propTypes = {
   title: PropTypes.string, // Text about the input field
   className: PropTypes.string,
+  errorMessage: PropTypes.string,
+  hideErrorMessage: PropTypes.bool,
 };
 
 function NewCardInput(props) {
   return (
-    <>
-      <div className="input-component-label new-card-margin">{props.title}</div>
+    <div className="edit-text-container">
+      <div className="input-component-label">{props.title}</div>
       <div
         className={
           props.className + " inputComponentField input_field_100 input"
         }
       ></div>
-    </>
+      <div
+        className={
+          props.hideErrorMessage
+            ? "hide-content error-message"
+            : "show-content error-message"
+        }
+      >
+        {props.errorMessage}
+      </div>
+    </div>
   );
 }
 
@@ -38,7 +49,6 @@ function AddCardAndProcessPayment(props) {
   const configureJuspay = () => {
     let jp = window.Juspay;
     juspay_form = props.jpNewCardConf(jp);
-    console.log(juspay_form);
   };
 
   useEffect(() => {
@@ -74,17 +84,53 @@ function AddCardAndProcessPayment(props) {
             className="order_id"
             value={paymentDetails.order_id}
           />
-          <NewCardInput title="CARD NUMBER" className="card_number_div" />
-          <NewCardInput title="NAME ON CARD" className="name_on_card_div" />
+          <div className="new-card-margin" />
           <NewCardInput
-            title="EXPIRY MONTH (MM)"
-            className="card_exp_month_div"
+            title="CARD NUMBER"
+            className="card_number_div"
+            errorMessage={
+              props.payment.newCardNumberValid
+                ? ""
+                : "Please enter a valid card number"
+            }
           />
           <NewCardInput
-            title="EXPIRY YEAR (YY)"
-            className="card_exp_year_div"
+            title="NAME ON CARD"
+            className="name_on_card_div"
+            errorMessage={
+              props.payment.newCardNameValid ? "" : "Please enter a valid name"
+            }
           />
-          <NewCardInput title="CVV" className="security_code_div" />
+          <div className="new-card-expiry-container">
+            <div className="new-card-expiry">
+              <div className="new-card-month">
+                <NewCardInput
+                  title="EXPIRY MONTH (MM)"
+                  className="card_exp_month_div"
+                  hideErrorMessage={true}
+                />
+              </div>
+              <div className="new-card-year">
+                <NewCardInput
+                  title="EXPIRY YEAR (YY)"
+                  className="card_exp_year_div"
+                  hideErrorMessage={true}
+                />
+              </div>
+            </div>
+            <div className="error-message">
+              {props.payment.newCardExpiryValid
+                ? ""
+                : "Please enter a valid expiry month and year"}
+            </div>
+          </div>
+          <NewCardInput
+            title="CVV"
+            className="security_code_div"
+            errorMessage={
+              props.payment.newCardCvvValid ? "" : "Please enter a valid cvv"
+            }
+          />
           <input type="hidden" className="payment_method_type" value="CARD" />
           <input type="hidden" className="redirect" value="true" />
           <div className="save-card-container">

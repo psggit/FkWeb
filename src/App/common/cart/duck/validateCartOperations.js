@@ -43,7 +43,6 @@ const onSuccess = (dispatch) => {
 
 const onError = (dispatch) => {
   return (err) => {
-    console.log(err);
     dispatch(validationFailure(err));
   };
 };

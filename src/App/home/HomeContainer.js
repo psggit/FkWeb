@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { HomeComponent } from "./HomeComponent";
-import { GetCurrentOrdersOperation } from "./duck";
+import { GetCurrentOrdersOperation, getCurrentOrderInProgress } from "./duck";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,7 +15,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCurrentOrdersFunc: (value) => dispatch(GetCurrentOrdersOperation(value)),
+    getCurrentOrdersFunc: () => dispatch(GetCurrentOrdersOperation()),
+    currentOrderInProgress: () => dispatch(getCurrentOrderInProgress()),
   };
 };
 

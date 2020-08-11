@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 
 HomeComponent.propTypes = {
+  currentOrderInProgress: PropTypes.func,
   getCurrentOrderInProgress: PropTypes.bool,
   getCurrentOrderFailed: PropTypes.bool,
   getCurrentOrderSuccess: PropTypes.bool,
@@ -21,16 +22,29 @@ function HomeComponent(props) {
   const history = useHistory();
 
   useLayoutEffect(() => {
-    props.getCurrentOrdersFunc();
+    const interval = 60000;
+    let trigger = !(
+      props.getCurrentOrderInProgress ||
+      props.getCurrentOrderSuccess ||
+      props.getCurrentOrderSuccess
+    );
+    if (trigger) {
+      props.currentOrderInProgress();
+      props.getCurrentOrdersFunc();
+    }
+    let iid = setInterval(() => {
+      if (trigger) {
+        props.currentOrderInProgress();
+        props.getCurrentOrdersFunc();
+      }
+    }, interval);
+    return () => {
+      clearInterval(iid);
+    };
   }, []);
 
   function showOrderInfo() {
-    history.push({
-      pathname: "/order/info",
-      state: {
-        currentOrder: props.currentOrder,
-      },
-    });
+    history.push("/order/info");
   }
 
   function showChooseAddress() {
