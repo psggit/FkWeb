@@ -67,7 +67,7 @@ export const jpNewCardConf = (JusPay) => {
         },
       },
       auto_tab_enabled: true,
-      auto_tab_from_card_number: "card_exp_month",
+      auto_tab_from_card_number: "name_on_card",
       styles: {
         input: {},
         ".card_number": {
