@@ -140,6 +140,7 @@ function CartComponent(props) {
   }
 
   if (props.validationFailure) {
+    console.log(props);
     return <RetryValidationComponent {...props} />;
   }
 
