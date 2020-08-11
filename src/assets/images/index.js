@@ -17,6 +17,7 @@ export const myOrdersIcon = require("./myorders.svg");
 export const myOrdersActiveIcon = require("./myorders-active.svg");
 export const newCardIcon = require("./new_cards.svg");
 export const nextIcon = require("./next.svg");
+export const orangeNextIcon = require("./orange_next.svg");
 export const rightArrowIcon = require("./right_arrow.svg");
 export const searchIcon = require("./search.svg");
 export const searchActiveIcon = require("./search-active.svg");
