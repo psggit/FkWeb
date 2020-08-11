@@ -63,10 +63,21 @@ declare type Sku = {
   clearCart: boolean,
 };
 
-const getDefaultState = (): State => {
+const getCartFromStore = () => {
+  try {
+    let cart = localStorage.getItem("cart");
+    cart = JSON.parse(cart);
+    return { retailer: cart.retailer, products: cart.products };
+  } catch {
+    return { retailer: {}, products: {} };
+  }
+};
+
+const initialState = (): State => {
+  let { retailer, products } = getCartFromStore();
   return {
-    retailer: {},
-    products: {},
+    retailer: retailer,
+    products: products,
     retailerDiffers: false,
     validationFailure: false,
     validationInProgress: false,
@@ -77,8 +88,6 @@ const getDefaultState = (): State => {
     pendingSku: {},
   };
 };
-
-const initialState = getDefaultState;
 
 let setRetailer = (state: State, sku: Sku): State => {
   state["retailer"] = {
