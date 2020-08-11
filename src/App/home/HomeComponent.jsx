@@ -22,22 +22,25 @@ function HomeComponent(props) {
   const history = useHistory();
 
   useLayoutEffect(() => {
+    const interval = 60000;
     let trigger = !(
       props.getCurrentOrderInProgress ||
       props.getCurrentOrderSuccess ||
       props.getCurrentOrderSuccess
     );
-    const interval = 60000;
     if (trigger) {
       props.currentOrderInProgress();
       props.getCurrentOrdersFunc();
     }
-    setInterval(() => {
+    let iid = setInterval(() => {
       if (trigger) {
         props.currentOrderInProgress();
         props.getCurrentOrdersFunc();
       }
     }, interval);
+    return () => {
+      clearInterval(iid);
+    };
   }, []);
 
   function showOrderInfo() {
