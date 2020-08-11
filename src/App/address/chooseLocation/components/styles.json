@@ -59,6 +59,48 @@
     ]
   },
   {
+    "featureType": "landscape.man_made",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#aaa"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.man_made",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "visibility": "on"
+      },
+      {
+        "weight": 1.5
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.man_made",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#585858"
+      },
+      {
+        "saturation": -5
+      },
+      {
+        "lightness": -20
+      },
+      {
+        "visibility": "on"
+      },
+      {
+        "weight": 7.5
+      }
+    ]
+  },
+  {
     "featureType": "poi",
     "elementType": "labels.text.fill",
     "stylers": [

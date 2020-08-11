@@ -33,6 +33,7 @@ CartItemComponent.protoTypes = {
 
 function CartItemComponent({ product, addItem, removeItem, retailer }) {
   let sku = getSkuFromProduct(product, retailer);
+  let price =  product.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   return (
     <div className="cart-item">
       <img src={product.image} className="cart-image" />
@@ -40,7 +41,7 @@ function CartItemComponent({ product, addItem, removeItem, retailer }) {
         <div className="cart-brand-name">{product.brandName}</div>
         <div className="sub-item">
           <div className="cart-volume">
-            {product.volume}ml | Rs {product.price}
+            {product.volume}ml | Rs {price}
           </div>
           <div className="cart-counter">
             <div className="symbol" onClick={() => removeItem(sku)}>
