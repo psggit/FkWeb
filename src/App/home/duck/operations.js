@@ -1,9 +1,5 @@
 import { getCurrentOrderAPI } from "../../../utils";
-import {
-  getCurrentOrderInProgress,
-  getCurrentOrderSuccess,
-  getCurrentOrderFailed,
-} from "./actions";
+import { getCurrentOrderSuccess, getCurrentOrderFailed } from "./actions";
 
 const onSuccess = (dispatch) => {
   return (data) => {
@@ -14,7 +10,6 @@ const onSuccess = (dispatch) => {
 const onError = (dispatch) => {
   return (err) => {
     dispatch(getCurrentOrderFailed(err));
-    alert(err);
   };
 };
 
@@ -34,7 +29,6 @@ const processResponse = (dispatch) => {
 
 const GetCurrentOrdersOperation = () => {
   return (dispatch) => {
-    dispatch(getCurrentOrderInProgress());
     getCurrentOrderAPI(
       processResponse(dispatch),
       onSuccess(dispatch),
