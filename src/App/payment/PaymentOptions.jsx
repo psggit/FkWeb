@@ -67,7 +67,6 @@ function PaymentOptions(props) {
     if (props.payment.initialTrigger) {
       props.initialise(props);
     }
-    console.log(triggerCreatePayment);
     if (triggerCreatePayment) {
       props.createPayment(props);
     }

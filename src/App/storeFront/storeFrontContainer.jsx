@@ -9,7 +9,6 @@ import {
 import { clearCartAndAdd, dontClearCart } from "../common/cart";
 
 const mapStateToProps = (state, props) => {
-  console.log(state);
   const {
     storeFront: { generItems, brandItems },
     addressStore: { selectedAddress },
