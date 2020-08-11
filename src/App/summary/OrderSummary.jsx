@@ -61,7 +61,7 @@ function SummaryComponent(props) {
   return (
     <div>
       <ToolbarComponent helpVisibility={false} title="Order Summary" />
-      <div className="page-container summary-wrapper">
+      <div className="page-container">
         <OrderAddressComponent {...props} />
         <OrderTotalComponent marginTop={true} total={summary.display_total} />
         <CartTotalComponent cartTotal={summary.display_cart_total} />

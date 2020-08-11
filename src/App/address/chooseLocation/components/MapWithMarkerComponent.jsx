@@ -4,6 +4,7 @@ import { GoogleMap, LoadScript, Autocomplete } from "@react-google-maps/api";
 import { mapMarkerIcon } from "../../../../assets/images";
 import { BottomNextComponent } from "../../../common/bottomNext";
 import { searchIcon } from "../../../../assets/images";
+import { useHistory } from "react-router-dom";
 import "../style.scss";
 
 const mapStyle = require("./styles.json");
@@ -14,10 +15,13 @@ MapComponent.propTypes = {
 };
 
 function MapComponent(props) {
-  const gps = props.center.split(",")
+  const gps = props.center.split(",");
   const mapRef = useRef(null);
   const [map, setMap] = React.useState(null);
-  const [center, setCenter] = useState({ lat: parseFloat(gps[0]), lng: parseFloat(gps[1]) });
+  const [center, setCenter] = useState({
+    lat: parseFloat(gps[0]),
+    lng: parseFloat(gps[1]),
+  });
   let [isCancelButton, setCancelButton] = useState(false);
 
   let [autocomplete, setAutoComplete] = useState(null);
@@ -27,7 +31,6 @@ function MapComponent(props) {
   };
 
   const onLoadAuto = (autocomplete) => {
-    console.log("autocomplete ", autocomplete);
     setAutoComplete(autocomplete);
   };
 
@@ -39,14 +42,11 @@ function MapComponent(props) {
       };
       setCenter(newPos);
       props.storeGpsFunc(newPos);
-    } else {
-      console.log("Autocomplete is not loaded yet!");
     }
   };
 
   const onUnmount = () => {
     mapRef.current = null;
-    console.log("[onUnmounting]");
     return null;
   };
 
@@ -109,14 +109,28 @@ function MapComponent(props) {
 
 MapWithMarkerComponent.propTypes = {
   center: PropTypes.string,
+  redirect: PropTypes.string,
   storeGpsFunc: PropTypes.func,
-}
+  editAddress: PropTypes.object,
+};
 function MapWithMarkerComponent(props) {
+  const history = useHistory();
+  function editAddress(address) {
+    history.push({
+      pathname: "/address/create/" + props.redirect,
+      state: {
+        editAddress: address,
+      },
+    });
+  }
   return (
     <>
       <MapComponent center={props.center} storeGpsFunc={props.storeGpsFunc} />
       <img src={mapMarkerIcon} className="marker" />
-      <BottomNextComponent routePath="/address/create" title="Set Location" />
+      <BottomNextComponent
+        onClickFunc={() => editAddress(props.editAddress)}
+        title="Set Location"
+      />
     </>
   );
 }

@@ -6,7 +6,7 @@ import {
   storeGpsOperation,
 } from "./duck";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     isSearchMode: state.chooseLocation.isSearchMode,
     isCancelButton: state.chooseLocation.isCancelButton,
@@ -15,6 +15,8 @@ const mapStateToProps = (state) => {
     address: state.chooseLocation.selectedMapAddress,
     selectedCity: state.stateCity.selectedCity,
     mapCenterGps: state.chooseLocation.selectedGps,
+    redirect: props.match.params.redirect,
+    editAddress: props.location.state.address,
   };
 };
 

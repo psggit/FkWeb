@@ -1,6 +1,7 @@
 import {
   birthYearEntered,
   changeGenderAction,
+  kycUpdate,
   showCheckboxAction,
   checkCheckboxAction,
   selectIDTypeAction,
@@ -59,7 +60,6 @@ const ChangeDocumentValueOperation = (value) => {
 };
 
 const SelectIDTypeOperation = (value) => {
-  console.log(value);
   return (dispatch) => {
     dispatch(selectIDTypeAction(value));
   };
@@ -73,8 +73,8 @@ const FinaliseIDProofValueOperation = (selectedDocument) => {
 };
 
 const onSuccess = () => {
-  return () => {
-    history.pushState("/choose/location");
+  return (dispatch) => {
+    dispatch(kycUpdate());
   };
 };
 
@@ -109,7 +109,7 @@ const UpdateKYCOperation = (value) => {
     updateBasicKYCAPI(
       reqBody,
       processResponse(dispatch),
-      onSuccess(),
+      onSuccess(dispatch),
       onError(dispatch)
     );
   };

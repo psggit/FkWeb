@@ -29,7 +29,12 @@ function SelectAddressComponent(props) {
   const history = useHistory();
 
   function showAddAddress() {
-    history.push("/choose/location");
+    history.push({
+      pathname: "/choose/location/" + props.redirect,
+      state: {
+        address: null,
+      },
+    });
   }
 
   function onClickProcess() {

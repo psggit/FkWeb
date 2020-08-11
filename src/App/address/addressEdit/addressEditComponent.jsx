@@ -120,7 +120,8 @@ function AddressInputComponent(props) {
           landmark == "" ||
           landmark == null ||
           flatNumber == "" ||
-          flatNumber == null
+          flatNumber == null ||
+          (address_type != "home" && address_type.length < 3)
             ? true
             : false
         }
@@ -139,6 +140,7 @@ AddressEditComponent.propTypes = {
   getAddressStatus: PropTypes.string,
   getAddressFromGps: PropTypes.func,
   resetAddressFunc: PropTypes.func,
+  redirect: PropTypes.string,
 };
 
 function AddressEditComponent(props) {
@@ -150,12 +152,10 @@ function AddressEditComponent(props) {
   const reqStatus = props.reqStatus;
   const loading =
     props.reqStatus === "inProgress" || props.getAddressStatus === "inProgress";
-  console.log(props.reqStatus)
-  console.log(props.getAddressStatus)
   if (gpsSelected === false) {
     return <Redirect to="/choose/location" />;
   } else if (reqStatus === "success") {
-    return <Redirect to="/address/select/sf" />;
+    return <Redirect to={"/address/select/" + props.redirect} />;
   } else if (loading === true) {
     return <SplashLoadingComponent motion={true} text="Finding Address" />;
   } else {
