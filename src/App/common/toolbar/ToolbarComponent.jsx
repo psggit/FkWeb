@@ -48,7 +48,7 @@ function ToolbarComponent(props) {
             onClick={showHelp}
           />
         </div>
-        <div className="title">{title}</div>
+        <div className="title  no-fold-text">{title}</div>
         {children}
       </div>
     </div>

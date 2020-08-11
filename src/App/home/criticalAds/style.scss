@@ -1,103 +1,99 @@
 @import "../../../colors.scss";
 
+.ad-modal-content {
+  flex-direction: column !important;
+  box-sizing: content-box;
+  color: #fff;
+  background-color: transparent !important;
+  /*height: 479px;*/
+  overflow: hidden;
+  max-width: 90%;
+  margin: 0 auto;
 
-.ad-modal-content{
-    flex-direction: column !important;
+  img {
+    object-fit: fill;
+    height: min-content;
+    max-width: 100%;
+  }
+  .ad-card {
+    border-radius: 10px 10px 0;
+    margin-right: 16px;
+  }
+
+  .modal-body {
+    border-radius: 5px !important;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    transition: all 1s linear;
+  }
+
+  .section-bottom {
     box-sizing: content-box;
-    color: #fff;
-    background-color: transparent !important;
-    border-color: transparent !important;
-    /*height: 479px;*/
-    overflow: hidden;
-    max-width: 90%;
-    margin: 0 auto;
+    background-color: $border-color;
+    height: 180px;
+    padding: 1rem;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-
-    img{
-        object-fit: fill;
-        height: min-content;
-        max-width: 100%;
-    }
-    .ad-card{
-        border-radius: 10px 10px 0;
-        margin-right: 16px;
-    }
-
-    .modal-body{
-        border-radius: 5px !important;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        transition: all 1s linear;
-    }
-
-    .section-bottom{
-        box-sizing: content-box;
-        background-color: $border-color;
-        height: 180px;
-        padding: 1rem;
-        border-radius: 0 0 10px 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .carousel-inner{
-        border-radius: 10px;
-    }
-
+  .carousel-inner {
+    border-radius: 10px;
+  }
 }
 
-.ad_title{
-    color: $orange-color;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 24px;
-    text-align: center;
+.ad_title {
+  color: $orange-color;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 24px;
+  text-align: center;
 }
 
-.ad_description{
-    color: $primary-color;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 18px;
-    text-align: center;
+.ad_description {
+  color: $primary-color;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 18px;
+  text-align: center;
 }
 
-.ad_disclaimer{
-    color: $primary-color;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 14px;
-    text-align: center;
+.ad_disclaimer {
+  color: $primary-color;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
 }
-.carousel-indicators{
-    .indicator{
-        width: 20px;
-        height: 6px;
-        border-radius: 5px;
-        margin: 0 0.2em;
-        background-color: $primary-color;
-    }
+.carousel-indicators {
+  .indicator {
+    width: 20px;
+    height: 6px;
+    border-radius: 5px;
+    margin: 0 0.2em;
+    background-color: $primary-color;
+  }
 
-    .indicator.active{
-        background-color: $orange-color;
-    }
-}
-
-.closeButtonContainer{
-    text-align: center;
-    margin-top: 2em;
+  .indicator.active {
+    background-color: $orange-color;
+  }
 }
 
-button.closeButton{
-    background: transparent;
-    border: none;
+.closeButtonContainer {
+  text-align: center;
+  margin-top: 2em;
+}
+
+button.closeButton {
+  background: transparent;
+  border: none;
 }
