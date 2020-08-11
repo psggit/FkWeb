@@ -39,7 +39,10 @@ function OrderInfoComponent(props) {
 
   function RenderToolBar() {
     return (
-      <ToolbarComponent title={order.status_message} onClick={handleBack} />
+      <ToolbarComponent
+        title={props.order.status_message}
+        onClick={handleBack}
+      />
     );
   }
 

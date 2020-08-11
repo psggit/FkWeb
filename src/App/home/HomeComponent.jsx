@@ -22,10 +22,21 @@ function HomeComponent(props) {
   const history = useHistory();
 
   useLayoutEffect(() => {
+    let trigger = !(
+      props.getCurrentOrderInProgress ||
+      props.getCurrentOrderSuccess ||
+      props.getCurrentOrderSuccess
+    );
     const interval = 60000;
-    setInterval(() => {
+    if (trigger) {
       props.currentOrderInProgress();
       props.getCurrentOrdersFunc();
+    }
+    setInterval(() => {
+      if (trigger) {
+        props.currentOrderInProgress();
+        props.getCurrentOrdersFunc();
+      }
     }, interval);
   }, []);
 
