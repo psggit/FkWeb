@@ -40,7 +40,7 @@ function OrderPlacedComponent(props) {
   }
 
   function RenderBottomNext() {
-    return <BottomNextComponent routePath="/" title="Home" />;
+    return <BottomNextComponent routePath="/home" title="Home" />;
   }
 
   function RenderOrderSuccess() {

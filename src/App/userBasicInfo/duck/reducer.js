@@ -13,27 +13,29 @@ import {
 
 import { createReducer } from "@reduxjs/toolkit";
 
-const initialState = {
-  loginInProgress: false,
-  loginSuccess: false,
-  loginFailed: false,
-  collectUserDetails: false,
-  birthYear: "",
-  gender: "",
-  selectedDocument: {},
-  finalisedDocument: {},
-  selectedDocumentValue: "",
-  showDeclaration: false,
-  checkDeclaration: false,
-  consumerIDTypes: [
-    { idType: "Driving License", name: "dl" },
-    { idType: "Passport", name: "passport" },
-    { idType: "PAN Card", name: "pan" },
-    { idType: "Voter ID", name: "voterid" },
-  ],
+const initialState = () => {
+  return {
+    loginInProgress: false,
+    loginSuccess: false,
+    loginFailed: false,
+    collectUserDetails: false,
+    birthYear: "",
+    gender: "",
+    selectedDocument: {},
+    finalisedDocument: {},
+    selectedDocumentValue: "",
+    showDeclaration: false,
+    checkDeclaration: false,
+    consumerIDTypes: [
+      { idType: "Driving License", name: "dl" },
+      { idType: "Passport", name: "passport" },
+      { idType: "PAN Card", name: "pan" },
+      { idType: "Voter ID", name: "voterid" },
+    ],
+  };
 };
 
-const userInfoCreateReducer = createReducer(initialState, {
+const userInfoCreateReducer = createReducer(initialState(), {
   [loginInProgress]: (state) => ({
     ...state,
     loginInProgress: true,
@@ -45,6 +47,7 @@ const userInfoCreateReducer = createReducer(initialState, {
     loginInProgress: false,
     loginSuccess: true,
     loginFailed: false,
+    userID: action.payload.data.auth_user.user_id,
     collectUserDetails: !(
       action.payload.data.bz_kyc_exist &&
       action.payload.data.dob_exist &&

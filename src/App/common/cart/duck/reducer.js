@@ -67,7 +67,6 @@ const getDefaultState = (): State => {
   return {
     retailer: {},
     products: {},
-
     retailerDiffers: false,
     validationFailure: false,
     validationInProgress: false,

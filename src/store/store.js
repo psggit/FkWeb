@@ -17,9 +17,8 @@ import { orderDetailReducer } from "../App/order";
 import { stateCityReducer } from "../App/stateCity";
 import { summaryReducer } from "../App/summary";
 import { paymentReducer } from "../App/payment";
-import { resetStore } from "./resetStore";
 
-resetStore();
+import { localStorageManager } from "./localStorageManager";
 
 const store = configureStore({
   reducer: combineReducers({
@@ -40,7 +39,7 @@ const store = configureStore({
     payment: paymentReducer,
   }),
 
-  middleware: [thunk],
+  middleware: [thunk, localStorageManager],
 });
 
 export default store;
