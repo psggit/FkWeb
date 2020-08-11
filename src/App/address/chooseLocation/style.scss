@@ -42,7 +42,7 @@
   }
 }
 
-.pac-container{
+.pac-container {
   background-color: $bg;
   width: 100% !important;
   left: 0 !important;
@@ -53,7 +53,7 @@
   border-top: 1px solid $border-color !important;
 }
 
-.pac-item-query{
+.pac-item-query {
   color: $primary-color !important;
   display: block;
   width: 100%;
@@ -61,7 +61,7 @@
   margin-bottom: 5px;
 }
 
-.pac-icon{
+.pac-icon {
   background-image: url("../../../assets/images/location.svg") !important;
   float: left;
   width: 24px !important;
@@ -70,15 +70,15 @@
   margin-top: 0 !important;
 }
 
-.pac-icon-marker{
+.pac-icon-marker {
   background-position: initial !important;
 }
 
-.pac-matched{
+.pac-matched {
   font-weight: 500 !important;
 }
 
-.pac-item{
+.pac-item {
   border-top: none !important;
   border-bottom: 0.5px solid $border-color;
   font-size: 12px;
@@ -87,6 +87,15 @@
   margin: 10px 0;
 }
 
-.pac-logo:after{
+.pac-logo:after {
   background: none !important;
 }
+
+.current-location {
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  left: 88%;
+  top: 83%;
+}
+

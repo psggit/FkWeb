@@ -46,7 +46,7 @@ const initialState = () => {
   };
 };
 
-const stateCityReducer = createReducer(initialState, {
+const stateCityReducer = createReducer(initialState(), {
   [fetchStateInProgress]: (state) => ({
     ...state,
     fetchStateInProgress: true,

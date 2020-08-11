@@ -60,6 +60,7 @@ const loginHandler = (gt, dispatch) => {
 };
 
 const loginWithGrantToken = (dispatch) => {
+  console.log(fkPlatform.getModuleHelper().getPermissionsModule());
   return fkPlatform
     .getModuleHelper()
     .getPermissionsModule()
