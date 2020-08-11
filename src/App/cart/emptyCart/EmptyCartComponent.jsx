@@ -1,5 +1,5 @@
 import React from "react";
-import { emptyCartIcon } from "../../../assets/images";
+import { emptyCartIcon, orangeNextIcon } from "../../../assets/images";
 import { useHistory } from "react-router-dom";
 import "./style.scss";
 
@@ -22,9 +22,10 @@ function EmptyCartComponent() {
         onClick={() => {
           redirect();
         }}
-        className="search-drinks"
+        className="search-drinks-container"
       >
-        Search Drinks
+        <div className="search-drinks">Search Drinks</div>
+        <img className="arrow" src={orangeNextIcon} />
       </div>
     </div>
   );

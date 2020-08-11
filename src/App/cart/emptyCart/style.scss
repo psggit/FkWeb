@@ -13,7 +13,7 @@
     margin-top: 32px;
   }
   .empty-title {
-    font-family: Montserrat-ExtraLight;
+    font-family: MontserratExtraLight;
     font-size: 40px;
     line-height: 40px;
     text-align: center;
@@ -23,7 +23,7 @@
     margin-top: 28px;
   }
   .favorite-drinks {
-    font-family: Montserrat-Regular;
+    font-family: MontserratRegular;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -33,9 +33,21 @@
     text-align: center;
   }
 
-  .search-drinks {
+  .search-drinks-container {
+    display: flex;
+    flex-direction: row;
     margin-top: 16px;
-    font-family: Montserrat-Medium;
-    color: $orange-color;
+
+    .search-drinks {
+      font-family: MontserratMedium;
+      color: $orange-color;
+    }
+
+    .arrow {
+      width: 12px;
+      height: 12px;
+      margin-top: 6px;
+      margin-left: 4px;
+    }
   }
 }

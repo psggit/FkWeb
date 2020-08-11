@@ -27,10 +27,10 @@ function StateCityComponent(props) {
   const [mode, setMode] = useState("state");
   const [selectedState, setSelectedState] = useState(null);
 
-  function showAddressSelection(city) {
+  function showAddressSelection() {
     history.push({
       pathname: "/user/login",
-      state: { gps: city.gps },
+      //state: { gps: city.gps },
     });
   }
 
@@ -88,7 +88,7 @@ function StateCityComponent(props) {
     }
   }
 
-  console.log(props.fetchCityFailed)
+  console.log(props.fetchCityFailed);
   return (
     <>
       <ToolbarComponent onClick={goBack} backVisibility={mode != "state"} />

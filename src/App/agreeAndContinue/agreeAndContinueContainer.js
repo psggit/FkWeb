@@ -5,6 +5,7 @@ import { agreeTandC, checkTC } from "./duck";
 const mapStateToProps = (state) => {
   return {
     showTC: state.tcStore.showTC,
+    selectedAddress: state.addressStore.selectedAddress,
   };
 };
 

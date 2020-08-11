@@ -10,3 +10,4 @@ export {
 } from "./operations";
 
 export { login } from "./loginOperations";
+export { userLocalStorageHandler } from "./userLocalStorageHandler";

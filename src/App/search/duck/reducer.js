@@ -7,13 +7,13 @@ const initialState = {
 function searchDrinkReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
-    case "PENDING":
+    case "searchDrinksPENDING":
       newState = { ...state, pending: true };
       return newState;
-    case "SUCCESS":
+    case "searchDrinksSUCCESS":
       newState = { ...state, data: action.payload.retailers, pending: false };
       return newState;
-    case "FAILURE":
+    case "searchDrinksFAILURE":
       newState = { ...state, error: action.payload, pending: false };
       return newState;
     default:

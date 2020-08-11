@@ -7,12 +7,13 @@ const mapStateToProps = (state) => {
     ...state,
     items: state.home.criticalads.items,
     isViewed: state.home.criticalads.isViewed,
+    address: state.addressStore.selectedAddress,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchHomeCriticalAds: () => dispatch(fetchHomeCriticalAds()),
+    fetchHomeCriticalAds: (cityID) => dispatch(fetchHomeCriticalAds(cityID)),
     setPopupVisibility: () => dispatch(setPopupVisibility()),
   };
 };

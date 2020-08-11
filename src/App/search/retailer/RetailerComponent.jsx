@@ -24,15 +24,16 @@ function RetailerComponent(props) {
   }
   if (query.length <= 2) {
     return (
-      <div className="initial-text">
+      <div className="initial-text search-initial-text-padding">
         <div>What are you looking for today?</div>
         <div className="mid-light-text">We'tell you where it's available !</div>
       </div>
     );
   }
+  console.log(data)
   return (
     <>
-      {data.length ? (
+      {data ? (
         <div className="accordion-container">
           {data.map((retailer, index) => (
             <React.Fragment key={index + "s"}>
@@ -62,6 +63,7 @@ function RetailerComponent(props) {
 
 RetailerComponent.propTypes = {
   query: PropTypes.string,
+  address: PropTypes.object,
   getSearchDrinks: PropTypes.func,
   data: PropTypes.array,
   pending: PropTypes.bool,

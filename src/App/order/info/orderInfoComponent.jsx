@@ -12,27 +12,22 @@ import {
   ArrivingComponent,
   OrderSummaryComponent,
   OrderSuccessComponent,
-  TellAFriendComponent,
 } from "../components";
 
+const getSummaryProps = (orderDetails) => {
+  return {
+    ...orderDetails,
+    display_total_paid: orderDetails.display_order_total,
+  };
+};
+
 OrderInfoComponent.propTypes = {
-  getOrderDetailsFunc: PropTypes.func,
-  fetchOrderDetailInProgress: PropTypes.bool,
-  fetchOrderDetailSuccess: PropTypes.bool,
-  fetchOrderDetailFailed: PropTypes.bool,
   order: PropTypes.object,
-  orderDetail: PropTypes.object,
 };
 
 function OrderInfoComponent(props) {
   const history = useHistory();
-
-  useLayoutEffect(() => {
-    props.getOrderDetailsFunc({
-      orderType: props.order.type,
-      orderID: props.order.order_id,
-    });
-  }, []);
+  let order = props.order.order_details;
 
   function handleBack() {
     if (props.order == null) {
@@ -45,7 +40,7 @@ function OrderInfoComponent(props) {
   function RenderToolBar() {
     return (
       <ToolbarComponent
-        title={props.order.detail_display_name}
+        title={props.order.status_message}
         onClick={handleBack}
       />
     );
@@ -61,7 +56,10 @@ function OrderInfoComponent(props) {
   function RenderOrderSuccess() {
     if (props.order == null) {
       return (
-        <OrderSuccessComponent orderPrice="Rs 50000" retailerName="Kloud Bar" />
+        <OrderSuccessComponent
+          orderPrice={order.display_order_total}
+          retailerName={order.retailer_name}
+        />
       );
     }
     return <div />;
@@ -69,47 +67,33 @@ function OrderInfoComponent(props) {
 
   function RenderArrivingComponent() {
     if (props.order == null) {
-      return <ArrivingComponent arrivalTime="Arrving Today" otp="864753" />;
+      return (
+        <ArrivingComponent
+          arrivalTime={order.delivery_status}
+          otp={order.otp}
+        />
+      );
     }
     return <div />;
   }
 
-  function RenderTellAFriendComponent() {
-    if (props.order == null) {
-      return <TellAFriendComponent />;
-    }
-    return <div />;
-  }
-
+  const summayProps = getSummaryProps(order);
   return (
     <>
       <RenderToolBar />
       <div className="page-container">
         <RenderOrderSuccess />
         <OrderPlacedHeaderComponent
-          purchasedOn={props.order.created_at}
-          orderID={"#" + props.order.order_id}
+          purchasedOn={order.transacted_on}
+          orderID={"#" + order.order_id}
         />
         <RenderArrivingComponent />
-        <RenderTellAFriendComponent />
-        {props.orderDetail ? (
-          <OrderDrinksComponent items={props.orderDetail.items} />
-        ) : (
-          <div />
-        )}
-        {props.orderDetail ? (
-          <DeliveryAddressComponent
-            address={props.orderDetail.address.address}
-            addressType={props.orderDetail.address.type}
-          />
-        ) : (
-          <div />
-        )}
-        {props.orderDetail ? (
-          <OrderSummaryComponent orderDetail={props.orderDetail.order_detail} />
-        ) : (
-          <div />
-        )}
+        <OrderDrinksComponent items={order.pdt_details} />
+        <DeliveryAddressComponent
+          address={order.delivery_address}
+          addressType={order.address_type}
+        />
+        <OrderSummaryComponent orderDetail={summayProps} />
       </div>
       <RenderBottomNext />
     </>

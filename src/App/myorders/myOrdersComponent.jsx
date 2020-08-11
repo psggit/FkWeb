@@ -51,7 +51,7 @@ function MyOrdersComponent(props) {
   return (
     <>
       <HeaderComponent title="My Orders" />
-      <div className="page-container myorders-container">
+      <div className="page-container">
         <div onClick={() => launchHelp()} className="need-help-container ">
           <div className="help-content-container">
             <div className="help-title">Help</div>

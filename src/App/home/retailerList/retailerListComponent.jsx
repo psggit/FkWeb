@@ -33,8 +33,12 @@ function RetailerTemplate(retailers, history) {
         }}
       >
         <div className="retailer_link">
-          <div className="retailer_name">{retailer.retailer_name}</div>
-          <div className="retailer_info">{retailer.store_info_msg}</div>
+          <div className="retailer_name no-fold-text">
+            {retailer.retailer_name}
+          </div>
+          <div className="retailer_info no-fold-text">
+            {retailer.store_info_msg}
+          </div>
         </div>
         <img src={rightArrowIcon} className="retailer_item_image" />
       </div>
@@ -56,11 +60,11 @@ function NoRetailerTemplate(text, history) {
 }
 
 function FetchFailedTemplate() {
-  return <div>Failed to Fetch...</div>
+  return <div>Failed to Fetch...</div>;
 }
 
 function ServiceUnavailableTemplate() {
-  return <div>Service Unavailable in your city...</div>
+  return <div>Service Unavailable in your city...</div>;
 }
 
 function RetailerList(props) {
@@ -82,9 +86,9 @@ function RetailerList(props) {
           <div className="loader"></div>
         </div>
       )}
-      {retailers.length !== 0 && retailerFetchStatus === "success" &&
-        RetailerTemplate(retailers, history)
-      }
+      {retailers.length !== 0 &&
+        retailerFetchStatus === "success" &&
+        RetailerTemplate(retailers, history)}
       {retailers.length === 0 &&
         retailerFetchStatus === "success" &&
         NoRetailerTemplate(message, history)}

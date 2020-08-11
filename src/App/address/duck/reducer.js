@@ -12,7 +12,6 @@ import {
   deleteAddressSuccessAction,
   resetAddressAction,
 } from "./actions";
-
 import { createReducer } from "@reduxjs/toolkit";
 // Default Api Call status
 const apiCallDefaultStatus = {
@@ -33,15 +32,39 @@ const defaultAddressInputPageState = {
   address_type: "Home",
 };
 
-const initialState = {
-  selectedMapAddress: defaultAddressInputPageState,
-  apiCalls: apiCallDefaultStatus,
-  createAddressStatus: "waiting",
-  selectedAddress: null,
-  savedUserAddresses: [],
+export const currentStateVersion = 1;
+
+const getAddressFromStorage = () => {
+  let addr = localStorage.getItem("selectedAddress");
+  if (addr !== null) {
+    addr = JSON.parse(addr);
+  }
+  let version = localStorage.getItem("selectedAddressVersion");
+  return { version, addr };
 };
 
-const addressListReducer = createReducer(initialState, {
+const initialState = () => {
+  let address = null;
+  let { version, addr } = getAddressFromStorage();
+  if (version === currentStateVersion.toString()) {
+    address = addr;
+  }
+  return {
+    //version should be updated when there are breaking changes to the structure
+    //of the state(ex: when removing an existing field or adding a new mandatory
+    //field). This is to prevent breaking application when using localStore
+    //to persist the data.
+    version: currentStateVersion,
+    selectedMapAddress: defaultAddressInputPageState,
+    apiCalls: apiCallDefaultStatus,
+    createAddressStatus: "waiting",
+    selectedAddress: address,
+    savedUserAddresses: [],
+    dontDeleteCurrentAddress: false,
+  };
+};
+
+const addressListReducer = createReducer(initialState(), {
   [selectAddressAction]: (state, action) => ({
     ...state,
     selectedAddress: action.payload,
@@ -57,6 +80,7 @@ const addressListReducer = createReducer(initialState, {
       validateAddressStatus: action.payload,
     },
   }),
+
   [updateAddressListAction]: (state, action) => ({
     ...state,
     savedUserAddresses: action.payload,
@@ -81,7 +105,6 @@ const addressListReducer = createReducer(initialState, {
   }),
   [deleteAddressSuccessAction]: (state) => ({
     ...state,
-    selectedAddress: null,
     apiCalls: { ...apiCallDefaultStatus, deleteAddressStatus: "success" },
   }),
   [deleteAddressInProgressAction]: (state) => ({

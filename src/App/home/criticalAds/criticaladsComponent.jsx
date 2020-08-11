@@ -9,6 +9,7 @@ CriticaladsComponent.propTypes = {
   fetchHomeCriticalAds: PropTypes.any,
   setPopupVisibility: PropTypes.any,
   isViewed: PropTypes.any,
+  address: PropTypes.object,
 };
 
 function CriticaladsComponent(props) {
@@ -24,16 +25,20 @@ function CriticaladsComponent(props) {
   };
 
   useEffect(() => {
-    props.fetchHomeCriticalAds();
+    if (props.address && props.items.length === 0) {
+      props.fetchHomeCriticalAds({
+        cityID: props.address.city.id,
+      });
+    }
   }, []);
 
-  if (!isVisible) {
+  if (!isVisible || props.items.length === 0) {
     return null;
   }
 
   return (
     <div className="options-overlay">
-      <div className="modal-content">
+      <div className="ad-modal-content">
         <div className="modal-body">
           <Carousel
             activeIndex={startIndex}

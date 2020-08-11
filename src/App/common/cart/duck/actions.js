@@ -25,3 +25,6 @@ export const clearCartAndAdd = createAction("clearCartAndAdd");
 export const dontClearCart = createAction("dontClearCart");
 
 export const resetOnUnmount = createAction("resetOnUnmount");
+
+//useful when an order is palced successfully
+export const clearCart = createAction("cartClear");

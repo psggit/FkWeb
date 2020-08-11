@@ -2,32 +2,32 @@
 
 .order-address-container {
   margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  height: 40px;
+  height: 38px;
   width: 100%;
 
   .address-logo-container {
     display: flex;
     flex-direction: row;
-    width: 40px;
     height: 100%;
+    position: absolute;
+    left: -26px;
 
     .image {
-      width: 24px;
-      height: 24px;
+      width: 16px;
+      height: 22px;
       align-self: center;
     }
   }
 
   .address-details-container {
     height: 40px;
-    width: 100%;
+    margin-left: 24px;
+    position: relative;
 
     .title {
-      font-family: Montserrat;
       width: 100%;
       font-size: 14px;
+      line-height: 17px;
     }
 
     .address {
@@ -37,7 +37,8 @@
       text-overflow: ellipsis;
       font-family: Montserrat;
       font-size: 12px;
-      margin-top: 0px;
+      line-height: 15px;
+      margin-top: 6px;
     }
   }
 }
@@ -51,8 +52,9 @@
 
 .order-container {
   @extend .order-layout;
-  font-family: Montserrat;
-  height: 48px;
+  font-weight: 500;
+  padding-top: 12px;
+  padding-bottom: 8px;
   margin-top: 8px;
   border-top: 0.5px solid $border-color;
   align-items: center;
@@ -63,7 +65,7 @@
 .you-pay-container {
   @extend .order-container;
   height: 56px;
-  margin-top: 0px;
+  margin-top: 12px;
   border-top: 0.5px solid $border-color;
   border-bottom: 0.5px solid $border-color;
 }
