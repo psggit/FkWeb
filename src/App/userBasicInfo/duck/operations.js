@@ -72,9 +72,9 @@ const FinaliseIDProofValueOperation = (selectedDocument) => {
   };
 };
 
-const onSuccess = (dispatch) => {
+const onSuccess = () => {
   return (dispatch) => {
-    dispatch(kycUpdate())
+    dispatch(kycUpdate());
   };
 };
 

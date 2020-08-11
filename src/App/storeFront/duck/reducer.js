@@ -47,23 +47,23 @@ function brandGenerReducer(state = brandInitialState, action) {
   let newState;
   switch (action.type) {
     case "BRANDPENDING":
-      newState = { ...state, status: "inProgress"};
+      newState = { ...state, status: "inProgress" };
       return newState;
     case "CLEAR_STATE":
       return brandInitialState;
     case "BRANDSUCCESS":
-      newState = { ...state, data: action.payload.brands, status: "success"};
+      newState = { ...state, data: action.payload.brands, status: "success" };
       return newState;
     case "BRANDPAGINATIONSUCCESS":
       newState = {
         ...state,
         data: [...state.data, ...action.payload.brands],
-        status: "success"
+        status: "success",
       };
 
       return newState;
     case "BRANDFAILURE":
-      newState = { ...state, error: action.payload, status: "failed"};
+      newState = { ...state, error: action.payload, status: "failed" };
       return newState;
     default:
       return state;
