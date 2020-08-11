@@ -11,9 +11,11 @@ function HeaderComponent(props) {
   const { title, children } = props;
 
   return (
-    <div className="header-bar fixed">
-      <div className="title">{title}</div>
-      {children}
+    <div className="header-bar-wrapper">
+      <div className="header-bar fixed">
+        <div className="title">{title}</div>
+        {children}
+      </div>
     </div>
   );
 }

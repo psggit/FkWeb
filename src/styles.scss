@@ -65,7 +65,7 @@
 }
 
 .fc-open.custom_fc_frame::before {
-  background: #151515f2;
+  background: $overlay-color;
   content: "";
   position: fixed;
   top: 0;
@@ -112,7 +112,7 @@ h1 {
   top: 0;
   right: 0;
   left: 0;
-  background: #292929d9;
+  background: $overlay-color;
   bottom: 0;
   z-index: 10;
 }
