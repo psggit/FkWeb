@@ -28,5 +28,6 @@ export const upiIcon = require("./upi.svg");
 export const deliveryPersonIcon = require("./delivery_person.svg");
 export const chooeLocationIcon = require("./choose_location.svg");
 export const crossIcon = require("./cross.svg");
+export const fssaiIcon = require("./fssai.svg");
 export const upIndicatorIcon = require("./upIndicator.svg");
 export const downIndicatorIcon = require("./downIndicator.svg");
