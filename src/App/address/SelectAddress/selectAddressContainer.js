@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     delelteAddressFunc: (value) => dispatch(deleteAddressOperation(value)),
     selectAddressFunc: (value) => dispatch(SelectAddressOperation(value)),
-    onMountFunc: () => dispatch(FetchAddressListOperation()),
+    onMountFunc: (selectedAddress) => dispatch(FetchAddressListOperation(selectedAddress)),
   };
 };
 

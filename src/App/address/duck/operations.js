@@ -39,11 +39,11 @@ const processResponse = () => {
   };
 };
 
-const FetchAddressListOperation = () => {
+const FetchAddressListOperation = (selectedAddress) => {
   return (dispatch) => {
     fetchAddressListAPI(
       processResponse(dispatch),
-      onSuccess(dispatch),
+      onSuccess(dispatch, selectedAddress),
       onError(dispatch)
     );
   };

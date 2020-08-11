@@ -59,8 +59,15 @@ function NoRetailerTemplate(text, history) {
   );
 }
 
-function FetchFailedTemplate() {
-  return <div>Failed to Fetch...</div>;
+function FetchFailedTemplate(selectedAddress) {
+  return (
+    <div
+      className="noRetailers hcenter vcenter flex"
+      onClick={() => fetchRetailersFunc(selectedAddress)}
+    >
+      Failed to Fetch...
+    </div>
+  );
 }
 
 function ServiceUnavailableTemplate() {
@@ -80,19 +87,22 @@ function RetailerList(props) {
 
   return (
     <div className="retailer_list_wrap">
-      {(retailerFetchStatus === "inProgress" && retailerFetchStatus === "waiting") && (
-        <div className="flex hcenter vcenter loading">
-          {" "}
-          <div className="loader"></div>
-        </div>
-      )}
+      {retailerFetchStatus === "inProgress" &&
+        retailerFetchStatus === "waiting" && (
+          <div className="flex hcenter vcenter loading">
+            {" "}
+            <div className="loader"></div>
+          </div>
+        )}
       {retailers.length !== 0 &&
         retailerFetchStatus === "success" &&
         RetailerTemplate(retailers, history)}
       {retailers.length === 0 &&
         retailerFetchStatus === "success" &&
         NoRetailerTemplate(message, history)}
-      {retailerFetchStatus === "failed" && <FetchFailedTemplate />}
+      {retailerFetchStatus === "failed" && (
+        <FetchFailedTemplate selectedAddress={selectedAddress} />
+      )}
     </div>
   );
 }
