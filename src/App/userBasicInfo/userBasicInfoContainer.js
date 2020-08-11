@@ -13,6 +13,7 @@ import {
 
 const mapStateToProps = (state) => {
   return {
+    selectedAddress: state.addressStore.selectedAddress,
     yob: state.ubiStore.birthYear,
     gender: state.ubiStore.gender,
     consumerIDTypes: state.ubiStore.consumerIDTypes,
