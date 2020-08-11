@@ -1,0 +1,25 @@
+
+.search-not-available-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50%;
+
+  .title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .content {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
