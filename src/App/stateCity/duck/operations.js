@@ -17,7 +17,6 @@ const onStateSuccess = (dispatch) => {
 const onStateError = (dispatch) => {
   return (err) => {
     dispatch(fetchStateFailed(err));
-    alert(err);
   };
 };
 
@@ -55,7 +54,6 @@ const onCitySuccess = (dispatch) => {
 const onCityError = (dispatch) => {
   return (err) => {
     dispatch(fetchCityFailed(err));
-    alert(err);
   };
 };
 

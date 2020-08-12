@@ -79,9 +79,7 @@ const onSuccess = (dispatch) => {
 };
 
 const onError = () => {
-  return (err) => {
-    alert(err);
-  };
+  return () => {};
 };
 
 const processResponse = () => {
