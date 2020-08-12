@@ -11,44 +11,7 @@ ProcessPayment.propTypes = {
   bank: PropTypes.any,
   payment: PropTypes.object,
   initialise: PropTypes.func,
-  summaryDetails: PropTypes.object,
 };
-
-/*
-function CardPayment() {
-  return (
-    <form className="juspay_inline_form" id="payment_form">
-      <input type="hidden" className="merchant_id" value="guest" />
-      <input type="hidden" className="order_id" value="guest_order" />
-      <div className="card_number_div"></div>
-      <div className="name_on_card_div"></div>
-      <div className="card_exp_month_div"></div> -{" "}
-      <div className="card_exp_year_div"></div>
-      <div className="security_code_div"></div>
-      <input type="checkbox" className="juspay_locker_save" /> Save card
-      information
-      <input type="hidden" className="redirect" value="true" />
-      <input
-        type="radio"
-        className="auth_type"
-        value=""
-        name="auth_type"
-      />{" "}
-      Verify with Secure Password
-      <input
-        type="radio"
-        className="auth_type"
-        value="ATMPIN"
-        name="auth_type"
-      />{" "}
-      Verify with ATM PIN
-      <button type="submit" id="common_pay_btn">
-        Make Payment
-      </button>
-    </form>
-  );
-}
-*/
 
 function SavedCardPayment() {
   return (

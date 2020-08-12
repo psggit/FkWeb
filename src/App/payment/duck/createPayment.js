@@ -15,7 +15,7 @@ const reqBodyFromState = (paymentState) => {
     products.push(p);
   }
   return {
-    amount: paymentState.summaryDetails.summaryDetails.total,
+    //amount: paymentState.summaryDetails.summaryDetails.total,
     device_type: "fk-web",
     mode: "NB/UPI/card",
     //mode: "card",
@@ -23,6 +23,7 @@ const reqBodyFromState = (paymentState) => {
     state_id: paymentState.selectedAddress.state.id,
     retailer_id: paymentState.retailer.id,
     order_id: paymentState.payment.orderDetails.order_id,
+    amount: paymentState.payment.orderDetails.balance,
   };
 };
 
