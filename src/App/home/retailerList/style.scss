@@ -8,7 +8,10 @@
   }
   .noRetailers {
     text-align: center;
-    height: 400px;
+    height: 256px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
   }
   .tryDifferentAddress {
     color: $orange-color;
