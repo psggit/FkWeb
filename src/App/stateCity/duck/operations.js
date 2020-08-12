@@ -20,10 +20,9 @@ const onStateError = (dispatch) => {
   };
 };
 
-const processStateResponse = (dispatch) => {
+const processStateResponse = () => {
   return (res) => {
     if (res.ok) {
-      dispatch(fetchStateFailed());
       return res.json();
     }
     if (res.status === 400) {
@@ -57,10 +56,9 @@ const onCityError = (dispatch) => {
   };
 };
 
-const processCityResponse = (dispatch) => {
+const processCityResponse = () => {
   return (res) => {
     if (res.ok) {
-      dispatch(fetchCityFailed());
       return res.json();
     }
     if (res.status === 400) {
