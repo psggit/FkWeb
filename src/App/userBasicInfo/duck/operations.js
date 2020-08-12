@@ -2,6 +2,8 @@ import {
   birthYearEntered,
   changeGenderAction,
   kycUpdate,
+  kycUpdateFailed,
+  errorClose,
   showCheckboxAction,
   checkCheckboxAction,
   selectIDTypeAction,
@@ -17,6 +19,12 @@ const ChangingBirthYear = (value) => {
       dispatch(birthYearEntered(value));
       dispatch(CheckCheckBoxOperation());
     }
+  };
+};
+
+const ErrorClose = () => {
+  return (dispatch) => {
+    dispatch(errorClose());
   };
 };
 
@@ -78,8 +86,10 @@ const onSuccess = (dispatch) => {
   };
 };
 
-const onError = () => {
-  return () => {};
+const onError = (dispatch) => {
+  return (err) => {
+    dispatch(kycUpdateFailed(err.message));
+  };
 };
 
 const processResponse = () => {
@@ -116,6 +126,7 @@ const UpdateKYCOperation = (value) => {
 export {
   ChangingBirthYear,
   FinaliseIDProofValueOperation,
+  ErrorClose,
   ChangingGenderOperation,
   UpdateKYCOperation,
   SelectIDTypeOperation,

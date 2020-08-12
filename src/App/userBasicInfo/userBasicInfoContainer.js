@@ -6,6 +6,7 @@ import {
   SelectIDTypeOperation,
   ChangeDocumentValueOperation,
   CheckDeclarationOperation,
+  ErrorClose,
   FinaliseIDProofValueOperation,
   UpdateKYCOperation,
   login,
@@ -26,6 +27,8 @@ const mapStateToProps = (state) => {
     loginSuccess: state.ubiStore.loginSuccess,
     loginFailed: state.ubiStore.loginFailed,
     collectUserDetails: state.ubiStore.collectUserDetails,
+    showError: state.ubiStore.showError,
+    errorMessage: state.ubiStore.errorMessage,
   };
 };
 
@@ -41,6 +44,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(FinaliseIDProofValueOperation(selectedDocument)),
     checkDeclarationFunc: () => dispatch(CheckDeclarationOperation()),
     login: () => dispatch(login()),
+    closeError: () => dispatch(ErrorClose()),
   };
 };
 

@@ -40,9 +40,14 @@ const loginFailed = createAction("loginFailed");
 
 const kycUpdate = createAction("kycUpdated");
 
+const kycUpdateFailed = createAction("kycUpdatedFailed");
+const errorClose = createAction("closeError");
+
 export {
   changeDocumentValueAction,
   kycUpdate,
+  kycUpdateFailed,
+  errorClose,
   birthYearEntered,
   selectIDTypeAction,
   changeGenderAction,

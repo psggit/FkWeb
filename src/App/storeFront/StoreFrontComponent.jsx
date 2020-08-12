@@ -50,6 +50,7 @@ function StoreFrontComponent(props) {
   }, []);
 
   useEffect(() => {
+    document.getElementById("brand_accordion").scroll(0, 0);
     if (generId != undefined) {
       if (offset === 0) {
         getBrands(
@@ -62,7 +63,6 @@ function StoreFrontComponent(props) {
       } else {
         setOffset(0);
       }
-      document.getElementById("brand_accordion").scroll(0, 0);
     }
   }, [generId]);
 
