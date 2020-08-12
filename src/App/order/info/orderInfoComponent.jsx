@@ -14,6 +14,8 @@ import {
   OrderSuccessComponent,
 } from "../components";
 
+import { CancelOrderComponent } from "../../common/summary";
+
 const getSummaryProps = (orderDetails) => {
   return {
     ...orderDetails,
@@ -74,6 +76,8 @@ function OrderInfoComponent(props) {
     );
   }
 
+  console.log("Order Placed:");
+
   const summayProps = getSummaryProps(order);
   return (
     <>
@@ -91,6 +95,12 @@ function OrderInfoComponent(props) {
           addressType={order.address_type}
         />
         <OrderSummaryComponent orderDetail={summayProps} />
+        <CancelOrderComponent
+          onClick={() => {
+            window.fcWidget.open();
+            window.fcWidget.show();
+          }}
+        />
       </div>
       <RenderBottomNext />
     </>

@@ -32,4 +32,5 @@ export const fssaiIcon = require("./fssai.svg");
 export const upIndicatorIcon = require("./upIndicator.svg");
 export const downIndicatorIcon = require("./downIndicator.svg");
 export const tick = require("./tick.svg");
+export const cancelIcon = require("./cancel.svg");
 export const currentLocationIcon = require("./current_location.svg");

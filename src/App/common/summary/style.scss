@@ -36,6 +36,21 @@
   }
 }
 
+.cancel-container {
+  @extend .charges-container;
+  margin-top: 16px;
+  margin-bottom: 24px;
+
+  .cancel-title {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .cancel-icon {
+    width: 24dpx;
+    height: 24px;
+  }
+}
 .gst-number-container {
   @extend .charges-container;
   font-family: MontserratBold;

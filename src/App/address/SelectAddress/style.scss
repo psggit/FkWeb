@@ -15,7 +15,6 @@
 }
 .address-container {
   padding-top: 15px;
-  border-bottom: 1px solid $border-color;
 }
 .add-new-address {
   display: flex;
@@ -23,6 +22,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid $border-color;
 
   .title {
     font-family: Montserrat;

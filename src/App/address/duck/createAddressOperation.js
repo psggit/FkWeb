@@ -4,7 +4,8 @@ import {
   createAddressSuccessAction,
 } from "./actions";
 
-import { createAddressAPI } from "../../../utils";
+import { createAddressAPI } from "../../../utils/createAddress";
+import { editAddressAPI } from "../../../utils/editAddress";
 
 const reqBodyFromState = (props) => {
   const flatNumber = props.address.flat_number;
@@ -13,8 +14,10 @@ const reqBodyFromState = (props) => {
   const landmark = props.address.landmark;
   const address_type = props.address.address_type;
   const gps = props.mapCenterGps;
+  const address_id = props.editAddress ? props.editAddress.address_id : null;
   return {
     address: current_address,
+    address_id: address_id,
     flat_number: flatNumber,
     gps: gps.lat + "," + gps.lng,
     landmark: landmark,
@@ -51,12 +54,21 @@ const createAddressOperation = (addressState) => {
   const reqParams = reqBodyFromState(addressState);
   return (dispatch) => {
     dispatch(createAddressInProgressAction());
-    createAddressAPI(
-      reqParams,
-      processResponse(dispatch),
-      onSuccess(dispatch),
-      onError(dispatch)
-    );
+    if (reqParams.address_id === undefined) {
+      createAddressAPI(
+        reqParams,
+        processResponse(dispatch),
+        onSuccess(dispatch),
+        onError(dispatch)
+      );
+    } else {
+      editAddressAPI(
+        reqParams,
+        processResponse(dispatch),
+        onSuccess(dispatch),
+        onError(dispatch)
+      );
+    }
   };
 };
 

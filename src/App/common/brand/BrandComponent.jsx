@@ -28,12 +28,13 @@ function BrandComponent(props) {
         <div className="accordionItem" onClick={toggle}>
           <div className="sku-item">
             <img className="thumbnail" src={brand.logo_low_res_image} alt="" />
-            <div className="sku-content-container">
-              <span className="summary">{brand.brand_name}</span>
+            <span className="summary">
+              {brand.brand_name}
+              <br />
               <span className="origin no-fold-text">
                 {brand.country_of_origin}
               </span>
-            </div>
+            </span>
           </div>
           <span className="">
             <img src={active ? UpArrow : DownArrow} alt="upDown Arrow" />
