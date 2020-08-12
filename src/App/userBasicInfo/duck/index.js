@@ -3,6 +3,7 @@ export {
   ChangingBirthYear,
   ChangingGenderOperation,
   SelectIDTypeOperation,
+  ErrorClose,
   ChangeDocumentValueOperation,
   UpdateKYCOperation,
   FinaliseIDProofValueOperation,

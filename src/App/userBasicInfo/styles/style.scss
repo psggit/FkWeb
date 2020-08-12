@@ -2,6 +2,17 @@
   .input-info {
     width: 75%;
   }
+  .tick {
+    visibility: hidden;
+  }
+  .selected {
+    .tick {
+      visibility: visible;
+    }
+  }
+  .modal-header {
+    text-align: center;
+  }
   .input-shield {
     width: 25%;
     img {

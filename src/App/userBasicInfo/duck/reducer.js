@@ -7,6 +7,8 @@ import {
   selectIDTypeAction,
   finaliseIDTypeAction,
   kycUpdate,
+  kycUpdateFailed,
+  errorClose,
   changeDocumentValueAction,
   showCheckboxAction,
   checkCheckboxAction,
@@ -27,6 +29,8 @@ const initialState = () => {
     selectedDocumentValue: "",
     showDeclaration: false,
     checkDeclaration: false,
+    showError: false,
+    errorMessage: "",
     consumerIDTypes: [
       { idType: "Driving License", name: "dl" },
       { idType: "Passport", name: "passport" },
@@ -64,6 +68,16 @@ const userInfoCreateReducer = createReducer(initialState(), {
   [birthYearEntered]: (state, action) => ({
     ...state,
     birthYear: action.payload,
+  }),
+  [kycUpdateFailed]: (state, action) => ({
+    ...state,
+    showError: true,
+    errorMessage: action.payload,
+  }),
+  [errorClose]: (state) => ({
+    ...state,
+    showError: false,
+    errorMessage: "",
   }),
   [kycUpdate]: (state) => ({
     ...state,

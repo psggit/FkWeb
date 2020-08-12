@@ -1,7 +1,8 @@
 import React, { useLayoutEffect } from "react";
 import "./styles/style.scss";
-import { shieldIcon, drinksIcon } from "../../assets/images";
+import { shieldIcon, drinksIcon, tick } from "../../assets/images";
 import { ToolbarComponent } from "../common/toolbar";
+import { Alert } from "../common/alert";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -226,7 +227,9 @@ function CheckBoxComponent(props) {
           "input-component-checkbox"
         }
       >
-        <div className="checkbox"></div>
+        <div className="checkbox flex hcenter vcenter">
+          <img className="tick" src={tick} />
+        </div>
         <div className="checkbox-text">
           I declare that the details furnished above are correct
         </div>
@@ -235,11 +238,23 @@ function CheckBoxComponent(props) {
   );
 }
 
+function AlertValidateErrorComponent(props) {
+  return (
+    <Alert
+      handleOption={() => props.closeError()}
+      show={true}
+      title={props.errorMessage}
+      option={"Ok"}
+    />
+  );
+}
+
 function CollectInfoComponent(props) {
   const yob = props.yob;
   const checkDeclaration = props.checkDeclaration;
   const showDeclaration = props.showDeclaration;
   const updateKycFunc = props.updateKycFunc;
+  console.log(props)
   const data = {
     dob: yob,
     gender: props.gender,
@@ -260,6 +275,7 @@ function CollectInfoComponent(props) {
         onClickFunc={() => updateKycFunc(data)}
         inActive={!checkDeclaration}
       />
+      {props.showError && <AlertValidateErrorComponent {...props} />}
     </div>
   );
 }
@@ -283,6 +299,9 @@ UserBasicInfoComponent.propTypes = {
   collectUserDetails: PropTypes.bool,
   login: PropTypes.func,
   selectedAddress: PropTypes.object,
+  showError: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  closeError: PropTypes.func,
 };
 
 function UserBasicInfoComponent(props) {
