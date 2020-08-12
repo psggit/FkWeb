@@ -3,6 +3,7 @@ import "./style.scss";
 import PropTypes from "prop-types";
 import { drinksIcon } from "../../../assets/images";
 import { useHistory } from "react-router-dom";
+import { ButtonComponent } from "../bottomNext/BottomNextComponent";
 
 SplashLoadingComponent.propTypes = {
   text: PropTypes.string,
@@ -33,13 +34,13 @@ function SplashLoadingComponent(props) {
       </div>
       {props.buttonText != undefined && (
         <>
-          <div
-            className="splash-button"
-            onClick={() => {
-              props.buttonFunc();
-            }}
-          >
-            {props.buttonText}
+          <div className="margin-tp">
+            <ButtonComponent
+              title={props.buttonText}
+              onClickFunc={() => {
+                props.buttonFunc();
+              }}
+            />
           </div>
           <div onClick={() => goHome()} className="splash-button">
             Go To Home

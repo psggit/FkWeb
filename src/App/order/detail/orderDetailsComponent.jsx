@@ -14,6 +14,8 @@ import {
   OrderSuccessComponent,
   TellAFriendComponent,
 } from "../components";
+import { CancelOrderComponent } from "../../common/summary";
+import { CancellationSummaryComponent } from "../components";
 
 OrderDetailsComponent.propTypes = {
   getOrderDetailsFunc: PropTypes.func,
@@ -29,7 +31,8 @@ function OrderDetailsComponent(props) {
 
   useLayoutEffect(() => {
     props.getOrderDetailsFunc({
-      orderType: props.order.type,
+      //orderType: props.order.type,
+      orderType: "delivery",
       orderID: props.order.order_id,
     });
   }, []);
@@ -58,18 +61,16 @@ function OrderDetailsComponent(props) {
     return <div />;
   }
 
-  function RenderOrderSuccess() {
-    if (props.order == null) {
-      return (
-        <OrderSuccessComponent orderPrice="Rs 50000" retailerName="Kloud Bar" />
-      );
-    }
-    return <div />;
-  }
-
   function RenderArrivingComponent() {
-    if (props.order == null) {
-      return <ArrivingComponent arrivalTime="Arrving Today" otp="864753" />;
+    if (props.order != null && props.orderDetail != null) {
+      if (props.order.type == "placed") {
+        return (
+          <ArrivingComponent
+            arrivalTime={props.orderDetail.order_detail.delivery_status}
+            otp={props.orderDetail.order_detail.otp}
+          />
+        );
+      }
     }
     return <div />;
   }
@@ -81,11 +82,27 @@ function OrderDetailsComponent(props) {
     return <div />;
   }
 
+  function RenderSummaryComponent() {
+    if (props.order != null && props.orderDetail != null) {
+      if (props.order.type == "cancelled") {
+        return (
+          <CancellationSummaryComponent
+            orderDetail={props.orderDetail.order_detail}
+          />
+        );
+      } else {
+        return (
+          <OrderSummaryComponent orderDetail={props.orderDetail.order_detail} />
+        );
+      }
+    } else {
+      return <div />;
+    }
+  }
   return (
     <>
       <RenderToolBar />
       <div className="page-container">
-        <RenderOrderSuccess />
         <OrderPlacedHeaderComponent
           purchasedOn={props.order.created_at}
           orderID={"#" + props.order.order_id}
@@ -105,10 +122,14 @@ function OrderDetailsComponent(props) {
         ) : (
           <div />
         )}
-        {props.orderDetail ? (
-          <OrderSummaryComponent orderDetail={props.orderDetail.order_detail} />
-        ) : (
-          <div />
+        <RenderSummaryComponent />
+        {props.order.type == "placed" && (
+          <CancelOrderComponent
+            onClick={() => {
+              window.fcWidget.open();
+              window.fcWidget.show();
+            }}
+          />
         )}
       </div>
       <RenderBottomNext />

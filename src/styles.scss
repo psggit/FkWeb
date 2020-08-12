@@ -340,8 +340,21 @@ input[type="radio"]:checked {
   right: 0;
 }
 
+.line {
+  border-bottom: 1px solid $border-color;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.padding-btm {
+  padding-bottom: 24px;
+}
 .padding-24 {
   padding: 24px;
+}
+
+.margin-tp {
+  margin-top: 24px;
 }
 
 .btn-general.disable {
