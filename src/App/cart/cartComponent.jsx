@@ -106,7 +106,7 @@ function AlertValidateErrorComponent(props) {
     <Alert
       handleOption={() => props.closeValidationErrorMessage()}
       show={true}
-      title={props.validateErrorMessage}
+      content={props.validateErrorMessage}
       option={"Ok"}
     />
   );

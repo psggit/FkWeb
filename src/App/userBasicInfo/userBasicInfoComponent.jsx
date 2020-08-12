@@ -243,7 +243,7 @@ function AlertValidateErrorComponent(props) {
     <Alert
       handleOption={() => props.closeError()}
       show={true}
-      title={props.errorMessage}
+      content={props.errorMessage}
       option={"Ok"}
     />
   );
@@ -254,7 +254,7 @@ function CollectInfoComponent(props) {
   const checkDeclaration = props.checkDeclaration;
   const showDeclaration = props.showDeclaration;
   const updateKycFunc = props.updateKycFunc;
-  console.log(props)
+  console.log(props);
   const data = {
     dob: yob,
     gender: props.gender,

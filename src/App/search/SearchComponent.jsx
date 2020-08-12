@@ -71,7 +71,11 @@ function SearchComponent(props) {
     });
     if (totalCartItems > 0) {
       return (
-        <BottomNextComponent redirectPath="/cart" isNav={true} title="View Cart">
+        <BottomNextComponent
+          redirectPath="/cart"
+          isNav={true}
+          title="View Cart"
+        >
           <CartContentComponent
             content={totalCartItems + " ITEMS | ₹ " + total}
           />
