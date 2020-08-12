@@ -115,6 +115,8 @@ h1 {
   background: $overlay-color;
   bottom: 0;
   z-index: 10;
+  display: flex;
+  align-items: center;
 }
 .options {
   width: 80%;

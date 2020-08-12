@@ -84,13 +84,15 @@ function SearchByStoreComponent(props) {
   }
 
   const renderSku = (brands, status) => {
-    if ((brands.length === 0) && (status != "waiting")) {
-      return (
-        <SearchNotAvailable
-          title="No Results found."
-          content="Try something else maybe?"
-        />
-      );
+    if (brands.length == 0 && status != "waiting") {
+      if (query.length > 2) {
+        return (
+          <SearchNotAvailable
+            title="No Results found."
+            content="Try something else maybe?"
+          />
+        );
+      }
     } else {
       return (
         <div>
