@@ -1,5 +1,5 @@
 import "./styles/style.scss";
-import { appIcon } from "../../assets/images";
+import { appIcon, rightArrowIcon } from "../../assets/images";
 import { Redirect, Link } from "react-router-dom";
 import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
@@ -33,7 +33,8 @@ function TcComponent(props) {
       </div>
       <div className="acButtonWrap">
         <div onClick={agreeTc} className="acButton">
-          Agree & Continue
+          <div>Agree & Continue</div>
+          <img src={rightArrowIcon} />
         </div>
       </div>
       <div className="aAndCTerms">
