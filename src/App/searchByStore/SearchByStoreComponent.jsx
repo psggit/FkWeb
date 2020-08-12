@@ -10,6 +10,7 @@ import { BrandContainer } from "../common/brand";
 import SearchLayout from "../common/layout/SearchLayout";
 import { LoadingComponent } from "../common/loading";
 import { AlertWithOptions } from "../common/alert";
+import { SearchNotAvailable } from "../common/searchNotAvailable";
 
 SearchByStoreComponent.propTypes = {
   data: PropTypes.array,
@@ -83,34 +84,43 @@ function SearchByStoreComponent(props) {
   }
 
   const renderSku = (brands) => {
-    return (
-      <div>
-        {brands.map((brand) => (
-          <BrandContainer
-            key={brand.brand_id}
-            brand={brand}
-            retailer={props.retailer}
-          />
-        ))}
-        {brands.length === props.offset + props.limit && (
-          <div
-            className="loadMore hcenter vcenter flex"
-            onClick={() => {
-              getSearchByStore(
-                query,
-                props.selectedAddress,
-                props.retailer,
-                props.limit,
-                props.offset + props.limit
-              );
-            }}
-          >
-            {" "}
-            Load More
-          </div>
-        )}
-      </div>
-    );
+    if (brands.length == 0) {
+      return (
+        <SearchNotAvailable
+          title="No Results found."
+          content="Try something else maybe?"
+        />
+      );
+    } else {
+      return (
+        <div>
+          {brands.map((brand) => (
+            <BrandContainer
+              key={brand.brand_id}
+              brand={brand}
+              retailer={props.retailer}
+            />
+          ))}
+          {brands.length === props.offset + props.limit && (
+            <div
+              className="loadMore hcenter vcenter flex"
+              onClick={() => {
+                getSearchByStore(
+                  query,
+                  props.selectedAddress,
+                  props.retailer,
+                  props.limit,
+                  props.offset + props.limit
+                );
+              }}
+            >
+              {" "}
+              Load More
+            </div>
+          )}
+        </div>
+      );
+    }
   };
 
   function searchUI() {
