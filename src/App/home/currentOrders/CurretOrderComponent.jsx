@@ -18,7 +18,7 @@ function CurretOrderComponent(props) {
         <img className="current-image" src={deliveryPersonIcon} />
         <div className="current-order-detail">
           <div className="order-title">{title}</div>
-          <div className="order-msg">{msg}</div>
+          <div className="order-msg">OTP: {msg}</div>
         </div>
         <img className="current-order-next" src={rightArrowIcon} />
       </div>
