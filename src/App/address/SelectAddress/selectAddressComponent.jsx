@@ -85,11 +85,11 @@ function SelectAddressComponent(props) {
           <LoadingComponent />
         ) : (
           <>
-            <AddressComponent {...props} />
             <div className="add-new-address" onClick={showAddAddress}>
               <div className="title">Add New Address</div>
               <img src={addAddressIcon} className="add-image" />
             </div>
+            <AddressComponent {...props} />
           </>
         )}
       </div>

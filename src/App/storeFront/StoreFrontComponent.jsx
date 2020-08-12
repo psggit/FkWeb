@@ -159,9 +159,9 @@ function StoreFrontComponent(props) {
             showSearchStores();
           }}
         >
-          <div>
-            <img className="" src={searchIcon} alt="searchIcon" />
-            Search Drinks
+          <div className="store-search-wrap">
+            <img className="image" src={searchIcon} alt="searchIcon" />
+            <div className="search-title">Search Drinks</div>
           </div>
         </div>
       </ToolbarComponent>
