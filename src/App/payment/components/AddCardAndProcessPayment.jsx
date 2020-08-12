@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../../common/toolbar";
 import { ButtonComponent } from "../../common/bottomNext/BottomNextComponent";
+import config from "../../../config";
 
 NewCardInput.propTypes = {
   title: PropTypes.string, // Text about the input field
@@ -54,7 +55,7 @@ function AddCardAndProcessPayment(props) {
   useEffect(() => {
     const script = document.createElement("script");
 
-    script.src = "https://sandbox.juspay.in/pay-v3.js";
+    script.src = config.JusPayScript;
     script.type = "text/javascript";
     script.async = true;
     script.onload = configureJuspay;
