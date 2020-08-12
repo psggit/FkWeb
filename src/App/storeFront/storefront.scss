@@ -56,6 +56,24 @@
     }
   }
 }
+
+.store-search-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .image {
+    width: 16px;
+    height: 16px;
+  }
+  .search-title {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+}
+
 .storefront-container {
   position: relative;
   .horiz-scroll {
