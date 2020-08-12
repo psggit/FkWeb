@@ -20,7 +20,7 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 15px;
-  height: 28px;
+  height: 32px;
   align-items: center;
 
   .label-container {
@@ -34,6 +34,14 @@
     width: 8px;
     align-self: center;
   }
+}
+
+.refundable-amount {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: 0.08px;
+  margin-top: 8px;
 }
 
 .cancel-container {

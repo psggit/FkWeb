@@ -19,24 +19,24 @@ function CancellationSummaryComponent(props) {
         ) : (
           <div />
         )}
-        {props.orderDetail.display_total_paid ? (
+        {props.orderDetail.display_cancellation_fee ? (
           <CartTotalComponent
             label="Cancellation Charges"
-            cartTotal={props.orderDetail.display_total_paid}
+            cartTotal={props.orderDetail.display_cancellation_fee}
           />
         ) : (
           <div />
         )}
         <div className="line" />
-        {props.orderDetail.display_total_paid ? (
+        {props.orderDetail.display_amount_repaid ? (
           <CartTotalComponent
             label="Amount Repaid"
-            cartTotal={props.orderDetail.display_total_paid}
+            cartTotal={props.orderDetail.display_amount_repaid}
           />
         ) : (
           <div />
         )}
-        <div className="charge-container">
+        <div className="refundable-amount">
           Refundable amt. will be processed to your source account
         </div>
       </div>
