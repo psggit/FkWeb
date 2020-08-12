@@ -42,7 +42,13 @@ function OrderPlacedComponent(props) {
   }
 
   function RenderToolBar() {
-    return <ToolbarComponent title="Order Placed" onClick={handleBack} />;
+    return (
+      <ToolbarComponent
+        backVisibility={false}
+        title="Order Placed"
+        onClick={handleBack}
+      />
+    );
   }
 
   function RenderBottomNext() {
