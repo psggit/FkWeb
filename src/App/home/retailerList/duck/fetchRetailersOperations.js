@@ -11,7 +11,7 @@ const reqBodyFromState = (selectedAddress) => {
     state_id: selectedAddress.state.id,
     gps: selectedAddress.gps,
     offset: 0,
-    limit: 20,
+    limit: 50,
   };
 };
 

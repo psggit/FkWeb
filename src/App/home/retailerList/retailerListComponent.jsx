@@ -51,7 +51,7 @@ function NoRetailerTemplate(text, history) {
   }
   return (
     <div className="noRetailers hcenter vcenter flex">
-      {text}
+      <div>{text}</div>
       <div onClick={() => showChooseAddress()} className="tryDifferentAddress">
         Try a different address...
       </div>
@@ -68,10 +68,6 @@ function FetchFailedTemplate(selectedAddress) {
       Failed to Fetch...
     </div>
   );
-}
-
-function ServiceUnavailableTemplate() {
-  return <div>Service Unavailable in your city...</div>;
 }
 
 function RetailerList(props) {
