@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import "./styles/style.scss";
 import { shieldIcon, drinksIcon, tick } from "../../assets/images";
 import { ToolbarComponent } from "../common/toolbar";
@@ -243,7 +243,7 @@ function AlertValidateErrorComponent(props) {
     <Alert
       handleOption={() => props.closeError()}
       show={true}
-      title={props.errorMessage}
+      content={props.errorMessage}
       option={"Ok"}
     />
   );
@@ -254,7 +254,7 @@ function CollectInfoComponent(props) {
   const checkDeclaration = props.checkDeclaration;
   const showDeclaration = props.showDeclaration;
   const updateKycFunc = props.updateKycFunc;
-  console.log(props)
+  console.log(props);
   const data = {
     dob: yob,
     gender: props.gender,
@@ -302,6 +302,7 @@ UserBasicInfoComponent.propTypes = {
   showError: PropTypes.bool,
   errorMessage: PropTypes.string,
   closeError: PropTypes.func,
+  userInfo: PropTypes.object,
 };
 
 function UserBasicInfoComponent(props) {
@@ -310,11 +311,22 @@ function UserBasicInfoComponent(props) {
   const loginFailed = props.loginFailed;
   const collectUserDetails = props.collectUserDetails;
   const trigger = !(loginSuccess || loginFailed || loginInProgress);
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (trigger) {
       props.login();
     }
   });
+
+  useEffect(() => {
+    if (loginSuccess) {
+      window.fcWidget.user.setProperties({
+        firstName: props.userInfo.name,
+        email: props.userInfo.email,
+        phone: props.userInfo.mobile,
+        userLoginType: "fk-web",
+      });
+    }
+  }, [props.loginSuccess]);
 
   if (loginInProgress) {
     return (

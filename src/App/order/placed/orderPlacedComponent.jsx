@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { ToolbarComponent } from "../../common/toolbar";
+import { HeaderComponent } from "../../common/toolbar";
 import { BottomNextComponent } from "../../common/bottomNext";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -42,7 +42,7 @@ function OrderPlacedComponent(props) {
   }
 
   function RenderToolBar() {
-    return <ToolbarComponent title="Order Placed" onClick={handleBack} />;
+    return <HeaderComponent title="Order Placed" />;
   }
 
   function RenderBottomNext() {

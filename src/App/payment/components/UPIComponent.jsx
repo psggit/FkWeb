@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { upiIcon } from "../../../assets/images";
 import { UPILowSuccessRate } from "./UPILowSuccessRate";
+import config from "../../../config";
 
 import "../style.scss";
 
@@ -27,7 +28,7 @@ function UPIComponent(props) {
   useEffect(() => {
     const script = document.createElement("script");
 
-    script.src = "https://sandbox.juspay.in/pay-v3.js";
+    script.src = config.JusPayScript;
     script.type = "text/javascript";
     script.async = true;
     script.onload = configureJuspay;
