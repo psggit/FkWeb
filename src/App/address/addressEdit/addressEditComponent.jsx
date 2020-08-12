@@ -141,6 +141,7 @@ AddressEditComponent.propTypes = {
   getAddressFromGps: PropTypes.func,
   resetAddressFunc: PropTypes.func,
   redirect: PropTypes.string,
+  editAddress: PropTypes.object,
 };
 
 function AddressEditComponent(props) {

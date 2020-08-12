@@ -66,7 +66,7 @@ function BottomNavigationComponent(props) {
                   <div className="navText">
                     {value.label.toUpperCase()}{" "}
                     {totalCartItems > 0 ? (
-                      <span className="navBadge">{totalCartItems}</span>
+                      <span className="navBadge hcenter flex vcenter">{totalCartItems}</span>
                     ) : null}
                   </div>
                 ) : (
