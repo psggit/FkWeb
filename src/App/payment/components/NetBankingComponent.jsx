@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { downArrowIcon } from "../../../assets/images";
 import "../style.scss";
 import PropTypes from "prop-types";
+import config from "../../../config";
 
 NetBankingComponent.propTypes = {
   payment: PropTypes.object,
@@ -47,7 +48,7 @@ let juspay_form;
 
 function NetBankingComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
-  const { banks, onBankSelected } = props;
+  const { banks } = props;
 
   const configureJuspay = () => {
     let jp = window.Juspay;
@@ -57,7 +58,7 @@ function NetBankingComponent(props) {
   useEffect(() => {
     const script = document.createElement("script");
 
-    script.src = "https://sandbox.juspay.in/pay-v3.js";
+    script.src = config.JusPayScript;
     script.type = "text/javascript";
     script.async = true;
     script.onload = configureJuspay;

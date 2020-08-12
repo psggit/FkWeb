@@ -1,5 +1,6 @@
 import React, { useState, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
+import config from "../../../config";
 
 import { lockIcon } from "../../../assets/images";
 
@@ -77,14 +78,13 @@ function Form(props) {
 
 function SavedCardComponent(props) {
   const payment = props.payment.paymentOptionsDetails;
-  const savedCardValid = props.payment.savedCardValid;
 
   const [jpLoaded, SetjpLoaded] = useState(false);
 
   useLayoutEffect(() => {
     const script = document.createElement("script");
 
-    script.src = "https://sandbox.juspay.in/pay-v3.js";
+    script.src = config.JusPayScript;
     script.type = "text/javascript";
     script.async = false;
     script.onload = () => SetjpLoaded(true);
