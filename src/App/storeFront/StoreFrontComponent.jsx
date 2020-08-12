@@ -50,7 +50,8 @@ function StoreFrontComponent(props) {
   }, []);
 
   useEffect(() => {
-    document.getElementById("brand_accordion").scroll(0, 0);
+    document.getElementById("app").scroll(0, 0);
+    window.scrollTo(0, 0);
     if (generId != undefined) {
       if (offset === 0) {
         getBrands(
