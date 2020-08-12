@@ -28,7 +28,7 @@ function RetailerComponent(props) {
     return (
       <div className="initial-text search-initial-text-padding">
         <div>What are you looking for today?</div>
-        <div className="mid-light-text">We'tell you where it's available!</div>
+        <div className="mid-light-text">We'll tell you where it's available!</div>
       </div>
     );
   }

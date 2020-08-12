@@ -12,6 +12,7 @@ const mapStateToProps = (state, props) => {
     getAddressStatus: state.addressStore.apiCalls.fetchAddressFromGPSStatus,
     mapCenterGps: state.chooseLocation.selectedGps,
     redirect: props.match.params.redirect,
+    editAddress: props.location.state.editAddress,
   };
 };
 
