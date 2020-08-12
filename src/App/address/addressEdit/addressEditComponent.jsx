@@ -37,17 +37,19 @@ function SaveAddressCheckBoxComponent(props) {
           <div className="checkbox-select-text">OTHER</div>
         </div>
       </div>
-      <EditText
-        placeholde="Home, Office, etc."
-        rid="addressType"
-        title="SAVE AS"
-        inputType="text"
-        onTextChanged={(id, value) => {
-          setOtherValue(value);
-          props.updateField({ address_type: value });
-        }}
-        inActive={selectedBox === "home" ? true : false}
-      />
+      {selectedBox !== "home" && (
+        <EditText
+          placeholde="Home, Office, etc."
+          rid="addressType"
+          title="SAVE AS"
+          inputType="text"
+          onTextChanged={(id, value) => {
+            setOtherValue(value);
+            props.updateField({ address_type: value });
+          }}
+          inActive={selectedBox === "home" ? true : false}
+        />
+      )}
     </>
   );
 }
