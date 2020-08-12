@@ -69,15 +69,9 @@ function OrderInfoComponent(props) {
   }
 
   function RenderArrivingComponent() {
-    if (props.order == null) {
-      return (
-        <ArrivingComponent
-          arrivalTime={order.delivery_status}
-          otp={order.otp}
-        />
-      );
-    }
-    return <div />;
+    return (
+      <ArrivingComponent arrivalTime={order.delivery_status} otp={order.otp} />
+    );
   }
 
   const summayProps = getSummaryProps(order);
