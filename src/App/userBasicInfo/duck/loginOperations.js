@@ -80,7 +80,7 @@ const login = () => {
       dispatch(getGrantTokenInitiated);
       return loginWithGrantToken(dispatch);
     } else {
-      return loginHandler({ grantToken: "dummyToken" }, dispatch);
+      return loginHandler({ grantToken: "" }, dispatch);
     }
   };
 };

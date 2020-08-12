@@ -164,7 +164,7 @@ function SelectIDComponent(props) {
                     })
                   }
                 />
-                <div className="radiobtn"></div>
+                <div className="radiobtn radiobtn-relative"></div>
                 <label
                   htmlFor={id.name}
                   className="no-fold-text option flex vcenter"

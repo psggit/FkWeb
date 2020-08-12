@@ -17,14 +17,12 @@ const onStateSuccess = (dispatch) => {
 const onStateError = (dispatch) => {
   return (err) => {
     dispatch(fetchStateFailed(err));
-    alert(err);
   };
 };
 
-const processStateResponse = (dispatch) => {
+const processStateResponse = () => {
   return (res) => {
     if (res.ok) {
-      dispatch(fetchStateFailed());
       return res.json();
     }
     if (res.status === 400) {
@@ -55,14 +53,12 @@ const onCitySuccess = (dispatch) => {
 const onCityError = (dispatch) => {
   return (err) => {
     dispatch(fetchCityFailed(err));
-    alert(err);
   };
 };
 
-const processCityResponse = (dispatch) => {
+const processCityResponse = () => {
   return (res) => {
     if (res.ok) {
-      dispatch(fetchCityFailed());
       return res.json();
     }
     if (res.status === 400) {

@@ -14,7 +14,6 @@ const onSuccess = (dispatch) => {
 const onError = (dispatch) => {
   return (err) => {
     dispatch(getOrderDetailFailed(err));
-    alert(err);
   };
 };
 

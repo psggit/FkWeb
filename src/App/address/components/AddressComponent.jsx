@@ -35,7 +35,7 @@ function AddressComponent(props) {
     option1: "Yes",
     option2: "No",
     handleOption1: fnDeleteAddress,
-    handleOption2: FnHideModal,
+    handleOption2: fnHideModal,
   };
 
   function editAddress(address) {
@@ -58,7 +58,7 @@ function AddressComponent(props) {
     }
   }
 
-  function FnHideModal() {
+  function fnHideModal() {
     setDeleteAddressId(0);
     setHideModal(false);
   }

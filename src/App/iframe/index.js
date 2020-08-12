@@ -1,1 +1,1 @@
-export { IframeContainer } from "./iframeContainer";
+export { IframeComponent } from "./iframeComponent";
