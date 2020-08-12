@@ -29,6 +29,7 @@ const mapStateToProps = (state) => {
     collectUserDetails: state.ubiStore.collectUserDetails,
     showError: state.ubiStore.showError,
     errorMessage: state.ubiStore.errorMessage,
+    userInfo: state.ubiStore.userInfo,
   };
 };
 

@@ -22,6 +22,7 @@ const initialState = () => {
     loginSuccess: false,
     loginFailed: false,
     collectUserDetails: false,
+    userInfo: {},
     birthYear: "",
     gender: "",
     selectedDocument: {},
@@ -53,6 +54,7 @@ const userInfoCreateReducer = createReducer(initialState(), {
     loginSuccess: true,
     loginFailed: false,
     userID: action.payload.data.auth_user.user_id,
+    userInfo: action.payload.data,
     collectUserDetails: !(
       action.payload.data.bz_kyc_exist &&
       action.payload.data.dob_exist &&
