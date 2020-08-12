@@ -59,7 +59,7 @@ function OrderFailedComponent(props) {
     <Alert
       handleOption={props.takeMeHome}
       show={true}
-      title={props.payment.placeOrderErrorMessage}
+      content={props.payment.placeOrderErrorMessage}
       option={"Ok"}
     />
   );

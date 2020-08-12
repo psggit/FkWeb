@@ -118,7 +118,7 @@ function SummaryFailedComponent(props) {
     <Alert
       handleOption={handleAction}
       show={true}
-      title={message}
+      content={message}
       option={"Ok"}
     />
   );
