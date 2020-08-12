@@ -2,6 +2,7 @@ import {
   updateAddressFromGpsAction,
   getAddressFromGpsInProgressAction,
   selectAddressAction,
+  validateAddressAction,
   updateAddressListAction,
   createAddressInProgressAction,
   createAddressFailAction,
@@ -19,6 +20,7 @@ const apiCallDefaultStatus = {
   editAddressStatus: "waiting",
   listAddressStatus: "waiting",
   fetchAddressFromGPSStatus: "waiting",
+  validateAddressStatus: "waiting",
 };
 
 const defaultAddressInputPageState = {
@@ -66,6 +68,17 @@ const addressListReducer = createReducer(initialState(), {
   [selectAddressAction]: (state, action) => ({
     ...state,
     selectedAddress: action.payload,
+    apiCalls: {
+      ...apiCallDefaultStatus,
+      validateAddressStatus: "inProgress",
+    },
+  }),
+  [validateAddressAction]: (state, action) => ({
+    ...state,
+    apiCalls: {
+      ...apiCallDefaultStatus,
+      validateAddressStatus: action.payload,
+    },
   }),
 
   [updateAddressListAction]: (state, action) => ({

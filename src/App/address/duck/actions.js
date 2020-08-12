@@ -1,6 +1,7 @@
 import { createAction } from "@reduxjs/toolkit";
 
 const selectAddressAction = createAction("selectAddressAction");
+const validateAddressAction = createAction("validateAddressAction");
 
 const updateAddressListAction = createAction("updateAddressListAction");
 
@@ -41,6 +42,7 @@ export {
   deleteAddressInProgressAction,
   deleteAddressFailAction,
   selectAddressAction,
+  validateAddressAction,
   updateAddressListAction,
   fetchAddressListFailAction,
   fetchAddressListSuccessAction,

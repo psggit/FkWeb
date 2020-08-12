@@ -102,7 +102,7 @@ function StateCityComponent(props) {
       {props.fetchCityFailed === true && (
         <SplashLoadingComponent
           motion={false}
-          text={"CITY Something went wrong, please try again."}
+          text={"Something went wrong, please try again."}
           buttonFunc={() => selectState(selectedState)}
           buttonText={"Retry"}
         />
