@@ -65,14 +65,14 @@ const ValidateAddressOperation = (address) => {
 };
 
 const onSuccessHandler = (dispatch, address) => {
-  return (value) => {
+  return () => {
     dispatch(validateAddressAction("success"));
     dispatch(selectAddressAction(address));
   };
 };
 
 const onErrorHandler = (dispatch) => {
-  return (err) => {
+  return () => {
     dispatch(validateAddressAction("failed"));
   };
 };
