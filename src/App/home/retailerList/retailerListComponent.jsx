@@ -59,13 +59,14 @@ function NoRetailerTemplate(text, history) {
   );
 }
 
-function FetchFailedTemplate(selectedAddress) {
+function FetchFailedTemplate(props) {
   return (
     <div
       className="noRetailers hcenter vcenter flex"
-      onClick={() => fetchRetailersFunc(selectedAddress)}
+      onClick={() => props.fetchRetailersFunc(props.selectedAddress)}
     >
-      Failed to Fetch...
+      Failed to Fetch...<br/>
+      <span className="retry">Retry</span>
     </div>
   );
 }
@@ -97,7 +98,7 @@ function RetailerList(props) {
         retailerFetchStatus === "success" &&
         NoRetailerTemplate(message, history)}
       {retailerFetchStatus === "failed" && (
-        <FetchFailedTemplate selectedAddress={selectedAddress} />
+        <FetchFailedTemplate {...props} />
       )}
     </div>
   );

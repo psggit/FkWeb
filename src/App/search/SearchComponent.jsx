@@ -29,6 +29,7 @@ function SearchComponent(props) {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     window.addEventListener("focusout", () => {
       SetCancelBtn(false);
     });
@@ -71,7 +72,11 @@ function SearchComponent(props) {
     });
     if (totalCartItems > 0) {
       return (
-        <BottomNextComponent redirectPath="/cart" isNav={true} title="View Cart">
+        <BottomNextComponent
+          redirectPath="/cart"
+          isNav={true}
+          title="View Cart"
+        >
           <CartContentComponent
             content={totalCartItems + " ITEMS | ₹ " + total}
           />

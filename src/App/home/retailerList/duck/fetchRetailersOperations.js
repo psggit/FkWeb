@@ -18,7 +18,6 @@ const reqBodyFromState = (selectedAddress) => {
 const processResponse = (dispatch) => {
   return (res) => {
     if (res.ok) {
-      dispatch(fetchRetailersFailure());
       return res.json();
     }
     if (res.status === 400) {
