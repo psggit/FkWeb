@@ -37,7 +37,7 @@ function CriticaladsComponent(props) {
   }
 
   return (
-    <div className="options-overlay">
+    <div className="options-overlay flex hcenter vcenter">
       <div className="ad-modal-content">
         <div className="modal-body">
           <Carousel
