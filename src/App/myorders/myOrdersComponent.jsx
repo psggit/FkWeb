@@ -62,6 +62,7 @@ function MyOrdersComponent(props) {
         <div className="past-orders">Past Orders</div>
         {orderItems(props)}
       </div>
+      <div className="padding-btm" />
       <BottomNavigationContainer />
     </>
   );

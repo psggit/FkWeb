@@ -14,6 +14,8 @@ import {
   OrderSuccessComponent,
   TellAFriendComponent,
 } from "../components";
+import { CancelOrderComponent } from "../../common/summary";
+import { CancellationSummaryComponent } from "../components";
 
 OrderDetailsComponent.propTypes = {
   getOrderDetailsFunc: PropTypes.func,
@@ -29,7 +31,8 @@ function OrderDetailsComponent(props) {
 
   useLayoutEffect(() => {
     props.getOrderDetailsFunc({
-      orderType: props.order.type,
+      //orderType: props.order.type,
+      orderType: "delivery",
       orderID: props.order.order_id,
     });
   }, []);
@@ -81,6 +84,23 @@ function OrderDetailsComponent(props) {
     return <div />;
   }
 
+  function RenderSummaryComponent() {
+    if (props.order != null && props.orderDetail != null) {
+      if (props.order.type == "cancelled") {
+        return (
+          <CancellationSummaryComponent
+            orderDetail={props.orderDetail.order_detail}
+          />
+        );
+      } else {
+        return (
+          <OrderSummaryComponent orderDetail={props.orderDetail.order_detail} />
+        );
+      }
+    } else {
+      return <div />;
+    }
+  }
   return (
     <>
       <RenderToolBar />
@@ -105,10 +125,14 @@ function OrderDetailsComponent(props) {
         ) : (
           <div />
         )}
-        {props.orderDetail ? (
-          <OrderSummaryComponent orderDetail={props.orderDetail.order_detail} />
-        ) : (
-          <div />
+        <RenderSummaryComponent />
+        {props.order.type == "placed" && (
+          <CancelOrderComponent
+            onClick={() => {
+              window.fcWidget.open();
+              window.fcWidget.show();
+            }}
+          />
         )}
       </div>
       <RenderBottomNext />
