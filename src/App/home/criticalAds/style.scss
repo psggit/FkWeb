@@ -12,9 +12,9 @@
 
   .critical-ad-image {
     object-fit: fill;
-    max-width: 300px;
     min-height: 250px;
     max-height: 300px;
+    width: 100%;
   }
 
   .ad-card {
@@ -44,6 +44,7 @@
 
   .carousel-inner {
     border-radius: 10px;
+    margin-bottom: 10px;
   }
 }
 

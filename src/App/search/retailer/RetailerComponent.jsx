@@ -23,6 +23,7 @@ function RetailerComponent(props) {
   if (pending) {
     return <LoadingComponent />;
   }
+
   if (query.length <= 2) {
     return (
       <div className="initial-text search-initial-text-padding">
