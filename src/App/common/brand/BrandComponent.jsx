@@ -26,12 +26,14 @@ function BrandComponent(props) {
     <React.Fragment>
       <div className={activeClass}>
         <div className="accordionItem" onClick={toggle}>
-          <div>
+          <div className="sku-item">
             <img className="thumbnail" src={brand.logo_low_res_image} alt="" />
-            <span className="summary">{brand.brand_name}</span>
-            <span className="origin no-fold-text">
-              {brand.country_of_origin}
-            </span>
+            <div className="sku-content-container">
+              <span className="summary">{brand.brand_name}</span>
+              <span className="origin no-fold-text">
+                {brand.country_of_origin}
+              </span>
+            </div>
           </div>
           <span className="">
             <img src={active ? UpArrow : DownArrow} alt="upDown Arrow" />
@@ -43,7 +45,12 @@ function BrandComponent(props) {
               <div>
                 <span>{sku.volume} ml</span>
                 <span> | </span>
-                <span>&#x20B9; {sku.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</span>
+                <span>
+                  &#x20B9;{" "}
+                  {sku.price
+                    .toString()
+                    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                </span>
               </div>
               <AddItemComponent key={i + sku.sku_id} {...props} sku={sku} />
             </div>
@@ -55,3 +62,4 @@ function BrandComponent(props) {
 }
 
 export { BrandComponent };
+
