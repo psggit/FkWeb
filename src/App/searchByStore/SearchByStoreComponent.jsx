@@ -83,8 +83,8 @@ function SearchByStoreComponent(props) {
     );
   }
 
-  const renderSku = (brands) => {
-    if (brands.length == 0) {
+  const renderSku = (brands, status) => {
+    if (brands.length == 0 && status != "waiting") {
       if (query.length > 2) {
         return (
           <SearchNotAvailable
@@ -126,12 +126,7 @@ function SearchByStoreComponent(props) {
   };
 
   function searchUI() {
-<<<<<<< HEAD
-    console.log(data);
-    return renderSku(data);
-=======
     return renderSku(data, status);
->>>>>>> b91a66b92dde9a2e5c8672229bc44aa02fa65d5e
   }
   function SearchWaiting() {
     return (
