@@ -8,13 +8,16 @@
   }
   .noRetailers {
     text-align: center;
-    height: 400px;
+    height: 256px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
   }
   .tryDifferentAddress {
     color: $orange-color;
   }
   .retailer_item {
-    height: 72px;
+    height: 84px;
     border-bottom: 1px solid $border-color;
     display: flex;
     flex-direction: row;
@@ -38,12 +41,14 @@
       .retailer_name {
         font-size: 16px;
         line-height: 24px;
-        font-family: MontserratBold;
+        font-weight: 600;
       }
 
       .retailer_info {
         font-size: 12px;
         line-height: 20px;
+        font-weight: 500;
+        margin-top: 6px;
         color: $edit-color;
       }
     }
