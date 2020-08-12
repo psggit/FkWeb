@@ -85,12 +85,14 @@ function SearchByStoreComponent(props) {
 
   const renderSku = (brands) => {
     if (brands.length == 0) {
-      return (
-        <SearchNotAvailable
-          title="No Results found."
-          content="Try something else maybe?"
-        />
-      );
+      if (query.length > 2) {
+        return (
+          <SearchNotAvailable
+            title="No Results found."
+            content="Try something else maybe?"
+          />
+        );
+      }
     } else {
       return (
         <div>
@@ -124,7 +126,12 @@ function SearchByStoreComponent(props) {
   };
 
   function searchUI() {
+<<<<<<< HEAD
+    console.log(data);
     return renderSku(data);
+=======
+    return renderSku(data, status);
+>>>>>>> b91a66b92dde9a2e5c8672229bc44aa02fa65d5e
   }
   function SearchWaiting() {
     return (
