@@ -37,7 +37,6 @@ AddCardAndProcessPayment.propTypes = {
   bank: PropTypes.any,
   payment: PropTypes.object,
   initialise: PropTypes.func,
-  summaryDetails: PropTypes.object,
   createPayment: PropTypes.func,
   jpNewCardConf: PropTypes.func,
   cancelAddNewCard: PropTypes.func,
