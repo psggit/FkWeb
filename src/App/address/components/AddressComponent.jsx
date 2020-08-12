@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./style.scss";
 import PropTypes from "prop-types";
 import { AlertWithOptions } from "../../common/alert";
-import { Alert } from "../../common/alert";
 import { useHistory } from "react-router-dom";
 
 function EmptyAddressComponent() {
@@ -74,7 +73,7 @@ function AddressComponent(props) {
   }
 
   return (
-    <div className={"address-container "+ props.redirect}>
+    <div className={"address-container " + props.redirect}>
       {addresses.length == 0 && <EmptyAddressComponent />}
       {props.savedUserAddresses.map((address) => {
         let canModifyAddress = true;
