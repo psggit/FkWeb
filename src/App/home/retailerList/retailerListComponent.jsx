@@ -33,10 +33,10 @@ function RetailerTemplate(retailers, history) {
         }}
       >
         <div className="retailer_link">
-          <div className="retailer_name no-fold-text">
+          <div className="retailer_name line-clamp">
             {retailer.retailer_name}
           </div>
-          <div className="retailer_info no-fold-text">
+          <div className="retailer_info line-clamp">
             {retailer.store_info_msg}
           </div>
         </div>
@@ -65,7 +65,8 @@ function FetchFailedTemplate(props) {
       className="noRetailers hcenter vcenter flex"
       onClick={() => props.fetchRetailersFunc(props.selectedAddress)}
     >
-      Failed to Fetch...<br/>
+      Failed to Fetch...
+      <br />
       <span className="retry">Retry</span>
     </div>
   );
@@ -97,9 +98,7 @@ function RetailerList(props) {
       {retailers.length === 0 &&
         retailerFetchStatus === "success" &&
         NoRetailerTemplate(message, history)}
-      {retailerFetchStatus === "failed" && (
-        <FetchFailedTemplate {...props} />
-      )}
+      {retailerFetchStatus === "failed" && <FetchFailedTemplate {...props} />}
     </div>
   );
 }
