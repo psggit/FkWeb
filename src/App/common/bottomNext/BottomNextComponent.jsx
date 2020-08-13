@@ -73,7 +73,7 @@ function ButtonComponent(props) {
 
   return (
     <div
-      className={(inActive == true ? "disable " : "") + "btn-general"}
+      className={(inActive == true ? "disable " : "") + "btn-general ripple"}
       onClick={() => clickProcess()}
     >
       <div className="btn-label">{title}</div>
