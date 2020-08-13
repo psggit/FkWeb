@@ -24,10 +24,10 @@ function TcComponent(props) {
         <div className="tcWrap">
           <div className="tc">
             I undertake that I am of <span>legal drinking age</span> at the
-            location where I intend to purchase drinks. Further, I expressly
-            instruct & authorise HipBar to{" "}
-            <span>display pricing, content & catalog information</span> relating
-            to alcoholic beverages in the HipBar App license for my use.
+            location where I intend to use HipBar: The Drinks App & agree to its
+            T&C. Further, I expressly instruct & authorise HipBar to{" "}
+            <span>display pricing, content & catalog information </span>relating
+            to alcoholic beverages in the HipBar App licensed for my use.
           </div>
         </div>
       </div>
