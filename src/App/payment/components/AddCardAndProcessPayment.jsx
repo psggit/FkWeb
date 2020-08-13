@@ -70,7 +70,7 @@ function AddCardAndProcessPayment(props) {
       <ToolbarComponent
         onClick={() => props.cancelAddNewCard()}
         helpVisibility={false}
-        title="Payment"
+        title="Add Card"
       />
       <div className="page-container">
         <form className="juspay_inline_form" id="new_card_payment_form">
@@ -139,7 +139,7 @@ function AddCardAndProcessPayment(props) {
               className="juspay_locker_save save-card-option"
             />{" "}
             <div className="save-card-title">
-              Save this card for faster checkouts
+              Save this card for faster transactions
             </div>
           </div>
           <div className="button-container">
