@@ -11,6 +11,7 @@ import {
   finaliseIDTypeAction,
 } from "./actions";
 import { updateBasicKYCAPI } from "../../../utils";
+import { validateKyc } from "./kycValidation";
 
 const ChangingBirthYear = (value) => {
   return (dispatch) => {
@@ -106,6 +107,10 @@ const processResponse = () => {
 };
 
 const UpdateKYCOperation = (value) => {
+  let { valid, message } = validateKyc(value.kycType, value.kycValue);
+  if (valid !== true) {
+    return (dispatch) => dispatch(kycUpdateFailed(message));
+  }
   var reqBody = {
     dob: value.dob,
     gender: value.gender,
