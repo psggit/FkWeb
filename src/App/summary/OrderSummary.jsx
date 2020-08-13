@@ -73,18 +73,22 @@ function SummaryComponent(props) {
         <OrderAddressComponent {...props} />
         <OrderTotalComponent marginTop={true} total={summary.display_total} />
         <CartTotalComponent cartTotal={summary.display_cart_total} />
-        <AdditionalChargersComponent
-          key="additional-charges"
-          label="Additional Charges"
-          charges={summary.total_fee}
-          chargesList={summary.fee_details}
-        />
-        <AdditionalChargersComponent
-          key="taxes"
-          label="Taxes"
-          charges={summary.total_tax}
-          chargesList={summary.tax_details}
-        />
+        {summary.total_fee && (
+          <AdditionalChargersComponent
+            key="additional-charges"
+            label="Additional Charges"
+            charges={summary.total_fee}
+            chargesList={summary.fee_details}
+          />
+        )}
+        {summary.total_tax && (
+          <AdditionalChargersComponent
+            key="taxes"
+            label="Taxes"
+            charges={summary.total_tax}
+            chargesList={summary.tax_details}
+          />
+        )}
         <YouPayComponent toPay={summary.display_balance} />
 
         <div className="summary-delivery-msg">{summary.delivery_message}</div>
