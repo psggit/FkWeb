@@ -35,12 +35,16 @@ const defaultAddressInputPageState = {
 export const currentStateVersion = 1;
 
 const getAddressFromStorage = () => {
-  let addr = localStorage.getItem("selectedAddress");
-  if (addr !== null) {
-    addr = JSON.parse(addr);
+  try {
+    let addr = localStorage.getItem("selectedAddress");
+    if (addr !== null) {
+      addr = JSON.parse(addr);
+    }
+    let version = localStorage.getItem("selectedAddressVersion");
+    return { version, addr };
+  } catch {
+    return { version: null, addr: null };
   }
-  let version = localStorage.getItem("selectedAddressVersion");
-  return { version, addr };
 };
 
 const initialState = () => {
