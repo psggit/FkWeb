@@ -110,7 +110,7 @@ function MapComponent(props) {
           top: "164px",
         }}
         center={center}
-        zoom={14}
+        zoom={16}
         onLoad={onLoad}
         onDragEnd={onCenterChanged}
         onUnmount={onUnmount}
