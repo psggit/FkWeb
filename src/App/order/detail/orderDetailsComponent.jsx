@@ -3,6 +3,8 @@ import { ToolbarComponent } from "../../common/toolbar";
 import { BottomNextComponent } from "../../common/bottomNext";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+import { SplashLoadingComponent } from "../../common/splashLoading";
+import { drinksIcon } from "../../../assets/images";
 
 import "../styles.scss";
 import {
@@ -98,6 +100,12 @@ function OrderDetailsComponent(props) {
     } else {
       return <div />;
     }
+  }
+
+  if (props.fetchOrderDetailInProgress) {
+    return (
+      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
+    );
   }
   return (
     <>
