@@ -46,6 +46,7 @@ function MyOrdersComponent(props) {
     props.getMyOrdersFunc({
       offset: 0,
     });
+    return () => window.fcWidget.close();
   }, []);
 
   return (
