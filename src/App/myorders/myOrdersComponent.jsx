@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { BottomNavigationContainer } from "../common/bottomNavigation";
 import { rightArrowIcon } from "../../assets/images";
+import { SplashLoadingComponent } from "../common/splashLoading";
+import { drinksIcon } from "../../assets/images";
 
 MyOrdersComponent.propTypes = {
   fetchOrderInProgress: PropTypes.bool,
@@ -13,6 +15,7 @@ MyOrdersComponent.propTypes = {
   fetchOrderSuccess: PropTypes.bool,
   orders: PropTypes.array,
   getMyOrdersFunc: PropTypes.func,
+  unMountAction: PropTypes.func,
 };
 
 function MyOrdersComponent(props) {
@@ -46,8 +49,17 @@ function MyOrdersComponent(props) {
     props.getMyOrdersFunc({
       offset: 0,
     });
-    return () => window.fcWidget.close();
+    return () => {
+      window.fcWidget.close();
+      props.unMountAction();
+    };
   }, []);
+
+  if (props.fetchOrderInProgress) {
+    return (
+      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
+    );
+  }
 
   return (
     <>
