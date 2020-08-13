@@ -26,9 +26,12 @@ function RetailerComponent(props) {
 
   if (query.length <= 2) {
     return (
-      <div className="initial-text search-initial-text-padding">
+      <div className="initial-text search-message-container">
         <div>What are you looking for today?</div>
-        <div className="mid-light-text">We'll tell you where it's available!</div>
+        <div className="mid-light-text">
+          We&apos;ll tell you where it&apos;s
+        </div>
+        <div className="mid-light-text">available!</div>
       </div>
     );
   }

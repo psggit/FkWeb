@@ -1,9 +1,7 @@
 @import "./additem/addItem.scss";
 .initial-text {
-  margin: auto;
   font-size: 16px;
   font-style: normal;
-  text-align: center;
   &:first-child {
     // font-weight: 600;
     font-family: "MontserratMedium";
@@ -11,8 +9,6 @@
   .mid-light-text {
     // font-weight: 400;
     font-family: "MontserratExtraLight";
-    width: 197px;
-    margin: 0px 28px;
   }
   .sorry-text {
     font-family: "MontserratExtraLight";
@@ -88,7 +84,6 @@
           width: 100%;
         }
       }
-
     }
   }
 }
@@ -150,4 +145,3 @@
 .active .folding-pannel {
   padding: 18px 24px;
 }
-
