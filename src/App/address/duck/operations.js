@@ -1,7 +1,6 @@
 import {
   selectAddressAction,
   validateAddressAction,
-  fetchAddressListSuccessAction,
   fetchAddressListFailAction,
   updateAddressListAction,
 } from "./actions";
@@ -15,10 +14,17 @@ const SelectAddressOperation = (value) => {
   };
 };
 
-const onSuccess = (dispatch) => {
+const onSuccess = (dispatch, selectedAddress) => {
   return (data) => {
+    if (selectedAddress != null) {
+      for (var i = 0; i < data.length; i++) {
+        if (selectedAddress.address_id === data[i].address_id) {
+          dispatch(selectAddressAction(data[i]));
+          break;
+        }
+      }
+    }
     dispatch(updateAddressListAction(data));
-    dispatch(fetchAddressListSuccessAction(data));
   };
 };
 
