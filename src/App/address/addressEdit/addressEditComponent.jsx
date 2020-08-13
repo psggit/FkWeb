@@ -113,7 +113,7 @@ function AddressInputComponent(props) {
         onTextChanged={(id, value) => {
           props.updateField({ landmark: value });
         }}
-        title="LANDMARKS"
+        title="LANDMARK"
         value={landmark ? landmark : ""}
         inputType="text"
       />
