@@ -81,6 +81,13 @@ body {
   font-family: "Montserrat";
   background-color: $bg;
   display: flex;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 
   section {
     width: 100%;
@@ -168,6 +175,15 @@ input[type="radio"] {
   position: relative;
 }
 
+@keyframes select {
+  from {
+    border: 2px solid;
+  }
+  to {
+    border: 4px solid $orange-color;
+  }
+}
+
 .line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -179,7 +195,8 @@ input[type="radio"]:checked + .radiobtn {
   border: 3px solid $orange-color;
 }
 .radiobtn.selected {
-  border: 3px solid $orange-color;
+  border: 4px solid $orange-color;
+  animation: select 0.25s;
 }
 .radio_item {
   padding: 0px 10px;
@@ -396,6 +413,23 @@ input[type="radio"]:checked {
     right: 16px;
   }
 }
+
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0s;
+}
+.ripple:hover {
+  background: $orange-color
+    radial-gradient(circle, transparent 1%, $orange-color 1%) center/15000%;
+}
+.ripple:active {
+  background-color: rgba(233, 124, 7, 0.5);
+  opacity: 0.5;
+  background-size: 100%;
+  transition: background 0s;
+}
+
 .flex {
   display: flex;
 }
