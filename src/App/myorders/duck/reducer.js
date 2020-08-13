@@ -1,4 +1,9 @@
-import { getOrderInProgress, getOrderSuccess, getOrderFailed } from "./actions";
+import {
+  getOrderInProgress,
+  getOrderSuccess,
+  getOrderFailed,
+  unMountAction,
+} from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
 
@@ -30,11 +35,19 @@ const myOrdersReducer = createReducer(initialState, {
     fetchOrderFailed: false,
     myOrders: removeDuplicates(state.myOrders.concat(data.payload)),
   }),
+
   [getOrderFailed]: (state) => ({
     ...state,
     fetchOrderInProgress: false,
     fetchOrderSuccess: false,
     fetchOrderFailed: true,
+  }),
+
+  [unMountAction]: (state) => ({
+    ...state,
+    fetchOrderInProgress: false,
+    fetchOrderSuccess: false,
+    fetchOrderFailed: false,
   }),
 });
 
