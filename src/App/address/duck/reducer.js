@@ -68,10 +68,6 @@ const addressListReducer = createReducer(initialState(), {
   [selectAddressAction]: (state, action) => ({
     ...state,
     selectedAddress: action.payload,
-    apiCalls: {
-      ...apiCallDefaultStatus,
-      validateAddressStatus: "inProgress",
-    },
   }),
   [validateAddressAction]: (state, action) => ({
     ...state,

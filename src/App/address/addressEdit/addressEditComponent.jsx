@@ -14,7 +14,10 @@ function SaveAddressCheckBoxComponent(props) {
     <>
       <div className="input-component flex">
         <div
-          onClick={() => setSelectedBox("home")}
+          onClick={() => {
+            setSelectedBox("home");
+            props.updateField({ address_type: "home" });
+          }}
           className={
             (selectedBox == "home" ? "selected " : "") +
             "input-component-checkbox"

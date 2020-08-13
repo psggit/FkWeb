@@ -81,7 +81,7 @@ function SelectAddressComponent(props) {
         {(listAddressApiStatus === "inProgress" ||
           listAddressApiStatus === "waiting" ||
           deleteAddressApiStatus === "inProgress") &&
-        validateAddressApiStatus === "waiting" ? (
+        validateAddressApiStatus === "inProgress" ? (
           <LoadingComponent />
         ) : (
           <>
@@ -94,7 +94,7 @@ function SelectAddressComponent(props) {
         )}
       </div>
       <BottomNextComponent
-        onClickFunc={onClickProcess}
+        onClickFunc={() => {onClickProcess()}}
         inActive={props.selectedAddress == undefined}
         title="Proceed"
       />
