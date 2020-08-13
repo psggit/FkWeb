@@ -30,7 +30,7 @@ function AddressComponent(props) {
   const addresses = props.savedUserAddresses;
   const alertDetails = {
     title: "Confirmation deletion",
-    content: "Do you want to delete the selected address?",
+    content: "Are you sure you want to delete the address?",
     option1: "Yes",
     option2: "No",
     handleOption1: fnDeleteAddress,
