@@ -5,7 +5,11 @@
 }
 
 .search-message-container {
-    height: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-container {
@@ -14,8 +18,8 @@
   margin: 10px 24px;
   position: relative;
   .inputWrap {
-     position: relative;
-     width: 100%;
+    position: relative;
+    width: 100%;
   }
   .search-img {
     position: absolute;
@@ -25,7 +29,7 @@
   }
   .inputCross {
     position: absolute;
-    padding:10px;
+    padding: 10px;
     right: 3px;
     top: -4px;
   }
