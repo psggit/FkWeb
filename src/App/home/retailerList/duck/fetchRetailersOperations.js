@@ -15,7 +15,7 @@ const reqBodyFromState = (selectedAddress) => {
   };
 };
 
-const processResponse = (dispatch) => {
+const processResponse = () => {
   return (res) => {
     if (res.ok) {
       return res.json();
