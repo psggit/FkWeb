@@ -59,7 +59,6 @@ const FetchAddressListOperation = (selectedAddress) => {
 
 const ValidateAddressOperation = (address) => {
   const reqBody = { gps: address.gps };
-  // const reqBody = { gps: "test data" };
   return (dispatch) => {
     validateDeliveryAddressAPI(
       reqBody,
