@@ -359,6 +359,8 @@ const paymentReducer = createReducer(initialState, {
       verifyPaymentFailed: false,
       verifyPaymentError: false,
       verifyPaymentErrorMessage: paymentFailureMessage,
+
+      addNewCard: false,
     };
   },
 
