@@ -79,6 +79,13 @@ function OrderInfoComponent(props) {
   console.log("Order Placed:");
 
   const summayProps = getSummaryProps(order);
+
+  useLayoutEffect(() => {
+    return () => {
+      window.fcWidget.close();
+    };
+  }, []);
+
   return (
     <>
       <RenderToolBar />

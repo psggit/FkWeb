@@ -3,6 +3,7 @@ import {
   getOrderSuccess,
   getOrderFailed,
   unMountAction,
+  paginationAction,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -11,6 +12,7 @@ const initialState = {
   fetchOrderInProgress: false,
   fetchOrderSuccess: false,
   fetchOrderFailed: false,
+  offset: 0,
   myOrders: [],
 };
 
@@ -27,6 +29,10 @@ const myOrdersReducer = createReducer(initialState, {
     fetchOrderInProgress: true,
     fetchOrderSuccess: false,
     fetchOrderFailed: false,
+  }),
+  [paginationAction]: (state, action) => ({
+    ...state,
+    offset: action.payload,
   }),
   [getOrderSuccess]: (state, data) => ({
     ...state,

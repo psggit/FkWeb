@@ -106,7 +106,7 @@ function AddressInputComponent(props) {
         id="pincodeText"
         title="PINCODE"
         value={pincode ? pincode : ""}
-        inputType="text"
+        inputType="number"
       />
       <EditText
         id="landMarkText"

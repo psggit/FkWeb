@@ -4,6 +4,8 @@ import {
   autoCompleteOperation,
   getPlacesDetailsOperation,
   storeGpsOperation,
+  deliveryCheckAction,
+  validateAddressOperation,
 } from "./duck";
 
 const mapStateToProps = (state, props) => {
@@ -17,6 +19,7 @@ const mapStateToProps = (state, props) => {
     mapCenterGps: state.chooseLocation.selectedGps,
     redirect: props.match.params.redirect,
     editAddress: props.location.state.address,
+    isDeliverableCheck: state.chooseLocation.isDeliverableCheck,
   };
 };
 
@@ -24,7 +27,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     autoComplete: (value) => dispatch(autoCompleteOperation(value)),
     getPlacesDetails: (value) => dispatch(getPlacesDetailsOperation(value)),
+    validateAddress: (value) => dispatch(validateAddressOperation(value)),
     storeGpsFunc: (value) => dispatch(storeGpsOperation(value)),
+    resetState: () => dispatch(deliveryCheckAction("waiting")),
   };
 };
 

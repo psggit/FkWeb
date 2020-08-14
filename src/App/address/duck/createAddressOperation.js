@@ -54,7 +54,7 @@ const createAddressOperation = (addressState) => {
   const reqParams = reqBodyFromState(addressState);
   return (dispatch) => {
     dispatch(createAddressInProgressAction());
-    if (reqParams.address_id === undefined) {
+    if (reqParams.address_id === null) {
       createAddressAPI(
         reqParams,
         processResponse(dispatch),

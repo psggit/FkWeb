@@ -5,6 +5,7 @@ import {
   FetchAddressListOperation,
   deleteAddressOperation,
   ValidateAddressOperation,
+  resetStateAction,
 } from "../duck";
 
 const mapStateToProps = (state, props) => {
@@ -22,6 +23,7 @@ const mapDispatchToProps = (dispatch) => {
     delelteAddressFunc: (value) => dispatch(deleteAddressOperation(value)),
     selectAddressFunc: (value) => dispatch(SelectAddressOperation(value)),
     validateAddressFunc: (value) => dispatch(ValidateAddressOperation(value)),
+    resetState: () => dispatch(resetStateAction()),
     onMountFunc: (selectedAddress) =>
       dispatch(FetchAddressListOperation(selectedAddress)),
   };

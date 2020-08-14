@@ -24,6 +24,7 @@ SelectAddressComponent.propTypes = {
 function SelectAddressComponent(props) {
   useEffect(() => {
     props.onMountFunc(props.selectedAddress);
+    return () => props.resetState();
   }, []);
 
   useEffect(() => {
@@ -94,7 +95,9 @@ function SelectAddressComponent(props) {
         )}
       </div>
       <BottomNextComponent
-        onClickFunc={() => {onClickProcess()}}
+        onClickFunc={() => {
+          onClickProcess();
+        }}
         inActive={props.selectedAddress == undefined}
         title="Proceed"
       />

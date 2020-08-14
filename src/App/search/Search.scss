@@ -15,7 +15,8 @@
 .search-container {
   display: flex;
   justify-content: center;
-  margin: 10px 24px;
+  padding: 10px 24px;
+  background: $bg;
   position: relative;
   .inputWrap {
     position: relative;

@@ -4,5 +4,12 @@ const getOrderInProgress = createAction("getOrderInProgress");
 const getOrderSuccess = createAction("getOrderSuccess");
 const getOrderFailed = createAction("getOrderFailed");
 const unMountAction = createAction("unMountAction");
+const paginationAction = createAction("myOrdersPagination");
 
-export { getOrderInProgress, getOrderSuccess, getOrderFailed, unMountAction };
+export {
+  getOrderInProgress,
+  getOrderSuccess,
+  paginationAction,
+  getOrderFailed,
+  unMountAction,
+};

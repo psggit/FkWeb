@@ -1,11 +1,23 @@
 @import "../../../colors.scss";
 
+.cart-item-container {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $border-color;
+
+  .not-available {
+    text-align: center;
+    color: $error-color;
+    font-size: 10px;
+    padding-bottom: 4px;
+  }
+}
+
 .cart-item {
   display: flex;
   padding-top: 8px;
   padding-bottom: 8px;
   flex-direction: row;
-  border-bottom: 1px solid $border-color;
 
   .cart-image {
     width: 48px;

@@ -1,9 +1,12 @@
 import { getMyOrdersAPI } from "../../../utils";
-import { getOrderSuccess, getOrderFailed, getOrderInProgress } from "./actions";
+import { getOrderSuccess, getOrderFailed, getOrderInProgress, paginationAction } from "./actions";
 
-const onSuccess = (dispatch) => {
+const limit = 10
+
+const onSuccess = (dispatch, offset) => {
   return (data) => {
     dispatch(getOrderSuccess(data.data));
+    dispatch(paginationAction(offset + limit));
   };
 };
 
@@ -30,7 +33,7 @@ const processResponse = (dispatch) => {
 const GetMyOrdersOperation = (value) => {
   var reqBody = {
     offset: value.offset,
-    limit: 10,
+    limit: limit,
   };
 
   return (dispatch) => {
@@ -38,7 +41,7 @@ const GetMyOrdersOperation = (value) => {
     getMyOrdersAPI(
       reqBody,
       processResponse(dispatch),
-      onSuccess(dispatch),
+      onSuccess(dispatch, value.offset),
       onError(dispatch)
     );
   };

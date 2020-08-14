@@ -13,6 +13,7 @@ MyOrdersComponent.propTypes = {
   fetchOrderInProgress: PropTypes.bool,
   fetchOrderFailed: PropTypes.bool,
   fetchOrderSuccess: PropTypes.bool,
+  offset: PropTypes.number,
   orders: PropTypes.array,
   getMyOrdersFunc: PropTypes.func,
   unMountAction: PropTypes.func,
@@ -29,6 +30,9 @@ function MyOrdersComponent(props) {
   }
 
   const orderItems = (props) => {
+    if (props.orders.length === 0 && props.fetchOrderSuccess === true) {
+      return <div className="search-message-container">No Past Orders.</div>;
+    }
     return props.orders.map((order) => {
       return (
         <OrderItem
@@ -47,7 +51,7 @@ function MyOrdersComponent(props) {
 
   useLayoutEffect(() => {
     props.getMyOrdersFunc({
-      offset: 0,
+      offset: props.offset,
     });
     return () => {
       window.fcWidget.close();
@@ -55,15 +59,16 @@ function MyOrdersComponent(props) {
     };
   }, []);
 
-  if (props.fetchOrderInProgress) {
-    return (
-      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
-    );
-  }
-
   return (
     <>
       <HeaderComponent title="My Orders" />
+      {props.fetchOrderInProgress && (
+        <SplashLoadingComponent
+          motion={true}
+          icon={drinksIcon}
+          text="Fetching Past Orders"
+        />
+      )}
       <div className="page-container">
         <div onClick={() => launchHelp()} className="need-help-container ">
           <div className="help-content-container">
@@ -74,6 +79,18 @@ function MyOrdersComponent(props) {
         </div>
         <div className="past-orders">Past Orders</div>
         {orderItems(props)}
+        {props.orders.length === props.offset && props.orders.length != 0 && (
+          <div
+            onClick={() =>
+              props.getMyOrdersFunc({
+                offset: props.offset,
+              })
+            }
+            className="loadMore flex hcenter vcenter"
+          >
+            Load more
+          </div>
+        )}
       </div>
       <div className="padding-btm" />
       <BottomNavigationContainer />

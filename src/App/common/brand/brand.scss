@@ -19,7 +19,7 @@
 }
 .accordion-container {
   width: 100%;
-  margin: 5vh auto 0;
+  margin: 1vh auto 0;
   border-radius: 5px;
   font-family: Montserrat;
   font-style: normal;
@@ -103,18 +103,13 @@
   line-height: 18px;
   padding: 0px 16px;
   width: 100%;
-  -webkit-line-clamp: 2;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 .origin {
   font-weight: 500;
   font-size: 10px;
-  /*padding: 0px 15px;
-  position: absolute;
-  bottom:6px;*/
+  padding: 0px 15px;
+  bottom: 6px;
   color: $edit-color;
 }
 

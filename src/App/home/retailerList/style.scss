@@ -47,6 +47,14 @@
         font-family: MontserratSemiBold;
       }
 
+      .retailer_name_enable {
+        color: $primary-color;
+      }
+
+      .retailer_name_disable {
+        color: $edit-color;
+      }
+
       .retailer_info {
         font-size: 12px;
         line-height: 20px;

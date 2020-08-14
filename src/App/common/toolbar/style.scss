@@ -2,7 +2,7 @@
 @import "../../../dimens.scss";
 
 .fixed {
-  position: fixed;
+  position: fixed !important;
   z-index: 1;
 }
 

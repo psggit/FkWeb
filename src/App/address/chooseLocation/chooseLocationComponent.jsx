@@ -15,6 +15,9 @@ ChooseLocationComponent.propTypes = {
   selectedCity: PropTypes.object,
   autoComplete: PropTypes.func,
   storeGpsFunc: PropTypes.func,
+  isDeliverableCheck: PropTypes.string,
+  validateAddress: PropTypes.func,
+  resetState: PropTypes.func,
   getPlacesDetails: PropTypes.func,
   redirect: PropTypes.string,
 };
@@ -52,26 +55,22 @@ function ChooseLocationComponent(props) {
     center = props.editAddress.gps;
     title = "Edit Address";
   }
-  const [searchMode, setSearchMode] = useState(false);
   return (
     <>
       <div>
         <ToolbarComponent helpVisibility={false} title={title} />
 
         <div>
-          <div className={(searchMode ? "" : "hide ") + "page-container"}>
-            <AutoCompletePlacesComponent
-              autoCompletePlaces={props.autoCompletePlaces}
-            />
-          </div>
-          <div className={searchMode ? "hide" : ""}>
-            <MapWithMarkerComponent
-              redirect={props.redirect}
-              editAddress={props.editAddress}
-              center={center}
-              storeGpsFunc={props.storeGpsFunc}
-            />
-          </div>
+          <MapWithMarkerComponent
+            redirect={props.redirect}
+            editAddress={props.editAddress}
+            validateAddress={props.validateAddress}
+            selectedGps={props.mapCenterGps}
+            isDeliverableCheck={props.isDeliverableCheck}
+            resetState={props.resetState}
+            center={center}
+            storeGpsFunc={props.storeGpsFunc}
+          />
         </div>
       </div>
     </>

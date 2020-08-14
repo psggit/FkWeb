@@ -1,10 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { drinksIcon } from "../../../assets/images";
 import "./style.scss";
-
-//TODO:@hl05 figure out the icons here!
 
 function getSkuFromProduct(product, retailer) {
   return {
@@ -21,42 +18,48 @@ function getSkuFromProduct(product, retailer) {
   };
 }
 
-CartItemComponent.protoTypes = {
+CartItemComponent.propTypes = {
   product: PropTypes.object,
   brandName: PropTypes.string,
   price: PropTypes.number,
   volume: PropTypes.number,
-  addItem: PropTypes.function,
-  removeItem: PropTypes.function,
+  addItem: PropTypes.func,
+  removeItem: PropTypes.func,
   retailer: PropTypes.object,
 };
 
-function CartItemComponent({ product, addItem, removeItem, retailer }) {
+function CartItemComponent(props) {
+  const { product, retailer, removeItem, addItem } = props;
   let sku = getSkuFromProduct(product, retailer);
   let price = product.price.toString();
   return (
-    <div className="cart-item">
-      <img src={product.image} className="cart-image" />
-      <div className="cart-content">
-        <div className="cart-brand-name">{product.brandName}</div>
-        <div className="sub-item">
-          <div className="cart-volume">
-            {product.volume}ml | Rs {price}
-          </div>
-          <div className="cart-counter">
-            <div className="symbol" onClick={() => removeItem(sku)}>
-              -
+    <div className="cart-item-container">
+      <div className="cart-item">
+        <img src={props.product.image} className="cart-image" />
+        <div className="cart-content">
+          <div className="cart-brand-name">{product.brandName}</div>
+          <div className="sub-item">
+            <div className="cart-volume">
+              {product.volume}ml | &#x20B9; {price}
             </div>
-            <div>{product.count}</div>
-            <div className="symbol" onClick={() => addItem(sku)}>
-              +
+            <div className="cart-counter">
+              <div className="symbol" onClick={() => removeItem(sku)}>
+                -
+              </div>
+              <div>{product.count}</div>
+              <div className="symbol" onClick={() => addItem(sku)}>
+                +
+              </div>
             </div>
           </div>
         </div>
-        {!product.available && "item is not avaialable."}
       </div>
+      {!product.available && (
+        <div className="not-available">
+          Item not avaialable. Please remove from cart.
+        </div>
+      )}
     </div>
   );
 }
-
 export { CartItemComponent };

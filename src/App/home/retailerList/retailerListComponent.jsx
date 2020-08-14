@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./style.scss";
 import { rightArrowIcon } from "../../../assets/images";
 import { useHistory } from "react-router-dom";
+import { Alert } from "../../common/alert";
 
 RetailerList.propTypes = {
   retailers: PropTypes.array,
@@ -12,15 +13,19 @@ RetailerList.propTypes = {
   selectedAddress: PropTypes.object,
 };
 
-function RetailerTemplate(retailers, history) {
+function RetailerTemplate(retailers, history, showRetailerDisabledFunc) {
   const ht = history;
   function showStoreDetails(retailer) {
-    ht.push({
-      pathname: "/storefront",
-      state: {
-        retailer: retailer,
-      },
-    });
+    if (retailer.should_blur) {
+      showRetailerDisabledFunc();
+    } else {
+      ht.push({
+        pathname: "/storefront",
+        state: {
+          retailer: retailer,
+        },
+      });
+    }
   }
 
   return retailers.map((retailer) => {
@@ -33,10 +38,16 @@ function RetailerTemplate(retailers, history) {
         }}
       >
         <div className="retailer_link">
-          <div className="retailer_name line-clamp">
+          <div
+            className={
+              (retailer.should_blur
+                ? "retailer_name_disable"
+                : "retailer_name_enable") + " retailer_name line-clamp"
+            }
+          >
             {retailer.retailer_name}
           </div>
-          <div className="retailer_info line-clamp">
+          <div className={"retailer_info line-clamp"}>
             {retailer.store_info_msg}
           </div>
         </div>
@@ -79,9 +90,31 @@ function RetailerList(props) {
   const retailerFetchStatus = props.retailerFetchStatus;
   const fetchRetailersFunc = props.fetchRetailersFunc;
   const selectedAddress = props.selectedAddress;
+  const [showRetailerDisabled, SetShowRetailerDisabled] = useState(false);
+
   useEffect(() => {
     fetchRetailersFunc(selectedAddress);
   }, []);
+
+  if (showRetailerDisabled) {
+    return (
+      <Alert
+        title={"Sorry!"}
+        content={
+          "This store us currently not accepting new orders. Please try later."
+        }
+        option={"OKAY"}
+        show={true}
+        handleOption={() => {
+          SetShowRetailerDisabled(false);
+        }}
+      />
+    );
+  }
+
+  function enableRetailerDisabled() {
+    SetShowRetailerDisabled(true);
+  }
 
   return (
     <div className="retailer_list_wrap">
@@ -94,7 +127,7 @@ function RetailerList(props) {
         )}
       {retailers.length !== 0 &&
         retailerFetchStatus === "success" &&
-        RetailerTemplate(retailers, history)}
+        RetailerTemplate(retailers, history, enableRetailerDisabled)}
       {retailers.length === 0 &&
         retailerFetchStatus === "success" &&
         NoRetailerTemplate(message, history)}

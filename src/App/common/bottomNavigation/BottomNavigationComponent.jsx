@@ -11,6 +11,7 @@ import {
   searchActiveIcon,
   myOrdersActiveIcon,
 } from "../../../assets/images";
+import PropTypes from "prop-types";
 
 const tabs = [
   {
@@ -39,6 +40,44 @@ const tabs = [
   },
 ];
 
+BottomComponent.propTypes = {
+  val: PropTypes.object,
+  loc: PropTypes.string,
+  items: PropTypes.number,
+};
+
+function BottomComponent(props) {
+  const value = props.val;
+  const location = props.loc;
+  return (
+    <div className="navItem">
+      <span className="navImage">
+        {value.route == location ? (
+          <img src={value.activeIcon} />
+        ) : (
+          <img src={value.icon} />
+        )}
+      </span>
+      {value.label == "Cart" ? (
+        <div
+          className={(value.route == location ? "activeLink " : "") + "navText"}
+        >
+          {value.label.toUpperCase()}{" "}
+          {props.items > 0 ? (
+            <span className="navBadge hcenter flex vcenter">{props.items}</span>
+          ) : null}
+        </div>
+      ) : (
+        <div
+          className={(value.route == location ? "activeLink " : "") + "navText"}
+        >
+          {value.label.toUpperCase()}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function BottomNavigationComponent(props) {
   let location = useLocation().pathname;
   const { cartProducts } = props;
@@ -53,27 +92,21 @@ function BottomNavigationComponent(props) {
       <div className="navBar navBar-height">
         {tabs.map((value, index) => (
           <div key={"navTouch" + index} className="col-3">
-            <NavLink to={value.route} activeClassName="activeLink">
-              <div className="navItem">
-                <span className="navImage">
-                  {value.route == location ? (
-                    <img src={value.activeIcon} />
-                  ) : (
-                    <img src={value.icon} />
-                  )}
-                </span>
-                {value.label == "Cart" ? (
-                  <div className="navText">
-                    {value.label.toUpperCase()}{" "}
-                    {totalCartItems > 0 ? (
-                      <span className="navBadge hcenter flex vcenter">{totalCartItems}</span>
-                    ) : null}
-                  </div>
-                ) : (
-                  <div className="navText">{value.label.toUpperCase()}</div>
-                )}
-              </div>
-            </NavLink>
+            {value.route != location ? (
+              <NavLink to={value.route} activeClassName="activeLink">
+                <BottomComponent
+                  val={value}
+                  loc={location}
+                  items={totalCartItems}
+                />
+              </NavLink>
+            ) : (
+              <BottomComponent
+                val={value}
+                loc={location}
+                items={totalCartItems}
+              />
+            )}
           </div>
         ))}
       </div>

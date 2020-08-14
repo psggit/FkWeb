@@ -63,16 +63,15 @@ const ValidateAddressOperation = (address) => {
     validateDeliveryAddressAPI(
       reqBody,
       processResponse(dispatch),
-      onSuccessHandler(dispatch, address),
+      onSuccessHandler(dispatch),
       onErrorHandler(dispatch)
     );
   };
 };
 
-const onSuccessHandler = (dispatch, address) => {
+const onSuccessHandler = (dispatch) => {
   return () => {
     dispatch(validateAddressAction("success"));
-    dispatch(selectAddressAction(address));
   };
 };
 

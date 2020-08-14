@@ -20,6 +20,7 @@ declare type Retailer = {
   id: number,
   name: string,
   description: string,
+  fssaiNo: string,
 };
 
 declare type Product = {
@@ -95,6 +96,7 @@ let setRetailer = (state: State, sku: Sku): State => {
     id: sku.retailerId,
     name: sku.retailerName,
     description: sku.retailerDescription,
+    fssaiNo: sku.retailerFssaiNo,
   };
   return state;
 };

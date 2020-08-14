@@ -23,18 +23,17 @@ function BrandComponent(props) {
 
   const activeClass = active ? "active" : "inactive";
   return (
-    <React.Fragment>
+    <>
       <div className={activeClass}>
         <div className="accordionItem" onClick={toggle}>
           <div className="sku-item">
             <img className="thumbnail" src={brand.logo_low_res_image} alt="" />
-            <span className="summary">
-              {brand.brand_name}
-              <br />
-              <span className="origin no-fold-text">
+            <div className="sku-content-container">
+              <div className="summary line-clamp">{brand.brand_name}</div>
+              <div className="origin no-fold-text">
                 {brand.country_of_origin}
-              </span>
-            </span>
+              </div>
+            </div>
           </div>
           <span className="">
             <img src={active ? UpArrow : DownArrow} alt="upDown Arrow" />
@@ -53,7 +52,7 @@ function BrandComponent(props) {
           </React.Fragment>
         ))}
       </div>
-    </React.Fragment>
+    </>
   );
 }
 

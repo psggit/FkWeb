@@ -9,6 +9,7 @@ function AddMoreComponent(retailer) {
     retailer_name: retailer.retailer.name,
     store_info: retailer.retailer.description,
     retailer_id: retailer.retailer.id,
+    fssai_no: retailer.retailer.fssaiNo,
   };
 
   function showStoreDetails() {

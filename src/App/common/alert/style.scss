@@ -14,13 +14,13 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
-  padding: 12px 0px 8px 0px !important;
+  padding: 4px 0px 8px 0px !important;
   border-bottom: none !important;
 }
 
 .modal-content {
   font-size: 14px;
-  padding: 12px 0px 12px 0px;
+  padding: 4px 0px 0px 0px;
   color: $primary-color;
   border: 0px !important;
   background-color: inherit !important;
@@ -33,23 +33,28 @@
 }
 
 .modal-button {
-  color: #fff;
+  color: $orange-color;
+  text-align: end;
   background: none;
   outline: 0;
   border: 0;
   font-size: 12px;
   padding: 8px;
+  width: 60px;
+  align-self: flex-end;
   border-radius: 4px;
 }
 
 .modal-button-one {
   @extend .modal-button;
   margin-left: 16px;
+  width: auto;
   color: $orange-color;
 }
 
 .modal-button-two {
   @extend .modal-button;
+  width: auto;
   margin-left: 16px;
 }
 

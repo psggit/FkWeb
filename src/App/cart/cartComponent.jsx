@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 import "./style.scss";
 import { AddMoreComponent } from "./addMore";
@@ -132,7 +132,7 @@ function CartComponent(props) {
   }, []);
 
   if (props.validationSuccessful) {
-    historyPush("/address/select/osm");
+    return <Redirect to="/address/select/osm" />;
   }
 
   let isEmpty = props.isEmpty;

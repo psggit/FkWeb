@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
     fetchOrderInProgress: state.myOrders.fetchOrderInProgress,
     fetchOrderFailed: state.myOrders.fetchOrderFailed,
     fetchOrderSuccess: state.myOrders.fetchOrderSuccess,
+    offset: state.myOrders.offset,
   };
 };
 

@@ -2,6 +2,7 @@ import {
   getPlacesDetailsAction,
   autoCompleteAction,
   autoCompleteFailAction,
+  deliveryCheckAction,
   autoCompleteInProgressAction,
   //  getAddressFromGpsFailAction,
   //  getAddressFromGpsInProgressAction,
@@ -17,6 +18,7 @@ const apiStatusInitial = {
 const initialState = {
   isSearchMode: false,
   isCancelButton: true,
+  isDeliverableCheck: "waiting",
   autoCompletePlaces: [],
   apiStatus: apiStatusInitial,
   placesInfo: {},
@@ -37,6 +39,10 @@ const chooseLocationReducer = createReducer(initialState, {
   [autoCompleteInProgressAction]: (state) => ({
     ...state,
     apiStatus: { ...apiStatusInitial, autocompleteAPIStatus: "inProgress" },
+  }),
+  [deliveryCheckAction]: (state, action) => ({
+    ...state,
+    isDeliverableCheck: action.payload,
   }),
   [storeMapGpsAction]: (state, action) => ({
     ...state,

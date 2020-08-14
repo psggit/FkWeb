@@ -35,6 +35,9 @@ function OrderPlacedComponent(props) {
 
   useLayoutEffect(() => {
     props.clearCart();
+    return () => {
+      window.fcWidget.close();
+    };
   }, []);
 
   function handleBack() {
