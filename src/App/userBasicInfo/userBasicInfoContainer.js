@@ -10,6 +10,7 @@ import {
   FinaliseIDProofValueOperation,
   UpdateKYCOperation,
   login,
+  exitToFk,
 } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -30,6 +31,8 @@ const mapStateToProps = (state) => {
     showError: state.ubiStore.showError,
     errorMessage: state.ubiStore.errorMessage,
     userInfo: state.ubiStore.userInfo,
+    grantTokenError: state.ubiStore.grantTokenError,
+    grantTokenErrorMessage: state.ubiStore.grantTokenErrorMessage,
   };
 };
 
@@ -46,6 +49,7 @@ const mapDispatchToProps = (dispatch) => {
     checkDeclarationFunc: () => dispatch(CheckDeclarationOperation()),
     login: () => dispatch(login()),
     closeError: () => dispatch(ErrorClose()),
+    exitToFk: () => dispatch(exitToFk()),
   };
 };
 

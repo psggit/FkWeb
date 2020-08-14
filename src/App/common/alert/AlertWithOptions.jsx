@@ -22,8 +22,8 @@ function AlertWithOptions({
   return (
     <div className={"modal display-block"}>
       <section className="modal-main">
-        <div className="modal-header"> {title}</div>
-        <div className="modal-content"> {content}</div>
+        {title && <div className="modal-header"> {title}</div>}
+        {content && <div className="modal-content"> {content}</div>}
         <div className="modal-btn-container">
           <button className="modal-button-two" onClick={handleOption2}>
             {option2}

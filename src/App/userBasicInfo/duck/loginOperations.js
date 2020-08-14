@@ -69,8 +69,9 @@ const loginWithGrantToken = (dispatch) => {
       dispatch(fetchGrantTokenSuccess());
       loginHandler(gt, dispatch);
     })
-    .catch((err) => {
-      dispatch(fetchGrantTokenFailed(err));
+    .catch(() => {
+      const message = "Please provide neccessary permissions to use HipBar";
+      dispatch(fetchGrantTokenFailed(message));
     });
 };
 
@@ -86,4 +87,11 @@ const login = () => {
   };
 };
 
-export { login };
+const exitToFk = () => {
+  return () => {
+    let navigationModule = fkPlatform.getModuleHelper().getNavigationModule();
+    navigationModule.exitSession();
+  };
+};
+
+export { login, exitToFk };

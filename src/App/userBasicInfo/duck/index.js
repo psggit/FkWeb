@@ -10,5 +10,5 @@ export {
   CheckDeclarationOperation,
 } from "./operations";
 
-export { login } from "./loginOperations";
+export { login, exitToFk } from "./loginOperations";
 export { userLocalStorageHandler } from "./userLocalStorageHandler";
