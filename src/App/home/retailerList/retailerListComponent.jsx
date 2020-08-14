@@ -101,7 +101,7 @@ function RetailerList(props) {
       <Alert
         title={"Sorry!"}
         content={
-          "This store us currently not accepting new orders. Please try later."
+          "This store is currently not accepting new orders. Please try later."
         }
         option={"OKAY"}
         show={true}
