@@ -42,8 +42,8 @@ function SaveAddressCheckBoxComponent(props) {
       </div>
       {selectedBox !== "home" && (
         <EditText
-          placeholde="Home, Office, etc."
-          rid="addressType"
+          placeholder="Home, Office, etc."
+          id="addressType"
           title="SAVE AS"
           inputType="text"
           onTextChanged={(id, value) => {

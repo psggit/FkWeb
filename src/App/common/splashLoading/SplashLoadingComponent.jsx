@@ -14,6 +14,8 @@ SplashLoadingComponent.propTypes = {
 };
 
 function SplashLoadingComponent(props) {
+  let history = useHistory();
+
   function goHome() {
     history.push("/home");
   }
