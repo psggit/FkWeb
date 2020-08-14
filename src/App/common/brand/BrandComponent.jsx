@@ -46,12 +46,7 @@ function BrandComponent(props) {
               <div>
                 <span>{sku.volume} ml</span>
                 <span> | </span>
-                <span>
-                  &#x20B9;{" "}
-                  {sku.price
-                    .toString()
-                    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
-                </span>
+                <span>&#x20B9; {sku.price.toString()}</span>
               </div>
               <AddItemComponent key={i + sku.sku_id} {...props} sku={sku} />
             </div>
@@ -62,5 +57,5 @@ function BrandComponent(props) {
   );
 }
 
+//.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
 export { BrandComponent };
-

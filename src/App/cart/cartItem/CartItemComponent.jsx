@@ -33,7 +33,7 @@ CartItemComponent.protoTypes = {
 
 function CartItemComponent({ product, addItem, removeItem, retailer }) {
   let sku = getSkuFromProduct(product, retailer);
-  let price =  product.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  let price = product.price.toString();
   return (
     <div className="cart-item">
       <img src={product.image} className="cart-image" />
