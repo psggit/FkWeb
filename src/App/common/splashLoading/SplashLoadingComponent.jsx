@@ -2,7 +2,6 @@ import React from "react";
 import "./style.scss";
 import PropTypes from "prop-types";
 import { drinksIcon } from "../../../assets/images";
-import { useHistory } from "react-router-dom";
 import { ButtonComponent } from "../bottomNext/BottomNextComponent";
 
 SplashLoadingComponent.propTypes = {
@@ -11,6 +10,7 @@ SplashLoadingComponent.propTypes = {
   motion: PropTypes.bool,
   buttonText: PropTypes.any,
   buttonFunc: PropTypes.any,
+  dontGoHome: PropTypes.func,
 };
 
 function SplashLoadingComponent(props) {
@@ -42,9 +42,11 @@ function SplashLoadingComponent(props) {
               }}
             />
           </div>
-          <div onClick={() => goHome()} className="splash-button">
-            Go To Home
-          </div>
+          {!props.dontGoHome && (
+            <div onClick={() => goHome()} className="splash-button">
+              Go To Home
+            </div>
+          )}
         </>
       )}
     </div>

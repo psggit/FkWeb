@@ -42,6 +42,7 @@ function LFComponent(props) {
         text="Something went wrong, please try again."
         buttonFunc={login}
         buttonText="Retry"
+        dontGoHome={true}
       />
     </>
   );
