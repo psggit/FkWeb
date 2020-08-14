@@ -10,7 +10,7 @@ SplashLoadingComponent.propTypes = {
   motion: PropTypes.bool,
   buttonText: PropTypes.any,
   buttonFunc: PropTypes.any,
-  dontGoHome: PropTypes.func,
+  dontGoHome: PropTypes.bool,
 };
 
 function SplashLoadingComponent(props) {
