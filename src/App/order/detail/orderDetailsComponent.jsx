@@ -13,7 +13,6 @@ import {
   OrderPlacedHeaderComponent,
   ArrivingComponent,
   OrderSummaryComponent,
-  OrderSuccessComponent,
   TellAFriendComponent,
 } from "../components";
 import { CancelOrderComponent } from "../../common/summary";

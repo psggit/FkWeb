@@ -1,7 +1,12 @@
 import { getMyOrdersAPI } from "../../../utils";
-import { getOrderSuccess, getOrderFailed, getOrderInProgress, paginationAction } from "./actions";
+import {
+  getOrderSuccess,
+  getOrderFailed,
+  getOrderInProgress,
+  paginationAction,
+} from "./actions";
 
-const limit = 10
+const limit = 10;
 
 const onSuccess = (dispatch, offset) => {
   return (data) => {
