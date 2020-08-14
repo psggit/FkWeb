@@ -1,12 +1,12 @@
 import { tcAgreed } from "./actions";
 
 const setTc = () => {
-  localStorage.setItem("tandc/status", "true");
+  sessionStorage.setItem("tandc/status", "true");
 };
 
 const checkTC = () => {
   return (dispatch) => {
-    var agreed = localStorage.getItem("tandc/status");
+    var agreed = sessionStorage.getItem("tandc/status");
     if (agreed === "true") {
       dispatch(tcAgreed());
     }
