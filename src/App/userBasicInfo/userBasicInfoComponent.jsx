@@ -20,10 +20,10 @@ function GranTokenFailure(props) {
     <AlertWithOptions
       title={"Login Failed"}
       content={props.grantTokenErrorMessage}
-      option1={"EXIT"}
-      option2={"TRY AGAIN"}
-      handleOption1={props.exitToFk}
-      handleOption2={props.login}
+      option1={"TRY AGAIN"}
+      option2={"EXIT"}
+      handleOption1={props.login}
+      handleOption2={props.exitToFk}
     />
   );
 }
