@@ -12,6 +12,7 @@ import {
   changeDocumentValueAction,
   showCheckboxAction,
   checkCheckboxAction,
+  fetchGrantTokenFailed,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -22,6 +23,8 @@ const initialState = () => {
     loginSuccess: false,
     loginFailed: false,
     collectUserDetails: false,
+    grantTokenError: false,
+    grantTokenErrorMessage: "",
     userInfo: {},
     birthYear: "",
     gender: "",
@@ -42,11 +45,21 @@ const initialState = () => {
 };
 
 const userInfoCreateReducer = createReducer(initialState(), {
+  [fetchGrantTokenFailed]: (state, e) => ({
+    ...state,
+    loginInProgress: false,
+    loginSuccess: false,
+    loginFailed: false,
+    grantTokenError: true,
+    grantTokenErrorMessage: e.payload,
+  }),
   [loginInProgress]: (state) => ({
     ...state,
     loginInProgress: true,
     loginSuccess: false,
     loginFailed: false,
+    grantTokenError: false,
+    grantTokenErrorMessage: "",
   }),
   [loginSuccess]: (state, action) => ({
     ...state,

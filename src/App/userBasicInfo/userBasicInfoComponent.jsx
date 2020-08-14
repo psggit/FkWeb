@@ -7,6 +7,26 @@ import { SplashLoadingComponent } from "../common/splashLoading";
 import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { BottomNextComponent } from "../common/bottomNext";
+import { AlertWithOptions } from "../common/alert";
+
+GranTokenFailure.propTypes = {
+  login: PropTypes.func,
+  grantTokenErrorMessage: PropTypes.string,
+  exitToFk: PropTypes.func,
+};
+
+function GranTokenFailure(props) {
+  return (
+    <AlertWithOptions
+      title={"Login Failed"}
+      content={props.grantTokenErrorMessage}
+      option1={"EXIT"}
+      option2={"TRY AGAIN"}
+      handleOption1={props.exitToFk}
+      handleOption2={props.login}
+    />
+  );
+}
 
 LFComponent.propTypes = {
   login: PropTypes.func,
@@ -45,6 +65,8 @@ CollectInfoComponent.propTypes = {
   selectingIDProofFunc: PropTypes.func,
   changeDocumentValueFunc: PropTypes.func,
   finaliseIDProofFunc: PropTypes.func,
+  grantTokenError: PropTypes.bool,
+  grantTokenErrorMessage: PropTypes.string,
 };
 
 const OpenIDOptions = () => {
@@ -254,7 +276,6 @@ function CollectInfoComponent(props) {
   const checkDeclaration = props.checkDeclaration;
   const showDeclaration = props.showDeclaration;
   const updateKycFunc = props.updateKycFunc;
-  console.log(props);
   const data = {
     dob: yob,
     gender: props.gender,
@@ -303,6 +324,7 @@ UserBasicInfoComponent.propTypes = {
   errorMessage: PropTypes.string,
   closeError: PropTypes.func,
   userInfo: PropTypes.object,
+  grantTokenError: PropTypes.bool,
 };
 
 function UserBasicInfoComponent(props) {
@@ -310,7 +332,9 @@ function UserBasicInfoComponent(props) {
   const loginInProgress = props.loginInProgress;
   const loginFailed = props.loginFailed;
   const collectUserDetails = props.collectUserDetails;
-  const trigger = !(loginSuccess || loginFailed || loginInProgress);
+  const grantTokenError = props.grantTokenError;
+  const trigger =
+    !grantTokenError && !(loginSuccess || loginFailed || loginInProgress);
   useEffect(() => {
     if (trigger) {
       props.login();
@@ -327,6 +351,10 @@ function UserBasicInfoComponent(props) {
       });
     }
   }, [props.loginSuccess]);
+
+  if (props.grantTokenError) {
+    return <GranTokenFailure {...props} />;
+  }
 
   if (loginInProgress) {
     return (
