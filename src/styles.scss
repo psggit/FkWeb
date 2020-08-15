@@ -295,7 +295,6 @@ input[type="radio"]:checked {
 .input_field_100 {
   background: transparent;
   width: 100%;
-  height: 36px;
   padding: 4px 0px;
   padding-top: 0px;
   border: 0px;
@@ -438,6 +437,13 @@ input[type="radio"]:checked {
   opacity: 0.5;
   background-size: 100%;
   transition: background 0s;
+}
+
+.btn-general.disable.ripple,
+.btn-general.disable.ripple:hover,
+.btn-general.disable.ripple:active {
+  background: $edit-color;
+  opacity: 1;
 }
 
 .flex {

@@ -17,6 +17,7 @@ function CriticaladsComponent(props) {
   let [startIndex, setStartIndex] = useState(0);
 
   const onCloseHandler = () => {
+    document.body.classList.remove('modal-open');
     props.setPopupVisibility();
   };
 
@@ -36,6 +37,7 @@ function CriticaladsComponent(props) {
     return null;
   }
 
+  document.body.classList.add('modal-open');
   return (
     <div className="options-overlay flex hcenter vcenter">
       <div className="ad-modal-content">
@@ -47,7 +49,7 @@ function CriticaladsComponent(props) {
             indicators={false}
           >
             {props.items.map((item, index) => (
-              <Carousel.Item key={"carousel-item-" + index}>
+              <Carousel.Item key={"carousel-item-" + item.id}>
                 <img className="critical-ad-image" src={item.high_res_image} />
                 <div className="section-bottom">
                   <div className="section-content">

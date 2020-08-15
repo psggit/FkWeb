@@ -63,6 +63,9 @@ function NoRetailerTemplate(text, history) {
   return (
     <div className="noRetailers hcenter vcenter flex">
       <div>{text}</div>
+      <div onClick={() => showChooseAddress()} className="tryDifferentAddress">
+        Sorry! We don't deliver here yet.
+      </div>
     </div>
   );
 }
