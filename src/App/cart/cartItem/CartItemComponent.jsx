@@ -56,7 +56,7 @@ function CartItemComponent(props) {
       </div>
       {!product.available && (
         <div className="not-available">
-          Item not avaialable. Please remove from cart.
+          Item not available. Please remove from cart.
         </div>
       )}
     </div>
