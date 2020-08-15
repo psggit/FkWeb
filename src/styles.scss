@@ -79,6 +79,7 @@ div,
 a {
   outline-style: none;
   text-decoration: none !important;
+  -webkit-appearance: none;
 }
 
 :focus {
@@ -91,6 +92,7 @@ body {
   font-family: "Montserrat";
   background-color: $bg;
   display: flex;
+  -webkit-appearance: none;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -117,8 +119,11 @@ h1 {
   display: none !important;
 }
 
-button, [type="button"], [type="reset"], [type="submit"] {
-    -webkit-appearance: none;
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: none;
 }
 
 .page-container {
