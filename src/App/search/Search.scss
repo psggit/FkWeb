@@ -24,15 +24,17 @@
   }
   .search-img {
     position: absolute;
-    top: 9px;
+    top: 10px;
     left: 9px;
     background: #272729;
   }
   .inputCross {
     position: absolute;
+    width: 36px;
+    height: 36px;
     padding: 10px;
-    right: 3px;
-    top: -4px;
+    top: 0px;
+    right: 0px;
   }
   input {
     padding: 7px 7px;

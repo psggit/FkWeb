@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { searchIcon } from "../../assets/images";
+import { searchIcon, exitIcon } from "../../assets/images";
 import PropTypes from "prop-types";
 
 SearchBox.propTypes = {
@@ -19,6 +19,11 @@ function SearchBox(props) {
     setInputValue(value);
     handleInput(value);
   }
+
+  function clearText() {
+    setInputValue("");
+  }
+
   return (
     <>
       <div className="inputWrap">
@@ -34,6 +39,16 @@ function SearchBox(props) {
           placeholder={placeholder}
           className="inputclass"
           autoComplete="off"
+        />
+        <img
+          className={
+            inputValue == ""
+              ? "hide-content inputCross"
+              : "show-content inputCross"
+          }
+          src={exitIcon}
+          alt="exitIcon"
+          onClick={clearText}
         />
       </div>
     </>
