@@ -28,7 +28,7 @@ function SearchBox(props) {
           type={inputType}
           name="input-form"
           onFocus={() => onFocusIn()}
-          onBlur={() => onFocusOut()}
+          onBlur={(e) => onFocusOut(e)}
           value={inputValue}
           onChange={(e) => handleChange(e.target.value)}
           placeholder={placeholder}

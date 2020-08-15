@@ -41,6 +41,7 @@ function SearchComponent(props) {
   const isFirstRun = useRef(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (isFirstRun.current) {
       isFirstRun.current = false;
       return;

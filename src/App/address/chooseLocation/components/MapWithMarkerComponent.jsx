@@ -8,6 +8,7 @@ import { searchIcon } from "../../../../assets/images";
 import { useHistory } from "react-router-dom";
 import "../style.scss";
 
+import { SearchBox } from "../../../search";
 import { LoadingComponent } from "../../../common/loading";
 
 const mapStyle = require("./styles.json");
@@ -116,14 +117,11 @@ function MapComponent(props) {
         >
           <div>
             <div className="search-container">
-              <img className="search-img" src={searchIcon} alt="searchIcon" />
-              <input
-                type="text"
+              <SearchBox
+                handleInput={setQuery}
                 placeholder="Search Location"
-                className="inputclass"
-                onFocus={onFocusIn}
-                onBlur={(e) => onFocusOut(e)}
-                onChange={(e) => setQuery(e.target.value)}
+                onFocusIn={onFocusIn}
+                onFocusOut={onFocusOut}
               />
               {isCancelButton ? <button>Cancel</button> : ""}
             </div>

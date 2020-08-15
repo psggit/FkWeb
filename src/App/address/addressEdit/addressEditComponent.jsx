@@ -42,8 +42,8 @@ function SaveAddressCheckBoxComponent(props) {
       </div>
       {selectedBox !== "home" && (
         <EditText
-          placeholde="Home, Office, etc."
-          rid="addressType"
+          placeholder="Home, Office, etc."
+          id="addressType"
           title="SAVE AS"
           inputType="text"
           onTextChanged={(id, value) => {
@@ -107,7 +107,8 @@ function AddressInputComponent(props) {
         title="PINCODE"
         autoComplete="off"
         value={pincode ? pincode : ""}
-        inputType="number"
+        maxLength={6}
+        inputType="tel"
       />
       <EditText
         id="landMarkText"

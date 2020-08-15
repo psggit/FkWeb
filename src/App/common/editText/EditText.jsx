@@ -12,9 +12,13 @@ EditText.propTypes = {
   errorMessage: PropTypes.string, // To display the error message below the line
   inputMode: PropTypes.string, // Pass numeric to show number keypad.
   autoComplete: PropTypes.string, // section-cc | cc-number, cc-name, cc-csc, cc-exp, cc-email
-  maxLength: PropTypes.string, // To limit the number of characters
+  maxLength: PropTypes.number, // To limit the number of characters
   inActive: PropTypes.bool,
 };
+
+function validateLength(length, maxLength) {
+  if (length == maxLength) return false;
+}
 
 function EditText(props) {
   const {
@@ -36,6 +40,21 @@ function EditText(props) {
     input = (
       <textarea
         id={id}
+        onChange={(e) => onTextChanged(id, e.target.value)}
+        className="input_field_100 dob"
+        value={value}
+        placeholder={placeholder}
+        type={inputType}
+        inputMode={inputMode}
+        autoComplete={autoComplete}
+        maxLength={maxLength}
+      />
+    );
+  } else if (inputType == "number") {
+    input = (
+      <input
+        id={id}
+        pattern="/^-?\d+\.?\d*$/"
         onChange={(e) => onTextChanged(id, e.target.value)}
         className="input_field_100 dob"
         value={value}

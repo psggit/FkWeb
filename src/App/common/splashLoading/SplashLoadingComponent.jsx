@@ -3,6 +3,7 @@ import "./style.scss";
 import PropTypes from "prop-types";
 import { drinksIcon } from "../../../assets/images";
 import { ButtonComponent } from "../bottomNext/BottomNextComponent";
+import { useHistory } from "react-router-dom";
 
 SplashLoadingComponent.propTypes = {
   text: PropTypes.string,
@@ -14,6 +15,8 @@ SplashLoadingComponent.propTypes = {
 };
 
 function SplashLoadingComponent(props) {
+  let history = useHistory();
+
   function goHome() {
     history.push("/home");
   }
