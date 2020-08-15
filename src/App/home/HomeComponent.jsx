@@ -22,7 +22,7 @@ function HomeComponent(props) {
   const history = useHistory();
 
   useLayoutEffect(() => {
-    const interval = 60000;
+    const interval = 30000;
     let trigger = !(
       props.getCurrentOrderInProgress ||
       props.getCurrentOrderSuccess ||
