@@ -86,6 +86,10 @@ a {
   outline: none !important;
 }
 
+.pac-item:hover {
+  background-color: transparent !important;
+}
+
 select {
   -webkit-appearance: none;
 }
