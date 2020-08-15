@@ -441,6 +441,13 @@ input[type="radio"]:checked {
   transition: background 0s;
 }
 
+.btn-general.disable.ripple,
+.btn-general.disable.ripple:hover,
+.btn-general.disable.ripple:active {
+  background: $edit-color;
+  opacity: 1;
+}
+
 .flex {
   display: flex;
 }

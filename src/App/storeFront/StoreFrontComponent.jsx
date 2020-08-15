@@ -98,7 +98,7 @@ function StoreFrontComponent(props) {
             retailer={props.retailer}
           />
         ))}
-        {item.length >= offset && item.length !== 0 && (
+        {item.length == offset + limit && item.length !== 0 && (
           <div
             className="flex hcenter vcenter loadMore"
             onClick={() => {

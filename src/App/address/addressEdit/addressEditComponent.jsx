@@ -105,6 +105,7 @@ function AddressInputComponent(props) {
         }}
         id="pincodeText"
         title="PINCODE"
+        autoComplete="off"
         value={pincode ? pincode : ""}
         maxLength={6}
         inputType="tel"

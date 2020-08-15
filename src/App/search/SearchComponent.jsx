@@ -29,6 +29,10 @@ function SearchComponent(props) {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     window.addEventListener("focusout", () => {
       SetCancelBtn(false);
     });

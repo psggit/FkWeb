@@ -7,8 +7,20 @@
     />
     <title>HipBar: The Drinks App</title>
   </head>
+  <style>
+    .loadWrapper {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background-color: black;
+    }
+  </style>
   <body>
-    <section id="app"></section>
+    <section id="app">
+      <div class="loadWrapper"></div>
+    </section>
     <script id="freshchat-js-sdk">
       (function () {
         return function e(t, n, a) {

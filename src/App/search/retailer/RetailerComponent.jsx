@@ -3,16 +3,26 @@ import PropTypes from "prop-types";
 import { LoadingComponent } from "../../common/loading";
 import { BrandContainer } from "../../common/brand";
 import { SearchNotAvailable } from "../../common/searchNotAvailable";
+import { useHistory } from "react-router-dom";
 
 function RetailerComponent(props) {
   const { query, data, pending } = props;
+  const ht = useHistory()
+  function redirectToStore(retailer) {
+    ht.push({
+      pathname: "/storefront",
+      state: {
+        retailer: retailer,
+      },
+    });
+  }
 
   const renderSku = (retailer) => {
     return (
       <>
         {retailer.brands.map((brand, index) => (
           <BrandContainer
-            key={brand.brand_id}
+            key={brand.brand_id + "," + retailer.retailer_id}
             brand={brand}
             retailer={retailer}
           />
@@ -49,7 +59,10 @@ function RetailerComponent(props) {
               <React.Fragment key={index + "s"}>
                 <div className="accordion-title">
                   <span> </span>
-                  <div key={retailer.retailer_name}>
+                  <div
+                    onClick={() => redirectToStore(retailer)}
+                    key={retailer.retailer_name}
+                  >
                     {retailer.retailer_name}
                   </div>
                 </div>
