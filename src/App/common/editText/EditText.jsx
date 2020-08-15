@@ -41,7 +41,7 @@ function EditText(props) {
       <textarea
         id={id}
         onChange={(e) => onTextChanged(id, e.target.value)}
-        className="input_field_100 dob"
+        className="text_input_field_100 input_field_100 dob"
         value={value}
         placeholder={placeholder}
         type={inputType}
