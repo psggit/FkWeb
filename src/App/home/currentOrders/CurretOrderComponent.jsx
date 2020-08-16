@@ -13,8 +13,11 @@ function CurretOrderComponent(props) {
   const { title, msg, onClickFunc } = props;
 
   return (
-    <div className="current-order-height" onClick={onClickFunc}>
-      <div className="current-order-bar current-order-height">
+    <div className="current-order-height">
+      <div
+        className="current-order-bar current-order-height"
+        onClick={onClickFunc}
+      >
         <img className="current-image" src={deliveryPersonIcon} />
         <div className="current-order-detail">
           <div className="order-title">{title}</div>

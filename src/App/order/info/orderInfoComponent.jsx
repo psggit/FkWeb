@@ -3,6 +3,7 @@ import { ToolbarComponent } from "../../common/toolbar";
 import { BottomNextComponent } from "../../common/bottomNext";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+import { HelpComponent } from "../../common/help";
 
 import "../styles.scss";
 import {
@@ -33,6 +34,11 @@ function OrderInfoComponent(props) {
   let productDetails = order.pdt_details.map((item) => {
     return { ...item, reserved_price: item.display_price };
   });
+
+  function launchHelp() {
+    window.fcWidget.open();
+    window.fcWidget.show();
+  }
 
   function handleBack() {
     if (props.order == null) {
@@ -102,6 +108,7 @@ function OrderInfoComponent(props) {
           addressType={order.address_type}
         />
         <OrderSummaryComponent orderDetail={summayProps} />
+        <HelpComponent launchHelp={() => launchHelp()} />
         <CancelOrderComponent
           onClick={() => {
             window.fcWidget.open();
