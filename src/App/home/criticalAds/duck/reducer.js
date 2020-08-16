@@ -8,12 +8,12 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
-  isViewed: true,
+  hasViewed: false,
   criticalAdsFetchState: "inProgress",
 };
 
 const criticalAdsReducer = createReducer(initialState, {
-  [setPopupVisibility]: (state) => ({ ...state, isViewed: false }),
+  [setPopupVisibility]: (state) => ({ ...state, hasViewed: true}),
   [fetchCriticalAdsSuccess]: (state, action) => ({
     ...state,
     items: action.payload.ads,

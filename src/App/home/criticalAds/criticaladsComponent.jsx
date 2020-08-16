@@ -8,16 +8,16 @@ CriticaladsComponent.propTypes = {
   items: PropTypes.any,
   fetchHomeCriticalAds: PropTypes.any,
   setPopupVisibility: PropTypes.any,
-  isViewed: PropTypes.any,
+  hasViewed: PropTypes.any,
   address: PropTypes.object,
 };
 
 function CriticaladsComponent(props) {
-  const isVisible = props.isViewed;
+  const userHasViewed = props.hasViewed;
   let [startIndex, setStartIndex] = useState(0);
 
   const onCloseHandler = () => {
-    document.body.classList.remove('modal-open');
+    document.body.classList.remove("modal-open");
     props.setPopupVisibility();
   };
 
@@ -26,18 +26,18 @@ function CriticaladsComponent(props) {
   };
 
   useEffect(() => {
-    if (props.address && props.items.length === 0) {
+    if (props.address && !userHasViewed) {
       props.fetchHomeCriticalAds({
         cityID: props.address.city.id,
       });
     }
   }, []);
 
-  if (!isVisible || props.items.length === 0) {
+  if (userHasViewed || props.items.length === 0) {
     return null;
   }
 
-  document.body.classList.add('modal-open');
+  document.body.classList.add("modal-open");
   return (
     <div className="options-overlay flex hcenter vcenter">
       <div className="ad-modal-content">

@@ -1,6 +1,10 @@
 import { connect } from "react-redux";
 import { HomeComponent } from "./HomeComponent";
-import { GetCurrentOrdersOperation, getCurrentOrderInProgress } from "./duck";
+import {
+  GetCurrentOrdersOperation,
+  getCurrentOrderInProgress,
+  resetOnUnmount,
+} from "./duck";
 
 const mapStateToProps = (state) => {
   return {
@@ -17,6 +21,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getCurrentOrdersFunc: () => dispatch(GetCurrentOrdersOperation()),
     currentOrderInProgress: () => dispatch(getCurrentOrderInProgress()),
+    resetOnUnmount: () => dispatch(resetOnUnmount()),
   };
 };
 

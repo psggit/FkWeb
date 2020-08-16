@@ -2,6 +2,7 @@ import {
   getCurrentOrderInProgress,
   getCurrentOrderSuccess,
   getCurrentOrderFailed,
+  resetOnUnmount,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -32,6 +33,12 @@ const currentOrderReducer = createReducer(initialState, {
     getCurrentOrderInProgress: false,
     getCurrentOrderSuccess: false,
     getCurrentOrderFailed: true,
+  }),
+  [resetOnUnmount]: (state) => ({
+    ...state,
+    getCurrentOrderInProgress: false,
+    getCurrentOrderSuccess: false,
+    getCurrentOrderFailed: false,
   }),
 });
 

@@ -16,6 +16,7 @@ HomeComponent.propTypes = {
   currentOrder: PropTypes.object,
   address: PropTypes.object,
   getCurrentOrdersFunc: PropTypes.func,
+  resetOnUnmount: PropTypes.func,
 };
 
 function HomeComponent(props) {
@@ -23,23 +24,15 @@ function HomeComponent(props) {
 
   useLayoutEffect(() => {
     const interval = 30000;
-    let trigger = !(
-      props.getCurrentOrderInProgress ||
-      props.getCurrentOrderSuccess ||
-      props.getCurrentOrderSuccess
-    );
-    if (trigger) {
+    props.currentOrderInProgress();
+    props.getCurrentOrdersFunc();
+    let iid = setInterval(() => {
       props.currentOrderInProgress();
       props.getCurrentOrdersFunc();
-    }
-    let iid = setInterval(() => {
-      if (trigger) {
-        props.currentOrderInProgress();
-        props.getCurrentOrdersFunc();
-      }
     }, interval);
     return () => {
       clearInterval(iid);
+      props.resetOnUnmount();
     };
   }, []);
 
