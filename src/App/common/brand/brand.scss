@@ -19,14 +19,16 @@
 }
 .accordion-container {
   width: 100%;
-  margin: 1vh auto 0;
+  margin-top: 1vh;
   border-radius: 5px;
   font-family: Montserrat;
   font-style: normal;
   line-height: 18px;
   overflow-y: scroll;
+  overflow-x: hidden;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
