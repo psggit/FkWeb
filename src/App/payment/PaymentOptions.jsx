@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { ToolbarComponent } from "../common/toolbar";
 import { SplashLoadingComponent } from "../common/splashLoading";
@@ -99,15 +100,10 @@ function PaymentOptions(props) {
 
   let title = "Pay ₹ " + props.payment.paymentDetails.amount + " using";
 
-  if (props.payment.addNewCard) {
+  const addCardAndProcess = () => {
     return <AddCardAndProcessPayment {...props} />;
-  }
-
-  if (
-    props.payment.createOrderSuccess &&
-    props.payment.fetchPaymentOptionsSuccess &&
-    props.payment.createPaymentSuccess
-  ) {
+  };
+  const paymentOptions = () => {
     return (
       <>
         <ToolbarComponent helpVisibility={false} title={title} />
@@ -129,6 +125,28 @@ function PaymentOptions(props) {
               />
             </div>
           )}
+        </div>
+      </>
+    );
+  };
+
+  if (
+    props.payment.createOrderSuccess &&
+    props.payment.fetchPaymentOptionsSuccess &&
+    props.payment.createPaymentSuccess
+  ) {
+    return (
+      <>
+        <div>
+          <Router>
+            <Switch>
+              <Route
+                path="/payment/options/card/new"
+                render={() => addCardAndProcess()}
+              />
+              <Route path="/payment/options" render={() => paymentOptions()} />
+            </Switch>
+          </Router>
         </div>
       </>
     );
