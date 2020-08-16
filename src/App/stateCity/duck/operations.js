@@ -6,6 +6,7 @@ import {
   fetchCityInProgress,
   fetchCitySuccess,
   fetchCityFailed,
+  clearCity,
 } from "./actions";
 
 const onStateSuccess = (dispatch) => {
@@ -50,6 +51,12 @@ const onCitySuccess = (dispatch) => {
   };
 };
 
+const ClearCity = () => {
+  return (dispatch) => {
+    dispatch(clearCity());
+  };
+};
+
 const onCityError = (dispatch) => {
   return (err) => {
     dispatch(fetchCityFailed(err));
@@ -84,4 +91,4 @@ const GetAvailableCitiesOperation = (value) => {
   };
 };
 
-export { GetAvailableStatesOperation, GetAvailableCitiesOperation };
+export { ClearCity, GetAvailableStatesOperation, GetAvailableCitiesOperation };

@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import {
   GetAvailableCitiesOperation,
   GetAvailableStatesOperation,
+  ClearCity,
   selectCity,
   selectState,
 } from "./duck";
@@ -24,6 +25,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAvailableCities: (value) => dispatch(GetAvailableCitiesOperation(value)),
     getAvailableStates: (value) => dispatch(GetAvailableStatesOperation(value)),
+    clearCity: () => dispatch(ClearCity()),
     selectCityFunc: (value) => dispatch(selectCity(value)),
     selectStateFunc: (value) => dispatch(selectState(value)),
   };

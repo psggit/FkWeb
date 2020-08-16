@@ -19,6 +19,7 @@ StateCityComponent.propTypes = {
   getAvailableCities: PropTypes.func,
   getAvailableStates: PropTypes.func,
   selectCityFunc: PropTypes.func,
+  clearCity: PropTypes.func,
   selectStateFunc: PropTypes.func,
 };
 
@@ -82,6 +83,7 @@ function StateCityComponent(props) {
 
   function goBack() {
     if (mode == "city") {
+      props.clearCity();
       setMode("state");
     } else {
       history.goBack();
