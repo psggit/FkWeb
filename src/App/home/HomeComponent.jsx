@@ -7,6 +7,7 @@ import { BottomNavigationContainer } from "../common/bottomNavigation";
 import { CurretOrderComponent } from "./currentOrders";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
+import { LoadingComponent } from "../common/loading";
 
 HomeComponent.propTypes = {
   currentOrderInProgress: PropTypes.func,
@@ -16,6 +17,9 @@ HomeComponent.propTypes = {
   currentOrder: PropTypes.object,
   address: PropTypes.object,
   getCurrentOrdersFunc: PropTypes.func,
+  resetOnUnmount: PropTypes.func,
+  getHomeCarouselInProgress: PropTypes.bool,
+  retailerFetchStatus: PropTypes.string,
 };
 
 function HomeComponent(props) {
@@ -23,23 +27,15 @@ function HomeComponent(props) {
 
   useLayoutEffect(() => {
     const interval = 30000;
-    let trigger = !(
-      props.getCurrentOrderInProgress ||
-      props.getCurrentOrderSuccess ||
-      props.getCurrentOrderSuccess
-    );
-    if (trigger) {
+    props.currentOrderInProgress();
+    props.getCurrentOrdersFunc();
+    let iid = setInterval(() => {
       props.currentOrderInProgress();
       props.getCurrentOrdersFunc();
-    }
-    let iid = setInterval(() => {
-      if (trigger) {
-        props.currentOrderInProgress();
-        props.getCurrentOrdersFunc();
-      }
     }, interval);
     return () => {
       clearInterval(iid);
+      props.resetOnUnmount();
     };
   }, []);
 
@@ -64,9 +60,13 @@ function HomeComponent(props) {
       return <div />;
     }
   }
+  const loading =
+    props.getHomeCarouselInProgress ||
+    props.retailerFetchStatus === "inProgress";
 
   return (
     <>
+      {loading && <LoadingComponent />}
       <CriticalAdsContainer />
       <ChooseAddressComponent
         address={props.address}

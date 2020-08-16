@@ -4,6 +4,7 @@ import {
   fetchStateSuccess,
   fetchCityInProgress,
   fetchCityFailed,
+  clearCity,
   fetchCitySuccess,
   selectState,
   selectCity,
@@ -92,6 +93,10 @@ const stateCityReducer = createReducer(initialState(), {
     fetchCityInProgress: false,
     fetchCityFailed: true,
     fetchCitySuccess: false,
+  }),
+  [clearCity]: (state) => ({
+    ...state,
+    cities: [],
   }),
 });
 

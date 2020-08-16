@@ -6,15 +6,17 @@ CarouselComponent.propTypes = {
   items: PropTypes.any,
   fetchHomeCarousel: PropTypes.any,
   address: PropTypes.object,
+  resetOnUnmount: PropTypes.func,
 };
 
 function CarouselComponent(props) {
   useLayoutEffect(() => {
-    if ((props.address) && (props.items.length === 0)) {
+    if (props.address && props.items.length === 0) {
       props.fetchHomeCarousel({
         cityID: props.address.city.id,
       });
     }
+    return () => props.resetOnUnmount();
   }, []);
 
   const carouselItems = (props) => {

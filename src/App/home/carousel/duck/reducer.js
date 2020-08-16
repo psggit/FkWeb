@@ -2,6 +2,7 @@ import {
   getHomeCarouselInProgress,
   getHomeCarouselSuccess,
   getHomeCarouselFailure,
+  resetOnUnmount,
 } from "./actions";
 import { createReducer } from "@reduxjs/toolkit";
 
@@ -32,6 +33,7 @@ const carouselReducer = createReducer(initialState, {
     getHomeCarouselSuccess: false,
     getHomeCarouselFailure: true,
   }),
+  [resetOnUnmount]: () => initialState,
 });
 
 export { carouselReducer };

@@ -1,6 +1,10 @@
 import { connect } from "react-redux";
 import { HomeComponent } from "./HomeComponent";
-import { GetCurrentOrdersOperation, getCurrentOrderInProgress } from "./duck";
+import {
+  GetCurrentOrdersOperation,
+  getCurrentOrderInProgress,
+  resetOnUnmount,
+} from "./duck";
 
 const mapStateToProps = (state) => {
   return {
@@ -10,6 +14,8 @@ const mapStateToProps = (state) => {
     getCurrentOrderFailed: state.home.currentOrder.getCurrentOrderFailed,
     currentOrder: state.home.currentOrder.order,
     address: state.addressStore.selectedAddress,
+    retailerFetchStatus: state.home.retailerList.retailerFetchStatus,
+    getHomeCarouselInProgress: state.home.carousel.getHomeCarouselInProgress,
   };
 };
 
@@ -17,6 +23,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getCurrentOrdersFunc: () => dispatch(GetCurrentOrdersOperation()),
     currentOrderInProgress: () => dispatch(getCurrentOrderInProgress()),
+    resetOnUnmount: () => dispatch(resetOnUnmount()),
   };
 };
 
