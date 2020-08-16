@@ -28,7 +28,11 @@ export const jpNetBankingConf = (JusPay) => {
       payment_form: "#nb_payment_form",
       success_handler: successHandler,
       error_handler: errorHandler,
-      styles: {},
+      styles: {
+        "make-payment": {
+          color: "#000000",
+        },
+      },
     });
   };
 };
