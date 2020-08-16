@@ -9,7 +9,7 @@ import {
   resetOnUnmount,
 } from "../common/cart";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     retailer: state.cart.retailer,
     products: state.cart.products,

@@ -103,29 +103,38 @@ function PaymentOptions(props) {
     return <AddCardAndProcessPayment {...props} />;
   }
 
-  return (
-    <>
-      <ToolbarComponent helpVisibility={false} title={title} />
-      <div className="page-container">
-        {payment.is_upi_enabled && (
-          <div>
-            <UPIComponent {...props} />
-          </div>
-        )}
+  if (
+    props.payment.createOrderSuccess &&
+    props.payment.fetchPaymentOptionsSuccess &&
+    props.payment.createPaymentSuccess
+  ) {
+    return (
+      <>
+        <ToolbarComponent helpVisibility={false} title={title} />
+        <div className="page-container">
+          {payment.is_upi_enabled && (
+            <div>
+              <UPIComponent {...props} />
+            </div>
+          )}
 
-        {payment.is_cards_enabled && <CreditDebitCardsComponent {...props} />}
-        {payment.is_nb_enabled && (
-          <div>
-            <NetBankingComponent
-              {...props}
-              banks={banks}
-              onBankSelected={openOtherBankOptions}
-              onOtherBankSelected={openOtherBankOptions}
-            />
-          </div>
-        )}
-      </div>
-    </>
+          {payment.is_cards_enabled && <CreditDebitCardsComponent {...props} />}
+          {payment.is_nb_enabled && (
+            <div>
+              <NetBankingComponent
+                {...props}
+                banks={banks}
+                onBankSelected={openOtherBankOptions}
+                onOtherBankSelected={openOtherBankOptions}
+              />
+            </div>
+          )}
+        </div>
+      </>
+    );
+  }
+  return (
+    <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
   );
 }
 
