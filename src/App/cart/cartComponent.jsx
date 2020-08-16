@@ -122,7 +122,7 @@ CartComponent.propTypes = {
 
 function historyPush(path) {
   let history = useHistory();
-  history.push(path);
+  console.log(history);
 }
 
 function CartComponent(props) {
@@ -132,7 +132,8 @@ function CartComponent(props) {
   }, []);
 
   if (props.validationSuccessful) {
-    return <Redirect to="/address/select/osm" />;
+    historyPush();
+    return <Redirect to="/address/select/osm" push={true} />;
   }
 
   let isEmpty = props.isEmpty;
