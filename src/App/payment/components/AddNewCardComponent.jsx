@@ -1,19 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
 import "../style.scss";
 import { addAddressIcon } from "../../../assets/images";
 
-AddNewCardComponent.propTypes = {
-  onclick: PropTypes.func,
-};
-
-function AddNewCardComponent(props) {
-  const { onclick } = props;
+function AddNewCardComponent() {
   return (
-    <div className="add-new-container" onClick={onclick}>
-      <div className="label">Add New Card</div>
-      <img className="image" src={addAddressIcon} />
-    </div>
+    <Link to={"/payment/options/card/new"}>
+      <div className="add-new-container" onClick={onclick}>
+        <div className="label">Add New Card</div>
+        <img className="image" src={addAddressIcon} />
+      </div>
+    </Link>
   );
 }
 

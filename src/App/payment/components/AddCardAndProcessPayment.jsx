@@ -67,11 +67,7 @@ function AddCardAndProcessPayment(props) {
 
   return (
     <>
-      <ToolbarComponent
-        onClick={() => props.cancelAddNewCard()}
-        helpVisibility={false}
-        title="Add Card"
-      />
+      <ToolbarComponent helpVisibility={false} title="Add Card" />
       <div className="page-container">
         <form className="juspay_inline_form" id="new_card_payment_form">
           <input

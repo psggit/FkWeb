@@ -21,11 +21,11 @@ function CreditDebitCardsComponent(props) {
     <div className="card-container">
       <div className="card-title">Credit/Debit Cards</div>
       {payment.cards.length === 0 ? (
-        <NewCardComponent onclick={() => props.addNewCard()} />
+        <NewCardComponent />
       ) : (
         <div>
           <SavedCardComponent {...props} />
-          <AddNewCardComponent onclick={() => props.addNewCard()} />
+          <AddNewCardComponent />
         </div>
       )}
     </div>
