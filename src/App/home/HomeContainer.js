@@ -14,6 +14,8 @@ const mapStateToProps = (state) => {
     getCurrentOrderFailed: state.home.currentOrder.getCurrentOrderFailed,
     currentOrder: state.home.currentOrder.order,
     address: state.addressStore.selectedAddress,
+    retailerFetchStatus: state.home.retailerList.retailerFetchStatus,
+    getHomeCarouselInProgress: state.home.carousel.getHomeCarouselInProgress,
   };
 };
 

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { CarouselComponent } from "./carouselComponent";
-import { fetchHomeCarousel } from "./duck";
+import { fetchHomeCarousel, resetOnUnmount } from "./duck";
 
 const mapStateToProps = (state) => {
   return {
@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchHomeCarousel: (value) => dispatch(fetchHomeCarousel(value)),
+    resetOnUnmount: () => dispatch(resetOnUnmount()),
   };
 };
 

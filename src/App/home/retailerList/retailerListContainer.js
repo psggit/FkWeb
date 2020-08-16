@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { RetailerList } from "./retailerListComponent";
-import { fetchRetailersOperation } from "./duck";
+import { fetchRetailersOperation, resetOnUnmount } from "./duck";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,6 +15,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchRetailersFunc: (selectedAddress) =>
       dispatch(fetchRetailersOperation(selectedAddress)),
+    resetOnUnmount: () => dispatch(resetOnUnmount()),
   };
 };
 

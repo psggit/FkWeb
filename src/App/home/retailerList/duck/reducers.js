@@ -3,6 +3,7 @@ import {
   fetchRetailersInProgress,
   fetchRetailersFailure,
   fetchRetailersSuccessfull,
+  resetOnUnmount,
 } from "./actions";
 
 const initialState = {
@@ -21,7 +22,7 @@ const retailerListReducer = createReducer(initialState, {
   [fetchRetailersFailure]: (state) => ({
     ...state,
     retailerFetchStatus: "failed",
-    message: "Sorry, there seems to be a problem...Please, try again",
+    message: "Something went wrong, please try again",
   }),
   [fetchRetailersSuccessfull]: (state, action) => ({
     ...state,
@@ -30,6 +31,7 @@ const retailerListReducer = createReducer(initialState, {
     message: action.payload.message,
     is_city_available: action.payload.is_city_available,
   }),
+  [resetOnUnmount]: () => initialState,
 });
 
 export { retailerListReducer };

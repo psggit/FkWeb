@@ -11,6 +11,7 @@ RetailerList.propTypes = {
   retailerFetchStatus: PropTypes.string,
   fetchRetailersFunc: PropTypes.func,
   selectedAddress: PropTypes.object,
+  resetOnUnmount: PropTypes.func,
 };
 
 function RetailerTemplate(retailers, history, showRetailerDisabledFunc) {
@@ -94,6 +95,7 @@ function RetailerList(props) {
 
   useEffect(() => {
     fetchRetailersFunc(selectedAddress);
+    return () => props.resetOnUnmount();
   }, []);
 
   if (showRetailerDisabled) {
