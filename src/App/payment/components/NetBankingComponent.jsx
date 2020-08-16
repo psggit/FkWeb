@@ -97,9 +97,10 @@ function NetBankingComponent(props) {
               <option
                 key={bank.payment_method}
                 value={bank.payment_method}
-                label={bank.description}
                 className="nb-options"
-              ></option>
+              >
+                {bank.description}
+              </option>
             ))}
           </select>
         </div>

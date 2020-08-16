@@ -45,7 +45,7 @@ export const jpSavedCardsConf = (JusPay, index) => {
       styles: {
         /* Add the styling for card security code input field here */
         ".security_code": {
-          "line-height": "50px",
+          "line-height": "40px",
           "font-size": "16px",
           width: "100%",
           outline: "none",

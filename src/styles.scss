@@ -91,15 +91,19 @@ a {
 }
 
 select {
-  -webkit-appearance: none;
+  -webkit-appearance: none !important;
+  -webkit-text-fill-color: $primary-color !important;
+  -webkit-tap-highlight-color: $black-color !important;
 }
 
 select option {
-  -webkit-appearance: none;
-  color: $black-color;
+  -webkit-appearance: none !important;
+  -webkit-text-fill-color: $primary-color !important;
+  -webkit-tap-highlight-color: $black-color !important;
 }
 select option:first-child {
-  color: $black-color;
+  -webkit-text-fill-color: $primary-color !important;
+  -webkit-tap-highlight-color: $black-color !important;
 }
 
 body {
