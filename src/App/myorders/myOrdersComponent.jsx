@@ -5,9 +5,9 @@ import { OrderItem } from "./components";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { BottomNavigationContainer } from "../common/bottomNavigation";
-import { rightArrowIcon } from "../../assets/images";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { drinksIcon } from "../../assets/images";
+import { HelpComponent } from "../common/help";
 
 MyOrdersComponent.propTypes = {
   fetchOrderInProgress: PropTypes.bool,
@@ -21,10 +21,12 @@ MyOrdersComponent.propTypes = {
 
 function MyOrdersComponent(props) {
   const history = useHistory();
+
   function launchHelp() {
     window.fcWidget.open();
     window.fcWidget.show();
   }
+
   function showOrderDetail(order) {
     history.push({ pathname: "/order/detail", state: { order: order } });
   }
@@ -70,13 +72,7 @@ function MyOrdersComponent(props) {
         />
       )}
       <div className="page-container">
-        <div onClick={() => launchHelp()} className="need-help-container ">
-          <div className="help-content-container">
-            <div className="help-title">Help</div>
-            <div className="help-sub-content">FAQs & Contact Support</div>
-          </div>
-          <img src={rightArrowIcon} className="help-next-icon" />
-        </div>
+        <HelpComponent launchHelp={() => launchHelp()} />
         <div className="past-orders">Past Orders</div>
         {orderItems(props)}
         {props.orders.length === props.offset && props.orders.length != 0 && (
