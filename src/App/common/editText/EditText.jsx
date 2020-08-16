@@ -16,10 +16,6 @@ EditText.propTypes = {
   inActive: PropTypes.bool,
 };
 
-function validateLength(length, maxLength) {
-  if (length == maxLength) return false;
-}
-
 function EditText(props) {
   const {
     id,

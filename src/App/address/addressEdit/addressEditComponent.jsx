@@ -86,6 +86,7 @@ function AddressInputComponent(props) {
         }}
         id="flatText"
         title="HOUSE/FLAT NO."
+        autoComplete="none"
         value={flatNumber ? flatNumber : ""}
         inputType="text"
       />
@@ -105,7 +106,7 @@ function AddressInputComponent(props) {
         }}
         id="pincodeText"
         title="PINCODE"
-        autoComplete="off"
+        autoComplete="none"
         value={pincode ? pincode : ""}
         maxLength={6}
         inputType="tel"
@@ -116,6 +117,7 @@ function AddressInputComponent(props) {
           props.updateField({ landmark: value });
         }}
         title="LANDMARK"
+        autoComplete="none"
         value={landmark ? landmark : ""}
         inputType="text"
       />

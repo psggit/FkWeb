@@ -38,7 +38,7 @@ function SearchBox(props) {
           onChange={(e) => handleChange(e.target.value)}
           placeholder={placeholder}
           className="inputclass"
-          autoComplete="off"
+          autoComplete="none"
         />
         <img
           className={
