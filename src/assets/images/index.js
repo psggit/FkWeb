@@ -35,3 +35,6 @@ export const tick = require("./tick.svg");
 export const cancelIcon = require("./cancel.svg");
 export const currentLocationIcon = require("./current_location.svg");
 export const exitIcon = require("./exit.svg");
+export const playStore = require("./play_store.svg");
+export const appStore = require("./app_store.svg");
+export const appImage = require("./app_img.svg");
