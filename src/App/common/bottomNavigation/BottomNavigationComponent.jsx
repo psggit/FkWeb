@@ -33,7 +33,7 @@ const tabs = [
     label: "Cart",
   },
   {
-    route: "/myorders",
+    route: "/my-orders",
     icon: myOrdersIcon,
     activeIcon: myOrdersActiveIcon,
     label: "My Orders",

@@ -170,7 +170,7 @@ function App() {
             component={(props) => <AddressEditContainer {...props} />}
           />
           <Route
-            path="/myorders"
+            path="/my-orders"
             component={(props) => <MyOrdersContainer {...props} />}
           />
           <Route
