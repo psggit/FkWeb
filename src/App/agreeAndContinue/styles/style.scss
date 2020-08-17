@@ -121,3 +121,57 @@
     }
   }
 }
+
+.visit-hip-bar-ext-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .visit-hip-bar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .header {
+      font-size: 16px;
+      line-height: 20px;
+      font-family: MontserratBold;
+    }
+
+    .sub-text {
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+    }
+
+    .app-link {
+      margin-top: 32px;
+      height: 34px;
+      width: 248px;
+
+      .play-store-img {
+        width: 116px;
+        margin-right: 16px;
+      }
+
+      .app-store-img {
+        width: 116px;
+      }
+    }
+
+    .app-img {
+      margin-top: 56px;
+      width: 200px;
+      height: 268px;
+      align-self: center;
+    }
+
+    .link {
+      font-size: 12px;
+      margin-top: 26px;
+      text-align: center;
+    }
+  }
+}
