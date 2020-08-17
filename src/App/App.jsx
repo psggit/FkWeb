@@ -38,7 +38,7 @@ function App() {
             path="/address/create/:redirect"
             component={AddressEditContainer}
           />
-          <Route path="/myorders" component={MyOrdersContainer} />
+          <Route path="/my-orders" component={MyOrdersContainer} />
           <Route
             path="/address/select/:redirect"
             component={SelectAddressContainer}
