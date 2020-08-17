@@ -12,7 +12,7 @@ AgreeAndContinueComponent.propTypes = {
 function AgreeAndContinueComponent(props) {
   const showTC = props.showTC;
 
-  if (!navigator.appVersion.includes("com.flipkart")) {
+  if (!navigator.appVersion.includes("flipkart")) {
     return <VisitHipBarComponent />;
   }
 
