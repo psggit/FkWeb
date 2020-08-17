@@ -53,7 +53,7 @@ function MyOrdersComponent(props) {
 
   useLayoutEffect(() => {
     props.getMyOrdersFunc({
-      offset: props.offset,
+      offset: 0,
     });
     return () => {
       window.fcWidget.close();
