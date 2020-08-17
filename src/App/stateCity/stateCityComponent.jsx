@@ -79,6 +79,7 @@ function StateCityComponent(props) {
 
   useLayoutEffect(() => {
     props.getAvailableStates();
+    return () => props.clearCity();
   }, []);
 
   function goBack() {
