@@ -5,14 +5,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { TcComponent, VisitHipBarComponent } from "./components";
 
-let fkPlatformActive = true;
-
-try {
-  new FKPlatform("hipbar");
-} catch (e) {
-  fkPlatformActive = false;
-}
-
 AgreeAndContinueComponent.propTypes = {
   showTC: PropTypes.bool,
   selectedAddress: PropTypes.object,
@@ -21,15 +13,13 @@ AgreeAndContinueComponent.propTypes = {
 function AgreeAndContinueComponent(props) {
   const showTC = props.showTC;
 
-  if (fkPlatformActive) {
-    if (FKPlatform.isPlatformAvailable()) {
-      if (showTC) {
-        return <TcComponent {...props} />;
-      } else if (props.selectedAddress !== null) {
-        return <Redirect to="/user/login" />;
-      }
-      return <Redirect to="/statecity/select" />;
+  if (FKPlatform.isPlatformAvailable()) {
+    if (showTC) {
+      return <TcComponent {...props} />;
+    } else if (props.selectedAddress !== null) {
+      return <Redirect to="/user/login" />;
     }
+    return <Redirect to="/statecity/select" />;
   }
   return <VisitHipBarComponent />;
 }
