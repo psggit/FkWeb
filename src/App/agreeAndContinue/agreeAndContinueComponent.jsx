@@ -1,3 +1,4 @@
+import FKPlatform from "fk-platform-sdk/web";
 import "./styles/style.scss";
 import { Redirect } from "react-router-dom";
 import React from "react";
@@ -12,16 +13,15 @@ AgreeAndContinueComponent.propTypes = {
 function AgreeAndContinueComponent(props) {
   const showTC = props.showTC;
 
-  //  if (!navigator.appVersion.includes("flipkart")) {
-  //    return <VisitHipBarComponent />;
-  //  }
-
-  if (showTC) {
-    return <TcComponent {...props} />;
-  } else if (props.selectedAddress !== null) {
-    return <Redirect to="/user/login" />;
+  if (FKPlatform.isPlatformAvailable()) {
+    if (showTC) {
+      return <TcComponent {...props} />;
+    } else if (props.selectedAddress !== null) {
+      return <Redirect to="/user/login" />;
+    }
+    return <Redirect to="/statecity/select" />;
   }
-  return <Redirect to="/statecity/select" />;
+  return <VisitHipBarComponent />;
 }
 
 export { AgreeAndContinueComponent };
