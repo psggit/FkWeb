@@ -15,10 +15,13 @@ import { validateKyc } from "./kycValidation";
 
 const ChangingBirthYear = (value) => {
   return (dispatch) => {
-    var d = new Date().getFullYear() - 20;
+    var d = new Date().getFullYear() - 21;
     if (value <= d) {
       dispatch(birthYearEntered(value));
       dispatch(CheckCheckBoxOperation());
+    } else if (value > d) {
+      dispatch(birthYearEntered(""));
+      dispatch(kycUpdateFailed("You need to be atleast 21 years to sign up."));
     }
   };
 };
@@ -63,7 +66,7 @@ const CheckDeclarationOperation = () => {
 
 const ChangeDocumentValueOperation = (value) => {
   return (dispatch) => {
-    dispatch(changeDocumentValueAction(value));
+    dispatch(changeDocumentValueAction(value.toUpperCase()));
     dispatch(CheckCheckBoxOperation());
   };
 };
@@ -83,7 +86,13 @@ const FinaliseIDProofValueOperation = (selectedDocument) => {
 
 const onSuccess = (dispatch) => {
   return (data) => {
-    dispatch(kycUpdate(data));
+    if (data.status === 200) {
+      dispatch(kycUpdate(data));
+    } else if (data.status === 403) {
+      dispatch(kycUpdateFailed(data.body.message));
+    } else {
+      throw new Error("Something went wrong, try again");
+    }
   };
 };
 
@@ -95,14 +104,7 @@ const onError = (dispatch) => {
 
 const processResponse = () => {
   return (res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    if (res.status === 400) {
-      throw new Error("invalid params");
-    } else {
-      throw new Error("Something went wrong, try again");
-    }
+    return { body: res.json(), status: res.status };
   };
 };
 

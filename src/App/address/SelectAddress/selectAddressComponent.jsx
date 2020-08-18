@@ -82,7 +82,8 @@ function SelectAddressComponent(props) {
         {(listAddressApiStatus === "inProgress" ||
           listAddressApiStatus === "waiting" ||
           deleteAddressApiStatus === "inProgress") &&
-        validateAddressApiStatus === "inProgress" ? (
+        (validateAddressApiStatus === "inProgress" ||
+          validateAddressApiStatus === "waiting") ? (
           <LoadingComponent />
         ) : (
           <>
