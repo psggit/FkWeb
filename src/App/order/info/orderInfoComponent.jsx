@@ -49,12 +49,7 @@ function OrderInfoComponent(props) {
   }
 
   function RenderToolBar() {
-    return (
-      <ToolbarComponent
-        title={props.order.status_message}
-        onClick={handleBack}
-      />
-    );
+    return <ToolbarComponent title="Order Info" onClick={handleBack} />;
   }
 
   function RenderBottomNext() {
@@ -81,8 +76,6 @@ function OrderInfoComponent(props) {
       <ArrivingComponent arrivalTime={order.delivery_status} otp={order.otp} />
     );
   }
-
-  console.log("Order Placed:");
 
   const summayProps = getSummaryProps(order);
 
