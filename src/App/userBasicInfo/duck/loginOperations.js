@@ -70,7 +70,7 @@ const loginWithGrantToken = (dispatch) => {
       loginHandler(gt, dispatch);
     })
     .catch(() => {
-      const message = "Please provide neccessary permissions to use HipBar";
+      const message = "Please provide necessary permissions to use HipBar";
       dispatch(fetchGrantTokenFailed(message));
     });
 };
