@@ -16,11 +16,10 @@ import { validateKyc } from "./kycValidation";
 const ChangingBirthYear = (value) => {
   return (dispatch) => {
     var d = new Date().getFullYear() - 21;
-    if (value <= d) {
+    if (value <= d && value.length <= 4) {
       dispatch(birthYearEntered(value));
       dispatch(CheckCheckBoxOperation());
     } else if (value > d) {
-      dispatch(birthYearEntered(""));
       dispatch(kycUpdateFailed("You need to be atleast 21 years to sign up."));
     }
   };

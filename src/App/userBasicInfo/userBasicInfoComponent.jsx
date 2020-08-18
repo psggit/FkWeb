@@ -112,13 +112,13 @@ function GenderSelectionComponent(props) {
       <div className="one-button-select-component">
         <div
           onClick={() => props.changingGenderFunc("male")}
-          className={(gender == "male" ? "selected " : "") + "input-select"}
+          className={(gender == "male" ? "selected " : "") + "flex vcenter hcenter input-select"}
         >
           Male
         </div>
         <div
           onClick={() => props.changingGenderFunc("female")}
-          className={(gender == "female" ? "selected " : "") + "input-select"}
+          className={(gender == "female" ? "selected " : "") + "flex vcenter hcenter input-select"}
         >
           Female
         </div>
