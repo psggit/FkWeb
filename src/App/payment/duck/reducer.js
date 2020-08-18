@@ -32,7 +32,7 @@ import {
 } from "./actions";
 
 const paymentFailureMessage =
-  "If the amount as been debited will be credited back in 4-7 business days";
+  "If the amount has been debited, will be credited back in 4-7 business days";
 const placeOrderFailureMessage = "Place order failed";
 
 let initialState = {
