@@ -55,7 +55,7 @@ function App() {
             component={() => (
               <IframeComponent
                 url={"https://" + DOMAIN + "/user-terms"}
-                title={`Terms And Condition`}
+                title={`Terms And Conditions`}
               />
             )}
           />
