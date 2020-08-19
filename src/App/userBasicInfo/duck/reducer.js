@@ -40,6 +40,7 @@ const initialState = () => {
       { idType: "Passport", name: "passport" },
       { idType: "PAN Card", name: "pan" },
       { idType: "Voter ID", name: "voterid" },
+      { idType: "Aadhaar", name: "aadhaar" },
     ],
   };
 };
