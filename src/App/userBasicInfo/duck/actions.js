@@ -1,5 +1,7 @@
 import { createAction } from "@reduxjs/toolkit";
 
+const nameEntered = createAction("nameEntered");
+
 const birthYearEntered = createAction("birthYearEntered");
 
 const changeGenderAction = createAction("changeGenderAction");
@@ -48,6 +50,7 @@ export {
   kycUpdate,
   kycUpdateFailed,
   errorClose,
+  nameEntered,
   birthYearEntered,
   selectIDTypeAction,
   changeGenderAction,

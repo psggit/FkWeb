@@ -49,6 +49,8 @@ function LFComponent(props) {
 }
 
 CollectInfoComponent.propTypes = {
+  name: PropTypes.string,
+  updateKycFunc: PropTypes.func,
   yob: PropTypes.string,
   gender: PropTypes.string,
   fetchKYCOptionsFunc: PropTypes.func,
@@ -76,6 +78,27 @@ const OpenIDOptions = () => {
 
 const CloseIDOptions = () => {
   document.getElementById("kycID").classList.add("hide");
+};
+
+const NameComponent = (props) => {
+  return (
+    <div className="input-component">
+      <div className="input-component-label">NAME</div>
+      <div className="inputComponentField input">
+        <input
+          onChange={(e) => props.changeName(e.target.value)}
+          className="input_field_100 name"
+          value={props.name}
+          type="text"
+        />
+      </div>
+    </div>
+  );
+};
+
+NameComponent.propTypes = {
+  name: PropTypes.string,
+  changeName: PropTypes.func,
 };
 
 YearOfBirthInputComponent.propTypes = {
@@ -112,13 +135,19 @@ function GenderSelectionComponent(props) {
       <div className="one-button-select-component">
         <div
           onClick={() => props.changingGenderFunc("male")}
-          className={(gender == "male" ? "selected " : "") + "flex vcenter hcenter input-select"}
+          className={
+            (gender == "male" ? "selected " : "") +
+            "flex vcenter hcenter input-select"
+          }
         >
           Male
         </div>
         <div
           onClick={() => props.changingGenderFunc("female")}
-          className={(gender == "female" ? "selected " : "") + "flex vcenter hcenter input-select"}
+          className={
+            (gender == "female" ? "selected " : "") +
+            "flex vcenter hcenter input-select"
+          }
         >
           Female
         </div>
@@ -275,9 +304,9 @@ function AlertValidateErrorComponent(props) {
 function CollectInfoComponent(props) {
   const yob = props.yob;
   const checkDeclaration = props.checkDeclaration;
-  const showDeclaration = props.showDeclaration;
   const updateKycFunc = props.updateKycFunc;
   const data = {
+    name: props.name,
     dob: yob,
     gender: props.gender,
     kycType: props.finalisedDocument.id,
@@ -288,6 +317,7 @@ function CollectInfoComponent(props) {
     <div className="page-container userBasicInfoComponent">
       <ToolbarComponent helpVisibility={false} title="Let's Get Started!" />
       <InfoComponent {...props} />
+      <NameComponent {...props} />
       <YearOfBirthInputComponent {...props} />
       <GenderSelectionComponent {...props} />
       <SelectIDComponent {...props} />
