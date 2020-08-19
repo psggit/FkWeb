@@ -24,3 +24,4 @@ export { fetchPaymentOptionsAPI } from "./fetchPaymentOptions";
 export { verifyPaymentAPI } from "./verifyPayment";
 export { finalizeOrderAPI } from "./finalizeOrder";
 export { userStatusAPI } from "./userStatus";
+export { Loading } from "./simpleLoadable";

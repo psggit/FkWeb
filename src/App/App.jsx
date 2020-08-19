@@ -1,42 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { hot } from "react-hot-loader/root";
 import Loadable from "react-loadable";
 
-import {
-  Redirect,
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { SplashLoadingComponent } from "./common/splashLoading";
-import { drinksIcon } from "../assets/images";
 import { IframeComponent } from "./iframe";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 
 import config from "../config";
-
-const Loading = (props) => {
-  if (props.error || props.pastDelay) {
-    return (
-      <SplashLoadingComponent
-        motion={false}
-        icon={drinksIcon}
-        text="Something went wrong, please try again."
-        buttonFunc={() => <Redirect to="/home" />}
-        buttonText="Home"
-      />
-    );
-  } else {
-    return <SplashLoadingComponent motion={true} icon={drinksIcon} text="" />;
-  }
-};
-
-Loading.propTypes = {
-  error: PropTypes.bool,
-  pastDelay: PropTypes.bool,
-};
+import { Loading } from "../utils";
 
 const OrderInfoContainer = Loadable({
   loader: () =>
