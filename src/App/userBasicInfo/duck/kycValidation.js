@@ -5,6 +5,7 @@ const DRIVING_LISCENSE_REGEX = new RegExp(
   "^[A-Z]{2}[0-9]{2}[A-Za-z0-9]{11,12}$"
 );
 const DRIVING_LISCENSE_KERALA_REGEX = new RegExp("^[0-9]{11}$");
+const AADHAAR_REGEX = new RegExp("^[0-9]{12}$");
 
 export const validateKyc = (type, value) => {
   let valid = false;
@@ -29,7 +30,7 @@ export const validateKyc = (type, value) => {
       message = "Invalid Voter ID";
       break;
     case "aadhaar":
-      valid = value.length == 12;
+      valid = AADHAAR_REGEX.test(value);
       message = "Invalid Aadhaar ID";
       break;
     default:
