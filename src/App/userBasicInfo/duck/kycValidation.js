@@ -28,6 +28,10 @@ export const validateKyc = (type, value) => {
       valid = VOTER_ID_REGEX.test(value);
       message = "Invalid Voter ID";
       break;
+    case "aadhaar":
+      valid = value.length == 12;
+      message = "Invalid Aadhaar ID";
+      break;
     default:
       valid = false;
       break;
