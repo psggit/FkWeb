@@ -1,5 +1,6 @@
 export { userInfoCreateReducer } from "./reducer";
 export {
+  ChangingName,
   ChangingBirthYear,
   ChangingGenderOperation,
   SelectIDTypeOperation,

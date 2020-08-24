@@ -22,11 +22,12 @@ try {
 /* TODO:@hl05 better error management */
 /* TODO:@hl05 making it work with regular web */
 
+// { scope: "user.name", isMandatory: true, shouldVerify: true },
+//{ scope: "user.email", isMandatory: false, shouldVerify: false },
+//{ scope: "user.location", isMandatory: false, shouldVerify: false },
+
 var scopeReq = [
-  { scope: "user.email", isMandatory: false, shouldVerify: false },
   { scope: "user.mobile", isMandatory: true, shouldVerify: true },
-  { scope: "user.name", isMandatory: true, shouldVerify: true },
-  //{ scope: "user.location", isMandatory: false, shouldVerify: false },
 ];
 
 const processResponse = () => {

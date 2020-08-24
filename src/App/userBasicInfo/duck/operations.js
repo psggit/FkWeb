@@ -9,9 +9,16 @@ import {
   selectIDTypeAction,
   changeDocumentValueAction,
   finaliseIDTypeAction,
+  nameEntered,
 } from "./actions";
 import { updateBasicKYCAPI } from "../../../utils";
 import { validateKyc } from "./kycValidation";
+
+const ChangingName = (value) => {
+  return (dispatch) => {
+    dispatch(nameEntered(value));
+  };
+};
 
 const ChangingBirthYear = (value) => {
   return (dispatch) => {
@@ -107,15 +114,32 @@ const processResponse = () => {
   };
 };
 
+const validateName = (name) => {
+  let valid = false;
+  let message = "Please enter your name";
+  if (name.length >= 1) {
+    return { validName: true, nameError: "" };
+  }
+  return { validName: valid, nameError: message };
+};
+
 const UpdateKYCOperation = (value) => {
+  //validate KYc
   let { valid, message } = validateKyc(value.kycType, value.kycValue);
   if (valid !== true) {
     return (dispatch) => dispatch(kycUpdateFailed(message));
   }
+
+  //validate Name
+  let { validName, nameError } = validateName(value.name);
+  if (validName !== true) {
+    return (dispatch) => dispatch(kycUpdateFailed(nameError));
+  }
+
   var reqBody = {
+    name: value.name,
     dob: value.dob,
     gender: value.gender,
-    name: "",
     kyc_type: value.kycType,
     kyc_value: value.kycValue,
   };
@@ -131,6 +155,7 @@ const UpdateKYCOperation = (value) => {
 
 export {
   ChangingBirthYear,
+  ChangingName,
   FinaliseIDProofValueOperation,
   ErrorClose,
   ChangingGenderOperation,
