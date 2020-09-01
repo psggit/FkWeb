@@ -29,3 +29,4 @@ Loading.propTypes = {
   pastDelay: PropTypes.bool,
 };
 
+export { Loading };
