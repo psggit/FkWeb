@@ -35,6 +35,7 @@ export { createPayment } from "./createPayment";
 export { jpSavedCardsConf } from "./jpSavedCards";
 export { jpUpiConf } from "./jpUpi";
 export { jpNetBankingConf } from "./jpNetBanking";
+export { jpWalletConf } from "./jpWallet";
 export { jpNewCardConf } from "./jpNewCard";
 export { verifyPayment } from "./verifyPaymentOperations";
 export { placeOrder } from "./placeOrderOperations";
