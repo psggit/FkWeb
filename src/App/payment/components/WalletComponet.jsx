@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import config from "../../../config";
+import "../style.scss";
 
 WalletComponent.propTypes = {
   payment: PropTypes.object,
@@ -38,8 +39,8 @@ function WalletComponent(props) {
   };
 
   return (
-    <div>
-      <div>Wallets</div>
+    <div className="payment-list-container">
+      <div className="title">Wallets</div>
 
       <form className="juspay_inline_form" id="wallet_payment_form">
         <input
@@ -54,21 +55,27 @@ function WalletComponent(props) {
           value={paymentDetails.order_id}
         />
         <input type="hidden" className="payment_method_type" value="WALLET" />
-        <select className="payment_method">
-          <option value="FREECHARGE" label="Freecharge Wallet">
-            Freecharge Wallet
-          </option>
-          <option value="SBIBUDDY" label="SBI Buddy">
-            SBI Buddy
-          </option>
-        </select>
-        <button
+        <div className="list-container">
+          <select className="payment_method select">
+            <option
+              value="FREECHARGE"
+              label="Freecharge Wallet"
+              className="options"
+            >
+              Freecharge Wallet
+            </option>
+            <option value="SBIBUDDY" label="SBI Buddy">
+              SBI Buddy
+            </option>
+          </select>
+        </div>
+        <div
           type="submit"
-          className="make_payment"
+          className="make_payment nb-pay-button"
           onClick={() => onSubmit()}
         >
-          Pay
-        </button>
+          Pay via Wallet
+        </div>
         <input type="hidden" className="redirect" value="true" />
       </form>
     </div>

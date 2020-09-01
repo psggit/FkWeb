@@ -10,6 +10,7 @@ import {
   CreditDebitCardsComponent,
   NetBankingComponent,
   UPIComponent,
+  WalletComponent,
 } from "./components";
 import { AddCardAndProcessPayment } from "./components";
 
@@ -115,6 +116,7 @@ function PaymentOptions(props) {
           )}
 
           {payment.is_cards_enabled && <CreditDebitCardsComponent {...props} />}
+          <WalletComponent {...props} />
           {payment.is_nb_enabled && (
             <div>
               <NetBankingComponent

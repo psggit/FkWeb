@@ -76,7 +76,7 @@ function NetBankingComponent(props) {
   };
 
   return (
-    <div className="net-banking-container">
+    <div className="payment-list-container">
       <div className="title">Net Banking</div>
       <form className="juspay_inline_form" id="nb_payment_form">
         <input
@@ -91,13 +91,13 @@ function NetBankingComponent(props) {
           value={paymentDetails.order_id}
         />
         <input type="hidden" className="payment_method_type" value="NB" />
-        <div className="bank-list-container">
-          <select className="payment_method nb-select">
+        <div className="list-container">
+          <select className="payment_method select">
             {banks.map((bank) => (
               <option
                 key={bank.payment_method}
                 value={bank.payment_method}
-                className="nb-options"
+                className="options"
               >
                 {bank.description}
               </option>
