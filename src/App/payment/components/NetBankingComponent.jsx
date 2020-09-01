@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { downArrowIcon } from "../../../assets/images";
 import "../style.scss";
 import PropTypes from "prop-types";
-import config from "../../../config";
 
 NetBankingComponent.propTypes = {
   payment: PropTypes.object,
+  jpLoaded: PropTypes.bool,
   jpNetBankingConf: PropTypes.func,
   banks: PropTypes.any,
   onBankSelected: PropTypes.any,
@@ -48,6 +48,7 @@ let juspay_form;
 
 function NetBankingComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
+  const jpLoaded = props.jpLoaded;
   const { banks } = props;
 
   const configureJuspay = () => {
@@ -56,20 +57,10 @@ function NetBankingComponent(props) {
   };
 
   useEffect(() => {
-    const script = document.createElement("script");
-
-    script.src = config.JusPayScript;
-    script.type = "text/javascript";
-    script.async = true;
-    script.onload = configureJuspay;
-    document.body.appendChild(script);
-
-    /*
-    return () => {
-      document.body.removeChild(script);
-    };
-	  */
-  }, []);
+    if (jpLoaded) {
+      configureJuspay();
+    }
+  }, [jpLoaded]);
 
   const onSubmit = () => {
     juspay_form.submit_form();

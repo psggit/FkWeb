@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { ToolbarComponent } from "../common/toolbar";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { drinksIcon } from "../../assets/images";
+import config from "../../config";
 
 import {
   CreditDebitCardsComponent,
@@ -53,6 +54,8 @@ PaymentOptions.propTypes = {
 };
 
 function PaymentOptions(props) {
+  const [jpLoaded, SetjpLoaded] = useState(false);
+
   let triggerCreatePayment =
     props.payment.createOrderSuccess &&
     !(
@@ -60,6 +63,20 @@ function PaymentOptions(props) {
       props.payment.createPaymentFailed ||
       props.payment.createPaymentSuccess
     );
+
+  useEffect(() => {
+    const script = document.createElement("script");
+
+    script.src = config.JusPayScript;
+    script.type = "text/javascript";
+    script.async = true;
+    script.onload = () => SetjpLoaded(true);
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   useEffect(() => {
     return props.resetPaymentOnUnmount;
@@ -92,6 +109,8 @@ function PaymentOptions(props) {
     );
   }
 
+  console.log("Payment Option", " : reload");
+
   const openOtherBankOptions = () => {
     document.getElementById("otherBanksID").classList.remove("hide");
   };
@@ -111,17 +130,21 @@ function PaymentOptions(props) {
         <div className="page-container">
           {payment.is_upi_enabled && (
             <div>
-              <UPIComponent {...props} />
+              <UPIComponent {...props} jpLoaded={jpLoaded} />
             </div>
           )}
 
-          {payment.is_cards_enabled && <CreditDebitCardsComponent {...props} />}
-          <WalletComponent {...props} />
+          {payment.is_cards_enabled && (
+            <CreditDebitCardsComponent {...props} jpLoaded={jpLoaded} />
+          )}
+          <WalletComponent {...props} jpLoaded={jpLoaded} />
+
           {payment.is_nb_enabled && (
             <div>
               <NetBankingComponent
                 {...props}
                 banks={banks}
+                jpLoaded={jpLoaded}
                 onBankSelected={openOtherBankOptions}
                 onOtherBankSelected={openOtherBankOptions}
               />

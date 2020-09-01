@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import config from "../../../config";
 import "../style.scss";
 
 WalletComponent.propTypes = {
   payment: PropTypes.object,
+  jpLoaded: PropTypes.bool,
   jpWalletConf: PropTypes.func,
 };
 
@@ -12,6 +12,8 @@ let juspay_form;
 
 function WalletComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
+  const wallets = props.payment.paymentOptionsDetails.wallets;
+  const jpLoaded = props.jpLoaded;
 
   const configureJuspay = () => {
     let jp = window.Juspay;
@@ -19,20 +21,10 @@ function WalletComponent(props) {
   };
 
   useEffect(() => {
-    const script = document.createElement("script");
-
-    script.src = config.JusPayScript;
-    script.type = "text/javascript";
-    script.async = true;
-    script.onload = configureJuspay;
-    document.body.appendChild(script);
-
-    /*
-    return () => {
-      document.body.removeChild(script);
-    };
-	  */
-  }, []);
+    if (jpLoaded) {
+      configureJuspay();
+    }
+  }, [jpLoaded]);
 
   const onSubmit = () => {
     juspay_form.submit_form();
@@ -48,7 +40,6 @@ function WalletComponent(props) {
           className="merchant_id"
           value={paymentDetails.merchant_id}
         />
-
         <input
           type="hidden"
           className="order_id"
@@ -56,17 +47,17 @@ function WalletComponent(props) {
         />
         <input type="hidden" className="payment_method_type" value="WALLET" />
         <div className="list-container">
-          <select className="payment_method select">
-            <option
-              value="FREECHARGE"
-              label="Freecharge Wallet"
-              className="options"
-            >
-              Freecharge Wallet
-            </option>
-            <option value="SBIBUDDY" label="SBI Buddy">
-              SBI Buddy
-            </option>
+          <select className="payment_method select minimal">
+            {wallets.map((wallet) => (
+              <option
+                key={wallet.payment_method}
+                value={wallet.payment_method}
+                label={wallet.description}
+                className="options"
+              >
+                {wallet.description}
+              </option>
+            ))}
           </select>
         </div>
         <div

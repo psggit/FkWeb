@@ -1,4 +1,5 @@
-let JusPayScript = "https://sandbox.juspay.in/pay-v3.js";
+//let JusPayScript = "https://sandbox.juspay.in/pay-v3.js";
+let JusPayScript = "https://api.juspay.in/pay-v3.js";
 if (ARGS_BUILD_ENV == "production") {
   JusPayScript = "https://api.juspay.in/pay-v3.js";
 }

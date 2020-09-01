@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { upiIcon } from "../../../assets/images";
 import { UPILowSuccessRate } from "./UPILowSuccessRate";
-import config from "../../../config";
 
 import "../style.scss";
 
 UPIComponent.propTypes = {
   payment: PropTypes.object,
+  jpLoaded: PropTypes.bool,
   jpUpiConf: PropTypes.func,
   paymentDetails: PropTypes.object,
 };
@@ -16,6 +16,7 @@ let juspay_form;
 
 function UPIComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
+  const jpLoaded = props.jpLoaded;
 
   const [payEnabled, SetPayEnabled] = useState(false);
   const [upiValid, SetUpiValid] = useState(true);
@@ -26,14 +27,10 @@ function UPIComponent(props) {
   };
 
   useEffect(() => {
-    const script = document.createElement("script");
-
-    script.src = config.JusPayScript;
-    script.type = "text/javascript";
-    script.async = true;
-    script.onload = configureJuspay;
-    document.body.appendChild(script);
-  }, []);
+    if (jpLoaded) {
+      configureJuspay();
+    }
+  }, [jpLoaded]);
 
   const onSubmit = () => {
     juspay_form.submit_form();
