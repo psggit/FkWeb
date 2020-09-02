@@ -29,6 +29,12 @@ import {
   newCardNameValid,
   newCardExpiryValid,
   newCardCvvValid,
+  createUPIPaymentInProgress,
+  createUPIPaymentSuccess,
+  createUPIPaymentFailed,
+  createCollectRequestInProgress,
+  createCollectRequestSuccess,
+  createCollectRequestFailed,
 } from "./actions";
 
 const paymentFailureMessage =
@@ -60,6 +66,17 @@ let initialState = {
   createOrderFailed: false,
   createOrderError: false,
   createOrderErrorMessage: "",
+
+  //ICICI UPI store
+  upiDetails: {},
+  createUPIPaymentInProgress: false,
+  createUPIPaymentSuccess: false,
+  createUPIPaymentFailed: false,
+  createUPIPaymentErrorMessage: "",
+  createCollectRequestInProgress: false,
+  createCollectRequestSuccess: false,
+  createCollectRequestFailed: false,
+  createCollectRequestErrorMessage: "",
 
   //verify payments
   verifyPaymentDetails: {},
@@ -208,6 +225,67 @@ const paymentReducer = createReducer(initialState, {
     };
   },
 
+  [createUPIPaymentInProgress]: (state) => {
+    return {
+      ...state,
+      createUPIPaymentInProgress: true,
+      createUPIPaymentSuccess: false,
+      createUPIPaymentFailed: false,
+      createUPIPaymentErrorMessage: "",
+    };
+  },
+
+  [createUPIPaymentSuccess]: (state, e) => {
+    return {
+      ...state,
+      createUPIPaymentInProgress: false,
+      createUPIPaymentSuccess: true,
+      createUPIPaymentFailed: false,
+      createUPIPaymentErrorMessage: "",
+      upiDetails: e.payload,
+    };
+  },
+
+  [createUPIPaymentFailed]: (state) => {
+    return {
+      ...state,
+      createUPIPaymentInProgress: false,
+      createUPIPaymentSuccess: false,
+      createUPIPaymentFailed: true,
+      createUPIPaymentErrorMessage: "",
+    };
+  },
+
+  [createCollectRequestInProgress]: (state) => {
+    return {
+      ...state,
+      createCollectRequestInProgress: true,
+      createCollectRequestSuccess: false,
+      createCollectRequestFailed: false,
+      createCollectRequestErrorMessage: "",
+    };
+  },
+
+  [createCollectRequestSuccess]: (state) => {
+    return {
+      ...state,
+      createCollectRequestInProgress: false,
+      createCollectRequestSuccess: true,
+      createCollectRequestFailed: false,
+      createCollectRequestErrorMessage: "",
+    };
+  },
+
+  [createCollectRequestFailed]: (state) => {
+    return {
+      ...state,
+      createCollectRequestInProgress: false,
+      createCollectRequestSuccess: false,
+      createCollectRequestFailed: true,
+      createCollectRequestErrorMessage: "",
+    };
+  },
+
   [fetchPaymentOptionsInProgress]: (state) => {
     return {
       ...state,
@@ -353,6 +431,15 @@ const paymentReducer = createReducer(initialState, {
       createOrderFailed: false,
       createOrderError: false,
       createOrderErrorMessage: "",
+
+      createUPIPaymentInProgress: false,
+      createUPIPaymentSuccess: false,
+      createUPIPaymentFailed: false,
+      createUPIPaymentErrorMessage: "",
+      createCollectRequestInProgress: false,
+      createCollectRequestSuccess: false,
+      createCollectRequestFailed: false,
+      createCollectRequestErrorMessage: "",
 
       //verify payments
       verifyPaymentInProgress: false,

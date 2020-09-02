@@ -14,6 +14,22 @@ export const fetchPaymentOptionsSuccess = createAction(
   "fetchPaymentOptionsSuccess"
 );
 
+export const createUPIPaymentInProgress = createAction(
+  "createUPIPaymentInProgress"
+);
+export const createUPIPaymentFailed = createAction("createUPIPaymentFailed");
+export const createUPIPaymentSuccess = createAction("createUPIPaymentSuccess");
+
+export const createCollectRequestInProgress = createAction(
+  "createCollectRequestInProgress"
+);
+export const createCollectRequestFailed = createAction(
+  "createCollectRequestFailed"
+);
+export const createCollectRequestSuccess = createAction(
+  "createCollectRequestSuccess"
+);
+
 export const createPaymentInProgress = createAction("createPaymentInProgress");
 export const createPaymentFailed = createAction("createPaymentFailed");
 export const createPaymentSuccess = createAction("createPaymentSuccess");

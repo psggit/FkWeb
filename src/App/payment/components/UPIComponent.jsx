@@ -10,16 +10,19 @@ UPIComponent.propTypes = {
   jpLoaded: PropTypes.bool,
   jpUpiConf: PropTypes.func,
   paymentDetails: PropTypes.object,
+  createUPIPayment: PropTypes.func,
 };
 
 let juspay_form;
 
 function UPIComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
+  const paymentOptionsDetails = props.payment.paymentOptionsDetails;
   const jpLoaded = props.jpLoaded;
 
   const [payEnabled, SetPayEnabled] = useState(false);
   const [upiValid, SetUpiValid] = useState(true);
+  const [newVpa, SetNewVpa] = useState("");
 
   const configureJuspay = () => {
     let jp = window.Juspay;
@@ -40,16 +43,23 @@ function UPIComponent(props) {
     if (val.length > 3) {
       if (val.match("[A-Za-z0-9_.-]{3,}@[A-Za-z0-9_.-]{3,}")) {
         SetUpiValid(true);
+        SetNewVpa(val);
         SetPayEnabled(val.length > 0);
       } else {
+        SetNewVpa("");
         SetUpiValid(false);
         SetPayEnabled(false);
       }
     } else {
+      SetNewVpa("");
       SetUpiValid(true);
       SetPayEnabled(false);
     }
   };
+
+  function chooseVpa(vpa) {
+    props.createUPIPayment(props, vpa);
+  }
 
   return (
     <form className="juspay_inline_form" id="upi_payment_form">
@@ -70,8 +80,18 @@ function UPIComponent(props) {
 
       <div className="upi-component">
         <img src={upiIcon} className="upi-image" />
+        {props.payment.is_upi_low_success_rate && <UPILowSuccessRate />}
+        {paymentOptionsDetails.upi.map((upi) => (
+          <div
+            key={upi.id}
+            className="vpa-container"
+            onClick={() => chooseVpa(upi.vpa)}
+          >
+            <div className="radiobtn"></div>
+            <div className="vpa">{upi.vpa}</div>
+          </div>
+        ))}
         <div className="upi-details">
-          {props.payment.is_upi_low_success_rate && <UPILowSuccessRate />}
           <div className="upi-field-container">
             <input
               type="radio"
@@ -92,7 +112,7 @@ function UPIComponent(props) {
                   (payEnabled ? "show-content" : "hide-content") +
                   " make_payment pay-button"
                 }
-                onClick={() => onSubmit()}
+                onClick={() => chooseVpa(newVpa)}
               >
                 PAY
               </div>

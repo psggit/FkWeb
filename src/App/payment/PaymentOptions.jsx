@@ -51,6 +51,7 @@ PaymentOptions.propTypes = {
   createPayment: PropTypes.func,
   jpSavedCardsConf: PropTypes.func,
   resetPaymentOnUnmount: PropTypes.func,
+  createCollectRequest: PropTypes.func,
 };
 
 function PaymentOptions(props) {
@@ -81,6 +82,16 @@ function PaymentOptions(props) {
   useEffect(() => {
     return props.resetPaymentOnUnmount;
   }, []);
+
+  useEffect(() => {
+    console.log(props);
+    if (
+      props.payment.createOrderSuccess &&
+      props.payment.createUPIPaymentSuccess
+    ) {
+      props.createCollectRequest(props.payment.upiDetails.txn_id);
+    }
+  }, [props.payment.createUPIPaymentSuccess]);
 
   useEffect(() => {
     if (props.payment.initialTrigger) {

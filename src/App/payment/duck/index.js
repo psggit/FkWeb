@@ -32,6 +32,8 @@ export { paymentReducer } from "./reducer";
 export { createOrder } from "./createOrder";
 export { fetchPaymentOptions } from "./fetchPaymentOptions";
 export { createPayment } from "./createPayment";
+export { createUPIPayment } from "./createUPIPayment";
+export { createCollectRequest } from "./createCollectRequest";
 export { jpSavedCardsConf } from "./jpSavedCards";
 export { jpUpiConf } from "./jpUpi";
 export { jpNetBankingConf } from "./jpNetBanking";
