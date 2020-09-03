@@ -25,6 +25,7 @@ export {
   newCardNameValid,
   newCardExpiryValid,
   newCardCvvValid,
+  updateUpiRemainingTime,
 } from "./actions";
 
 export { initialise } from "./operations";
@@ -41,4 +42,5 @@ export { jpNetBankingConf } from "./jpNetBanking";
 export { jpWalletConf } from "./jpWallet";
 export { jpNewCardConf } from "./jpNewCard";
 export { verifyPayment } from "./verifyPaymentOperations";
+export { verifyUpiPayment } from "./verifyUpiPayment";
 export { placeOrder } from "./placeOrderOperations";

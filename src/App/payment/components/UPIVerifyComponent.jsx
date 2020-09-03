@@ -1,21 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../../common/toolbar";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 UPIVerifyComponent.propTypes = {
   payment: PropTypes.object,
   resetUPI: PropTypes.func,
+  verifyUpiPayment: PropTypes.func,
+  updateUpiRemainingTime: PropTypes.func,
+  resetVerifyUPIPaymentOnUnmount: PropTypes.func,
 };
 
 function UPIVerifyComponent(props) {
-  const paymentOptionsDetails = props.payment.paymentOptionsDetails;
+  const timeLimit = useParams().time_limit;
+  const txnId = useParams().txn_id;
+  const orderId = useParams().order_id;
+  const upiRemainingTime = props.payment.upiRemainingTime;
 
   useEffect(() => {
-    //  return () => {
     props.resetUPI();
-    //};
+    return () => {
+      props.resetVerifyUPIPaymentOnUnmount(props);
+    };
   }, []);
+
+  useLayoutEffect(() => {
+    if (props.payment.upiRemainingTime > 0) {
+      verifyPayment();
+    }
+  }, [props.payment.upiRemainingTime]);
+
+  function verifyPayment() {
+    setTimeout(() => {
+      props.verifyUpiPayment(txnId);
+      props.updateUpiRemainingTime();
+    }, 5000);
+  }
 
   function formatToConsistency(number) {
     return String(number).padStart(2, "0");
@@ -32,14 +53,15 @@ function UPIVerifyComponent(props) {
       <div className="timer">
         <CountdownCircleTimer
           onComplete={() => {
-            console.log("Timer");
+            return [false, 1000000];
           }}
           isPlaying
           size={140}
           strokeWidth={8}
           strokeLinecap="square"
           rotation="clockwise"
-          duration={paymentOptionsDetails.upi_time_limit}
+          duration={upiRemainingTime <= 0 ? 0 : timeLimit}
+          initialRemainingTime={upiRemainingTime}
           colors="#e97c07"
         >
           {children}

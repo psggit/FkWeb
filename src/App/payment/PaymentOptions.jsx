@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
 } from "react-router-dom";
 
@@ -155,7 +154,17 @@ function PaymentOptions(props) {
         {props.payment.createOrderSuccess &&
         props.payment.createUPIPaymentSuccess &&
         props.payment.createCollectRequestSuccess ? (
-          <Redirect to="/payment/options/upi/verify" push={true} />
+          <Redirect
+            to={
+              "/payment/options/upi/verify/" +
+              props.payment.paymentOptionsDetails.upi_time_limit +
+              "/" +
+              props.payment.upiDetails.txn_id +
+              "/" +
+              props.payment.orderDetails.order_id
+            }
+            push={true}
+          />
         ) : null}
         <ToolbarComponent helpVisibility={false} title={title} />
         <div className="page-container">
@@ -201,7 +210,7 @@ function PaymentOptions(props) {
                 render={() => addCardAndProcess()}
               />
               <Route
-                path="/payment/options/upi/verify"
+                path="/payment/options/upi/verify/:time_limit/:txn_id/:order_id"
                 render={() => upiVerifyProcess()}
               />
               <Route path="/payment/options" render={() => paymentOptions()} />

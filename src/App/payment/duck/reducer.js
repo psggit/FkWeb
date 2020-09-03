@@ -14,6 +14,8 @@ import {
   verifyPaymentSuccess,
   verifyPaymentFailed,
   verifyPaymentError,
+  verifyUpiPaymentFailed,
+  verifyUpiPaymentSuccess,
   placeOrderInProgress,
   placeOrderSuccess,
   placeOrderFailed,
@@ -36,6 +38,8 @@ import {
   createCollectRequestSuccess,
   createCollectRequestFailed,
   resetUPI,
+  resetVerifyUPIPaymentOnUnmount,
+  updateUpiRemainingTime,
 } from "./actions";
 
 const paymentFailureMessage =
@@ -88,6 +92,12 @@ let initialState = {
   verifyPaymentErrorMessage: paymentFailureMessage,
   paymentRetryCount: 0,
 
+  verifyUpiPaymentDetails: {},
+  verifyUpiPaymentSuccess: false,
+  verifyUpiPaymentFailed: false,
+  upiPaymentRetryCount: 0,
+  upiRemainingTime: 0,
+
   //place order
   placeOrderDetails: {},
   placeOrderInProgress: false,
@@ -130,6 +140,25 @@ const paymentSuccessHandler = (state, data) => {
     verifyPaymentError: false,
     verifyPaymentDetails: data,
     paymentRetryCount: state.paymentRetryCount + 1,
+  };
+};
+
+const upiPaymentSuccessHandler = (state, data) => {
+  if (data.status === "success") {
+    return {
+      ...state,
+      verifyUpiPaymentSuccess: true,
+      verifyUpiPaymentFailed: false,
+      verifyUpiPaymentDetails: data,
+      upiPaymentRetryCount: state.upiPaymentRetryCount + 1,
+    };
+  }
+  return {
+    ...state,
+    verifyUpiPaymentSuccess: false,
+    verifyUpiPaymentFailed: false,
+    verifyUpiPaymentDetails: data,
+    upiPaymentRetryCount: state.upiPaymentRetryCount + 1,
   };
 };
 
@@ -300,6 +329,28 @@ const paymentReducer = createReducer(initialState, {
       createCollectRequestErrorMessage: "",
     };
   },
+
+  [resetVerifyUPIPaymentOnUnmount]: (state) => {
+    return {
+      ...state,
+      verifyUpiPaymentSuccess: false,
+      verifyUpiPaymentFailed: false,
+      verifyPaymentErrorMessage: paymentFailureMessage,
+      upiRemainingTime: state.paymentOptionsDetails.upi_time_limit,
+      upiPaymentRetryCount: 0,
+
+      placeOrderInProgress: false,
+      placeOrderFailed: false,
+      placeOrderSuccess: false,
+      placeOrderError: false,
+      placeOrderErrorMessage: placeOrderFailureMessage,
+      placeOrderRetryCount: 0,
+
+      takeMeHome: false,
+      tryPayingAgain: false,
+    };
+  },
+
   [fetchPaymentOptionsInProgress]: (state) => {
     return {
       ...state,
@@ -332,6 +383,7 @@ const paymentReducer = createReducer(initialState, {
       fetchPaymentOptionsError: false,
       fetchPaymentOptionsErrorMessage: "",
       paymentOptionsDetails: e.payload,
+      upiRemainingTime: e.payload.upi_time_limit,
     };
   },
   [initialTrigger]: (state) => {
@@ -370,6 +422,26 @@ const paymentReducer = createReducer(initialState, {
       verifyPaymentSuccess: false,
       verifyPaymentFailed: false,
       verifyPaymentError: true,
+    };
+  },
+
+  [verifyUpiPaymentFailed]: (state) => {
+    return {
+      ...state,
+      verifyUpiPaymentFailed: false,
+      verifyUpiPaymentSuccess: false,
+      upiPaymentRetryCount: state.upiPaymentRetryCount + 1,
+    };
+  },
+
+  [verifyUpiPaymentSuccess]: (state, e) => {
+    return upiPaymentSuccessHandler(state, e.payload);
+  },
+
+  [updateUpiRemainingTime]: (state) => {
+    return {
+      ...state,
+      upiRemainingTime: state.upiRemainingTime - 5,
     };
   },
 

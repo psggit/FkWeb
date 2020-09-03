@@ -22,6 +22,7 @@ export { createOrderAPI } from "./createOrder";
 export { createPaymentAPI } from "./createPayment";
 export { fetchPaymentOptionsAPI } from "./fetchPaymentOptions";
 export { verifyPaymentAPI } from "./verifyPayment";
+export { verifyUpiPaymentAPI } from "./verifyUpiPayment";
 export { finalizeOrderAPI } from "./finalizeOrder";
 export { userStatusAPI } from "./userStatus";
 export { createUPIOrderAPI } from "./createUPIOrder";
