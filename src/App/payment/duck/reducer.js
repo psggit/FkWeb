@@ -35,6 +35,7 @@ import {
   createCollectRequestInProgress,
   createCollectRequestSuccess,
   createCollectRequestFailed,
+  resetUPI,
 } from "./actions";
 
 const paymentFailureMessage =
@@ -286,6 +287,19 @@ const paymentReducer = createReducer(initialState, {
     };
   },
 
+  [resetUPI]: (state) => {
+    return {
+      ...state,
+      createUPIPaymentInProgress: false,
+      createUPIPaymentSuccess: false,
+      createUPIPaymentFailed: false,
+      createUPIPaymentErrorMessage: "",
+      createCollectRequestInProgress: false,
+      createCollectRequestSuccess: false,
+      createCollectRequestFailed: false,
+      createCollectRequestErrorMessage: "",
+    };
+  },
   [fetchPaymentOptionsInProgress]: (state) => {
     return {
       ...state,

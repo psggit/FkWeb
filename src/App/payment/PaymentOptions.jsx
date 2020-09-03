@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 
 import { ToolbarComponent } from "../common/toolbar";
 import { SplashLoadingComponent } from "../common/splashLoading";
@@ -12,6 +18,7 @@ import {
   NetBankingComponent,
   UPIComponent,
   WalletComponent,
+  UPIVerifyComponent,
 } from "./components";
 import { AddCardAndProcessPayment } from "./components";
 
@@ -132,11 +139,24 @@ function PaymentOptions(props) {
   let title = "Pay ₹ " + props.payment.paymentDetails.amount + " using";
 
   const addCardAndProcess = () => {
+    console.log("props:addCardAndProcess", props);
     return <AddCardAndProcessPayment {...props} />;
   };
+
+  const upiVerifyProcess = () => {
+    console.log("props:upiVerifyProcess", props);
+    return <UPIVerifyComponent {...props} />;
+  };
+
   const paymentOptions = () => {
+    console.log("props:paymentOptions", props);
     return (
       <>
+        {props.payment.createOrderSuccess &&
+        props.payment.createUPIPaymentSuccess &&
+        props.payment.createCollectRequestSuccess ? (
+          <Redirect to="/payment/options/upi/verify" push={true} />
+        ) : null}
         <ToolbarComponent helpVisibility={false} title={title} />
         <div className="page-container">
           {payment.is_upi_enabled && (
@@ -179,6 +199,10 @@ function PaymentOptions(props) {
               <Route
                 path="/payment/options/card/new"
                 render={() => addCardAndProcess()}
+              />
+              <Route
+                path="/payment/options/upi/verify"
+                render={() => upiVerifyProcess()}
               />
               <Route path="/payment/options" render={() => paymentOptions()} />
             </Switch>

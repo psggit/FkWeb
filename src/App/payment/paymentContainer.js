@@ -17,6 +17,7 @@ import {
   cancelAddNewCard,
   createUPIPayment,
   createCollectRequest,
+  resetUPI,
 } from "./duck";
 
 const mapStateToProps = (state) => {
@@ -43,6 +44,7 @@ const mapDispatchToProps = (dispatch) => {
     jpNetBankingConf: (ps) => dispatch(jpNetBankingConf(ps)),
     jpWalletConf: (ps) => dispatch(jpWalletConf(ps)),
     resetPaymentOnUnmount: (ps) => dispatch(resetPaymentOnUnmount(ps)),
+    resetUPI: (ps) => dispatch(resetUPI(ps)),
     addNewCard: () => dispatch(addNewCard()),
     cancelAddNewCard: () => dispatch(cancelAddNewCard()),
   };

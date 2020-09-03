@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../../common/toolbar";
 import { ButtonComponent } from "../../common/bottomNext/BottomNextComponent";
-import config from "../../../config";
 
 NewCardInput.propTypes = {
   title: PropTypes.string, // Text about the input field

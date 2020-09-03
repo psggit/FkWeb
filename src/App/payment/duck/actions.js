@@ -30,6 +30,8 @@ export const createCollectRequestSuccess = createAction(
   "createCollectRequestSuccess"
 );
 
+export const resetUPI = createAction("resetUPI");
+
 export const createPaymentInProgress = createAction("createPaymentInProgress");
 export const createPaymentFailed = createAction("createPaymentFailed");
 export const createPaymentSuccess = createAction("createPaymentSuccess");

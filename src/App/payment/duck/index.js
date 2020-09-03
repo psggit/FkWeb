@@ -15,6 +15,7 @@ export {
   placeOrderError,
   takeMeHome,
   tryPayingAgain,
+  resetUPI,
   resetPaymentOnUnmount,
   resetVerifyPaymentOnUnmount,
   addNewCard,
