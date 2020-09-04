@@ -18,10 +18,12 @@ import {
   createUPIPayment,
   createCollectRequest,
   resetUPI,
+  resetVerifyUPIPaymentOnUnmount,
   verifyUpiPayment,
   updateUpiRemainingTime,
+  showUPICancel,
+  showUPITimeOut,
 } from "./duck";
-import { resetVerifyUPIPaymentOnUnmount } from "./duck/actions";
 
 const mapStateToProps = (state) => {
   return {
@@ -52,6 +54,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(resetVerifyUPIPaymentOnUnmount(ps)),
     verifyUpiPayment: (ps) => dispatch(verifyUpiPayment(ps)),
     updateUpiRemainingTime: () => dispatch(updateUpiRemainingTime()),
+    showUPITimeOut: (ps, show) => dispatch(showUPITimeOut(ps, show)),
+    showUPICancel: (ps, show) => dispatch(showUPICancel(ps, show)),
     addNewCard: () => dispatch(addNewCard()),
     cancelAddNewCard: () => dispatch(cancelAddNewCard()),
   };

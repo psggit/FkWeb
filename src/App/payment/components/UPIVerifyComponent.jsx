@@ -2,13 +2,16 @@ import React, { useLayoutEffect, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../../common/toolbar";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams, useHistory } from "react-router-dom";
+import { Alert, AlertWithOptions } from "../../common/alert";
 
 UPIVerifyComponent.propTypes = {
   payment: PropTypes.object,
   resetUPI: PropTypes.func,
   verifyUpiPayment: PropTypes.func,
   updateUpiRemainingTime: PropTypes.func,
+  showUPITimeOut: PropTypes.func,
+  showUPICancel: PropTypes.func,
   resetVerifyUPIPaymentOnUnmount: PropTypes.func,
 };
 
@@ -18,11 +21,11 @@ function UPIVerifyComponent(props) {
   const orderId = useParams().order_id;
   const upiRemainingTime = props.payment.upiRemainingTime;
 
+  const history = useHistory();
+
   useEffect(() => {
     props.resetUPI();
-    return () => {
-      props.resetVerifyUPIPaymentOnUnmount(props);
-    };
+    return () => props.resetVerifyUPIPaymentOnUnmount();
   }, []);
 
   useLayoutEffect(() => {
@@ -53,6 +56,7 @@ function UPIVerifyComponent(props) {
       <div className="timer">
         <CountdownCircleTimer
           onComplete={() => {
+            //        props.showUPITimeOut(true);
             return [false, 1000000];
           }}
           isPlaying
@@ -70,6 +74,45 @@ function UPIVerifyComponent(props) {
     );
   }
 
+  const handleUPICancel = () => {
+    history.goBack();
+  };
+
+  const handleUPIdismiss = () => {
+    console.log("Handle dismiss");
+    props.showUPICancel(false);
+  };
+
+  const handleUPITimeOut = () => {
+    history.goBack();
+  };
+
+  function UpiCancel() {
+    return (
+      <AlertWithOptions
+        handleOption1={handleUPICancel}
+        handleOption2={handleUPIdismiss}
+        show={true}
+        title="Cancel Confirmation"
+        content="UPI payment authorization time has expired. Please re-initiate the transaction and complete payment before the timer runs out"
+        option1="Yes"
+        option2="No"
+      />
+    );
+  }
+
+  function UpiTimeOut() {
+    return (
+      <Alert
+        handleOption={handleUPITimeOut}
+        show={true}
+        title="UPI Payment"
+        content="UPI payment authorization time has expired. Please re-initiate the transaction and complete payment before the timer runs out"
+        option="Okay"
+      />
+    );
+  }
+
   return (
     <>
       <ToolbarComponent helpVisibility={false} title="Complete Payment" />
@@ -84,7 +127,13 @@ function UPIVerifyComponent(props) {
         <div className="note">
           Please don&apos;t hit back button until the transaction is complete
         </div>
-        <div className="button-container"></div>
+      </div>
+      {props.payment.showUPICancel ? <UpiCancel /> : null}
+      {props.payment.showUPITimeOut ? <UpiTimeOut /> : null}
+      <div className="upi-cancel-container">
+        <div className="cancel" onClick={() => props.showUPICancel(true)}>
+          CANCEL
+        </div>
       </div>
     </>
   );

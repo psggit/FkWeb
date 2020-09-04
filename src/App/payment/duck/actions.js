@@ -30,6 +30,8 @@ export const createCollectRequestSuccess = createAction(
   "createCollectRequestSuccess"
 );
 
+export const showUPITimeOut = createAction("showUPITimeOut");
+export const showUPICancel = createAction("showUPICancel");
 export const updateUpiRemainingTime = createAction("updateUpiRemainingTime");
 export const resetUPI = createAction("resetUPI");
 export const resetVerifyUPIPaymentOnUnmount = createAction(

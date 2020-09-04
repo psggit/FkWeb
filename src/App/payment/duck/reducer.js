@@ -40,6 +40,8 @@ import {
   resetUPI,
   resetVerifyUPIPaymentOnUnmount,
   updateUpiRemainingTime,
+  showUPICancel,
+  showUPITimeOut,
 } from "./actions";
 
 const paymentFailureMessage =
@@ -97,6 +99,8 @@ let initialState = {
   verifyUpiPaymentFailed: false,
   upiPaymentRetryCount: 0,
   upiRemainingTime: 0,
+  showUPITimeOut: false,
+  showUPICancel: false,
 
   //place order
   placeOrderDetails: {},
@@ -338,6 +342,8 @@ const paymentReducer = createReducer(initialState, {
       verifyPaymentErrorMessage: paymentFailureMessage,
       upiRemainingTime: state.paymentOptionsDetails.upi_time_limit,
       upiPaymentRetryCount: 0,
+      showUPITimeOut: false,
+      showUPICancel: false,
 
       placeOrderInProgress: false,
       placeOrderFailed: false,
@@ -442,6 +448,18 @@ const paymentReducer = createReducer(initialState, {
     return {
       ...state,
       upiRemainingTime: state.upiRemainingTime - 5,
+    };
+  },
+  [showUPICancel]: (state, show) => {
+    return {
+      ...state,
+      showUPICancel: show.payload,
+    };
+  },
+  [showUPITimeOut]: (state, show) => {
+    return {
+      ...state,
+      showUPITimeOut: show.payload,
     };
   },
 
