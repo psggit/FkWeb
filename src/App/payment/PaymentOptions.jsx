@@ -177,8 +177,9 @@ function PaymentOptions(props) {
           {payment.is_cards_enabled && (
             <CreditDebitCardsComponent {...props} jpLoaded={jpLoaded} />
           )}
-          <WalletComponent {...props} jpLoaded={jpLoaded} />
-
+          {payment.is_jp_wallets_enabled && (
+            <WalletComponent {...props} jpLoaded={jpLoaded} />
+          )}
           {payment.is_nb_enabled && (
             <div>
               <NetBankingComponent

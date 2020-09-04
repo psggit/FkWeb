@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch) => {
     createOrder: (ps) => dispatch(createOrder(ps)),
     fetchPaymentOptions: (ps) => dispatch(fetchPaymentOptions(ps)),
     createPayment: (ps) => dispatch(createPayment(ps)),
-    createUPIPayment: (ps) => dispatch(createUPIPayment(ps)),
+    createUPIPayment: (ps, vpa) => dispatch(createUPIPayment(ps, vpa)),
     createCollectRequest: (ps) => dispatch(createCollectRequest(ps)),
     jpUpiConf: (ps) => dispatch(jpUpiConf(ps)),
     jpSavedCardsConf: (ps, index) => dispatch(jpSavedCardsConf(ps, index)),

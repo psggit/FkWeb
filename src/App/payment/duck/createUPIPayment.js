@@ -44,8 +44,8 @@ const onError = (dispatch) => {
   };
 };
 
-const createUPIPayment = (paymentState) => {
-  let reqBody = reqBodyFromState(paymentState);
+const createUPIPayment = (paymentState, vpa) => {
+  let reqBody = reqBodyFromState(paymentState, vpa);
   return (dispatch) => {
     dispatch(createUPIPaymentInProgress());
     createUPIOrderAPI(
