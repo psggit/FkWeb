@@ -13,31 +13,13 @@ UPIComponent.propTypes = {
   createUPIPayment: PropTypes.func,
 };
 
-let juspay_form;
-
 function UPIComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
   const paymentOptionsDetails = props.payment.paymentOptionsDetails;
-  const jpLoaded = props.jpLoaded;
 
   const [payEnabled, SetPayEnabled] = useState(false);
   const [upiValid, SetUpiValid] = useState(true);
   const [newVpa, SetNewVpa] = useState("");
-
-  const configureJuspay = () => {
-    let jp = window.Juspay;
-    juspay_form = props.jpUpiConf(jp);
-  };
-
-  useEffect(() => {
-    if (jpLoaded) {
-      configureJuspay();
-    }
-  }, [jpLoaded]);
-
-  const onSubmit = () => {
-    juspay_form.submit_form();
-  };
 
   const onTextChanged = (val) => {
     if (val.length > 3) {
@@ -63,21 +45,6 @@ function UPIComponent(props) {
 
   return (
     <form className="juspay_inline_form" id="upi_payment_form">
-      <input
-        type="hidden"
-        className="merchant_id"
-        value={paymentDetails.merchant_id}
-      />
-
-      <input
-        type="hidden"
-        className="order_id"
-        value={paymentDetails.order_id}
-      />
-      <input type="hidden" className="payment_method_type" value="UPI" />
-      <input type="hidden" className="payment_method" value="UPI" />
-      <input type="hidden" className="txn_type" value="UPI_COLLECT" />
-
       <div className="upi-component">
         <img src={upiIcon} className="upi-image" />
         {props.payment.is_upi_low_success_rate && <UPILowSuccessRate />}
