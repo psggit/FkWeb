@@ -4,6 +4,8 @@ import { ToolbarComponent } from "../../common/toolbar";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useParams, useHistory } from "react-router-dom";
 import { Alert, AlertWithOptions } from "../../common/alert";
+import { SplashLoadingComponent } from "../../common/splashLoading";
+import { drinksIcon } from "../../../assets/images";
 
 UPIVerifyComponent.propTypes = {
   payment: PropTypes.object,
@@ -15,24 +17,120 @@ UPIVerifyComponent.propTypes = {
   resetVerifyUPIPaymentOnUnmount: PropTypes.func,
 };
 
+const getRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+const retryHandler = (count, inProgress, retry, error) => {
+  const jitter = getRandomInt(1000, 3000);
+  if (count === 0) {
+    inProgress();
+    retry();
+  } else if (count > 0 && count < 3) {
+    inProgress();
+    setTimeout(retry, jitter);
+  } else {
+    error();
+  }
+};
+
+let triggerPlaceOrder = (props, oid, txn_id) => {
+  let payment = props.payment;
+  let trigger =
+    payment.verifyUpiPaymentSuccess &&
+    !payment.placeOrderError &&
+    !(
+      payment.placeOrderInProgress ||
+      payment.placeOrderSuccess ||
+      payment.placeOrderFailed
+    );
+  if (trigger) {
+    retryHandler(
+      payment.placeOrderRetryCount,
+      props.placeOrderInProgress,
+      () => {
+        props.placeOrder(oid, txn_id);
+      },
+      props.placeOrderError
+    );
+  }
+};
+
+RetryComponent.propTypes = {
+  payment: PropTypes.object,
+  verifyUpiPayment: PropTypes.func,
+  placeOrder: PropTypes.func,
+};
+
+function RetryComponent(props) {
+  let retryAction = props.placeOrder;
+
+  return (
+    <SplashLoadingComponent
+      motion={false}
+      icon={drinksIcon}
+      text="Something went wrong, please try again."
+      buttonFunc={() => retryAction(props)}
+      buttonText="Retry"
+    />
+  );
+}
+
+OrderFailedComponent.propTypes = {
+  takeMeHome: PropTypes.func,
+  tryPayingAgain: PropTypes.func,
+  payment: PropTypes.object,
+};
+
+function OrderFailedComponent(props) {
+  return (
+    <Alert
+      handleOption={props.takeMeHome}
+      show={true}
+      content={props.payment.placeOrderErrorMessage}
+      option={"Ok"}
+    />
+  );
+}
+
 function UPIVerifyComponent(props) {
+  let payment = props.payment;
+
   const timeLimit = useParams().time_limit;
   const txnId = useParams().txn_id;
   const orderId = useParams().order_id;
-  const upiRemainingTime = props.payment.upiRemainingTime;
+  const upiRemainingTime = payment.upiRemainingTime;
 
   const history = useHistory();
+
+  if (payment.takeMeHome) {
+    history.push("/home");
+  }
+  if (payment.tryPayingAgain) {
+    history.push("/order/summary");
+  }
+  if (payment.placeOrderSuccess) {
+    history.push("/order/placed");
+  }
 
   useEffect(() => {
     props.resetUPI();
     return () => props.resetVerifyUPIPaymentOnUnmount();
   }, []);
 
+  useEffect(() => {
+    if (payment.verifyUpiPaymentSuccess) {
+      triggerPlaceOrder(props, orderId, txnId);
+    }
+  }, [payment.verifyUpiPaymentSuccess]);
+
   useLayoutEffect(() => {
-    if (props.payment.upiRemainingTime > 0) {
+    if (payment.upiRemainingTime > 0) {
       verifyPayment();
     }
-  }, [props.payment.upiRemainingTime]);
+  }, [payment.upiRemainingTime]);
 
   function verifyPayment() {
     setTimeout(() => {
@@ -56,7 +154,9 @@ function UPIVerifyComponent(props) {
       <div className="timer">
         <CountdownCircleTimer
           onComplete={() => {
-            //        props.showUPITimeOut(true);
+            if (props.payment.showTimeOutCount < 2) {
+              props.showUPITimeOut(true);
+            }
             return [false, 1000000];
           }}
           isPlaying
@@ -113,6 +213,20 @@ function UPIVerifyComponent(props) {
     );
   }
 
+  if (payment.placeOrderInProgress) {
+    return (
+      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
+    );
+  }
+
+  if (payment.placeOrderFailed) {
+    return <RetryComponent {...props} />;
+  }
+
+  if (payment.placeOrderError) {
+    return <OrderFailedComponent {...props} />;
+  }
+
   return (
     <>
       <ToolbarComponent helpVisibility={false} title="Complete Payment" />
@@ -128,8 +242,8 @@ function UPIVerifyComponent(props) {
           Please don&apos;t hit back button until the transaction is complete
         </div>
       </div>
-      {props.payment.showUPICancel ? <UpiCancel /> : null}
-      {props.payment.showUPITimeOut ? <UpiTimeOut /> : null}
+      {payment.showUPICancel ? <UpiCancel /> : null}
+      {payment.showUPITimeOut ? <UpiTimeOut /> : null}
       <div className="upi-cancel-container">
         <div className="cancel" onClick={() => props.showUPICancel(true)}>
           CANCEL

@@ -100,6 +100,7 @@ let initialState = {
   upiPaymentRetryCount: 0,
   upiRemainingTime: 0,
   showUPITimeOut: false,
+  showTimeOutCount: 0,
   showUPICancel: false,
 
   //place order
@@ -343,6 +344,7 @@ const paymentReducer = createReducer(initialState, {
       upiRemainingTime: state.paymentOptionsDetails.upi_time_limit,
       upiPaymentRetryCount: 0,
       showUPITimeOut: false,
+      showTimeOutCount: 0,
       showUPICancel: false,
 
       placeOrderInProgress: false,
@@ -460,6 +462,7 @@ const paymentReducer = createReducer(initialState, {
     return {
       ...state,
       showUPITimeOut: show.payload,
+      showTimeOutCount: state.showTimeOutCount + 1,
     };
   },
 
