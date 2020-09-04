@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { useHistory } from "react-router-dom";
-
 import { NewCardComponent } from "./NewCardComponent";
 import { SavedCardComponent } from "./SavedCardComponent";
 import { AddNewCardComponent } from "./AddNewCardComponent";
@@ -12,10 +10,12 @@ import "../style.scss";
 CreditDebitCardsComponent.propTypes = {
   payment: PropTypes.object,
   addNewCard: PropTypes.func,
+  jpLoaded: PropTypes.bool,
 };
 
 function CreditDebitCardsComponent(props) {
   const payment = props.payment.paymentOptionsDetails;
+  const jpLoaded = props.jpLoaded;
 
   return (
     <div className="card-container">
@@ -24,7 +24,7 @@ function CreditDebitCardsComponent(props) {
         <NewCardComponent />
       ) : (
         <div>
-          <SavedCardComponent {...props} />
+          <SavedCardComponent {...props} jpLoaded={jpLoaded} />
           <AddNewCardComponent />
         </div>
       )}

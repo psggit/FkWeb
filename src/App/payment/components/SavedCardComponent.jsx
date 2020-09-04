@@ -1,6 +1,5 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import PropTypes from "prop-types";
-import config from "../../../config";
 
 import { lockIcon } from "../../../assets/images";
 
@@ -8,6 +7,7 @@ import "../style.scss";
 
 SavedCardComponent.propTypes = {
   payment: PropTypes.object,
+  jpLoaded: PropTypes.bool,
   jpSavedCardsConf: PropTypes.func,
   paymentDetails: PropTypes.object,
   savedCardValid: PropTypes.object,
@@ -78,18 +78,7 @@ function Form(props) {
 
 function SavedCardComponent(props) {
   const payment = props.payment.paymentOptionsDetails;
-
-  const [jpLoaded, SetjpLoaded] = useState(false);
-
-  useLayoutEffect(() => {
-    const script = document.createElement("script");
-
-    script.src = config.JusPayScript;
-    script.type = "text/javascript";
-    script.async = false;
-    script.onload = () => SetjpLoaded(true);
-    document.body.appendChild(script);
-  }, []);
+  const jpLoaded = props.jpLoaded;
 
   const onSubmit = (index) => {
     var selectedForm = juspay_forms[index];
@@ -104,7 +93,7 @@ function SavedCardComponent(props) {
     ) {
       return "show-content make_payment card-pay-button";
     } else {
-      return "hide-content make_payment card-pay-button";
+      return "hide-content";
     }
   }
 

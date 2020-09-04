@@ -1,15 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import { ToolbarComponent } from "../common/toolbar";
 import { SplashLoadingComponent } from "../common/splashLoading";
 import { drinksIcon } from "../../assets/images";
+import config from "../../config";
 
 import {
   CreditDebitCardsComponent,
   NetBankingComponent,
   UPIComponent,
+  WalletComponent,
+  UPIVerifyComponent,
 } from "./components";
 import { AddCardAndProcessPayment } from "./components";
 
@@ -49,9 +57,12 @@ PaymentOptions.propTypes = {
   createPayment: PropTypes.func,
   jpSavedCardsConf: PropTypes.func,
   resetPaymentOnUnmount: PropTypes.func,
+  createCollectRequest: PropTypes.func,
 };
 
 function PaymentOptions(props) {
+  const [jpLoaded, SetjpLoaded] = useState(false);
+
   let triggerCreatePayment =
     props.payment.createOrderSuccess &&
     !(
@@ -61,8 +72,32 @@ function PaymentOptions(props) {
     );
 
   useEffect(() => {
+    const script = document.createElement("script");
+
+    script.src = config.JusPayScript;
+    script.type = "text/javascript";
+    script.async = true;
+    script.onload = () => SetjpLoaded(true);
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
     return props.resetPaymentOnUnmount;
   }, []);
+
+  useEffect(() => {
+    console.log(props);
+    if (
+      props.payment.createOrderSuccess &&
+      props.payment.createUPIPaymentSuccess
+    ) {
+      props.createCollectRequest(props.payment.upiDetails.txn_id);
+    }
+  }, [props.payment.createUPIPaymentSuccess]);
 
   useEffect(() => {
     if (props.payment.initialTrigger) {
@@ -91,6 +126,8 @@ function PaymentOptions(props) {
     );
   }
 
+  console.log("Payment Option", " : reload");
+
   const openOtherBankOptions = () => {
     document.getElementById("otherBanksID").classList.remove("hide");
   };
@@ -101,25 +138,53 @@ function PaymentOptions(props) {
   let title = "Pay ₹ " + props.payment.paymentDetails.amount + " using";
 
   const addCardAndProcess = () => {
+    console.log("props:addCardAndProcess", props);
     return <AddCardAndProcessPayment {...props} />;
   };
+
+  const upiVerifyProcess = () => {
+    console.log("props:upiVerifyProcess", props);
+    return <UPIVerifyComponent {...props} />;
+  };
+
   const paymentOptions = () => {
+    console.log("props:paymentOptions", props);
     return (
       <>
+        {props.payment.createOrderSuccess &&
+        props.payment.createUPIPaymentSuccess &&
+        props.payment.createCollectRequestSuccess ? (
+          <Redirect
+            to={
+              "/payment/options/upi/verify/" +
+              props.payment.paymentOptionsDetails.upi_time_limit +
+              "/" +
+              props.payment.upiDetails.txn_id +
+              "/" +
+              props.payment.orderDetails.order_id
+            }
+            push={true}
+          />
+        ) : null}
         <ToolbarComponent helpVisibility={false} title={title} />
         <div className="page-container">
           {payment.is_upi_enabled && (
             <div>
-              <UPIComponent {...props} />
+              <UPIComponent {...props} jpLoaded={jpLoaded} />
             </div>
           )}
 
-          {payment.is_cards_enabled && <CreditDebitCardsComponent {...props} />}
+          {payment.is_cards_enabled && (
+            <CreditDebitCardsComponent {...props} jpLoaded={jpLoaded} />
+          )}
+          <WalletComponent {...props} jpLoaded={jpLoaded} />
+
           {payment.is_nb_enabled && (
             <div>
               <NetBankingComponent
                 {...props}
                 banks={banks}
+                jpLoaded={jpLoaded}
                 onBankSelected={openOtherBankOptions}
                 onOtherBankSelected={openOtherBankOptions}
               />
@@ -143,6 +208,10 @@ function PaymentOptions(props) {
               <Route
                 path="/payment/options/card/new"
                 render={() => addCardAndProcess()}
+              />
+              <Route
+                path="/payment/options/upi/verify/:time_limit/:txn_id/:order_id"
+                render={() => upiVerifyProcess()}
               />
               <Route path="/payment/options" render={() => paymentOptions()} />
             </Switch>
