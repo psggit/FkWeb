@@ -235,12 +235,11 @@ function UPIVerifyComponent(props) {
         <div className="msg"> 2. Check pending transactions</div>
         <div className="msg"> 3. Complete payment </div>
         <TimerComponent />
+        <div className="note">Please complete payment before the timer</div>
         <div className="note">
-          Please complete payment before the timer runs out
+          runs out and please don&apos;t hit back button
         </div>
-        <div className="note">
-          Please don&apos;t hit back button until the transaction is complete
-        </div>
+        <div className="note">until the transaction is complete</div>
       </div>
       {payment.showUPICancel ? <UpiCancel /> : null}
       {payment.showUPITimeOut ? <UpiTimeOut /> : null}
