@@ -83,7 +83,7 @@ function NetBankingComponent(props) {
         />
         <input type="hidden" className="payment_method_type" value="NB" />
         <div className="list-container">
-          <select className="payment_method select">
+          <select className="payment_method select minimal">
             {banks.map((bank) => (
               <option
                 key={bank.payment_method}
