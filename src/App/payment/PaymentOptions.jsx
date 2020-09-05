@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
   Redirect,
+  useHistory,
 } from "react-router-dom";
 
 import { ToolbarComponent } from "../common/toolbar";
@@ -71,6 +72,18 @@ function PaymentOptions(props) {
       props.payment.createPaymentSuccess
     );
 
+  const history = useHistory();
+  if (props.payment.takeMeHome) {
+    history.push("/home");
+  }
+
+  if (props.payment.tryPayingAgain) {
+    history.push("/order/summary");
+  }
+
+  if (props.payment.placeOrderSuccess) {
+    history.push("/order/placed");
+  }
   useEffect(() => {
     const script = document.createElement("script");
 
