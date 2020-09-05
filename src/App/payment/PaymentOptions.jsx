@@ -90,7 +90,6 @@ function PaymentOptions(props) {
   }, []);
 
   useEffect(() => {
-    console.log(props);
     if (
       props.payment.createOrderSuccess &&
       props.payment.createUPIPaymentSuccess
@@ -126,8 +125,6 @@ function PaymentOptions(props) {
     );
   }
 
-  console.log("Payment Option", " : reload");
-
   const openOtherBankOptions = () => {
     document.getElementById("otherBanksID").classList.remove("hide");
   };
@@ -138,12 +135,10 @@ function PaymentOptions(props) {
   let title = "Pay ₹ " + props.payment.paymentDetails.amount + " using";
 
   const addCardAndProcess = () => {
-    console.log("props:addCardAndProcess", props);
     return <AddCardAndProcessPayment {...props} />;
   };
 
   const upiVerifyProcess = () => {
-    console.log("props:upiVerifyProcess", props);
     return <UPIVerifyComponent {...props} />;
   };
 
