@@ -95,8 +95,12 @@ function OrderFailedComponent(props) {
   );
 }
 
+let intervalId;
+
 function UPIVerifyComponent(props) {
   let payment = props.payment;
+
+  const interval = 5000;
 
   const timeLimit = useParams().time_limit;
   const txnId = useParams().txn_id;
@@ -117,7 +121,11 @@ function UPIVerifyComponent(props) {
 
   useEffect(() => {
     props.resetUPI();
-    return () => props.resetVerifyUPIPaymentOnUnmount();
+    verifyPayment();
+    return () => {
+      cancelTimer();
+      props.resetVerifyUPIPaymentOnUnmount();
+    };
   }, []);
 
   useEffect(() => {
@@ -127,16 +135,21 @@ function UPIVerifyComponent(props) {
   }, [payment.verifyUpiPaymentSuccess]);
 
   useLayoutEffect(() => {
-    if (payment.upiRemainingTime > 0) {
-      verifyPayment();
+    if (payment.upiRemainingTime < 0) {
+      cancelTimer();
+      //      verifyPayment();
     }
   }, [payment.upiRemainingTime]);
 
+  function cancelTimer() {
+    clearInterval(intervalId);
+  }
+
   function verifyPayment() {
-    setTimeout(() => {
+    intervalId = setInterval(() => {
       props.verifyUpiPayment(txnId);
       props.updateUpiRemainingTime();
-    }, 5000);
+    }, interval);
   }
 
   function formatToConsistency(number) {
@@ -155,6 +168,7 @@ function UPIVerifyComponent(props) {
         <CountdownCircleTimer
           onComplete={() => {
             if (props.payment.showTimeOutCount < 2) {
+              cancelTimer();
               props.showUPITimeOut(true);
             }
             return [false, 1000000];
@@ -175,6 +189,7 @@ function UPIVerifyComponent(props) {
   }
 
   const handleUPICancel = () => {
+    cancelTimer();
     history.goBack();
   };
 
@@ -184,6 +199,7 @@ function UPIVerifyComponent(props) {
   };
 
   const handleUPITimeOut = () => {
+    cancelTimer();
     history.goBack();
   };
 
@@ -229,7 +245,11 @@ function UPIVerifyComponent(props) {
 
   return (
     <>
-      <ToolbarComponent helpVisibility={false} title="Complete Payment" />
+      <ToolbarComponent
+        onClick={() => props.showUPICancel(true)}
+        helpVisibility={false}
+        title="Complete Payment"
+      />
       <div className="page-container upi-verify-container">
         <div className="msg"> 1. Open the UPI-linked mobile app</div>
         <div className="msg"> 2. Check pending transactions</div>
