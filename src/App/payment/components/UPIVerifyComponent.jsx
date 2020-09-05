@@ -245,7 +245,11 @@ function UPIVerifyComponent(props) {
 
   return (
     <>
-      <ToolbarComponent helpVisibility={false} title="Complete Payment" />
+      <ToolbarComponent
+        onClick={() => props.showUPICancel(true)}
+        helpVisibility={false}
+        title="Complete Payment"
+      />
       <div className="page-container upi-verify-container">
         <div className="msg"> 1. Open the UPI-linked mobile app</div>
         <div className="msg"> 2. Check pending transactions</div>
