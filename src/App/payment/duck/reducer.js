@@ -555,6 +555,13 @@ const paymentReducer = createReducer(initialState, {
       verifyPaymentError: false,
       verifyPaymentErrorMessage: paymentFailureMessage,
 
+      placeOrderInProgress: false,
+      placeOrderFailed: false,
+      placeOrderSuccess: false,
+      placeOrderError: false,
+      placeOrderErrorMessage: placeOrderFailureMessage,
+      placeOrderRetryCount: 0,
+
       takeMeHome: false,
       tryPayingAgain: false,
 
