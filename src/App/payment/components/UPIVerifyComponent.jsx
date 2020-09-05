@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../../common/toolbar";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { Redirect, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Alert, AlertWithOptions } from "../../common/alert";
 import { SplashLoadingComponent } from "../../common/splashLoading";
 import { drinksIcon } from "../../../assets/images";
@@ -111,16 +111,6 @@ function UPIVerifyComponent(props) {
 
   const history = useHistory();
 
-  if (payment.takeMeHome) {
-    history.push("/home");
-  }
-  if (payment.tryPayingAgain) {
-    history.push("/order/summary");
-  }
-  if (payment.placeOrderSuccess) {
-    history.push("/order/placed");
-  }
-
   useEffect(() => {
     props.resetUPI();
     verifyPayment();
@@ -144,7 +134,6 @@ function UPIVerifyComponent(props) {
   useLayoutEffect(() => {
     if (payment.upiRemainingTime < 0) {
       cancelTimer();
-      //      verifyPayment();
     }
   }, [payment.upiRemainingTime]);
 
