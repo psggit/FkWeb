@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ToolbarComponent } from "../../common/toolbar";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { useParams, useHistory } from "react-router-dom";
+import { Redirect, useParams, useHistory } from "react-router-dom";
 import { Alert, AlertWithOptions } from "../../common/alert";
 import { SplashLoadingComponent } from "../../common/splashLoading";
 import { drinksIcon } from "../../../assets/images";
@@ -38,6 +38,7 @@ const retryHandler = (count, inProgress, retry, error) => {
 
 let triggerPlaceOrder = (props, oid, txn_id) => {
   let payment = props.payment;
+
   let trigger =
     payment.verifyUpiPaymentSuccess &&
     !payment.placeOrderError &&
@@ -46,6 +47,7 @@ let triggerPlaceOrder = (props, oid, txn_id) => {
       payment.placeOrderSuccess ||
       payment.placeOrderFailed
     );
+
   if (trigger) {
     retryHandler(
       payment.placeOrderRetryCount,
@@ -130,9 +132,14 @@ function UPIVerifyComponent(props) {
 
   useEffect(() => {
     if (payment.verifyUpiPaymentSuccess) {
+      cancelTimer();
       triggerPlaceOrder(props, orderId, txnId);
     }
   }, [payment.verifyUpiPaymentSuccess]);
+
+  useEffect(() => {
+    triggerPlaceOrder(props, orderId, txnId);
+  });
 
   useLayoutEffect(() => {
     if (payment.upiRemainingTime < 0) {
@@ -194,7 +201,6 @@ function UPIVerifyComponent(props) {
   };
 
   const handleUPIdismiss = () => {
-    console.log("Handle dismiss");
     props.showUPICancel(false);
   };
 

@@ -17,7 +17,7 @@ const processResponse = () => {
 
 const onSuccess = (dispatch) => {
   return (data) => {
-    //dispatch(createOrderFailed(data));
+    //    dispatch(placeOrderFailed(data));
     dispatch(placeOrderSuccess(data));
   };
 };
