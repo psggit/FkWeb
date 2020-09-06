@@ -45,4 +45,3 @@ const UPIVerifyContainer = connect(
 )(UPIVerifyComponent);
 
 export { UPIVerifyContainer };
-
