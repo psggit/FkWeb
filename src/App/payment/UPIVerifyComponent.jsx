@@ -1,11 +1,11 @@
 import React, { useLayoutEffect, useEffect } from "react";
 import PropTypes from "prop-types";
-import { ToolbarComponent } from "../../common/toolbar";
+import { ToolbarComponent } from "../common/toolbar";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useParams, useHistory } from "react-router-dom";
-import { Alert, AlertWithOptions } from "../../common/alert";
-import { SplashLoadingComponent } from "../../common/splashLoading";
-import { drinksIcon } from "../../../assets/images";
+import { Alert, AlertWithOptions } from "../common/alert";
+import { SplashLoadingComponent } from "../common/splashLoading";
+import { drinksIcon } from "../../assets/images";
 
 UPIVerifyComponent.propTypes = {
   payment: PropTypes.object,
@@ -110,6 +110,17 @@ function UPIVerifyComponent(props) {
   const upiRemainingTime = payment.upiRemainingTime;
 
   const history = useHistory();
+  if (props.payment.takeMeHome) {
+    history.push("/home");
+  }
+
+  if (props.payment.tryPayingAgain) {
+    history.push("/order/summary");
+  }
+
+  if (props.payment.placeOrderSuccess) {
+    history.push("/order/placed");
+  }
 
   useEffect(() => {
     props.resetUPI();

@@ -5,7 +5,6 @@ import {
   Switch,
   Route,
   Redirect,
-  useHistory,
 } from "react-router-dom";
 
 import { ToolbarComponent } from "../common/toolbar";
@@ -18,7 +17,6 @@ import {
   NetBankingComponent,
   UPIComponent,
   WalletComponent,
-  UPIVerifyComponent,
 } from "./components";
 import { AddCardAndProcessPayment } from "./components";
 
@@ -72,18 +70,6 @@ function PaymentOptions(props) {
       props.payment.createPaymentSuccess
     );
 
-  const history = useHistory();
-  if (props.payment.takeMeHome) {
-    history.push("/home");
-  }
-
-  if (props.payment.tryPayingAgain) {
-    history.push("/order/summary");
-  }
-
-  if (props.payment.placeOrderSuccess) {
-    history.push("/order/placed");
-  }
   useEffect(() => {
     const script = document.createElement("script");
 
@@ -119,6 +105,25 @@ function PaymentOptions(props) {
       props.createPayment(props);
     }
   });
+  if (
+    props.payment.createOrderSuccess &&
+    props.payment.createUPIPaymentSuccess &&
+    props.payment.createCollectRequestSuccess
+  ) {
+    return (
+      <Redirect
+        to={
+          "/payment/upi/verify/" +
+          props.payment.paymentOptionsDetails.upi_time_limit +
+          "/" +
+          props.payment.upiDetails.txn_id +
+          "/" +
+          props.payment.orderDetails.order_id
+        }
+        push={true}
+      />
+    );
+  }
 
   if (
     props.payment.createOrderFailed ||
@@ -151,29 +156,10 @@ function PaymentOptions(props) {
     return <AddCardAndProcessPayment {...props} />;
   };
 
-  const upiVerifyProcess = () => {
-    return <UPIVerifyComponent {...props} />;
-  };
-
   const paymentOptions = () => {
     console.log("props:paymentOptions", props);
     return (
       <>
-        {props.payment.createOrderSuccess &&
-        props.payment.createUPIPaymentSuccess &&
-        props.payment.createCollectRequestSuccess ? (
-          <Redirect
-            to={
-              "/payment/options/upi/verify/" +
-              props.payment.paymentOptionsDetails.upi_time_limit +
-              "/" +
-              props.payment.upiDetails.txn_id +
-              "/" +
-              props.payment.orderDetails.order_id
-            }
-            push={true}
-          />
-        ) : null}
         <ToolbarComponent helpVisibility={false} title={title} />
         <div className="page-container">
           {payment.is_upi_enabled && (
@@ -217,10 +203,6 @@ function PaymentOptions(props) {
               <Route
                 path="/payment/options/card/new"
                 render={() => addCardAndProcess()}
-              />
-              <Route
-                path="/payment/options/upi/verify/:time_limit/:txn_id/:order_id"
-                render={() => upiVerifyProcess()}
               />
               <Route path="/payment/options" render={() => paymentOptions()} />
             </Switch>

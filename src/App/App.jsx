@@ -22,6 +22,7 @@ import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
 import { StateCityContainer } from "./stateCity";
 import { OrderInfoContainer } from "./order/info";
 import config from "../config";
+import { UPIVerifyContainer } from "./payment/upiVerifyContainer";
 
 const DOMAIN = config.BASE_DOMAIN;
 
@@ -79,6 +80,10 @@ function App() {
           />
           <Route path="/order/summary" component={OrderSummaryContainer} />
           <Route path="/payment/options" component={PaymentContainer} />
+          <Route
+            path="/payment/upi/verify/:time_limit/:txn_id/:order_id"
+            component={UPIVerifyContainer}
+          />
 
           <Route
             path="/payment/verify/order/:order_id"
