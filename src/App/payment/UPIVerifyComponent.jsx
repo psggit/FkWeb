@@ -214,9 +214,8 @@ function UPIVerifyComponent(props) {
       <AlertWithOptions
         handleOption1={handleUPICancel}
         handleOption2={handleUPIdismiss}
-        show={true}
         title="Cancel Confirmation"
-        content="UPI payment authorization time has expired. Please re-initiate the transaction and complete payment before the timer runs out"
+        content="Do you want to cancel the ongoing transaction?"
         option1="Yes"
         option2="No"
       />
