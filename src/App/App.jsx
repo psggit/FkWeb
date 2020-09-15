@@ -5,6 +5,7 @@ import Loadable from "react-loadable";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { IframeComponent } from "./iframe";
+import { UPIVerifyContainer } from "./payment/upiVerifyContainer";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
 
 import config from "../config";
@@ -170,7 +171,7 @@ function App() {
             component={() => (
               <IframeComponent
                 url={"https://" + DOMAIN + "/user-terms"}
-                title={`Terms And Condition`}
+                title={`Terms And Conditions`}
               />
             )}
           />
@@ -199,6 +200,11 @@ function App() {
           <Route
             path="/payment/options"
             component={(props) => <PaymentContainer {...props} />}
+          />
+
+          <Route
+            path="/payment/upi/verify/:time_limit/:txn_id/:order_id"
+            component={UPIVerifyContainer}
           />
 
           <Route

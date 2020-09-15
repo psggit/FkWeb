@@ -45,6 +45,7 @@ AddCardAndProcessPayment.propTypes = {
 let juspay_form;
 function AddCardAndProcessPayment(props) {
   const paymentDetails = props.payment.paymentDetails;
+  const jpLoaded = props.payment.jpLoaded;
 
   const configureJuspay = () => {
     let jp = window.Juspay;
@@ -52,8 +53,13 @@ function AddCardAndProcessPayment(props) {
   };
 
   useEffect(() => {
-    const script = document.createElement("script");
+    if (jpLoaded) {
+      configureJuspay();
+    }
+  }, [jpLoaded]);
 
+  useEffect(() => {
+    const script = document.createElement("script");
     script.src = config.JusPayScript;
     script.type = "text/javascript";
     script.async = true;

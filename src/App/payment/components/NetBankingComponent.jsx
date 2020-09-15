@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { downArrowIcon } from "../../../assets/images";
 import "../style.scss";
 import PropTypes from "prop-types";
-import config from "../../../config";
 
 NetBankingComponent.propTypes = {
   payment: PropTypes.object,
+  jpLoaded: PropTypes.bool,
   jpNetBankingConf: PropTypes.func,
   banks: PropTypes.any,
   onBankSelected: PropTypes.any,
@@ -48,6 +48,7 @@ let juspay_form;
 
 function NetBankingComponent(props) {
   const paymentDetails = props.payment.paymentDetails;
+  const jpLoaded = props.jpLoaded;
   const { banks } = props;
 
   const configureJuspay = () => {
@@ -56,27 +57,17 @@ function NetBankingComponent(props) {
   };
 
   useEffect(() => {
-    const script = document.createElement("script");
-
-    script.src = config.JusPayScript;
-    script.type = "text/javascript";
-    script.async = true;
-    script.onload = configureJuspay;
-    document.body.appendChild(script);
-
-    /*
-    return () => {
-      document.body.removeChild(script);
-    };
-	  */
-  }, []);
+    if (jpLoaded) {
+      configureJuspay();
+    }
+  }, [jpLoaded]);
 
   const onSubmit = () => {
     juspay_form.submit_form();
   };
 
   return (
-    <div className="net-banking-container">
+    <div className="payment-list-container">
       <div className="title">Net Banking</div>
       <form className="juspay_inline_form" id="nb_payment_form">
         <input
@@ -91,13 +82,13 @@ function NetBankingComponent(props) {
           value={paymentDetails.order_id}
         />
         <input type="hidden" className="payment_method_type" value="NB" />
-        <div className="bank-list-container">
-          <select className="payment_method nb-select">
+        <div className="list-container">
+          <select className="payment_method select minimal">
             {banks.map((bank) => (
               <option
                 key={bank.payment_method}
                 value={bank.payment_method}
-                className="nb-options"
+                className="options"
               >
                 {bank.description}
               </option>

@@ -1,6 +1,10 @@
-import { placeOrderSuccess, placeOrderFailed } from "./actions";
+import {
+  createCollectRequestSuccess,
+  createCollectRequestInProgress,
+  createCollectRequestFailed,
+} from "./actions";
 
-import { finalizeOrderAPI } from "../../../utils";
+import { createCollectRequestAPI } from "../../../utils";
 
 const processResponse = () => {
   return (res) => {
@@ -17,21 +21,21 @@ const processResponse = () => {
 
 const onSuccess = (dispatch) => {
   return (data) => {
-    //    dispatch(placeOrderFailed(data));
-    dispatch(placeOrderSuccess(data));
+    dispatch(createCollectRequestSuccess(data));
   };
 };
 
 const onError = (dispatch) => {
   return (err) => {
-    dispatch(placeOrderFailed(err));
+    dispatch(createCollectRequestFailed(err));
   };
 };
 
-const placeOrder = (oid, txn_id) => {
+const createCollectRequest = (orderID) => {
   return (dispatch) => {
-    finalizeOrderAPI(
-      { order_id: oid, txn_id: txn_id },
+    dispatch(createCollectRequestInProgress());
+    createCollectRequestAPI(
+      orderID,
       processResponse(dispatch),
       onSuccess(dispatch),
       onError(dispatch)
@@ -39,4 +43,4 @@ const placeOrder = (oid, txn_id) => {
   };
 };
 
-export { placeOrder };
+export { createCollectRequest };

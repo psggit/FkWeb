@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { UserBasicInfoComponent } from "./userBasicInfoComponent";
 import {
+  ChangingName,
   ChangingBirthYear,
   ChangingGenderOperation,
   SelectIDTypeOperation,
@@ -16,6 +17,7 @@ import {
 const mapStateToProps = (state) => {
   return {
     selectedAddress: state.addressStore.selectedAddress,
+    name: state.ubiStore.name,
     yob: state.ubiStore.birthYear,
     gender: state.ubiStore.gender,
     consumerIDTypes: state.ubiStore.consumerIDTypes,
@@ -38,6 +40,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    changeName: (value) => dispatch(ChangingName(value)),
     changeBirthYear: (value) => dispatch(ChangingBirthYear(value)),
     changingGenderFunc: (value) => dispatch(ChangingGenderOperation(value)),
     selectingIDProofFunc: (value) => dispatch(SelectIDTypeOperation(value)),

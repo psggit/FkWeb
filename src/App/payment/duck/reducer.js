@@ -14,6 +14,8 @@ import {
   verifyPaymentSuccess,
   verifyPaymentFailed,
   verifyPaymentError,
+  verifyUpiPaymentFailed,
+  verifyUpiPaymentSuccess,
   placeOrderInProgress,
   placeOrderSuccess,
   placeOrderFailed,
@@ -29,10 +31,21 @@ import {
   newCardNameValid,
   newCardExpiryValid,
   newCardCvvValid,
+  createUPIPaymentInProgress,
+  createUPIPaymentSuccess,
+  createUPIPaymentFailed,
+  createCollectRequestInProgress,
+  createCollectRequestSuccess,
+  createCollectRequestFailed,
+  resetUPI,
+  resetVerifyUPIPaymentOnUnmount,
+  updateUpiRemainingTime,
+  showUPICancel,
+  showUPITimeOut,
 } from "./actions";
 
 const paymentFailureMessage =
-  "If the amount as been debited will be credited back in 4-7 business days";
+  "If the amount has been debited, will be credited back in 4-7 business days";
 const placeOrderFailureMessage = "Place order failed";
 
 let initialState = {
@@ -61,6 +74,17 @@ let initialState = {
   createOrderError: false,
   createOrderErrorMessage: "",
 
+  //ICICI UPI store
+  upiDetails: {},
+  createUPIPaymentInProgress: false,
+  createUPIPaymentSuccess: false,
+  createUPIPaymentFailed: false,
+  createUPIPaymentErrorMessage: "",
+  createCollectRequestInProgress: false,
+  createCollectRequestSuccess: false,
+  createCollectRequestFailed: false,
+  createCollectRequestErrorMessage: "",
+
   //verify payments
   verifyPaymentDetails: {},
   verifyPaymentInProgress: false,
@@ -69,6 +93,15 @@ let initialState = {
   verifyPaymentError: false,
   verifyPaymentErrorMessage: paymentFailureMessage,
   paymentRetryCount: 0,
+
+  verifyUpiPaymentDetails: {},
+  verifyUpiPaymentSuccess: false,
+  verifyUpiPaymentFailed: false,
+  upiPaymentRetryCount: 0,
+  upiRemainingTime: 0,
+  showUPITimeOut: false,
+  showTimeOutCount: 0,
+  showUPICancel: false,
 
   //place order
   placeOrderDetails: {},
@@ -112,6 +145,25 @@ const paymentSuccessHandler = (state, data) => {
     verifyPaymentError: false,
     verifyPaymentDetails: data,
     paymentRetryCount: state.paymentRetryCount + 1,
+  };
+};
+
+const upiPaymentSuccessHandler = (state, data) => {
+  if (data.status === "success") {
+    return {
+      ...state,
+      verifyUpiPaymentSuccess: true,
+      verifyUpiPaymentFailed: false,
+      verifyUpiPaymentDetails: data,
+      upiPaymentRetryCount: state.upiPaymentRetryCount + 1,
+    };
+  }
+  return {
+    ...state,
+    verifyUpiPaymentSuccess: false,
+    verifyUpiPaymentFailed: false,
+    verifyUpiPaymentDetails: data,
+    upiPaymentRetryCount: state.upiPaymentRetryCount + 1,
   };
 };
 
@@ -208,6 +260,105 @@ const paymentReducer = createReducer(initialState, {
     };
   },
 
+  [createUPIPaymentInProgress]: (state) => {
+    return {
+      ...state,
+      createUPIPaymentInProgress: true,
+      createUPIPaymentSuccess: false,
+      createUPIPaymentFailed: false,
+      createUPIPaymentErrorMessage: "",
+    };
+  },
+
+  [createUPIPaymentSuccess]: (state, e) => {
+    return {
+      ...state,
+      createUPIPaymentInProgress: false,
+      createUPIPaymentSuccess: true,
+      createUPIPaymentFailed: false,
+      createUPIPaymentErrorMessage: "",
+      upiDetails: e.payload,
+    };
+  },
+
+  [createUPIPaymentFailed]: (state) => {
+    return {
+      ...state,
+      createUPIPaymentInProgress: false,
+      createUPIPaymentSuccess: false,
+      createUPIPaymentFailed: true,
+      createUPIPaymentErrorMessage: "",
+    };
+  },
+
+  [createCollectRequestInProgress]: (state) => {
+    return {
+      ...state,
+      createCollectRequestInProgress: true,
+      createCollectRequestSuccess: false,
+      createCollectRequestFailed: false,
+      createCollectRequestErrorMessage: "",
+    };
+  },
+
+  [createCollectRequestSuccess]: (state) => {
+    return {
+      ...state,
+      createCollectRequestInProgress: false,
+      createCollectRequestSuccess: true,
+      createCollectRequestFailed: false,
+      createCollectRequestErrorMessage: "",
+    };
+  },
+
+  [createCollectRequestFailed]: (state) => {
+    return {
+      ...state,
+      createCollectRequestInProgress: false,
+      createCollectRequestSuccess: false,
+      createCollectRequestFailed: true,
+      createCollectRequestErrorMessage: "",
+    };
+  },
+
+  [resetUPI]: (state) => {
+    return {
+      ...state,
+      createUPIPaymentInProgress: false,
+      createUPIPaymentSuccess: false,
+      createUPIPaymentFailed: false,
+      createUPIPaymentErrorMessage: "",
+      createCollectRequestInProgress: false,
+      createCollectRequestSuccess: false,
+      createCollectRequestFailed: false,
+      createCollectRequestErrorMessage: "",
+    };
+  },
+
+  [resetVerifyUPIPaymentOnUnmount]: (state) => {
+    return {
+      ...state,
+      verifyUpiPaymentSuccess: false,
+      verifyUpiPaymentFailed: false,
+      verifyPaymentErrorMessage: paymentFailureMessage,
+      upiRemainingTime: state.paymentOptionsDetails.upi_time_limit,
+      upiPaymentRetryCount: 0,
+      showUPITimeOut: false,
+      showTimeOutCount: 0,
+      showUPICancel: false,
+
+      placeOrderInProgress: false,
+      placeOrderFailed: false,
+      placeOrderSuccess: false,
+      placeOrderError: false,
+      placeOrderErrorMessage: placeOrderFailureMessage,
+      placeOrderRetryCount: 0,
+
+      takeMeHome: false,
+      tryPayingAgain: false,
+    };
+  },
+
   [fetchPaymentOptionsInProgress]: (state) => {
     return {
       ...state,
@@ -240,6 +391,7 @@ const paymentReducer = createReducer(initialState, {
       fetchPaymentOptionsError: false,
       fetchPaymentOptionsErrorMessage: "",
       paymentOptionsDetails: e.payload,
+      upiRemainingTime: e.payload.upi_time_limit,
     };
   },
   [initialTrigger]: (state) => {
@@ -278,6 +430,39 @@ const paymentReducer = createReducer(initialState, {
       verifyPaymentSuccess: false,
       verifyPaymentFailed: false,
       verifyPaymentError: true,
+    };
+  },
+
+  [verifyUpiPaymentFailed]: (state) => {
+    return {
+      ...state,
+      verifyUpiPaymentFailed: false,
+      verifyUpiPaymentSuccess: false,
+      upiPaymentRetryCount: state.upiPaymentRetryCount + 1,
+    };
+  },
+
+  [verifyUpiPaymentSuccess]: (state, e) => {
+    return upiPaymentSuccessHandler(state, e.payload);
+  },
+
+  [updateUpiRemainingTime]: (state) => {
+    return {
+      ...state,
+      upiRemainingTime: state.upiRemainingTime - 5,
+    };
+  },
+  [showUPICancel]: (state, show) => {
+    return {
+      ...state,
+      showUPICancel: show.payload,
+    };
+  },
+  [showUPITimeOut]: (state, show) => {
+    return {
+      ...state,
+      showUPITimeOut: show.payload,
+      showTimeOutCount: state.showTimeOutCount + 1,
     };
   },
 
@@ -354,12 +539,31 @@ const paymentReducer = createReducer(initialState, {
       createOrderError: false,
       createOrderErrorMessage: "",
 
+      createUPIPaymentInProgress: false,
+      createUPIPaymentSuccess: false,
+      createUPIPaymentFailed: false,
+      createUPIPaymentErrorMessage: "",
+      createCollectRequestInProgress: false,
+      createCollectRequestSuccess: false,
+      createCollectRequestFailed: false,
+      createCollectRequestErrorMessage: "",
+
       //verify payments
       verifyPaymentInProgress: false,
       verifyPaymentSuccess: false,
       verifyPaymentFailed: false,
       verifyPaymentError: false,
       verifyPaymentErrorMessage: paymentFailureMessage,
+
+      placeOrderInProgress: false,
+      placeOrderFailed: false,
+      placeOrderSuccess: false,
+      placeOrderError: false,
+      placeOrderErrorMessage: placeOrderFailureMessage,
+      placeOrderRetryCount: 0,
+
+      takeMeHome: false,
+      tryPayingAgain: false,
 
       addNewCard: false,
     };

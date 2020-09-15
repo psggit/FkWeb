@@ -54,6 +54,8 @@ const myOrdersReducer = createReducer(initialState, {
     fetchOrderInProgress: false,
     fetchOrderSuccess: false,
     fetchOrderFailed: false,
+    myOrders: [],
+    offset: 0,
   }),
 });
 

@@ -14,11 +14,38 @@ export const fetchPaymentOptionsSuccess = createAction(
   "fetchPaymentOptionsSuccess"
 );
 
+export const createUPIPaymentInProgress = createAction(
+  "createUPIPaymentInProgress"
+);
+export const createUPIPaymentFailed = createAction("createUPIPaymentFailed");
+export const createUPIPaymentSuccess = createAction("createUPIPaymentSuccess");
+
+export const createCollectRequestInProgress = createAction(
+  "createCollectRequestInProgress"
+);
+export const createCollectRequestFailed = createAction(
+  "createCollectRequestFailed"
+);
+export const createCollectRequestSuccess = createAction(
+  "createCollectRequestSuccess"
+);
+
+export const showUPITimeOut = createAction("showUPITimeOut");
+export const showUPICancel = createAction("showUPICancel");
+export const updateUpiRemainingTime = createAction("updateUpiRemainingTime");
+export const resetUPI = createAction("resetUPI");
+export const resetVerifyUPIPaymentOnUnmount = createAction(
+  "resetVerifyUPIPaymentOnUnmount"
+);
+
 export const createPaymentInProgress = createAction("createPaymentInProgress");
 export const createPaymentFailed = createAction("createPaymentFailed");
 export const createPaymentSuccess = createAction("createPaymentSuccess");
 
 export const initialTrigger = createAction("initialTrigger");
+
+export const verifyUpiPaymentSuccess = createAction("verifyUpiPaymentSuccess");
+export const verifyUpiPaymentFailed = createAction("verifyUpiPaymentFailed");
 
 export const verifyPaymentInProgress = createAction("verifyPaymentInProgress");
 export const verifyPaymentSuccess = createAction("verifyPaymentSuccess");

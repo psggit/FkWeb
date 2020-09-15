@@ -1,6 +1,6 @@
-import { placeOrderSuccess, placeOrderFailed } from "./actions";
+import { verifyUpiPaymentSuccess, verifyUpiPaymentFailed } from "./actions";
 
-import { finalizeOrderAPI } from "../../../utils";
+import { verifyUpiPaymentAPI } from "../../../utils";
 
 const processResponse = () => {
   return (res) => {
@@ -17,21 +17,21 @@ const processResponse = () => {
 
 const onSuccess = (dispatch) => {
   return (data) => {
-    //    dispatch(placeOrderFailed(data));
-    dispatch(placeOrderSuccess(data));
+    //dispatch(createOrderFailed(data));
+    dispatch(verifyUpiPaymentSuccess(data));
   };
 };
 
 const onError = (dispatch) => {
   return (err) => {
-    dispatch(placeOrderFailed(err));
+    dispatch(verifyUpiPaymentFailed(err));
   };
 };
 
-const placeOrder = (oid, txn_id) => {
+const verifyUpiPayment = (oid) => {
   return (dispatch) => {
-    finalizeOrderAPI(
-      { order_id: oid, txn_id: txn_id },
+    verifyUpiPaymentAPI(
+      oid,
       processResponse(dispatch),
       onSuccess(dispatch),
       onError(dispatch)
@@ -39,4 +39,4 @@ const placeOrder = (oid, txn_id) => {
   };
 };
 
-export { placeOrder };
+export { verifyUpiPayment };

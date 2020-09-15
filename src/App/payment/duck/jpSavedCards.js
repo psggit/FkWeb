@@ -61,13 +61,10 @@ export const jpSavedCardsConf = (JusPay, index) => {
           index: index,
         };
         switch (event.type) {
-          case "onready":
-            savedCardProp.isValid = false;
+          case "keyup":
             dispatch(savedCardValid(savedCardProp));
             break;
           default:
-            savedCardProp.isValid = event.valid;
-            dispatch(savedCardValid(savedCardProp));
             break;
         }
       },

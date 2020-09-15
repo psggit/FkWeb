@@ -120,11 +120,6 @@ CartComponent.propTypes = {
   resetOnUnmount: PropTypes.func,
 };
 
-function historyPush(path) {
-  let history = useHistory();
-  console.log(history);
-}
-
 function CartComponent(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -132,7 +127,6 @@ function CartComponent(props) {
   }, []);
 
   if (props.validationSuccessful) {
-    historyPush();
     return <Redirect to="/address/select/osm" push={true} />;
   }
 

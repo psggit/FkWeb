@@ -2,6 +2,7 @@ import {
   loginInProgress,
   loginSuccess,
   loginFailed,
+  nameEntered,
   birthYearEntered,
   changeGenderAction,
   selectIDTypeAction,
@@ -26,6 +27,7 @@ const initialState = () => {
     grantTokenError: false,
     grantTokenErrorMessage: "",
     userInfo: {},
+    name: "",
     birthYear: "",
     gender: "",
     selectedDocument: {},
@@ -40,6 +42,7 @@ const initialState = () => {
       { idType: "Passport", name: "passport" },
       { idType: "PAN Card", name: "pan" },
       { idType: "Voter ID", name: "voterid" },
+      { idType: "Aadhaar", name: "aadhaar" },
     ],
   };
 };
@@ -79,6 +82,10 @@ const userInfoCreateReducer = createReducer(initialState(), {
     loginInProgress: false,
     loginSuccess: false,
     loginFailed: true,
+  }),
+  [nameEntered]: (state, action) => ({
+    ...state,
+    name: action.payload,
   }),
   [birthYearEntered]: (state, action) => ({
     ...state,
