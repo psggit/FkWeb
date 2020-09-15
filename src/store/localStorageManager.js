@@ -1,5 +1,5 @@
 import { addressLocalStorageHandler } from "../App/address";
-import { userLocalStorageHandler } from "../App/userBasicInfo";
+import { userLocalStorageHandler } from "../App/login";
 import { cartLocalStorageHandler } from "../App/common/cart";
 import { locationLocalStorageHandler } from "../App/stateCity";
 

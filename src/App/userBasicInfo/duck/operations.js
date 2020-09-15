@@ -48,11 +48,15 @@ const ChangingGenderOperation = (value) => {
 const CheckCheckBoxOperation = () => {
   return (dispatch, getState) => {
     let store = getState().ubiStore;
+    let summaryStore = getState().summaryDetails;
+    let { bz_kyc_exist, dob_exist, gender_exist } = summaryStore.summaryDetails;
+    dob_exist = false; //temp data
+    // console.log(store.birthYear.length, dob_exist);
     if (
-      store.gender != "" &&
-      store.birthYear.length == 4 &&
-      store.finalisedDocument != "" &&
-      store.selectedDocumentValue != ""
+      (store.gender != "" || gender_exist) &&
+      (store.birthYear.length == 4 || dob_exist) &&
+      (store.finalisedDocument != "" || bz_kyc_exist) &&
+      (store.selectedDocumentValue != "" || bz_kyc_exist)
     ) {
       dispatch(showCheckboxAction(true));
     } else {
@@ -123,11 +127,19 @@ const validateName = (name) => {
   return { validName: valid, nameError: message };
 };
 
-const UpdateKYCOperation = (value) => {
-  //validate KYc
-  let { valid, message } = validateKyc(value.kycType, value.kycValue);
-  if (valid !== true) {
-    return (dispatch) => dispatch(kycUpdateFailed(message));
+const UpdateKYCOperation = (value, bz_kyc_exist) => {
+  //validate KYC
+
+  let data = {
+    valid: bz_kyc_exist,
+    message: "",
+  };
+  if (!data.valid) {
+    data = validateKyc(value.kycType, value.kycValue);
+  }
+
+  if (data.valid !== true) {
+    return (dispatch) => dispatch(kycUpdateFailed(data.message));
   }
 
   //validate Name

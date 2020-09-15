@@ -10,11 +10,9 @@ import {
   ErrorClose,
   FinaliseIDProofValueOperation,
   UpdateKYCOperation,
-  login,
-  exitToFk,
 } from "./duck";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     selectedAddress: state.addressStore.selectedAddress,
     name: state.ubiStore.name,
@@ -26,15 +24,13 @@ const mapStateToProps = (state) => {
     showDeclaration: state.ubiStore.showDeclaration,
     checkDeclaration: state.ubiStore.checkDeclaration,
     selectedDocumentValue: state.ubiStore.selectedDocumentValue,
-    loginInProgress: state.ubiStore.loginInProgress,
-    loginSuccess: state.ubiStore.loginSuccess,
-    loginFailed: state.ubiStore.loginFailed,
-    collectUserDetails: state.ubiStore.collectUserDetails,
+    collectUserDetails:
+      state.summaryDetails.summaryDetails.is_basic_details_required,
+    summaryDetails: state.summaryDetails,
     showError: state.ubiStore.showError,
     errorMessage: state.ubiStore.errorMessage,
     userInfo: state.ubiStore.userInfo,
-    grantTokenError: state.ubiStore.grantTokenError,
-    grantTokenErrorMessage: state.ubiStore.grantTokenErrorMessage,
+    redirect: props.match.params.redirect,
   };
 };
 
@@ -44,15 +40,14 @@ const mapDispatchToProps = (dispatch) => {
     changeBirthYear: (value) => dispatch(ChangingBirthYear(value)),
     changingGenderFunc: (value) => dispatch(ChangingGenderOperation(value)),
     selectingIDProofFunc: (value) => dispatch(SelectIDTypeOperation(value)),
-    updateKycFunc: (value) => dispatch(UpdateKYCOperation(value)),
+    updateKycFunc: (value, bz_kyc_exist) =>
+      dispatch(UpdateKYCOperation(value, bz_kyc_exist)),
     changeDocumentValueFunc: (value) =>
       dispatch(ChangeDocumentValueOperation(value)),
     finaliseIDProofFunc: (selectedDocument) =>
       dispatch(FinaliseIDProofValueOperation(selectedDocument)),
     checkDeclarationFunc: () => dispatch(CheckDeclarationOperation()),
-    login: () => dispatch(login()),
     closeError: () => dispatch(ErrorClose()),
-    exitToFk: () => dispatch(exitToFk()),
   };
 };
 

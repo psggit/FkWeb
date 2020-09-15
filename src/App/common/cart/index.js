@@ -5,6 +5,7 @@ export {
   removeSkuFromCart,
   isEmpty,
   validateCart,
+  fetchSummary,
   closeValidationErrorMessage,
   clearCartAndAdd,
   dontClearCart,

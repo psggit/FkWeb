@@ -10,6 +10,9 @@ import {
   dontClearCart,
   resetOnUnmount,
   clearCart,
+  fetchSummaryInProgress,
+  fetchSummaryFailed,
+  fetchSummarySuccess,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -49,6 +52,12 @@ declare type State = {
   validateError: boolean,
   validateErrorMessage: string,
   redirect: boolean,
+  fetchSummaryInProgress: boolean,
+  fetchSummaryFailed: boolean,
+  fetchSummarySuccess: boolean,
+  fetchSummaryError: boolean,
+  fetchSummaryLocationError: boolean,
+  fetchSummaryErrorMessage: string,
   pendingSku: Sku,
 };
 
@@ -88,6 +97,13 @@ const initialState = (): State => {
     validateErrorMessage: "",
     redirect: false,
     pendingSku: {},
+    fetchSummaryInProgress: false,
+    fetchSummaryFailed: false,
+    fetchSummarySuccess: false,
+    fetchSummaryError: false,
+    fetchSummaryLocationError: false,
+    fetchSummaryErrorMessage: "",
+    cartUpdate: false,
   };
 };
 
@@ -110,6 +126,12 @@ let resetValidationState = (state: State): State => {
   state.validateErrorMessage = "";
   state.redirect = false;
   state.pendingSku = {};
+  state.fetchSummaryInProgress = false;
+  state.fetchSummaryFailed = false;
+  state.fetchSummarySuccess = false;
+  state.fetchSummaryError = false;
+  state.fetchSummaryLocationError = false;
+  state.fetchSummaryErrorMessage = "";
   return state;
 };
 
@@ -119,6 +141,7 @@ let resetState = (state: State): State => {
   state.retailerDiffers = false;
   state = resetValidationState(state);
   state.pendingSku = {};
+  state.cartUpdate = false;
   return state;
 };
 
@@ -164,6 +187,7 @@ let addProduct = (state: State, sku: Sku): State => {
     prod.count += 1;
   }
   state.products[prod.skuId.toString()] = prod;
+  state.cartUpdate = true;
   state = resetValidationState(state);
   return state;
 };
@@ -178,7 +202,7 @@ let removeProduct = (state: State, sku: Sku): State => {
   if (prod.count === 0) {
     delete state.products[prod.skuId.toString()];
   }
-
+  state.cartUpdate = true;
   state = resetValidationState(state);
   return state;
 };
@@ -239,6 +263,50 @@ const cartTotal = (oldS: State): number => {
   return total;
 };
 
+const handleSummarySuccess = (state: State, data: Object): State => {
+  if (data.statusCode === 0) {
+    //success
+    state = {
+      ...state,
+      summaryDetails: data.summary_details,
+      fetchSummaryInProgress: false,
+      fetchSummaryFailed: false,
+      fetchSummarySuccess: true,
+      fetchSummaryError: false,
+      fetchSummaryLocationError: false,
+      fetchSummaryErrorMessage: "",
+      cartUpdate: false,
+    };
+  } else if (data.statusCode === 30003) {
+    //location error
+    state = {
+      ...state,
+      summaryDetails: data.summary_details,
+      fetchSummaryInProgress: false,
+      fetchSummaryFailed: false,
+      fetchSummarySuccess: true,
+      fetchSummaryError: false,
+      fetchSummaryLocationError: true,
+      fetchSummaryErrorMessage: data.message,
+      cartUpdate: false,
+    };
+  } else {
+    //summary error
+    state = {
+      ...state,
+      summaryDetails: data.summary_details,
+      fetchSummaryInProgress: false,
+      fetchSummaryFailed: false,
+      fetchSummarySuccess: true,
+      fetchSummaryError: true,
+      fetchSummaryLocationError: false,
+      fetchSummaryErrorMessage: data.message,
+      cartUpdate: false,
+    };
+  }
+  return state;
+};
+
 const cartReducer = createReducer(initialState(), {
   [addSkuToCart]: (state: State, e: Object) => {
     return void addProduct(state, e.payload);
@@ -269,6 +337,30 @@ const cartReducer = createReducer(initialState(), {
       validateError: false,
       validateErrorMessage: "",
     };
+  },
+
+  [fetchSummaryInProgress]: (state: State): State => {
+    return {
+      ...state,
+      fetchSummaryInProgress: true,
+      fetchSummaryFailed: false,
+      fetchSummarySuccess: false,
+      cartUpdate: false,
+    };
+  },
+
+  [fetchSummaryFailed]: (state: State): State => {
+    return {
+      ...state,
+      fetchSummaryInProgress: false,
+      fetchSummaryFailed: true,
+      fetchSummarySuccess: false,
+      cartUpdate: false,
+    };
+  },
+
+  [fetchSummarySuccess]: (state: State, e: Object) => {
+    return void handleSummarySuccess(state, e.payload);
   },
 
   [closeValidationErrorMessage]: (state: State): State => {

@@ -313,18 +313,24 @@ function CollectInfoComponent(props) {
     kycValue: props.selectedDocumentValue,
   };
 
+  //const { bz_kyc_exist, dob_exist, gender_exist } = props.userInfo;
+  let bz_kyc_exist = true;
+  let dob_exist = false;
+  let gender_exist = false;
+  let name_exist = false;
+
   return (
     <div className="page-container userBasicInfoComponent">
       <ToolbarComponent helpVisibility={false} title="Let's Get Started!" />
       <InfoComponent {...props} />
-      <NameComponent {...props} />
-      <YearOfBirthInputComponent {...props} />
-      <GenderSelectionComponent {...props} />
-      <SelectIDComponent {...props} />
+      {name_exist ? null : <NameComponent {...props} />}
+      {dob_exist ? null : <YearOfBirthInputComponent {...props} />}
+      {gender_exist ? null : <GenderSelectionComponent {...props} />}
+      {bz_kyc_exist ? null : <SelectIDComponent {...props} />}
       <CheckBoxComponent {...props} />
       <BottomNextComponent
         title="Proceed"
-        onClickFunc={() => updateKycFunc(data)}
+        onClickFunc={() => updateKycFunc(data, bz_kyc_exist)}
         inActive={!checkDeclaration}
       />
       {props.showError && <AlertValidateErrorComponent {...props} />}
@@ -345,64 +351,25 @@ UserBasicInfoComponent.propTypes = {
   selectedDocument: PropTypes.object,
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
-  loginInProgress: PropTypes.bool,
-  loginFailed: PropTypes.bool,
-  loginSuccess: PropTypes.bool,
   collectUserDetails: PropTypes.bool,
-  login: PropTypes.func,
   selectedAddress: PropTypes.object,
   showError: PropTypes.bool,
   errorMessage: PropTypes.string,
   closeError: PropTypes.func,
   userInfo: PropTypes.object,
   grantTokenError: PropTypes.bool,
+  redirect: PropTypes.string,
 };
 
 function UserBasicInfoComponent(props) {
-  const loginSuccess = props.loginSuccess;
-  const loginInProgress = props.loginInProgress;
-  const loginFailed = props.loginFailed;
-  const collectUserDetails = props.collectUserDetails;
-  const grantTokenError = props.grantTokenError;
-  const trigger =
-    !grantTokenError && !(loginSuccess || loginFailed || loginInProgress);
-  useEffect(() => {
-    if (trigger) {
-      props.login();
-    }
-  });
+  // const collectUserDetails = props.summaryDetails.summaryDetails.is_basic_details_required;
+  // console.log("userbasicInfoComponent");
+  // console.log(props.collectUserDetails);
 
-  useEffect(() => {
-    if (loginSuccess) {
-      window.fcWidget.user.setProperties({
-        firstName: props.userInfo.name,
-        email: props.userInfo.email,
-        phone: props.userInfo.mobile,
-        userLoginType: "fk-web",
-      });
-    }
-  }, [props.loginSuccess]);
-
-  if (props.grantTokenError) {
-    return <GranTokenFailure {...props} />;
-  }
-
-  if (loginInProgress) {
-    return (
-      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
-    );
-  } else if (loginFailed) {
-    return <LFComponent login={props.login} />;
-  } else if (loginSuccess) {
-    if (collectUserDetails) {
-      return <CollectInfoComponent {...props} />;
-    } else if (props.selectedAddress !== null) {
-      return <Redirect to="/home" />;
-    } else {
-      return <Redirect to="/address/select/sf" />;
-    }
+  if (props.collectUserDetails) {
+    return <CollectInfoComponent {...props} />;
   } else {
-    return <div> </div>;
+    return <Redirect to="/payment/options" />;
   }
 }
 

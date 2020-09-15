@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { IframeComponent } from "./iframe";
 import { UPIVerifyContainer } from "./payment/upiVerifyContainer";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
-
 import config from "../config";
 import { Loading } from "../utils";
 
@@ -54,6 +53,11 @@ const CartContainer = Loadable({
 const UserBasicInfoContainer = Loadable({
   loader: () =>
     import("./userBasicInfo").then((module) => module.UserBasicInfoContainer),
+  loading: Loading,
+});
+
+const LoginContainer = Loadable({
+  loader: () => import("./login").then((module) => module.LoginContainer),
   loading: Loading,
 });
 
@@ -124,6 +128,10 @@ function App() {
         <Switch>
           <Route
             path="/user/login"
+            component={(props) => <LoginContainer {...props} />}
+          />
+          <Route
+            path="/user/userBasicInfo"
             component={(props) => <UserBasicInfoContainer {...props} />}
           />
           <Route
