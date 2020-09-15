@@ -25,5 +25,6 @@ export { verifyPaymentAPI } from "./verifyPayment";
 export { verifyUpiPaymentAPI } from "./verifyUpiPayment";
 export { finalizeOrderAPI } from "./finalizeOrder";
 export { userStatusAPI } from "./userStatus";
+export { Loading } from "./simpleLoadable";
 export { createUPIOrderAPI } from "./createUPIOrder";
 export { createCollectRequestAPI } from "./createCollectRequest";
