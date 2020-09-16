@@ -7,12 +7,14 @@ import {
   validateCart,
   closeValidationErrorMessage,
   resetOnUnmount,
+  fetchSummary,
 } from "../common/cart";
 
 const mapStateToProps = (state, props) => {
   return {
     retailer: state.cart.retailer,
     products: state.cart.products,
+    summary: state.summaryDetails,
     retailerDiffers: state.cart.retailerDiffers,
     isEmpty: isEmpty(state.cart),
     validationInProgress: state.cart.validationInProgress,
@@ -21,6 +23,7 @@ const mapStateToProps = (state, props) => {
     validateErrorMessage: state.cart.validateErrorMessage,
     validationSuccessful: state.cart.validationSuccessful,
     selectedAddress: state.addressStore.selectedAddress,
+    cartUpdate: state.cart.cartUpdate,
   };
 };
 
@@ -31,6 +34,7 @@ const mapDispatchToProps = (dispatch) => {
     validateCart: (cs) => dispatch(validateCart(cs)),
     closeValidationErrorMessage: () => dispatch(closeValidationErrorMessage()),
     resetOnUnmount: () => dispatch(resetOnUnmount()),
+    fetchSummary: (ss) => dispatch(fetchSummary(ss)),
   };
 };
 

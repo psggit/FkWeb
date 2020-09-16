@@ -1,7 +1,4 @@
 import {
-  loginInProgress,
-  loginSuccess,
-  loginFailed,
   nameEntered,
   birthYearEntered,
   changeGenderAction,
@@ -13,19 +10,12 @@ import {
   changeDocumentValueAction,
   showCheckboxAction,
   checkCheckboxAction,
-  fetchGrantTokenFailed,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = () => {
   return {
-    loginInProgress: false,
-    loginSuccess: false,
-    loginFailed: false,
-    collectUserDetails: false,
-    grantTokenError: false,
-    grantTokenErrorMessage: "",
     userInfo: {},
     name: "",
     birthYear: "",
@@ -48,41 +38,6 @@ const initialState = () => {
 };
 
 const userInfoCreateReducer = createReducer(initialState(), {
-  [fetchGrantTokenFailed]: (state, e) => ({
-    ...state,
-    loginInProgress: false,
-    loginSuccess: false,
-    loginFailed: false,
-    grantTokenError: true,
-    grantTokenErrorMessage: e.payload,
-  }),
-  [loginInProgress]: (state) => ({
-    ...state,
-    loginInProgress: true,
-    loginSuccess: false,
-    loginFailed: false,
-    grantTokenError: false,
-    grantTokenErrorMessage: "",
-  }),
-  [loginSuccess]: (state, action) => ({
-    ...state,
-    loginInProgress: false,
-    loginSuccess: true,
-    loginFailed: false,
-    userID: action.payload.data.auth_user.user_id,
-    userInfo: action.payload.data,
-    collectUserDetails: !(
-      action.payload.data.bz_kyc_exist &&
-      action.payload.data.dob_exist &&
-      action.payload.data.gender_exist
-    ),
-  }),
-  [loginFailed]: (state) => ({
-    ...state,
-    loginInProgress: false,
-    loginSuccess: false,
-    loginFailed: true,
-  }),
   [nameEntered]: (state, action) => ({
     ...state,
     name: action.payload,

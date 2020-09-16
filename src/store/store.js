@@ -9,6 +9,7 @@ import { skuItemReducer } from "../App/common/brand";
 import { searchDrinkReducer } from "../App/search";
 import { searchByStoreReducer } from "../App/searchByStore";
 import { userInfoCreateReducer } from "../App/userBasicInfo";
+import { loginReducer } from "../App/login";
 import { cartReducer } from "../App/common/cart";
 import thunk from "redux-thunk";
 import { storeFrontReducer } from "../App/storeFront";
@@ -29,6 +30,7 @@ const store = configureStore({
     storeFront: storeFrontReducer,
     searchItem: searchDrinkReducer,
     ubiStore: userInfoCreateReducer,
+    login: loginReducer,
     addressStore: addressListReducer,
     cart: cartReducer,
     chooseLocation: chooseLocationReducer,

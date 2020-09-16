@@ -93,7 +93,7 @@ function SummaryComponent(props) {
 
         <div className="summary-delivery-msg">{summary.delivery_message}</div>
       </div>
-      <BottomNextComponent routePath="/payment/options" title="Pay Now" />
+      <BottomNextComponent routePath="/user/userBasicInfo" title="Pay Now"/>
     </div>
   );
 }

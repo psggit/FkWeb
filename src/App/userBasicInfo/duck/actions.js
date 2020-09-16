@@ -15,7 +15,7 @@ const changeDocumentValueAction = createAction("ChangeDocumentValueAction");
 const showCheckboxAction = createAction("showCheckboxAction");
 
 const checkCheckboxAction = createAction("checkCheckboxAction");
-
+/*
 //Fetch grant token, action to trigger fetching grant token
 const fetchGrantToken = createAction("fetchGrantToken");
 
@@ -38,7 +38,7 @@ const loginInProgress = createAction("loginInProgress");
 const loginSuccess = createAction("loginSuccess");
 
 //On login failure, retry in specific conditions
-const loginFailed = createAction("loginFailed");
+const loginFailed = createAction("loginFailed");*/
 
 const kycUpdate = createAction("kycUpdated");
 
@@ -57,12 +57,4 @@ export {
   finaliseIDTypeAction,
   showCheckboxAction,
   checkCheckboxAction,
-  fetchGrantToken,
-  getGrantTokenInitiated,
-  fetchGrantTokenSuccess,
-  fetchGrantTokenFailed,
-  loginInitiated,
-  loginInProgress,
-  loginSuccess,
-  loginFailed,
 };
