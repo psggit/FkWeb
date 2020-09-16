@@ -69,7 +69,7 @@ function NetBankingComponent(props) {
   return (
     <div className="payment-list-container">
       <div className="title">Net Banking</div>
-      <div className="sub-title">Choose one of the banks below</div>
+      <div className="sub-title">Choose a bank and pay</div>
       <div className="list-wrapper nb-margin">
         <form className="juspay_inline_form " id="nb_payment_form">
           <input
