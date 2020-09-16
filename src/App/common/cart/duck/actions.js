@@ -26,5 +26,11 @@ export const dontClearCart = createAction("dontClearCart");
 
 export const resetOnUnmount = createAction("resetOnUnmount");
 
-//useful when an order is palced successfully
+//useful when an order is placed successfully
 export const clearCart = createAction("cartClear");
+
+export const fetchSummaryInProgress = createAction("fetchSummaryInProgress");
+
+export const fetchSummaryFailed = createAction("fetchSummaryFailed");
+
+export const fetchSummarySuccess = createAction("fetchSummarySuccess");

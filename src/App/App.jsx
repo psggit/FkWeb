@@ -1,28 +1,123 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
+import Loadable from "react-loadable";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { HomeContainer } from "./home";
+
 import { IframeComponent } from "./iframe";
-import { AgreeAndContinueContainer } from "./agreeAndContinue";
-import { UserBasicInfoContainer } from "./userBasicInfo";
-import { CartContainer } from "./cart";
-import { SearchByStoreContainer } from "./searchByStore";
-import { MyOrdersContainer } from "./myorders";
-import { SelectAddressContainer, AddressEditContainer } from "./address";
-import { SearchContainer } from "./search";
-import { StoreFrontContainer } from "./storeFront";
-import { OrderSummaryContainer } from "./summary";
-import {
-  PaymentContainer,
-  ProcessPaymentContainer,
-  PaymentVerifyContainer,
-} from "./payment";
-import { ChooseLocationContainer } from "./address/chooseLocation";
-import { OrderDetailsContainer, OrderPlacedContainer } from "./order";
-import { StateCityContainer } from "./stateCity";
-import { OrderInfoContainer } from "./order/info";
-import config from "../config";
 import { UPIVerifyContainer } from "./payment/upiVerifyContainer";
+import { AgreeAndContinueContainer } from "./agreeAndContinue";
+import config from "../config";
+import { Loading } from "../utils";
+
+const OrderInfoContainer = Loadable({
+  loader: () =>
+    import("./order/info").then((module) => module.OrderInfoContainer),
+  loading: Loading,
+});
+
+const PaymentContainer = Loadable({
+  loader: () => import("./payment").then((module) => module.PaymentContainer),
+  loading: Loading,
+});
+
+const ProcessPaymentContainer = Loadable({
+  loader: () =>
+    import("./payment").then((module) => module.ProcessPaymentContainer),
+  loading: Loading,
+});
+
+const PaymentVerifyContainer = Loadable({
+  loader: () =>
+    import("./payment").then((module) => module.PaymentVerifyContainer),
+  loading: Loading,
+});
+
+const SelectAddressContainer = Loadable({
+  loader: () =>
+    import("./address").then((module) => module.SelectAddressContainer),
+  loading: Loading,
+});
+
+const AddressEditContainer = Loadable({
+  loader: () =>
+    import("./address").then((module) => module.AddressEditContainer),
+  loading: Loading,
+});
+
+const CartContainer = Loadable({
+  loader: () => import("./cart").then((module) => module.CartContainer),
+  loading: Loading,
+});
+
+const UserBasicInfoContainer = Loadable({
+  loader: () =>
+    import("./userBasicInfo").then((module) => module.UserBasicInfoContainer),
+  loading: Loading,
+});
+
+const LoginContainer = Loadable({
+  loader: () => import("./login").then((module) => module.LoginContainer),
+  loading: Loading,
+});
+
+const OrderPlacedContainer = Loadable({
+  loader: () => import("./order").then((module) => module.OrderPlacedContainer),
+  loading: Loading,
+});
+
+const OrderDetailsContainer = Loadable({
+  loader: () =>
+    import("./order").then((module) => module.OrderDetailsContainer),
+  loading: Loading,
+});
+
+const SearchByStoreContainer = Loadable({
+  loader: () =>
+    import("./searchByStore").then((module) => module.SearchByStoreContainer),
+  loading: Loading,
+});
+
+const ChooseLocationContainer = Loadable({
+  loader: () =>
+    import("./address/chooseLocation").then(
+      (module) => module.ChooseLocationContainer
+    ),
+  loading: Loading,
+});
+
+const HomeContainer = Loadable({
+  loader: () => import("./home").then((module) => module.HomeContainer),
+  loading: Loading,
+});
+
+const MyOrdersContainer = Loadable({
+  loader: () => import("./myorders").then((module) => module.MyOrdersContainer),
+  loading: Loading,
+});
+
+const SearchContainer = Loadable({
+  loader: () => import("./search").then((module) => module.SearchContainer),
+  loading: Loading,
+});
+
+const StateCityContainer = Loadable({
+  loader: () =>
+    import("./stateCity").then((module) => module.StateCityContainer),
+  loading: Loading,
+});
+
+const StoreFrontContainer = Loadable({
+  loader: () =>
+    import("./storeFront").then((module) => module.StoreFrontContainer),
+  loading: Loading,
+});
+
+const OrderSummaryContainer = Loadable({
+  loader: () =>
+    import("./summary").then((module) => module.OrderSummaryContainer),
+  loading: Loading,
+});
 
 const DOMAIN = config.BASE_DOMAIN;
 
@@ -31,26 +126,54 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route path="/user/login" component={UserBasicInfoContainer} />
-          <Route path="/search" component={SearchContainer} />
-          <Route path="/searchbystore" component={SearchByStoreContainer} />
-          <Route path="/cart" component={CartContainer} />
+          <Route
+            path="/user/login"
+            component={(props) => <LoginContainer {...props} />}
+          />
+          <Route
+            path="/user/userBasicInfo"
+            component={(props) => <UserBasicInfoContainer {...props} />}
+          />
+          <Route
+            path="/search"
+            component={(props) => <SearchContainer {...props} />}
+          />
+          <Route
+            path="/searchbystore"
+            component={(props) => <SearchByStoreContainer {...props} />}
+          />
+          <Route
+            path="/cart"
+            component={(props) => <CartContainer {...props} />}
+          />
           <Route
             path="/address/create/:redirect"
-            component={AddressEditContainer}
+            component={(props) => <AddressEditContainer {...props} />}
           />
-          <Route path="/my-orders" component={MyOrdersContainer} />
+          <Route
+            path="/my-orders"
+            component={(props) => <MyOrdersContainer {...props} />}
+          />
           <Route
             path="/address/select/:redirect"
             component={SelectAddressContainer}
           />
-          <Route path="/home" component={HomeContainer} />
-          <Route path="/statecity/select" component={StateCityContainer} />
+          <Route
+            path="/home"
+            component={(props) => <HomeContainer {...props} />}
+          />
+          <Route
+            path="/statecity/select"
+            component={(props) => <StateCityContainer {...props} />}
+          />
           <Route
             path="/choose/location/:redirect"
-            component={ChooseLocationContainer}
+            component={(props) => <ChooseLocationContainer {...props} />}
           />
-          <Route path="/storefront" component={StoreFrontContainer} />
+          <Route
+            path="/storefront"
+            component={(props) => <StoreFrontContainer {...props} />}
+          />
           <Route
             path="/user-terms"
             component={() => (
@@ -78,8 +201,15 @@ function App() {
               />
             )}
           />
-          <Route path="/order/summary" component={OrderSummaryContainer} />
-          <Route path="/payment/options" component={PaymentContainer} />
+          <Route
+            path="/order/summary"
+            component={(props) => <OrderSummaryContainer {...props} />}
+          />
+          <Route
+            path="/payment/options"
+            component={(props) => <PaymentContainer {...props} />}
+          />
+
           <Route
             path="/payment/upi/verify/:time_limit/:txn_id/:order_id"
             component={UPIVerifyContainer}
@@ -87,12 +217,24 @@ function App() {
 
           <Route
             path="/payment/verify/order/:order_id"
-            component={PaymentVerifyContainer}
+            component={(props) => <PaymentVerifyContainer {...props} />}
           />
-          <Route path="/order/detail" component={OrderDetailsContainer} />
-          <Route path="/order/placed" component={OrderPlacedContainer} />
-          <Route path="/order/info" component={OrderInfoContainer} />
-          <Route path="/payment" component={ProcessPaymentContainer} />
+          <Route
+            path="/order/detail"
+            component={(props) => <OrderDetailsContainer {...props} />}
+          />
+          <Route
+            path="/order/placed"
+            component={(props) => <OrderPlacedContainer {...props} />}
+          />
+          <Route
+            path="/order/info"
+            component={(props) => <OrderInfoContainer {...props} />}
+          />
+          <Route
+            path="/payment"
+            component={(props) => <ProcessPaymentContainer {...props} />}
+          />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
       </Router>

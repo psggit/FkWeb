@@ -9,4 +9,5 @@ export {
   clearCart,
 } from "./actions";
 export { validateCart } from "./validateCartOperations";
+export { fetchSummary, updateCart } from "./validateSummaryOperations";
 export { cartLocalStorageHandler } from "./cartLocalStorageHandler";

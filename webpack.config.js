@@ -3,6 +3,9 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => {
   const ARGS_SENTRY_ENV = JSON.stringify(env.SENTRY_ENV || "local");
@@ -12,7 +15,7 @@ module.exports = (env, argv) => {
   const config = {
     entry: ["react-hot-loader/patch", "./src/index.js"],
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, "dist/"),
       publicPath: "/",
       filename: "[name].[contenthash].js",
     },
@@ -28,13 +31,13 @@ module.exports = (env, argv) => {
           use: {
             loader: "file-loader",
             options: {
-              name: "fonts/[name].[ext]",
+              name: "fonts/[name].[contenthash].[ext]",
             },
           },
         },
         {
-          test: /\.scss$/,
-          use: ["style-loader", "css-loader", "sass-loader"],
+          test: /\.s[ac]ss$/i,
+          use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
         },
         {
           test: /\.svg$/,
@@ -76,6 +79,12 @@ module.exports = (env, argv) => {
       },
     },
     plugins: [
+      new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: "[name].css",
+        chunkFilename: "[id].[contenthash].css",
+      }),
       new CopyPlugin({
         patterns: [{ from: "src/index.html" }],
       }),
@@ -92,6 +101,20 @@ module.exports = (env, argv) => {
       }),
     ],
     optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          cache: true,
+          parallel: true,
+          extractComments: false,
+          terserOptions: {
+            output: {
+              comments: false,
+            },
+          },
+        }),
+        new OptimizeCSSAssetsPlugin({}),
+      ],
       runtimeChunk: "single",
       splitChunks: {
         cacheGroups: {
