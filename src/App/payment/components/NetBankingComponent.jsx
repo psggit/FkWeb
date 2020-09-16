@@ -69,42 +69,45 @@ function NetBankingComponent(props) {
   return (
     <div className="payment-list-container">
       <div className="title">Net Banking</div>
-      <form className="juspay_inline_form" id="nb_payment_form">
-        <input
-          type="hidden"
-          className="merchant_id"
-          value={paymentDetails.merchant_id}
-        />
+      <div className="sub-title">Choose a bank and pay</div>
+      <div className="list-wrapper nb-margin">
+        <form className="juspay_inline_form " id="nb_payment_form">
+          <input
+            type="hidden"
+            className="merchant_id"
+            value={paymentDetails.merchant_id}
+          />
 
-        <input
-          type="hidden"
-          className="order_id"
-          value={paymentDetails.order_id}
-        />
-        <input type="hidden" className="payment_method_type" value="NB" />
-        <div className="list-container">
-          <select className="payment_method select minimal">
-            {banks.map((bank) => (
-              <option
-                key={bank.payment_method}
-                value={bank.payment_method}
-                className="options"
-              >
-                {bank.description}
-              </option>
-            ))}
-          </select>
-        </div>
+          <input
+            type="hidden"
+            className="order_id"
+            value={paymentDetails.order_id}
+          />
+          <input type="hidden" className="payment_method_type" value="NB" />
+          <div className="list-container ">
+            <select className="payment_method select minimal">
+              {banks.map((bank) => (
+                <option
+                  key={bank.payment_method}
+                  value={bank.payment_method}
+                  className="options"
+                >
+                  {bank.description}
+                </option>
+              ))}
+            </select>
 
-        <div
-          type="submit"
-          className="make_payment nb-pay-button"
-          onClick={() => onSubmit()}
-        >
-          Pay via Net Banking
-        </div>
-        <input type="hidden" className="redirect" value="true" />
-      </form>
+            <div
+              type="submit"
+              className="make_payment nb-pay-button"
+              onClick={() => onSubmit()}
+            >
+              PAY
+            </div>
+          </div>
+          <input type="hidden" className="redirect" value="true" />
+        </form>
+      </div>
     </div>
   );
 }
