@@ -33,7 +33,7 @@ function WalletComponent(props) {
   return (
     <div className="payment-list-container">
       <div className="title">Wallets</div>
-      <div className="sub-title">Choose a bank and pay</div>
+      <div className="sub-title">Choose a wallet and pay</div>
 
       <div className="list-wrapper wallet-margin">
         <form className="juspay_inline_form" id="wallet_payment_form">
