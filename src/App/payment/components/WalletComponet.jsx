@@ -33,42 +33,45 @@ function WalletComponent(props) {
   return (
     <div className="payment-list-container">
       <div className="title">Wallets</div>
+      <div className="sub-title">Choose one of the wallets below</div>
 
-      <form className="juspay_inline_form" id="wallet_payment_form">
-        <input
-          type="hidden"
-          className="merchant_id"
-          value={paymentDetails.merchant_id}
-        />
-        <input
-          type="hidden"
-          className="order_id"
-          value={paymentDetails.order_id}
-        />
-        <input type="hidden" className="payment_method_type" value="WALLET" />
-        <div className="list-container">
-          <select className="payment_method select minimal">
-            {wallets.map((wallet) => (
-              <option
-                key={wallet.payment_method}
-                value={wallet.payment_method}
-                label={wallet.description}
-                className="options"
-              >
-                {wallet.description}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div
-          type="submit"
-          className="make_payment nb-pay-button"
-          onClick={() => onSubmit()}
-        >
-          Pay via Wallet
-        </div>
-        <input type="hidden" className="redirect" value="true" />
-      </form>
+      <div className="list-wrapper wallet-margin">
+        <form className="juspay_inline_form" id="wallet_payment_form">
+          <input
+            type="hidden"
+            className="merchant_id"
+            value={paymentDetails.merchant_id}
+          />
+          <input
+            type="hidden"
+            className="order_id"
+            value={paymentDetails.order_id}
+          />
+          <input type="hidden" className="payment_method_type" value="WALLET" />
+          <div className="list-container">
+            <select className="payment_method select minimal">
+              {wallets.map((wallet) => (
+                <option
+                  key={wallet.payment_method}
+                  value={wallet.payment_method}
+                  label={wallet.description}
+                  className="options"
+                >
+                  {wallet.description}
+                </option>
+              ))}
+            </select>
+            <div
+              type="submit"
+              className="make_payment nb-pay-button"
+              onClick={() => onSubmit()}
+            >
+              PAY
+            </div>
+          </div>
+          <input type="hidden" className="redirect" value="true" />
+        </form>
+      </div>
     </div>
   );
 }
