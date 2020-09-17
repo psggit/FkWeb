@@ -17,7 +17,7 @@ function OrderSummaryComponent(props) {
   let summary = props.summary;
   return (
     <div className="generic-detail-container">
-      <div className="order-sub-header">SUMMARY</div>
+      <div className="order-sub-header">Summary</div>
       <OrderTotalComponent marginTop={true} total={summary.display_total} />
       <CartTotalComponent cartTotal={summary.display_cart_total} />
       {summary.total_fee && (

@@ -334,7 +334,9 @@ function CollectInfoComponent(props) {
       <CheckBoxComponent {...props} />
       <BottomNextComponent
         title="Proceed"
-        onClickFunc={() => updateKycFunc(data, bz_kyc_exist)}
+        onClickFunc={() =>
+          updateKycFunc(data, name_exist, dob_exist, gender_exist, bz_kyc_exist)
+        }
         inActive={!checkDeclaration}
       />
       {props.showError && <AlertValidateErrorComponent {...props} />}
@@ -367,9 +369,10 @@ UserBasicInfoComponent.propTypes = {
 };
 
 function UserBasicInfoComponent(props) {
-  if (props.collectUserDetails && !props.collectedUserDetails) {
+  // console.log(props.collectedUserDetails, props.collectedUserDetails);
+  if (props.collectedUserDetails && !props.collectedUserDetails) {
     return <CollectInfoComponent {...props} />;
-  } else if (props.collectedUserDetails) {
+  } else if (!props.collectUserDetails || props.collectedUserDetails) {
     return <Redirect to="/payment/options" />;
   } else {
     return <div></div>;

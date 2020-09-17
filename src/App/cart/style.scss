@@ -6,6 +6,17 @@
   min-height: 92vh;
   flex-direction: column;
   bottom: 0;
+
+  .error-container{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+  }
+  .cart-error{
+    text-align: center;
+    width: 100%;
+  }
 }
 
 .full-cart {
@@ -13,4 +24,3 @@
   height: 100%;
   flex-direction: column;
 }
-

@@ -83,4 +83,20 @@
   .add-new-address{
     width: 100%;
   }
+
+  .address-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+  }
+  .sub-title{
+    line-height: 16px;
+    text-align: center;
+    font-size: 12px;
+  }
+  .line-clamp{
+    flex-direction: column;
+  }
 }

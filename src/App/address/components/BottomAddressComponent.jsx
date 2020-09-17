@@ -18,8 +18,13 @@ function BottomAddressComponent(props) {
               <div className="address-logo-container">
                 <img src={locationIcon} className="image" />
               </div>
-              <div className="title">{props.selectedAddress.type}</div>
-              <div className="address">{props.selectedAddress.address}</div>
+              <div className="address-bar" onClick={props.showAddAddress}>
+                <div className="line-clamp">
+                  <div className="title">{props.selectedAddress.type}</div>
+                  <div className="address">{props.selectedAddress.address}</div>
+                </div>
+                <div className="sub-title">CHANGE</div>
+              </div>
             </div>
           </div>
         </div>

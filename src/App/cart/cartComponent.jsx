@@ -79,6 +79,8 @@ NextComponent.propTypes = {
   products: PropTypes.object,
   validateCart: PropTypes.func,
   selectedAddress: PropTypes.object,
+  fetchSummaryError: PropTypes.bool,
+  fetchSummaryLocationError: PropTypes.bool,
 };
 
 function NextComponent(props) {
@@ -88,10 +90,12 @@ function NextComponent(props) {
     products: props.products,
     selectedAddress: props.selectedAddress,
   };
+  // console.log(props.fetchSummaryError, props.fetchSummaryLocationError);
   return (
     <div>
       <BottomNextComponent
         isNav={true}
+        inActive={props.fetchSummaryError || props.fetchSummaryLocationError}
         title="Pay Now"
         onClickFunc={() => props.validateCart(validateParams)}
       />
@@ -179,18 +183,6 @@ function CartComponent(props) {
   }, [props.cartUpdate]);
 
   useEffect(() => {
-    if (trigger) {
-      props.fetchSummary(props);
-    }
-  });
-
-  useEffect(() => {
-    if (props.cartUpdate) {
-      props.fetchSummary(props);
-    }
-  }, [props.cartUpdate]);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
     return () => props.resetOnUnmount();
   }, []);
@@ -212,7 +204,7 @@ function CartComponent(props) {
   const history = useHistory();
 
   if (props.validationSuccessful) {
-    return <Redirect to="/address/select/osm" push={true} />;
+    return <Redirect to="/user/userBasicInfo" push={true} />;
   }
 
   let isEmpty = props.isEmpty;
@@ -238,8 +230,9 @@ function CartComponent(props) {
   }
 
   const showAddAddress = () => {
+    console.log("[showAddAdress]");
     history.push({
-      pathname: "/choose/location/" + props.redirect,
+      pathname: "/address/select/osm",
       state: {
         address: null,
       },
@@ -253,17 +246,28 @@ function CartComponent(props) {
           <CartHeaderComponent {...props} />
           <CartItems {...props} />
           {fetchSummaryInProgress && <LoadingComponent />}
+          {(fetchSummaryError || fetchSummaryLocationError) && (
+            <SummaryFailedComponent {...props} />
+          )}
+          {(fetchSummaryError || fetchSummaryLocationError) && (
+            <div className="error-container">
+              <div className="cart-error">
+                {props.summary.fetchSummaryErrorMessage}
+              </div>
+            </div>
+          )}
           {fetchSummarySuccess &&
             !fetchSummaryError &&
             !fetchSummaryLocationError && (
               <OrderSummaryComponent summary={summary} />
             )}
-          {(fetchSummaryError || fetchSummaryLocationError) && (
-            <SummaryFailedComponent {...props} />
-          )}
         </div>
         <BottomAddressComponent {...props} showAddAddress={showAddAddress} />
-        <NextComponent {...props} />
+        <NextComponent
+          {...props}
+          fetchSummaryError={fetchSummaryError}
+          fetchSummaryLocationError={fetchSummaryLocationError}
+        />
       </div>
 
       <BottomNavigationContainer />

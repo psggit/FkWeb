@@ -41,8 +41,16 @@ const mapDispatchToProps = (dispatch) => {
     changeBirthYear: (value) => dispatch(ChangingBirthYear(value)),
     changingGenderFunc: (value) => dispatch(ChangingGenderOperation(value)),
     selectingIDProofFunc: (value) => dispatch(SelectIDTypeOperation(value)),
-    updateKycFunc: (value, bz_kyc_exist) =>
-      dispatch(UpdateKYCOperation(value, bz_kyc_exist)),
+    updateKycFunc: (value, name_exist, dob_exist, gender_exist, bz_kyc_exist) =>
+      dispatch(
+        UpdateKYCOperation(
+          value,
+          name_exist,
+          dob_exist,
+          gender_exist,
+          bz_kyc_exist
+        )
+      ),
     changeDocumentValueFunc: (value) =>
       dispatch(ChangeDocumentValueOperation(value)),
     finaliseIDProofFunc: (selectedDocument) =>

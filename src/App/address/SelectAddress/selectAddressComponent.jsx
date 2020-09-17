@@ -33,7 +33,7 @@ function SelectAddressComponent(props) {
     }
 
     if (props.apiStatus.validateAddressStatus == "success") {
-      history.push("/order/summary");
+      history.push("/cart");
     }
   }, [props.apiStatus.validateAddressStatus]);
 
@@ -75,7 +75,10 @@ function SelectAddressComponent(props) {
     }
   }
 
-  if ((listAddressApiStatus === "success") && (props.savedUserAddresses.length == 0)) {
+  if (
+    listAddressApiStatus === "success" &&
+    props.savedUserAddresses.length == 0
+  ) {
     showAddAddress()
   }
 
