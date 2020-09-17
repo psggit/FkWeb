@@ -18,6 +18,8 @@ const loginInitiated = createAction("loginInitiated");
 //event emitted when we initiate login process using fk-sdk
 const loginInProgress = createAction("loginInProgress");
 
+const updateDeviceGps = createAction("updateDeviceGPS");
+
 //On login success
 const loginSuccess = createAction("loginSuccess");
 
@@ -37,6 +39,7 @@ export {
   loginInProgress,
   loginSuccess,
   loginFailed,
+  updateDeviceGps,
   guessAddressInProgress,
   guessAddressSuccess,
   guessAddressFailed,

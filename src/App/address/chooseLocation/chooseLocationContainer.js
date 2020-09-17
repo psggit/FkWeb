@@ -18,6 +18,7 @@ const mapStateToProps = (state, props) => {
     selectedCity: state.stateCity.selectedCity,
     mapCenterGps: state.chooseLocation.selectedGps,
     redirect: props.match.params.redirect,
+    deviceGps: state.login.deviceGps,
     editAddress: props.location.state.address,
     isDeliverableCheck: state.chooseLocation.isDeliverableCheck,
   };

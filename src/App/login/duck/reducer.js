@@ -2,10 +2,12 @@ import {
   loginInProgress,
   loginSuccess,
   loginFailed,
+  updateDeviceGps,
   guessAddressInProgress,
   guessAddressSuccess,
   guessAddressFailed,
   fetchGrantTokenFailed,
+  fetchGrantTokenSuccess,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -15,6 +17,7 @@ const initialState = () => {
     loginInProgress: false,
     loginSuccess: false,
     loginFailed: false,
+    locationPermission: false,
     guessAddressInProgress: false,
     guessAddressSuccess: false,
     guessAdddressFailed: false,
@@ -37,6 +40,10 @@ const loginReducer = createReducer(initialState(), {
     loginFailed: false,
     grantTokenError: true,
     grantTokenErrorMessage: e.payload,
+  }),
+  [fetchGrantTokenSuccess]: (state, e) => ({
+    ...state,
+    locationPermission: e.payload.result["user.location"],
   }),
   [guessAddressInProgress]: (state) => ({
     ...state,
@@ -73,6 +80,10 @@ const loginReducer = createReducer(initialState(), {
     userID: action.payload.data.auth_user.user_id,
     userInfo: action.payload.data,
     deviceGps: null,
+  }),
+  [updateDeviceGps]: (state, action) => ({
+    ...state,
+    deviceGps: action.payload,
   }),
   [loginFailed]: (state) => ({
     ...state,

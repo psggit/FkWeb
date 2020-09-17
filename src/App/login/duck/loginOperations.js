@@ -75,7 +75,7 @@ const loginWithGrantToken = (dispatch) => {
     .getPermissionsModule()
     .getToken(scopeReq)
     .then((gt) => {
-      dispatch(fetchGrantTokenSuccess());
+      dispatch(fetchGrantTokenSuccess(gt));
       loginHandler(gt, dispatch);
     })
     .catch(() => {

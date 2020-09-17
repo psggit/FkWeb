@@ -29,9 +29,11 @@ LoginComponent.propTypes = {
   loginFailed: PropTypes.bool,
   loginSuccess: PropTypes.bool,
   guessAddressInfo: PropTypes.object,
+  setDeviceGps: PropTypes.func,
   guessAddressInProgress: PropTypes.bool,
   guessAddressFailed: PropTypes.bool,
   guessAddressSuccess: PropTypes.bool,
+  locationPermission: PropTypes.bool,
   deviceGps: PropTypes.string,
   showError: PropTypes.bool,
   errorMessage: PropTypes.string,
@@ -74,7 +76,7 @@ function LoginComponent(props) {
   const guessedState = props.guessAddressInfo.state;
 
   // const deviceGPS = props.deviceGps;
-  const deviceGPS = "12.993818985957093,80.26090878993273";
+  const deviceGPS = props.deviceGps;
   // const deviceGPS = "13.006928,80.255516";
   const trigger =
     !grantTokenError && !(loginSuccess || loginFailed || loginInProgress);
@@ -94,12 +96,27 @@ function LoginComponent(props) {
         userLoginType: "fk-web",
       });
       if (props.selectedAddress === null) {
-        // Device GPS not available
-        if (!deviceGPS) {
-          setFlow("selectState");
+        if (props.locationPermission) {
+          navigator.geolocation.getCurrentPosition(
+            (loc) => {
+              if (loc.coords) {
+                if (loc.coords.latitude && loc.coords.longitude) {
+                  var gps = loc.coords.latitude + "," + loc.coords.longitude;
+                  props.setDeviceGps(gps);
+                  props.guessAddress(gps);
+                  return;
+                }
+              }
+              setFlow("selectState");
+            },
+            () => {
+              setFlow("selectState");
+            }
+          );
         } else {
-          props.guessAddress(deviceGPS);
+          setFlow("selectState");
         }
+        // Device GPS not available
       } else {
         setFlow("home");
       }

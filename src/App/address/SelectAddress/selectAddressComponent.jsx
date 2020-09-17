@@ -79,7 +79,7 @@ function SelectAddressComponent(props) {
     listAddressApiStatus === "success" &&
     props.savedUserAddresses.length == 0
   ) {
-    showAddAddress()
+    showAddAddress();
   }
 
   return (

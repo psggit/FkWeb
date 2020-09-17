@@ -10,7 +10,7 @@ import {
   fetchSummary,
 } from "../common/cart";
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return {
     retailer: state.cart.retailer,
     products: state.cart.products,

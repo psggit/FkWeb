@@ -18,6 +18,7 @@ ChooseLocationComponent.propTypes = {
   isDeliverableCheck: PropTypes.string,
   validateAddress: PropTypes.func,
   resetState: PropTypes.func,
+  deviceGps: PropTypes.string,
   getPlacesDetails: PropTypes.func,
   redirect: PropTypes.string,
 };
@@ -48,12 +49,15 @@ function ChooseLocationComponent(props) {
       //SetCancelBtn(false);
     });
   });
-  if (props.editAddress === null) {
-    center = props.selectedCity.gps;
-    title = "Add New Address";
-  } else {
+  if (props.editAddress !== null) {
     center = props.editAddress.gps;
     title = "Edit Address";
+  } else if (props.deviceGps) {
+    center = props.deviceGps;
+    title = "Add New Address";
+  } else {
+    center = props.selectedCity.gps;
+    title = "Add New Address";
   }
   return (
     <>
