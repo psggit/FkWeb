@@ -64,10 +64,10 @@
   }
 }
 
-.bottom-address-component{
+.bottom-address-component {
   height: auto;
 
-  .bottom-bar-nav{
+  .bottom-bar-nav {
     bottom: 110px !important;
     display: flex;
     flex-direction: row;
@@ -77,23 +77,31 @@
     position: fixed;
     left: 0;
     right: 0;
+    border-bottom: 2.4px solid $border-color;
   }
-  .add-new-address{
+  .add-new-address {
     width: 100%;
   }
+  .title {
+    font-family: MontserratSemiBold;
+    font-size: 12px;
+    line-height: 16px;
+  }
 
-  .address-bar{
+  .address-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .sub-title{
+  .sub-title {
     line-height: 16px;
     text-align: center;
     font-size: 12px;
+    font-family: MontserratSemiBold;
   }
-  .line-clamp{
+  .line-clamp {
     flex-direction: column;
     width: 80%;
   }
 }
+

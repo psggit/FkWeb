@@ -3,19 +3,24 @@
 .add_more_drinks {
   /*height: 64px; */
   width: 80px;
+  height: 36px;
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
 
   .drinks_icon {
-   margin-right: 10px;
-
+    margin-right: 10px;
   }
 
   .label {
     align-self: center;
+    font-family: MontserratBold;
+    font-size: 12px;
   }
 
-  .arrow_right{
-	margin-left: 8px;
+  .arrow_right {
+    margin-left: 4px;
+    height: 8px;
+    width: 6px;
   }
 }
-
