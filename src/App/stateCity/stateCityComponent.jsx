@@ -30,7 +30,7 @@ function StateCityComponent(props) {
 
   function showAddressSelection() {
     history.push({
-      pathname: "/user/login",
+      pathname: "/address/select/sf",
       //state: { gps: city.gps },
     });
   }

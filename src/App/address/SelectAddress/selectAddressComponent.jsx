@@ -5,7 +5,7 @@ import { addAddressIcon } from "../../../assets/images";
 import { BottomNextComponent } from "../../common/bottomNext";
 import { LoadingComponent } from "../../common/loading";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { AlertWithOptions } from "../../common/alert";
 import "./style.scss";
 
@@ -70,11 +70,15 @@ function SelectAddressComponent(props) {
       history.push("/home");
     } else if (props.redirect === "osm") {
       props.validateAddressFunc(props.selectedAddress);
-      // history.push("/order/summary");
     } else {
       history.push("/home");
     }
   }
+
+  if ((listAddressApiStatus === "success") && (props.savedUserAddresses.length == 0)) {
+    showAddAddress()
+  }
+
   return (
     <>
       <ToolbarComponent helpVisibility={false} title="Choose Address" />

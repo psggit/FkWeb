@@ -13,10 +13,9 @@ AgreeAndContinueComponent.propTypes = {
 
 function AgreeAndContinueComponent(props) {
   const showTC = props.showTC;
-  let [showModal, setModal] = useState(true);
+  let [showModal, setModal] = useState(false);
   const fnPermissionsGranted = () => {
     setModal(false);
-    console.log("[permissions granted]");
     navigator.geolocation.getCurrentPosition((loc) => {
       console.log(loc.coords.latitude);
     });
@@ -53,8 +52,6 @@ function AgreeAndContinueComponent(props) {
 
       //return <Redirect to="/statecity/select" />;
     }
-
-    
   }
   return <VisitHipBarComponent />;*/
   if (FKPlatform.isPlatformAvailable()) {

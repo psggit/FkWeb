@@ -2,6 +2,9 @@ import {
   loginInProgress,
   loginSuccess,
   loginFailed,
+  guessAddressInProgress,
+  guessAddressSuccess,
+  guessAddressFailed,
   fetchGrantTokenFailed,
 } from "./actions";
 
@@ -12,8 +15,13 @@ const initialState = () => {
     loginInProgress: false,
     loginSuccess: false,
     loginFailed: false,
+    guessAddressInProgress: false,
+    guessAddressSuccess: false,
+    guessAdddressFailed: false,
+    guessAddressInfo: {},
     grantTokenError: false,
     grantTokenErrorMessage: "",
+    deviceGps: null,
     showError: false,
     errorMessage: "",
     userInfo: {},
@@ -30,6 +38,25 @@ const loginReducer = createReducer(initialState(), {
     grantTokenError: true,
     grantTokenErrorMessage: e.payload,
   }),
+  [guessAddressInProgress]: (state) => ({
+    ...state,
+    guessAddressInProgress: true,
+    guessAddressSuccess: false,
+    guessAddressFailed: false,
+  }),
+  [guessAddressSuccess]: (state, action) => ({
+    ...state,
+    guessAddressInProgress: false,
+    guessAddressSuccess: true,
+    guessAddressFailed: false,
+    guessAddressInfo: action.payload,
+  }),
+  [guessAddressFailed]: (state) => ({
+    ...state,
+    guessAddressInProgress: false,
+    guessAddressSuccess: false,
+    guessAddressFailed: true,
+  }),
   [loginInProgress]: (state) => ({
     ...state,
     loginInProgress: true,
@@ -45,6 +72,7 @@ const loginReducer = createReducer(initialState(), {
     loginFailed: false,
     userID: action.payload.data.auth_user.user_id,
     userInfo: action.payload.data,
+    deviceGps: null,
   }),
   [loginFailed]: (state) => ({
     ...state,

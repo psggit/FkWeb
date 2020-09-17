@@ -1,5 +1,5 @@
 import FKPlatform from "fk-platform-sdk/web";
-import { loginAPI } from "../../../utils";
+import { loginAPI, guessAddressAPI } from "../../../utils";
 import {
   getGrantTokenInitiated,
   fetchGrantTokenSuccess,
@@ -7,7 +7,14 @@ import {
   loginInProgress,
   loginSuccess,
   loginFailed,
+  guessAddressInProgress,
+  guessAddressSuccess,
+  guessAddressFailed,
 } from "./actions";
+
+import { selectState, selectCity } from "../../stateCity/duck/actions";
+
+import { selectAddressAction } from "../../address/duck/actions";
 
 let fkPlatformActive = true;
 
@@ -28,6 +35,7 @@ try {
 
 var scopeReq = [
   { scope: "user.mobile", isMandatory: true, shouldVerify: true },
+  { scope: "user.location", isMandatory: false, shouldVerify: false },
 ];
 
 const processResponse = () => {
@@ -76,6 +84,55 @@ const loginWithGrantToken = (dispatch) => {
     });
 };
 
+const guessAddress = (gps) => {
+  return (dispatch) => {
+    dispatch(guessAddressInProgress());
+    var data = {};
+    if (!gps) {
+      dispatch(guessAddressSuccess(data));
+    }
+    guessAddressAPI(
+      gps,
+      processGuessAddressResponse(dispatch),
+      onGuessAddressSuccess(dispatch),
+      onGuessAddressError(dispatch)
+    );
+  };
+};
+
+const processGuessAddressResponse = () => {
+  return (res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error("Something went wrong, try again");
+  };
+};
+
+const onGuessAddressSuccess = (dispatch) => {
+  return (data) => {
+    if (data.city) {
+      if (data.city.fk_enabled && data.state.fk_enabled) {
+        dispatch(selectState(data.state));
+        dispatch(selectCity(data.city));
+        if (data.address) {
+          data.address.address_id = data.address.id;
+          data.address.city = data.city;
+          data.address.state = data.state;
+          dispatch(selectAddressAction(data.address));
+        }
+        dispatch(guessAddressSuccess(data));
+      }
+    }
+  };
+};
+
+const onGuessAddressError = (dispatch) => {
+  return (err) => {
+    dispatch(guessAddressFailed(err));
+  };
+};
+
 const login = () => {
   return (dispatch) => {
     dispatch(loginInProgress());
@@ -95,4 +152,4 @@ const exitToFk = () => {
   };
 };
 
-export { login, exitToFk };
+export { login, guessAddress, exitToFk };

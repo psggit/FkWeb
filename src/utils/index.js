@@ -1,4 +1,5 @@
 export { loginAPI } from "./login";
+export { guessAddressAPI } from "./identifyLocation";
 export { validateCartAPI } from "./validateCart";
 export { autoCompleteLocationAPI } from "./autoComplete";
 export { fetchAddressListAPI } from "./fetchAddress";

@@ -1,11 +1,18 @@
 import { connect } from "react-redux";
 import { LoginComponent } from "./loginComponent";
-import { login, exitToFk } from "./duck";
+import { login, exitToFk, guessAddress } from "./duck";
 
+// TODO:
+// import Address Guessers
 const mapStateToProps = (state, props) => {
   return {
     selectedAddress: state.addressStore.selectedAddress,
     userInfo: state.login.userInfo,
+    deviceGps: state.login.deviceGps,
+    guessAddressInfo: state.login.guessAddressInfo,
+    guessAddressSuccess: state.login.guessAddressSuccess,
+    guessAddressInProgress: state.login.guessAddressInProgress,
+    guessAddressFailed: state.login.guessAddressFailed,
     loginInProgress: state.login.loginInProgress,
     loginSuccess: state.login.loginSuccess,
     loginFailed: state.login.loginFailed,
@@ -19,6 +26,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: () => dispatch(login()),
+    guessAddress: (gps) => dispatch(guessAddress(gps)),
     exitToFk: () => dispatch(exitToFk()),
   };
 };

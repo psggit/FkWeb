@@ -24,6 +24,10 @@ const loginSuccess = createAction("loginSuccess");
 //On login failure, retry in specific conditions
 const loginFailed = createAction("loginFailed");
 
+const guessAddressInProgress = createAction("guessAddressInProgress");
+const guessAddressSuccess = createAction("guessAddressloginSuccess");
+const guessAddressFailed = createAction("guessAddressloginFailed");
+
 export {
   fetchGrantToken,
   getGrantTokenInitiated,
@@ -33,4 +37,7 @@ export {
   loginInProgress,
   loginSuccess,
   loginFailed,
+  guessAddressInProgress,
+  guessAddressSuccess,
+  guessAddressFailed,
 };
