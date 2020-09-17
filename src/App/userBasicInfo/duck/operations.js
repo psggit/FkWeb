@@ -59,7 +59,7 @@ const CheckCheckBoxOperation = () => {
 
     if (
       (store.gender != "" || gender_exist) &&
-      ((store.birthYear.length == 4 && store.birthYear > 0) || dob_exist) &&
+      ((store.birthYear.length == 4 && store.birthYear > 1905) || dob_exist) &&
       (store.finalisedDocument != "" || bz_kyc_exist) &&
       (store.selectedDocumentValue != "" || bz_kyc_exist) &&
       (store.name.length > 1 || name_exist)
@@ -164,9 +164,11 @@ const UpdateKYCOperation = (
   }
 
   //validate Name
-  let { validName, nameError } = validateName(value.name);
-  if (validName !== true) {
-    return (dispatch) => dispatch(kycUpdateFailed(nameError));
+  if (!validateData.valid_name) {
+    let { validName, nameError } = validateName(value.name);
+    if (validName !== true) {
+      return (dispatch) => dispatch(kycUpdateFailed(nameError));
+    }
   }
 
   var reqBody = {

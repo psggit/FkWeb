@@ -24,8 +24,6 @@ const mapStateToProps = (state, props) => {
     showDeclaration: state.ubiStore.showDeclaration,
     checkDeclaration: state.ubiStore.checkDeclaration,
     selectedDocumentValue: state.ubiStore.selectedDocumentValue,
-    collectUserDetails:
-      state.summaryDetails.summaryDetails.is_basic_details_required,
     collectedUserDetails: state.ubiStore.collectedUserDetails,
     summaryDetails: state.summaryDetails,
     showError: state.ubiStore.showError,

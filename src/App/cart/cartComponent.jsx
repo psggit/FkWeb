@@ -230,7 +230,6 @@ function CartComponent(props) {
   }
 
   const showAddAddress = () => {
-    console.log("[showAddAdress]");
     history.push({
       pathname: "/address/select/osm",
       state: {

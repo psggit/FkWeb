@@ -28,6 +28,8 @@ function SelectAddressComponent(props) {
   }, []);
 
   useEffect(() => {
+    console.log("validateAddress");
+    console.log(props.apiStatus.validateAddressStatus);
     if (props.apiStatus.validateAddressStatus == "failed") {
       setHideModal(true);
     }

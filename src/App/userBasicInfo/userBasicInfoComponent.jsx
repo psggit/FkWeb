@@ -357,7 +357,6 @@ UserBasicInfoComponent.propTypes = {
   selectedDocument: PropTypes.object,
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
-  collectUserDetails: PropTypes.bool,
   collectedUserDetails: PropTypes.bool,
   selectedAddress: PropTypes.object,
   showError: PropTypes.bool,
@@ -369,13 +368,13 @@ UserBasicInfoComponent.propTypes = {
 };
 
 function UserBasicInfoComponent(props) {
-  // console.log(props.collectedUserDetails, props.collectedUserDetails);
-  if (props.collectedUserDetails && !props.collectedUserDetails) {
+  let is_required = props.summaryDetails.summaryDetails.is_basic_details_required;
+  let is_collected = props.collectedUserDetails;
+
+  if (is_required && !is_collected) {
     return <CollectInfoComponent {...props} />;
-  } else if (!props.collectUserDetails || props.collectedUserDetails) {
-    return <Redirect to="/payment/options" />;
   } else {
-    return <div></div>;
+    return <Redirect to="/payment/options" />;
   }
 }
 

@@ -10,6 +10,7 @@ BottomAddressComponent.propTypes = {
 };
 
 function BottomAddressComponent(props) {
+  console.log(props);
   if (props.selectedAddress !== null) {
     return (
       <div className="bottom-address-component">
@@ -24,7 +25,9 @@ function BottomAddressComponent(props) {
                   <div className="title">{props.selectedAddress.type}</div>
                   <div className="address">{props.selectedAddress.address}</div>
                   <div className="address">
-                    {props.summary.summaryDetails.delivery_message}
+                    {props.summary.summaryDetails !== null
+                      ? props.summary.summaryDetails.delivery_message
+                      : ""}
                   </div>
                 </div>
                 <div className="sub-title">CHANGE</div>
@@ -54,3 +57,5 @@ function BottomAddressComponent(props) {
 }
 
 export { BottomAddressComponent };
+
+//
