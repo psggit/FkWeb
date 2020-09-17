@@ -57,6 +57,7 @@ SummaryComponent.propTypes = {
   summary: PropTypes.object,
 };
 function SummaryComponent(props) {
+  // console.log(props);
   let summary = props.summary.summaryDetails;
   const history = useHistory();
   const goBack = () => {
@@ -93,7 +94,7 @@ function SummaryComponent(props) {
 
         <div className="summary-delivery-msg">{summary.delivery_message}</div>
       </div>
-      <BottomNextComponent routePath="/user/userBasicInfo" title="Pay Now"/>
+      <BottomNextComponent routePath="/user/userBasicInfo" title="Pay Now" />
     </div>
   );
 }

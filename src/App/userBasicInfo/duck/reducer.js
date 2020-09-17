@@ -27,6 +27,7 @@ const initialState = () => {
     checkDeclaration: false,
     showError: false,
     errorMessage: "",
+    collectedUserDetails: false,
     consumerIDTypes: [
       { idType: "Driving License", name: "dl" },
       { idType: "Passport", name: "passport" },
@@ -58,7 +59,7 @@ const userInfoCreateReducer = createReducer(initialState(), {
   }),
   [kycUpdate]: (state) => ({
     ...state,
-    collectUserDetails: false,
+    collectedUserDetails: true,
   }),
   [changeGenderAction]: (state, action) => ({
     ...state,

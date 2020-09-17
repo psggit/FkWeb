@@ -22,8 +22,7 @@ function AddMoreComponent(retailer) {
   }
   return (
     <div className="add_more_drinks" onClick={() => showStoreDetails(retailer)}>
-      <img className="drinks_icon" src={drinksIcon} />
-      <div className="label">Add more drinks to cart</div>
+      <div className="label">Browse</div>
       <img className="arrow_right" src={rightArrowIcon} />
     </div>
   );

@@ -17,6 +17,7 @@ import { validateKyc } from "./kycValidation";
 const ChangingName = (value) => {
   return (dispatch) => {
     dispatch(nameEntered(value));
+    dispatch(CheckCheckBoxOperation());
   };
 };
 
@@ -49,14 +50,19 @@ const CheckCheckBoxOperation = () => {
   return (dispatch, getState) => {
     let store = getState().ubiStore;
     let summaryStore = getState().summaryDetails;
-    let { bz_kyc_exist, dob_exist, gender_exist } = summaryStore.summaryDetails;
-    dob_exist = false; //temp data
-    // console.log(store.birthYear.length, dob_exist);
+    let {
+      bz_kyc_exist,
+      dob_exist,
+      gender_exist,
+      name_exist,
+    } = summaryStore.summaryDetails;
+
     if (
       (store.gender != "" || gender_exist) &&
       (store.birthYear.length == 4 || dob_exist) &&
       (store.finalisedDocument != "" || bz_kyc_exist) &&
-      (store.selectedDocumentValue != "" || bz_kyc_exist)
+      (store.selectedDocumentValue != "" || bz_kyc_exist) &&
+      (store.name.length > 1 || name_exist)
     ) {
       dispatch(showCheckboxAction(true));
     } else {

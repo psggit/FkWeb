@@ -1,3 +1,2 @@
-import AddressComponent from "./AddressComponent";
-
-export default AddressComponent;
+export { AddressComponent } from "./AddressComponent";
+export { BottomAddressComponent } from "./BottomAddressComponent";

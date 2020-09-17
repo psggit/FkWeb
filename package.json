@@ -23,6 +23,7 @@
     "@sentry/react": "^5.19.0",
     "bootstrap": "^4.5.0",
     "fk-platform-sdk": "^1.0.18",
+    "node-forge": "^0.10.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.2.0",
     "react-countdown-circle-timer": "^2.3.7",

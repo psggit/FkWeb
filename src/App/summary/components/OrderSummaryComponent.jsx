@@ -37,6 +37,7 @@ function OrderSummaryComponent(props) {
         />
       )}
       <YouPayComponent toPay={summary.display_balance} />
+      <div className="summary-delivery-msg">{summary.delivery_message}</div>
     </div>
   );
 }

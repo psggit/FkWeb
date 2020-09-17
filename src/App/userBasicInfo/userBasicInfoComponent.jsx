@@ -70,6 +70,9 @@ CollectInfoComponent.propTypes = {
   finaliseIDProofFunc: PropTypes.func,
   grantTokenError: PropTypes.bool,
   grantTokenErrorMessage: PropTypes.string,
+  summaryDetails: PropTypes.object,
+  collectUserDetails: PropTypes.bool,
+  showError: PropTypes.bool,
 };
 
 const OpenIDOptions = () => {
@@ -313,11 +316,12 @@ function CollectInfoComponent(props) {
     kycValue: props.selectedDocumentValue,
   };
 
-  //const { bz_kyc_exist, dob_exist, gender_exist } = props.userInfo;
-  let bz_kyc_exist = true;
-  let dob_exist = false;
-  let gender_exist = false;
-  let name_exist = false;
+  let {
+    bz_kyc_exist,
+    dob_exist,
+    gender_exist,
+    name_exist,
+  } = props.summaryDetails.summaryDetails;
 
   return (
     <div className="page-container userBasicInfoComponent">
@@ -352,6 +356,7 @@ UserBasicInfoComponent.propTypes = {
   selectedDocumentValue: PropTypes.string,
   checkDeclarationFunc: PropTypes.func,
   collectUserDetails: PropTypes.bool,
+  collectedUserDetails: PropTypes.bool,
   selectedAddress: PropTypes.object,
   showError: PropTypes.bool,
   errorMessage: PropTypes.string,
@@ -362,14 +367,12 @@ UserBasicInfoComponent.propTypes = {
 };
 
 function UserBasicInfoComponent(props) {
-  // const collectUserDetails = props.summaryDetails.summaryDetails.is_basic_details_required;
-  // console.log("userbasicInfoComponent");
-  // console.log(props.collectUserDetails);
-
-  if (props.collectUserDetails) {
+  if (props.collectUserDetails && !props.collectedUserDetails) {
     return <CollectInfoComponent {...props} />;
-  } else {
+  } else if (props.collectedUserDetails) {
     return <Redirect to="/payment/options" />;
+  } else {
+    return <div></div>;
   }
 }
 

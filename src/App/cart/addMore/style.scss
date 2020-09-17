@@ -1,11 +1,9 @@
 @import "../../../colors.scss";
 
 .add_more_drinks {
+  /*height: 64px; */
+  width: 80px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  height: 64px;
-  border-bottom: 1px solid $border-color;
 
   .drinks_icon {
    margin-right: 10px;

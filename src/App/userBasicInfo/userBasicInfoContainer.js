@@ -26,6 +26,7 @@ const mapStateToProps = (state, props) => {
     selectedDocumentValue: state.ubiStore.selectedDocumentValue,
     collectUserDetails:
       state.summaryDetails.summaryDetails.is_basic_details_required,
+    collectedUserDetails: state.ubiStore.collectedUserDetails,
     summaryDetails: state.summaryDetails,
     showError: state.ubiStore.showError,
     errorMessage: state.ubiStore.errorMessage,

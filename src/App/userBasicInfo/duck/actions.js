@@ -40,7 +40,7 @@ const loginSuccess = createAction("loginSuccess");
 //On login failure, retry in specific conditions
 const loginFailed = createAction("loginFailed");*/
 
-const kycUpdate = createAction("kycUpdated");
+const kycUpdate = createAction("kycUpdate");
 
 const kycUpdateFailed = createAction("kycUpdatedFailed");
 const errorClose = createAction("closeError");

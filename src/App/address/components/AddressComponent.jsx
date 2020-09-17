@@ -124,4 +124,4 @@ function AddressComponent(props) {
   );
 }
 
-export default AddressComponent;
+export { AddressComponent };

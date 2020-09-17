@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ToolbarComponent } from "../../common/toolbar";
-import AddressComponent from "./../components";
+import { AddressComponent } from "./../components";
 import { addAddressIcon } from "../../../assets/images";
 import { BottomNextComponent } from "../../common/bottomNext";
 import { LoadingComponent } from "../../common/loading";

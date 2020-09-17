@@ -19,10 +19,9 @@
   .retailer-name {
     font-family: MontserratBold;
     font-style: bold;
-    font-size: 24px;
-    line-height: 24px;
+    font-size: 22px;
+    line-height: 22px;
     margin-top: 8px;
-    order: 2;
     color: $secondary-color;
   }
 
@@ -33,5 +32,19 @@
     margin-top: 8px;
     order: 3;
     color: $secondary-color;
+  }
+}
+
+.cart {
+  .generic-detail-container {
+    border-bottom: none;
+  }
+
+  .cart-sub-header{
+    display: flex;
+    flex-direction: row;
+    order: 2;
+    justify-content: space-between;
+    align-items: center;
   }
 }

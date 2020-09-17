@@ -1,7 +1,7 @@
 import React from "react";
 import { ToolbarComponent } from "../../common/toolbar";
 import { SearchBoxComponent } from "../../common/searchBox";
-import AddressComponent from "./../components";
+import { AddressComponent } from "./../components";
 import { addAddressIcon } from "../../../assets/images";
 import { BottomNextComponent } from "../../common/bottomNext";
 import PropTypes from "prop-types";

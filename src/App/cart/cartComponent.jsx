@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import "./style.scss";
-// import { AddMoreComponent } from "./addMore";
+
 import { CartItemComponent } from "./cartItem";
 import { EmptyCartComponent } from "./emptyCart";
 import { CartHeaderComponent } from "./header";
@@ -12,7 +12,8 @@ import { drinksIcon } from "../../assets/images";
 import { Alert } from "../common/alert";
 import { BottomNavigationContainer } from "../common/bottomNavigation";
 import { OrderSummaryComponent } from "../summary/components";
-// import { OrderAddressComponent } from "../summary/components/OrderAddressComponent";
+import { BottomAddressComponent } from "../address/components";
+import { LoadingComponent } from "../common/loading";
 
 RetryValidationComponent.propTypes = {
   products: PropTypes.object,
@@ -127,15 +128,9 @@ function SummaryFailedComponent(props) {
   let [displayMessage, setDisplayMessage] = useState(true);
 
   let handleAction;
-  if (fetchSummaryError) {
+  if (fetchSummaryError || fetchSummaryLocationError) {
     handleAction = () => {
       setDisplayMessage(false);
-      // setDisplayMessage(true);
-    };
-  } else if (fetchSummaryLocationError) {
-    handleAction = () => {
-      setDisplayMessage(false);
-      // setDisplayMessage(true);
     };
   }
 
@@ -164,24 +159,25 @@ CartComponent.propTypes = {
   fetchSummaryLocationError: PropTypes.bool,
   fetchSummary: PropTypes.func,
   resetOnUnmount: PropTypes.func,
+  showAddAddress: PropTypes.func,
   summary: PropTypes.any,
   cartUpdate: PropTypes.bool,
+  redirect: PropTypes.string,
 };
 
 function CartComponent(props) {
-  let {
-    fetchSummarySuccess,
-    fetchSummaryInProgress,
-    fetchSummaryFailed,
-    fetchSummaryError,
-    fetchSummaryLocationError,
-  } = props.summary;
+  useEffect(() => {
+    if (trigger) {
+      props.fetchSummary(props);
+    }
+  });
 
-  const trigger = !(
-    fetchSummarySuccess ||
-    fetchSummaryFailed ||
-    fetchSummaryInProgress
-  );
+  useEffect(() => {
+    if (props.cartUpdate) {
+      props.fetchSummary(props);
+    }
+  }, [props.cartUpdate]);
+
   useEffect(() => {
     if (trigger) {
       props.fetchSummary(props);
@@ -198,6 +194,22 @@ function CartComponent(props) {
     window.scrollTo(0, 0);
     return () => props.resetOnUnmount();
   }, []);
+
+  let {
+    fetchSummarySuccess,
+    fetchSummaryInProgress,
+    fetchSummaryFailed,
+    fetchSummaryError,
+    fetchSummaryLocationError,
+  } = props.summary;
+
+  const trigger = !(
+    fetchSummarySuccess ||
+    fetchSummaryFailed ||
+    fetchSummaryInProgress
+  );
+
+  const history = useHistory();
 
   if (props.validationSuccessful) {
     return <Redirect to="/address/select/osm" push={true} />;
@@ -225,21 +237,32 @@ function CartComponent(props) {
     );
   }
 
+  const showAddAddress = () => {
+    history.push({
+      pathname: "/choose/location/" + props.redirect,
+      state: {
+        address: null,
+      },
+    });
+  };
+
   return (
     <div className="cart">
       <div className="full-cart show-content">
         <div className="padding-24">
           <CartHeaderComponent {...props} />
           <CartItems {...props} />
+          {fetchSummaryInProgress && <LoadingComponent />}
           {fetchSummarySuccess &&
-          !fetchSummaryError &&
-          !fetchSummaryLocationError ? (
-            <OrderSummaryComponent summary={summary} />
-          ) : null}
-          {fetchSummaryError || fetchSummaryLocationError ? (
+            !fetchSummaryError &&
+            !fetchSummaryLocationError && (
+              <OrderSummaryComponent summary={summary} />
+            )}
+          {(fetchSummaryError || fetchSummaryLocationError) && (
             <SummaryFailedComponent {...props} />
-          ) : null}
+          )}
         </div>
+        <BottomAddressComponent {...props} showAddAddress={showAddAddress} />
         <NextComponent {...props} />
       </div>
 
@@ -249,6 +272,3 @@ function CartComponent(props) {
 }
 
 export { CartComponent };
-
-//component missing in the design
-//<AddMoreComponent retailer={props.retailer} />
