@@ -27,6 +27,7 @@ try {
 }
 
 /* TODO:@hl05 better error management */
+//
 /* TODO:@hl05 making it work with regular web */
 
 // { scope: "user.name", isMandatory: true, shouldVerify: true },

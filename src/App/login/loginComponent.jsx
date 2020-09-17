@@ -95,30 +95,29 @@ function LoginComponent(props) {
         phone: props.userInfo.mobile,
         userLoginType: "fk-web",
       });
-      if (props.selectedAddress === null) {
-        if (props.locationPermission) {
-          navigator.geolocation.getCurrentPosition(
-            (loc) => {
-              if (loc.coords) {
-                if (loc.coords.latitude && loc.coords.longitude) {
-                  var gps = loc.coords.latitude + "," + loc.coords.longitude;
-                  props.setDeviceGps(gps);
-                  props.guessAddress(gps);
-                  return;
-                }
+      if (props.locationPermission) {
+        navigator.geolocation.getCurrentPosition(
+          (loc) => {
+            if (loc.coords) {
+              if (loc.coords.latitude && loc.coords.longitude) {
+                var gps = loc.coords.latitude + "," + loc.coords.longitude;
+                props.setDeviceGps(gps);
+                props.guessAddress(gps);
+                return;
               }
-              setFlow("selectState");
-            },
-            () => {
-              setFlow("selectState");
             }
-          );
-        } else {
-          setFlow("selectState");
-        }
-        // Device GPS not available
+            setFlow("selectState");
+          },
+          () => {
+            setFlow("selectState");
+          }
+        );
       } else {
-        setFlow("home");
+        if (props.selectedAddress) {
+          setFlow("home");
+        } else {
+          setFlow("selectAddress");
+        }
       }
     }
   }, [props.loginSuccess]);
@@ -128,10 +127,10 @@ function LoginComponent(props) {
       if (!guessedCity) {
         setFlow("selectState");
       } else {
-        if (!guessedAddress) {
-          setFlow("selectAddress");
-        } else {
+        if (props.selectedAddress) {
           setFlow("home");
+        } else {
+          setFlow("selectAddress");
         }
       }
     }

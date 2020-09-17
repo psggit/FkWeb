@@ -55,8 +55,11 @@ function ChooseLocationComponent(props) {
   } else if (props.deviceGps) {
     center = props.deviceGps;
     title = "Add New Address";
-  } else {
+  } else if (props.selecedCity) {
     center = props.selectedCity.gps;
+    title = "Add New Address";
+  } else {
+    center = "28.6129167,77.227321";
     title = "Add New Address";
   }
   return (
