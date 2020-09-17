@@ -6,6 +6,7 @@ import { locationIcon, addAddressIcon } from "../../../assets/images";
 BottomAddressComponent.propTypes = {
   selectedAddress: PropTypes.object,
   showAddAddress: PropTypes.func,
+  summary: PropTypes.object,
 };
 
 function BottomAddressComponent(props) {
@@ -22,6 +23,9 @@ function BottomAddressComponent(props) {
                 <div className="line-clamp">
                   <div className="title">{props.selectedAddress.type}</div>
                   <div className="address">{props.selectedAddress.address}</div>
+                  <div className="address">
+                    {props.summary.summaryDetails.delivery_message}
+                  </div>
                 </div>
                 <div className="sub-title">CHANGE</div>
               </div>

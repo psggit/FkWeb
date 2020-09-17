@@ -73,12 +73,10 @@
     flex-direction: row;
     background: #1b1b1f;
     backdrop-filter: blur(25px);
-    padding: 16px;
-    padding-bottom: 0;
+    padding: 5px 16px;
     position: fixed;
     left: 0;
     right: 0;
-    padding-top: 5px;
   }
   .add-new-address{
     width: 100%;
@@ -88,8 +86,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-    
   }
   .sub-title{
     line-height: 16px;
@@ -98,5 +94,6 @@
   }
   .line-clamp{
     flex-direction: column;
+    width: 80%;
   }
 }
