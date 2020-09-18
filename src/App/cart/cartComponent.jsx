@@ -202,13 +202,16 @@ function CartComponent(props) {
   );
 
   const history = useHistory();
-
-  if (props.validationSuccessful) {
-    return <Redirect to="/user/userBasicInfo" push={true} />;
-  }
-
   let isEmpty = props.isEmpty;
   let summary = props.summary.summaryDetails;
+
+  if (props.validationSuccessful) {
+    if (summary.is_basic_details_required) {
+      return <Redirect to="/user/userBasicInfo" push={true} />;
+    } else {
+      return <Redirect to="/payment/options" push={true}/>;
+    }
+  }
 
   if (isEmpty) {
     return <ReturnEmptyCart />;
