@@ -36,7 +36,7 @@ try {
 
 var scopeReq = [
   { scope: "user.mobile", isMandatory: true, shouldVerify: true },
-  { scope: "user.location", isMandatory: false, shouldVerify: false },
+//  { scope: "user.location", isMandatory: false, shouldVerify: false },
 ];
 
 const processResponse = () => {

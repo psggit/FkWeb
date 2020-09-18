@@ -116,7 +116,7 @@ function LoginComponent(props) {
         if (props.selectedAddress) {
           setFlow("home");
         } else {
-          setFlow("selectAddress");
+          setFlow("selectState");
         }
       }
     }
