@@ -4,7 +4,6 @@ import { GoogleMap, LoadScript, Autocomplete } from "@react-google-maps/api";
 import { mapMarkerIcon, currentLocationIcon } from "../../../../assets/images";
 import { BottomNextComponent } from "../../../common/bottomNext";
 import { Alert, AlertWithOptions } from "../../../common/alert";
-import { searchIcon } from "../../../../assets/images";
 import { useHistory } from "react-router-dom";
 import "../style.scss";
 
