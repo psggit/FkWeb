@@ -115,7 +115,7 @@ function UPIVerifyComponent(props) {
   }
 
   if (props.payment.tryPayingAgain) {
-    history.push("/order/summary");
+    history.push("/cart");
   }
 
   if (props.payment.placeOrderSuccess) {

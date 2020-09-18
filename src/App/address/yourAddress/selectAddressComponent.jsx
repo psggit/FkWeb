@@ -31,7 +31,7 @@ function SelectAddressComponent(props) {
         </div>
       </div>
       <BottomNextComponent
-        routePath="/order/summary"
+        routePath="/cart"
         inActive={props.selectedAddress.address_id == undefined}
         title="Proceed"
       />
