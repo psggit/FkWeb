@@ -1,4 +1,5 @@
 export { userInfoCreateReducer } from "./reducer";
+export { resetOnUnmount } from "./actions";
 export {
   ChangingName,
   ChangingBirthYear,

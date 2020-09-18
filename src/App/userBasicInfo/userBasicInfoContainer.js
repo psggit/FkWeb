@@ -10,6 +10,7 @@ import {
   ErrorClose,
   FinaliseIDProofValueOperation,
   UpdateKYCOperation,
+  resetOnUnmount,
 } from "./duck";
 
 const mapStateToProps = (state, props) => {
@@ -55,6 +56,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(FinaliseIDProofValueOperation(selectedDocument)),
     checkDeclarationFunc: () => dispatch(CheckDeclarationOperation()),
     closeError: () => dispatch(ErrorClose()),
+    resetOnUnmount: () => dispatch(resetOnUnmount()),
   };
 };
 

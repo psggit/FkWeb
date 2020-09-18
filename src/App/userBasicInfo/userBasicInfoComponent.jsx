@@ -181,10 +181,12 @@ function InfoComponent() {
 
 function SelectIDComponent(props) {
   const finalisedDocument = props.finalisedDocument;
-  //const showConsumerIDs = props.showConsumerIDs;
+  // const finalisedDocument = { value: undefined };
+  //const showConsumerIDs = props.showConsumerIDs; //commented earlier
   const selectedDocument = props.selectedDocument;
   const availableConsumerIDs = props.consumerIDTypes;
   const selectedDocumentValue = props.selectedDocumentValue;
+  // const selectedDocumentValue = "";
   return (
     <>
       <div className="input-component">
@@ -315,6 +317,7 @@ function CollectInfoComponent(props) {
     kycType: props.finalisedDocument.id,
     kycValue: props.selectedDocumentValue,
   };
+  console.log("[userBasicInfo]", data);
 
   let {
     bz_kyc_exist,
@@ -365,10 +368,18 @@ UserBasicInfoComponent.propTypes = {
   userInfo: PropTypes.object,
   grantTokenError: PropTypes.bool,
   redirect: PropTypes.string,
+  resetOnUnmount: PropTypes.func,
 };
 
 function UserBasicInfoComponent(props) {
-  let is_required = props.summaryDetails.summaryDetails.is_basic_details_required;
+  useEffect(() => {
+    return () => {
+      props.resetOnUnmount();
+    };
+  }, []);
+
+  let is_required =
+    props.summaryDetails.summaryDetails.is_basic_details_required;
   let is_collected = props.collectedUserDetails;
 
   if (is_required && !is_collected) {

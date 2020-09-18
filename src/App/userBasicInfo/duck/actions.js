@@ -45,6 +45,8 @@ const kycUpdate = createAction("kycUpdate");
 const kycUpdateFailed = createAction("kycUpdatedFailed");
 const errorClose = createAction("closeError");
 
+const resetOnUnmount = createAction("resetOnUnmount");
+
 export {
   changeDocumentValueAction,
   kycUpdate,
@@ -57,4 +59,5 @@ export {
   finaliseIDTypeAction,
   showCheckboxAction,
   checkCheckboxAction,
+  resetOnUnmount,
 };

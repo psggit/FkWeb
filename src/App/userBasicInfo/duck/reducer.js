@@ -10,6 +10,7 @@ import {
   changeDocumentValueAction,
   showCheckboxAction,
   checkCheckboxAction,
+  resetOnUnmount,
 } from "./actions";
 
 import { createReducer } from "@reduxjs/toolkit";
@@ -85,6 +86,28 @@ const userInfoCreateReducer = createReducer(initialState(), {
   [checkCheckboxAction]: (state, action) => ({
     ...state,
     checkDeclaration: action.payload,
+  }),
+  [resetOnUnmount]: (state) => ({
+    ...state,
+    userInfo: {},
+    name: "",
+    birthYear: "",
+    gender: "",
+    selectedDocument: {},
+    finalisedDocument: {},
+    selectedDocumentValue: "",
+    showDeclaration: false,
+    checkDeclaration: false,
+    showError: false,
+    errorMessage: "",
+    collectedUserDetails: false,
+    consumerIDTypes: [
+      { idType: "Driving License", name: "dl" },
+      { idType: "Passport", name: "passport" },
+      { idType: "PAN Card", name: "pan" },
+      { idType: "Voter ID", name: "voterid" },
+      { idType: "Aadhaar", name: "aadhaar" },
+    ],
   }),
 });
 
