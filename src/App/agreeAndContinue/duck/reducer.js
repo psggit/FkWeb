@@ -3,7 +3,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import { tcAgreed } from "./actions";
 
 const initialState = {
-  showTC: !(sessionStorage.getItem("tandc/status") === "true"),
+  showTC: !(localStorage.getItem("tandc/status") === "true"),
 };
 
 const tcReducer = createReducer(initialState, {
