@@ -221,15 +221,18 @@ let replaceProductInfo = (state: State, skus: Array<Sku>): State => {
 };
 
 let setUnAvailableProducts = (state: State, skus: Array<number>): State => {
-  console.log("[handleSummarySuccess 1.1]", skus);
   for (let id of skus) {
-    console.log("[handleSummarySuccess] ", id, state.products);
     state.products[id.toString()].available = false;
   }
-  console.log("[handleSummarySuccess 0.1]");
   return state;
 };
 
+let setAvailableProducts = (state: State): State => {
+  for (let prod: Product of Object.values(state.products)) {
+    state.products[prod.skuId.toString()].available = true;
+  }
+  return state;
+};
 // let validateCart = (state: State, data: Object): State => {
 //   if (data.unavailableItems !== undefined) {
 //     state = setUnAvailableProducts(state, data.unAvailableItems);
@@ -265,15 +268,12 @@ const cartTotal = (oldS: State): number => {
 };
 
 const handleSummarySuccess = (state: State, data: Object): State => {
-  console.log("[11111]");
+  state = setAvailableProducts(state);
   if (data.unavailableItems != null) {
-    console.log("[22222]");
     state = setUnAvailableProducts(state, data.unavailableItems);
   } else if (data.unavail_items != null) {
-    console.log("[3333]");
     state = setUnAvailableProducts(state, data.unavail_items);
   }
-  console.log("[handleSummarySuccess]", data);
 
   if (data.statusCode === 0) {
     //success
@@ -297,18 +297,6 @@ const handleSummarySuccess = (state: State, data: Object): State => {
   }
   return state;
 };
-
-function fnUpdateCloseValidation(state: State): State {
-  console.log("fnUpdateCloseValidation");
-  console.log(state);
-  return {
-    ...state,
-    fetchSummaryError: false,
-    fetchErrorMessageCount: state.fetchErrorMessageCount + 1,
-    fetchSummaryErrorMessage: "",
-  }
-}
-
 
 const cartReducer = createReducer(initialState(), {
   [addSkuToCart]: (state: State, e: Object) => {
