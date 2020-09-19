@@ -2,7 +2,7 @@ export { cartReducer, cartTotal, isEmpty } from "./reducer";
 export {
   addSkuToCart,
   removeSkuFromCart,
-  closeValidationErrorMessage,
+  closeSummaryAlert,
   clearCartAndAdd,
   dontClearCart,
   resetOnUnmount,

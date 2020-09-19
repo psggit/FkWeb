@@ -16,9 +16,7 @@ export const validationSuccessful = createAction("validationSuccessful");
 export const validationFailure = createAction("validationFailure");
 
 // validateErrorOk
-export const closeValidationErrorMessage = createAction(
-  "closeValidationErrorMessage"
-);
+export const closeSummaryAlert = createAction("closeSummaryAlert");
 
 export const clearCartAndAdd = createAction("clearCartAndAdd");
 

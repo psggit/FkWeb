@@ -1,6 +1,6 @@
 import {
   fetchSummaryInProgress,
-  fetchSummaryFailed,
+  fetchSummaryFailedNotInUse,
   fetchSummarySuccess,
 } from "./actions";
 
@@ -47,7 +47,7 @@ const onSuccess = (dispatch) => {
 
 const onError = (dispatch) => {
   return (err) => {
-    dispatch(fetchSummaryFailed(err));
+    dispatch(fetchSummaryFailedNotInUse(err));
   };
 };
 

@@ -37,5 +37,7 @@ export const validateKyc = (type, value) => {
       valid = false;
       break;
   }
+  console.log("return");
+  console.log(valid, message);
   return { valid, message };
 };

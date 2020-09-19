@@ -41,12 +41,14 @@ const processResponse = () => {
 
 const onSuccess = (dispatch) => {
   return (data) => {
+    console.log("onSuccess", data);
     dispatch(fetchSummarySuccess(data));
   };
 };
 
 const onError = (dispatch) => {
   return (err) => {
+    console.log("fetchSummaryFailed");
     dispatch(fetchSummaryFailed(err));
   };
 };

@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import {
   fetchSummaryInProgress,
-  fetchSummaryFailed,
+  fetchSummaryFailedNotInUse,
   fetchSummarySuccess,
   resetOnUnmount,
 } from "./actions";
@@ -9,7 +9,7 @@ import {
 let initialState = {
   summaryDetails: {},
   fetchSummaryInProgress: false,
-  fetchSummaryFailed: false,
+  fetchSummaryFailedNotInUse: false,
   fetchSummarySuccess: false,
   fetchSummaryError: false,
   fetchSummaryLocationError: false,
@@ -22,7 +22,7 @@ const handleSummarySuccess = (state, data) => {
       ...state,
       summaryDetails: data.summary_details,
       fetchSummaryInProgress: false,
-      fetchSummaryFailed: false,
+      fetchSummaryFailedNotInUse: false,
       fetchSummarySuccess: true,
       fetchSummaryError: false,
       fetchSummaryLocationError: false,
@@ -33,7 +33,7 @@ const handleSummarySuccess = (state, data) => {
       ...state,
       summaryDetails: data.summary_details,
       fetchSummaryInProgress: false,
-      fetchSummaryFailed: false,
+      fetchSummaryFailedNotInUse: false,
       fetchSummarySuccess: true,
       fetchSummaryError: false,
       fetchSummaryLocationError: true,
@@ -44,7 +44,7 @@ const handleSummarySuccess = (state, data) => {
       ...state,
       summaryDetails: data.summary_details,
       fetchSummaryInProgress: false,
-      fetchSummaryFailed: false,
+      fetchSummaryFailedNotInUse: false,
       fetchSummarySuccess: true,
       fetchSummaryError: true,
       fetchSummaryLocationError: false,
@@ -59,16 +59,16 @@ const summaryReducer = createReducer(initialState, {
     return {
       ...state,
       fetchSummaryInProgress: true,
-      fetchSummaryFailed: false,
+      fetchSummaryFailedNotInUse: false,
       fetchSummarySuccess: false,
     };
   },
 
-  [fetchSummaryFailed]: (state) => {
+  [fetchSummaryFailedNotInUse]: (state) => {
     return {
       ...state,
       fetchSummaryInProgress: false,
-      fetchSummaryFailed: true,
+      fetchSummaryFailedNotInUse: true,
       fetchSummarySuccess: false,
     };
   },
@@ -79,7 +79,7 @@ const summaryReducer = createReducer(initialState, {
     return {
       ...state,
       fetchSummaryInProgress: false,
-      fetchSummaryFailed: false,
+      fetchSummaryFailedNotInUse: false,
       fetchSummarySuccess: false,
       fetchSummaryError: false,
       fetchSummaryLocationError: false,

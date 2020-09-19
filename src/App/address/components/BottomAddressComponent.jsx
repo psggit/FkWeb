@@ -6,7 +6,7 @@ import { locationIcon, addAddressIcon } from "../../../assets/images";
 BottomAddressComponent.propTypes = {
   selectedAddress: PropTypes.object,
   showAddAddress: PropTypes.func,
-  summary: PropTypes.object,
+  summaryDetails: PropTypes.object,
 };
 
 function BottomAddressComponent(props) {
@@ -25,8 +25,8 @@ function BottomAddressComponent(props) {
                   <div className="title">{props.selectedAddress.type}</div>
                   <div className="address">{props.selectedAddress.address}</div>
                   <div className="address">
-                    {props.summary.summaryDetails !== null
-                      ? props.summary.summaryDetails.delivery_message
+                    {props.summary !== null
+                      ? props.summary.delivery_message
                       : ""}
                   </div>
                 </div>

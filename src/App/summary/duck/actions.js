@@ -2,7 +2,7 @@ import { createAction } from "@reduxjs/toolkit";
 
 const fetchSummaryInProgress = createAction("fetchSummaryInProgress");
 
-const fetchSummaryFailed = createAction("fetchSummaryFailed");
+const fetchSummaryFailedNotInUse = createAction("fetchSummaryFailedNotInUse");
 
 const fetchSummarySuccess = createAction("fetchSummarySuccess");
 
@@ -10,7 +10,7 @@ const resetOnUnmount = createAction("resetOnUnmount");
 
 export {
   fetchSummaryInProgress,
-  fetchSummaryFailed,
+  fetchSummaryFailedNotInUse,
   fetchSummarySuccess,
   resetOnUnmount,
 };

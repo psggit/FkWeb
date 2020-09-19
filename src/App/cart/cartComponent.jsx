@@ -18,7 +18,7 @@ import { LoadingComponent } from "../common/loading";
 RetryValidationComponent.propTypes = {
   products: PropTypes.object,
   retailer: PropTypes.object,
-  validateCart: PropTypes.func,
+  fetchSummary: PropTypes.func,
   selectedAddress: PropTypes.object,
 };
 
@@ -33,7 +33,7 @@ function RetryValidationComponent(props) {
       motion={false}
       icon={drinksIcon}
       text="Something went wrong, please try again."
-      buttonFunc={() => props.validateCart(payload)}
+      buttonFunc={() => props.fetchSummary(props)}
       buttonText="Retry"
     />
   );
@@ -81,23 +81,30 @@ NextComponent.propTypes = {
   selectedAddress: PropTypes.object,
   fetchSummaryError: PropTypes.bool,
   fetchSummaryLocationError: PropTypes.bool,
+  fnProceed: PropTypes.func,
+  is_basic_details_required: PropTypes.bool,
+  history: PropTypes.any,
 };
 
 function NextComponent(props) {
-  //let shouldValidate = !props.validationSuccessful;
-  let validateParams = {
-    retailer: props.retailer,
-    products: props.products,
-    selectedAddress: props.selectedAddress,
+  const fnProceed = () => {
+    if (props.is_basic_details_required) {
+      props.history.push({
+        pathname: "/user/userBasicInfo",
+      });
+    } else {
+      props.history.push({
+        pathname: "/payment/options",
+      });
+    }
   };
-  // console.log(props.fetchSummaryError, props.fetchSummaryLocationError);
   return (
     <div>
       <BottomNextComponent
         isNav={true}
         inActive={props.fetchSummaryError || props.fetchSummaryLocationError}
         title="Pay Now"
-        onClickFunc={() => props.validateCart(validateParams)}
+        onClickFunc={() => fnProceed()}
       />
     </div>
   );
@@ -107,7 +114,7 @@ function NextComponent(props) {
 
 AlertValidateErrorComponent.propTypes = {
   closeValidationErrorMessage: PropTypes.func,
-  validateErrorMessage: PropTypes.string,
+  summary: PropTypes.object,
 };
 
 function AlertValidateErrorComponent(props) {
@@ -115,7 +122,7 @@ function AlertValidateErrorComponent(props) {
     <Alert
       handleOption={() => props.closeValidationErrorMessage()}
       show={true}
-      content={props.validateErrorMessage}
+      content={props.summary.fetchSummaryErrorMessage}
       option={"Ok"}
     />
   );
@@ -126,14 +133,14 @@ SummaryFailedComponent.propTypes = {
 };
 
 function SummaryFailedComponent(props) {
-  let fetchSummaryError = props.summary.fetchSummaryError;
-  let fetchSummaryLocationError = props.summary.fetchSummaryLocationError;
-  let message = props.summary.fetchSummaryErrorMessage;
+  let fetchSummaryError = props.fetchSummaryError;
+  let message = props.fetchSummaryErrorMessage;
   let [displayMessage, setDisplayMessage] = useState(true);
 
   let handleAction;
-  if (fetchSummaryError || fetchSummaryLocationError) {
+  if (fetchSummaryError) {
     handleAction = () => {
+      props.closeSummaryAlert();
       setDisplayMessage(false);
     };
   }
@@ -153,28 +160,42 @@ function SummaryFailedComponent(props) {
 }
 
 CartComponent.propTypes = {
-  validationFailure: PropTypes.bool,
-  validateError: PropTypes.bool,
-  validationSuccessful: PropTypes.bool,
-  validationInProgress: PropTypes.bool,
   fetchSummarySuccess: PropTypes.bool,
   fetchSummaryInProgress: PropTypes.bool,
   fetchSummaryFailed: PropTypes.bool,
-  fetchSummaryLocationError: PropTypes.bool,
   fetchSummary: PropTypes.func,
   resetOnUnmount: PropTypes.func,
   showAddAddress: PropTypes.func,
   summary: PropTypes.any,
   cartUpdate: PropTypes.bool,
   redirect: PropTypes.string,
+  selectedAddress: PropTypes.object,
+  fetchErrorMessageCount: PropTypes.number,
+  fetchSummaryError: PropTypes.bool,
+  fetchSummaryErrorMessage: PropTypes.string,
 };
 
 function CartComponent(props) {
+  const {
+    fetchSummarySuccess,
+    fetchSummaryInProgress,
+    fetchSummaryFailed,
+    fetchSummaryError,
+    fetchErrorMessageCount,
+  } = props;
+
+  const trigger = !(
+    fetchSummarySuccess ||
+    fetchSummaryFailed ||
+    fetchSummaryInProgress
+  );
+
   useEffect(() => {
     if (trigger) {
       props.fetchSummary(props);
+      // props.closeValidationErrorMessage();
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (props.cartUpdate) {
@@ -187,46 +208,23 @@ function CartComponent(props) {
     return () => props.resetOnUnmount();
   }, []);
 
-  let {
-    fetchSummarySuccess,
-    fetchSummaryInProgress,
-    fetchSummaryFailed,
-    fetchSummaryError,
-    fetchSummaryLocationError,
-  } = props.summary;
-
-  const trigger = !(
-    fetchSummarySuccess ||
-    fetchSummaryFailed ||
-    fetchSummaryInProgress
-  );
+  useEffect(() => {
+    console.log("[PROPS]", props);
+  });
 
   const history = useHistory();
   let isEmpty = props.isEmpty;
-  let summary = props.summary.summaryDetails;
-
-  if (props.validationSuccessful) {
-    if (summary.is_basic_details_required) {
-      return <Redirect to="/user/userBasicInfo" push={true} />;
-    } else {
-      return <Redirect to="/payment/options" push={true}/>;
-    }
-  }
+  let summary = props.summary;
 
   if (isEmpty) {
     return <ReturnEmptyCart />;
   }
 
-  if (props.validationFailure) {
-    console.log(props);
+  if (fetchSummaryFailed) {
     return <RetryValidationComponent {...props} />;
   }
 
-  if (props.validateError) {
-    return <AlertValidateErrorComponent {...props} />;
-  }
-
-  if (props.validationInProgress) {
+  if (props.fetchSummaryInProgress) {
     return (
       <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
     );
@@ -248,27 +246,25 @@ function CartComponent(props) {
           <CartHeaderComponent {...props} />
           <CartItems {...props} />
           {fetchSummaryInProgress && <LoadingComponent />}
-          {(fetchSummaryError || fetchSummaryLocationError) && (
+          {fetchSummaryError && fetchErrorMessageCount === 0 && (
             <SummaryFailedComponent {...props} />
           )}
-          {(fetchSummaryError || fetchSummaryLocationError) && (
+          {fetchSummaryError && (
             <div className="error-container">
-              <div className="cart-error">
-                {props.summary.fetchSummaryErrorMessage}
-              </div>
+              <div className="cart-error">{props.fetchSummaryErrorMessage}</div>
             </div>
           )}
-          {fetchSummarySuccess &&
-            !fetchSummaryError &&
-            !fetchSummaryLocationError && (
-              <OrderSummaryComponent summary={summary} />
-            )}
+          {fetchSummarySuccess && !fetchSummaryError && (
+            <OrderSummaryComponent summary={summary} />
+          )}
         </div>
         <BottomAddressComponent {...props} showAddAddress={showAddAddress} />
         <NextComponent
-          {...props}
+          history={history}
+          is_basic_details_required={
+            summary ? summary.is_basic_details_required : false
+          }
           fetchSummaryError={fetchSummaryError}
-          fetchSummaryLocationError={fetchSummaryLocationError}
         />
       </div>
 

@@ -1,7 +1,7 @@
 export { summaryReducer } from "./reducer";
 export {
   fetchSummaryInProgress,
-  fetchSummaryFailed,
+  fetchSummaryFailedNotInUse,
   fetchSummarySuccess,
   resetOnUnmount,
 } from "./actions";

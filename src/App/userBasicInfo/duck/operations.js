@@ -105,7 +105,12 @@ const onSuccess = (dispatch) => {
     if (data.status === 200) {
       dispatch(kycUpdate(data));
     } else if (data.status === 403) {
-      dispatch(kycUpdateFailed(data.body.message));
+      console.log(data);
+      dispatch(
+        kycUpdateFailed(
+          "ID already exists. Please choose a different ID to proceed."
+        )
+      );
     } else {
       throw new Error("Something went wrong, try again");
     }
@@ -147,20 +152,15 @@ const UpdateKYCOperation = (
     valid_name: name_exist,
     valid_dob: dob_exist,
     valid_gender: gender_exist,
+    valid: false,
     errorMsg: "",
   };
 
   if (!validateData.valid_bz_kyc) {
-    let data = validateKyc(value.kycType, value.kycValue);
-    validateData = {
-      ...validateData,
-      valid_bz_kyc: data.valid,
-      errorMsg: data.message,
-    };
-  }
-
-  if (validateData.valid_bz_kyc !== true) {
-    return (dispatch) => dispatch(kycUpdateFailed(validateData.errorMsg));
+    let { valid, message } = validateKyc(value.kycType, value.kycValue);
+    if (valid !== true) {
+      return (dispatch) => dispatch(kycUpdateFailed(message));
+    }
   }
 
   //validate Name

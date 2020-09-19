@@ -317,7 +317,6 @@ function CollectInfoComponent(props) {
     kycType: props.finalisedDocument.id,
     kycValue: props.selectedDocumentValue,
   };
-  console.log("[userBasicInfo]", data);
 
   let {
     bz_kyc_exist,

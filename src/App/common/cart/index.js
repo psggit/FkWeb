@@ -6,7 +6,7 @@ export {
   isEmpty,
   validateCart,
   fetchSummary,
-  closeValidationErrorMessage,
+  closeSummaryAlert,
   clearCartAndAdd,
   dontClearCart,
   resetOnUnmount,

@@ -5,7 +5,7 @@ import {
   validationSuccessful,
   validationInProgress,
   validationFailure,
-  closeValidationErrorMessage,
+  closeSummaryAlert,
   clearCartAndAdd,
   dontClearCart,
   resetOnUnmount,
@@ -89,6 +89,7 @@ const initialState = (): State => {
   return {
     retailer: retailer,
     products: products,
+    summaryDetails: {},
     retailerDiffers: false,
     validationFailure: false,
     validationInProgress: false,
@@ -101,7 +102,7 @@ const initialState = (): State => {
     fetchSummaryFailed: false,
     fetchSummarySuccess: false,
     fetchSummaryError: false,
-    fetchSummaryLocationError: false,
+    fetchErrorMessageCount: 0,
     fetchSummaryErrorMessage: "",
     cartUpdate: false,
   };
@@ -119,18 +120,13 @@ let setRetailer = (state: State, sku: Sku): State => {
 
 let resetValidationState = (state: State): State => {
   state.retailerDiffers = false;
-  state.validationFailure = false;
-  state.validationInProgress = false;
-  state.validationSuccessful = false;
-  state.validateError = false;
-  state.validateErrorMessage = "";
   state.redirect = false;
   state.pendingSku = {};
   state.fetchSummaryInProgress = false;
   state.fetchSummaryFailed = false;
   state.fetchSummarySuccess = false;
   state.fetchSummaryError = false;
-  state.fetchSummaryLocationError = false;
+  // state.fetchErrorMessageCount = 0;
   state.fetchSummaryErrorMessage = "";
   return state;
 };
@@ -225,35 +221,40 @@ let replaceProductInfo = (state: State, skus: Array<Sku>): State => {
 };
 
 let setUnAvailableProducts = (state: State, skus: Array<number>): State => {
+  console.log("[handleSummarySuccess 1.1]", skus);
   for (let id of skus) {
+    console.log("[handleSummarySuccess] ", id, state.products);
     state.products[id.toString()].available = false;
   }
+  console.log("[handleSummarySuccess 0.1]");
   return state;
 };
 
-let validateCart = (state: State, data: Object): State => {
-  if (data.unavailableItems !== undefined) {
-    state = setUnAvailableProducts(state, data.unAvailableItems);
-  } else if (data.unavail_items !== undefined) {
-    state = setUnAvailableProducts(state, data.unavail_items);
-  }
+// let validateCart = (state: State, data: Object): State => {
+//   if (data.unavailableItems !== undefined) {
+//     state = setUnAvailableProducts(state, data.unAvailableItems);
+//   } else if (data.unavail_items !== undefined) {
+//     state = setUnAvailableProducts(state, data.unavail_items);
+//   }
 
-  state.validationFailure = false;
-  state.retailer.description = data.delivery_message;
-  if (data.statusCode === 0) {
-    state = replaceProductInfo(state, data.products);
-    state.validateError = false;
-    state.validateErrorMessage = "";
-    state.validationSuccessful = true;
-    state.validationInProgress = false;
-  } else {
-    state.validateError = true;
-    state.validateErrorMessage = data.message;
-    state.validationSuccessful = false;
-    state.validationInProgress = false;
-  }
-  return state;
-};
+//   state.validationFailure = false;
+//   state.retailer.description = data.delivery_message;
+//   if (data.statusCode === 0) {
+//     console.log("validationIF", data);
+//     state = replaceProductInfo(state, data.products);
+//     state.validateError = false;
+//     state.validateErrorMessage = "";
+//     state.validationSuccessful = true;
+//     state.validationInProgress = false;
+//   } else {
+//     console.log("validationError", data);
+//     state.validateError = true;
+//     state.validateErrorMessage = data.message;
+//     state.validationSuccessful = false;
+//     state.validationInProgress = false;
+//   }
+//   return state;
+// };
 
 const cartTotal = (oldS: State): number => {
   let total: number = 0;
@@ -264,48 +265,50 @@ const cartTotal = (oldS: State): number => {
 };
 
 const handleSummarySuccess = (state: State, data: Object): State => {
+  console.log("[11111]");
+  if (data.unavailableItems != null) {
+    console.log("[22222]");
+    state = setUnAvailableProducts(state, data.unavailableItems);
+  } else if (data.unavail_items != null) {
+    console.log("[3333]");
+    state = setUnAvailableProducts(state, data.unavail_items);
+  }
+  console.log("[handleSummarySuccess]", data);
+
   if (data.statusCode === 0) {
     //success
-    state = {
-      ...state,
-      summaryDetails: data.summary_details,
-      fetchSummaryInProgress: false,
-      fetchSummaryFailed: false,
-      fetchSummarySuccess: true,
-      fetchSummaryError: false,
-      fetchSummaryLocationError: false,
-      fetchSummaryErrorMessage: "",
-      cartUpdate: false,
-    };
-  } else if (data.statusCode === 30003) {
-    //location error
-    state = {
-      ...state,
-      summaryDetails: data.summary_details,
-      fetchSummaryInProgress: false,
-      fetchSummaryFailed: false,
-      fetchSummarySuccess: true,
-      fetchSummaryError: false,
-      fetchSummaryLocationError: true,
-      fetchSummaryErrorMessage: data.message,
-      cartUpdate: false,
-    };
+    state.summaryDetails = data.summary_details;
+    state.fetchSummaryInProgress = false;
+    state.fetchSummaryFailed = false;
+    state.fetchSummarySuccess = true;
+    state.fetchSummaryError = false;
+    state.fetchSummaryErrorMessage = "";
+    state.fetchErrorMessageCount = 0;
+    state.cartUpdate = false;
   } else {
     //summary error
-    state = {
-      ...state,
-      summaryDetails: data.summary_details,
-      fetchSummaryInProgress: false,
-      fetchSummaryFailed: false,
-      fetchSummarySuccess: true,
-      fetchSummaryError: true,
-      fetchSummaryLocationError: false,
-      fetchSummaryErrorMessage: data.message,
-      cartUpdate: false,
-    };
+    state.summaryDetails = data.summary_details;
+    state.fetchSummaryInProgress = false;
+    state.fetchSummaryFailed = false;
+    state.fetchSummarySuccess = true;
+    state.fetchSummaryError = true;
+    state.fetchSummaryErrorMessage = data.message;
+    state.cartUpdate = false;
   }
   return state;
 };
+
+function fnUpdateCloseValidation(state: State): State {
+  console.log("fnUpdateCloseValidation");
+  console.log(state);
+  return {
+    ...state,
+    fetchSummaryError: false,
+    fetchErrorMessageCount: state.fetchErrorMessageCount + 1,
+    fetchSummaryErrorMessage: "",
+  }
+}
+
 
 const cartReducer = createReducer(initialState(), {
   [addSkuToCart]: (state: State, e: Object) => {
@@ -363,14 +366,9 @@ const cartReducer = createReducer(initialState(), {
     return void handleSummarySuccess(state, e.payload);
   },
 
-  [closeValidationErrorMessage]: (state: State): State => {
-    return {
-      ...state,
-      validationFailure: false,
-      validationSuccessful: false,
-      validationInProgress: false,
-      validateError: false,
-    };
+  [closeSummaryAlert]: (state: State): State => {
+    state.fetchErrorMessageCount = 1;
+    return state;
   },
 
   [clearCartAndAdd]: (state: State) => {
