@@ -50,8 +50,8 @@ const mapDispatchToProps = (dispatch) => {
     jpUpiConf: (ps) => dispatch(jpUpiConf(ps)),
     jpSavedCardsConf: (ps, index) => dispatch(jpSavedCardsConf(ps, index)),
     jpNewCardConf: (ps) => dispatch(jpNewCardConf(ps)),
-    jpNetBankingConf: (ps) => dispatch(jpNetBankingConf(ps)),
-    jpWalletConf: (ps) => dispatch(jpWalletConf(ps)),
+    jpNetBankingConf: (ps, index) => dispatch(jpNetBankingConf(ps, index)),
+    jpWalletConf: (ps, index) => dispatch(jpWalletConf(ps, index)),
     resetPaymentOnUnmount: (ps) => dispatch(resetPaymentOnUnmount(ps)),
     resetUPI: (ps) => dispatch(resetUPI(ps)),
     resetVerifyUPIPaymentOnUnmount: (ps) =>

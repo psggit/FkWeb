@@ -22,10 +22,10 @@ const errorHandler = () => {
   };
 };
 
-export const jpWalletConf = (JusPay) => {
+export const jpWalletConf = (JusPay, index) => {
   return () => {
     return JusPay.Setup({
-      payment_form: "#wallet_payment_form",
+      payment_form: "#wallet_payment_form" + index,
       success_handler: successHandler,
       error_handler: errorHandler,
       styles: {

@@ -22,10 +22,10 @@ const errorHandler = () => {
   };
 };
 
-export const jpNetBankingConf = (JusPay) => {
+export const jpNetBankingConf = (JusPay, index) => {
   return () => {
     return JusPay.Setup({
-      payment_form: "#nb_payment_form",
+      payment_form: "#nb_payment_form" + index,
       success_handler: successHandler,
       error_handler: errorHandler,
       styles: {
