@@ -3,7 +3,7 @@ import "../style.scss";
 import PropTypes from "prop-types";
 
 let juspay_form;
-const walletDisplayCount = 3;
+const walletDisplayCount = 4;
 
 JpWalletComponent.propTypes = {
   jpWalletConf: PropTypes.func,

@@ -4,7 +4,7 @@ import { JpWalletComponent } from "./JpWalletComponent";
 import "../style.scss";
 
 let juspay_form = [];
-const walletDisplayCount = 5;
+const walletDisplayCount = 4;
 
 WalletFormComponent.propTypes = {
   index: PropTypes.number,
