@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { BottomNavigationContainer } from "../common/bottomNavigation";
+import { Redirect } from "react-router-dom";
 import {
   BottomNextComponent,
   CartContentComponent,
@@ -88,7 +89,10 @@ function SearchComponent(props) {
       );
     }
   }
-
+  //
+  if (!props.selectedAddress) {
+    return <Redirect to="/stateCity" />;
+  }
   return (
     <>
       <HeaderComponent title="Search Drinks"></HeaderComponent>

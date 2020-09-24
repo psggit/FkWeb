@@ -127,6 +127,10 @@ function App() {
       <Router>
         <Switch>
           <Route
+            path="/user/login/:redirect"
+            component={(props) => <LoginContainer {...props} />}
+          />
+          <Route
             path="/user/login"
             component={(props) => <LoginContainer {...props} />}
           />
@@ -235,6 +239,7 @@ function App() {
             path="/payment"
             component={(props) => <ProcessPaymentContainer {...props} />}
           />
+          <Route path="/tandc/:redirect" component={AgreeAndContinueContainer} />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
       </Router>

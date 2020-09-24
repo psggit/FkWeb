@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 import { HeaderComponent } from "../common/toolbar";
 import "./style.scss";
 import { OrderItem } from "./components";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { BottomNavigationContainer } from "../common/bottomNavigation";
 import { SplashLoadingComponent } from "../common/splashLoading";
@@ -13,6 +13,7 @@ MyOrdersComponent.propTypes = {
   fetchOrderInProgress: PropTypes.bool,
   fetchOrderFailed: PropTypes.bool,
   fetchOrderSuccess: PropTypes.bool,
+  loginSuccess: PropTypes.bool,
   offset: PropTypes.number,
   orders: PropTypes.array,
   getMyOrdersFunc: PropTypes.func,
@@ -61,37 +62,41 @@ function MyOrdersComponent(props) {
     };
   }, []);
 
-  return (
-    <>
-      <HeaderComponent title="My Orders" />
-      {props.fetchOrderInProgress && (
-        <SplashLoadingComponent
-          motion={true}
-          icon={drinksIcon}
-          text="Fetching Past Orders"
-        />
-      )}
-      <div className="page-container">
-        <HelpComponent launchHelp={() => launchHelp()} />
-        <div className="past-orders">Past Orders</div>
-        {orderItems(props)}
-        {props.orders.length === props.offset && props.orders.length != 0 && (
-          <div
-            onClick={() =>
-              props.getMyOrdersFunc({
-                offset: props.offset,
-              })
-            }
-            className="loadMore flex hcenter vcenter"
-          >
-            Load more
-          </div>
+  if (!props.loginSuccess) {
+    return <Redirect to="/user/login/my_orders" />;
+  } else {
+    return (
+      <>
+        <HeaderComponent title="My Orders" />
+        {props.fetchOrderInProgress && (
+          <SplashLoadingComponent
+            motion={true}
+            icon={drinksIcon}
+            text="Fetching Past Orders"
+          />
         )}
-      </div>
-      <div className="padding-btm" />
-      <BottomNavigationContainer />
-    </>
-  );
+        <div className="page-container">
+          <HelpComponent launchHelp={() => launchHelp()} />
+          <div className="past-orders">Past Orders</div>
+          {orderItems(props)}
+          {props.orders.length === props.offset && props.orders.length != 0 && (
+            <div
+              onClick={() =>
+                props.getMyOrdersFunc({
+                  offset: props.offset,
+                })
+              }
+              className="loadMore flex hcenter vcenter"
+            >
+              Load more
+            </div>
+          )}
+        </div>
+        <div className="padding-btm" />
+        <BottomNavigationContainer />
+      </>
+    );
+  }
 }
 
 export { MyOrdersComponent };

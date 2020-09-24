@@ -5,6 +5,7 @@ import { GetMyOrdersOperation, unMountAction } from "./duck";
 const mapStateToProps = (state) => {
   return {
     orders: state.myOrders.myOrders,
+    loginSuccess: state.login.loginSuccess,
     fetchOrderInProgress: state.myOrders.fetchOrderInProgress,
     fetchOrderFailed: state.myOrders.fetchOrderFailed,
     fetchOrderSuccess: state.myOrders.fetchOrderSuccess,

@@ -27,6 +27,7 @@ function GranTokenFailure(props) {
 LoginComponent.propTypes = {
   loginInProgress: PropTypes.bool,
   loginFailed: PropTypes.bool,
+  showTC: PropTypes.bool,
   loginSuccess: PropTypes.bool,
   guessAddressInfo: PropTypes.object,
   setDeviceGps: PropTypes.func,
@@ -68,16 +69,12 @@ function LoginComponent(props) {
   const loginInProgress = props.loginInProgress;
   const loginFailed = props.loginFailed;
   const grantTokenError = props.grantTokenError;
+  const redirect = props.redirect;
+  //
   const [flow, setFlow] = useState("");
-  //TODO: Fill these up
-  const guessedAddress = props.guessAddressInfo.address;
-  const guessAddressSuccess = props.guessAddressSuccess;
   const guessedCity = props.guessAddressInfo.city;
-  const guessedState = props.guessAddressInfo.state;
+  const showTC = props.showTC;
 
-  // const deviceGPS = props.deviceGps;
-  const deviceGPS = props.deviceGps;
-  // const deviceGPS = "13.006928,80.255516";
   const trigger =
     !grantTokenError && !(loginSuccess || loginFailed || loginInProgress);
   useEffect(() => {
@@ -95,6 +92,10 @@ function LoginComponent(props) {
         phone: props.userInfo.mobile,
         userLoginType: "fk-web",
       });
+      if (redirect) {
+        setFlow(redirect);
+        return;
+      }
       if (props.locationPermission) {
         navigator.geolocation.getCurrentPosition(
           (loc) => {
@@ -135,30 +136,42 @@ function LoginComponent(props) {
       }
     }
   }, [props.guessAddressSuccess]);
-
+  console.log(flow)
   if (props.grantTokenError) {
     return <GranTokenFailure {...props} />;
   }
-
-  if (loginInProgress) {
-    return (
-      <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
-    );
-  } else if (loginFailed) {
-    return <LFComponent login={props.login} />;
-  } else if (loginSuccess && flow != "") {
-    if (flow === "home") {
-      return <Redirect to="/home" />;
-    } else if (flow === "selectAddress") {
-      return <Redirect to="/address/select/sf" />;
-    } else if (flow === "selectState") {
-      // TODO: Find the right URL
-      return <Redirect to="/statecity/select" />;
-    } else {
-      return <div> UNKNOWN STATE</div>;
+  if (showTC) {
+    if (redirect) {
+      return <Redirect to={`/tandc/${redirect}`} />;
     }
+    return <Redirect to="/" />;
   } else {
-    return <div> </div>;
+    if (loginInProgress) {
+      return (
+        <SplashLoadingComponent
+          motion={true}
+          icon={drinksIcon}
+          text="Loading"
+        />
+      );
+    } else if (loginFailed) {
+      return <LFComponent login={props.login} />;
+    } else if (loginSuccess && flow != "") {
+      if (flow === "home") {
+        return <Redirect to="/home" />;
+      } else if (flow === "selectAddress") {
+        return <Redirect to="/address/select/sf" />;
+      } else if (flow === "my_orders") {
+        return <Redirect to="/my-orders" />;
+      } else if (flow === "selectState") {
+        // TODO: Find the right URL
+        return <Redirect to="/statecity/select" />;
+      } else {
+        return <div> UNKNOWN STATE</div>;
+      }
+    } else {
+      return <div> mYs </div>;
+    }
   }
 }
 
