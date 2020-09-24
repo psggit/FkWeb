@@ -22,7 +22,7 @@ app.use(
 app.get("/*", (_, res) => {
   res.sendFile(path.join(__dirname, "dist/index.html"), (err) => {
     if (err) {
-      res.status(500).send(err);
+      res.status(404).end();
     }
   });
 });
