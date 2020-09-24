@@ -82,5 +82,4 @@ function HomeComponent(props) {
     </>
   );
 }
-
 export { HomeComponent };
