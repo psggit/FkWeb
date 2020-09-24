@@ -15,6 +15,7 @@ app.use(httpLogger);
 app.use(
   serveStatic(path.join(__dirname, "dist/"), {
     maxAge: "30d",
+    index: false,
   })
 );
 
