@@ -176,6 +176,10 @@ CartComponent.propTypes = {
 };
 
 function CartComponent(props) {
+  //
+  if (!props.selectedAddress) {
+    return <Redirect to="/stateCity" />;
+  }
   const {
     fetchSummarySuccess,
     fetchSummaryInProgress,

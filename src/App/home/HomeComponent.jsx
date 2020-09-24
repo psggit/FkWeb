@@ -6,7 +6,7 @@ import { ChooseAddressComponent } from "./chooseAddress";
 import { BottomNavigationContainer } from "../common/bottomNavigation";
 import { CurretOrderComponent } from "./currentOrders";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { LoadingComponent } from "../common/loading";
 
 HomeComponent.propTypes = {
@@ -64,6 +64,9 @@ function HomeComponent(props) {
     props.getHomeCarouselInProgress ||
     props.retailerFetchStatus === "inProgress";
 
+  if (!props.address) {
+    return <Redirect to="/stateCity" />;
+  }
   return (
     <>
       {loading && <LoadingComponent />}

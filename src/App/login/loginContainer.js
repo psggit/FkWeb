@@ -23,6 +23,7 @@ const mapStateToProps = (state, props) => {
     grantTokenError: state.login.grantTokenError,
     grantTokenErrorMessage: state.login.grantTokenErrorMessage,
     redirect: props.match.params.redirect,
+    showTC: state.tcStore.showTC,
   };
 };
 const mapDispatchToProps = (dispatch) => {

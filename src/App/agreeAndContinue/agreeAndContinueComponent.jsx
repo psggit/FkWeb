@@ -8,11 +8,13 @@ import { AlertWithOptions } from "../common/alert";
 
 AgreeAndContinueComponent.propTypes = {
   showTC: PropTypes.bool,
+  redirect: PropTypes.string,
   selectedAddress: PropTypes.object,
 };
 
 function AgreeAndContinueComponent(props) {
   const showTC = props.showTC;
+  const redirect = props.redirect;
   let [showModal, setModal] = useState(false);
   const fnPermissionsGranted = () => {
     setModal(false);
@@ -55,14 +57,16 @@ function AgreeAndContinueComponent(props) {
   }
   return <VisitHipBarComponent />;*/
   if (FKPlatform.isPlatformAvailable()) {
+
+    const redirectURL = (!redirect) ? `/user/login/` : `/user/login/${redirect}`;
     if (showTC) {
       return <TcComponent {...props} />;
     } else if (showModal) {
       return <AlertWithOptions {...alertDetails} />;
     } else if (!showModal && props.selectedAddress !== null) {
-      return <Redirect to="/user/login/" />;
+      return <Redirect to={redirectURL} />;
     }
-    return <Redirect to="/user/login/" />;
+    return <Redirect to={redirectURL} />;
     //return <Redirect to="/statecity/select" />;
   }
   return <VisitHipBarComponent />;
