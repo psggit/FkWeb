@@ -1,6 +1,8 @@
 # fk-web
 
-Empty project.
+## TODO
+- [  ] Tracing with sentry
+
 
 ## Building and running on localhost
 
