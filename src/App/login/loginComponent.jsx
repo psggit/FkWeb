@@ -170,7 +170,7 @@ function LoginComponent(props) {
         return <div> UNKNOWN STATE</div>;
       }
     } else {
-      return <div> mYs </div>;
+      return <div> </div>;
     }
   }
 }
