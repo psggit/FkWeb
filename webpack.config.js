@@ -101,12 +101,12 @@ module.exports = (env, argv) => {
         ARGS_BUILD_ENV: ARGS_BUILD_ENV,
         ARGS_BASE_DOMAIN: ARGS_BASE_DOMAIN,
       }),
+
       //Must always be the last plugin to run
       new SentryWebpackPlugin({
         url: "https://sty.hipbar.com/",
         // sentry-cli configuration
         authToken: env.SENTRY_AUTH_TOKEN,
-        debug: true,
         org: "hipbar",
         project: "fk-web",
         // webpack specific configuration
