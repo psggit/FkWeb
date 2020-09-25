@@ -109,6 +109,7 @@ module.exports = (env, argv) => {
         authToken: env.SENTRY_AUTH_TOKEN,
         org: "hipbar",
         project: "fk-web",
+        release: env.SENTRY_RELEASE,
         // webpack specific configuration
         include: ".",
         ignore: ["node_modules", "webpack.config.js"],
