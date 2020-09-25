@@ -13,7 +13,6 @@ module.exports = (env, argv) => {
   const ARGS_SENTRY_RELEASE = JSON.stringify(env.SENTRY_RELEASE || "local");
   const ARGS_BUILD_ENV = JSON.stringify(env.BUILD_ENV || "local");
   const ARGS_BASE_DOMAIN = JSON.stringify(env.BASE_DOMAIN || "hipbar-dev.com");
-  const SENTRY_AUTH_TOKEN = JSON.stringify(env.SENTRY_AUTH_TOKEN || "");
   const config = {
     entry: ["react-hot-loader/patch", "./src/index.js"],
     output: {
@@ -106,8 +105,7 @@ module.exports = (env, argv) => {
       new SentryWebpackPlugin({
         url: "https://sty.hipbar.com/",
         // sentry-cli configuration
-        authToken:
-          "90cda9d1add24f099c57b51430fa254789c6d0f3ae6c4fc7afea5af5a5e52675",
+        authToken: env.SENTRY_AUTH_TOKEN,
         debug: true,
         org: "hipbar",
         project: "fk-web",
