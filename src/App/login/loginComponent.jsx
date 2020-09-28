@@ -72,7 +72,9 @@ function LoginComponent(props) {
   const redirect = props.redirect;
   //
   const [flow, setFlow] = useState("");
-  const guessedCity = props.guessAddressInfo.city;
+  const guessedCity = props.guessAddressInfo
+    ? props.guessAddressInfo.city
+    : null;
   const showTC = props.showTC;
 
   const trigger =
@@ -136,7 +138,7 @@ function LoginComponent(props) {
       }
     }
   }, [props.guessAddressSuccess]);
-  console.log(flow)
+  console.log(flow);
   if (props.grantTokenError) {
     return <GranTokenFailure {...props} />;
   }
