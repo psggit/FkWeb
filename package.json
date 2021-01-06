@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.5",
-    "@react-google-maps/api": "^1.9.9",
+    "@react-google-maps/api": "^2.1.0",
     "@reduxjs/toolkit": "^1.4.0",
     "@sentry/react": "^5.19.0",
     "bootstrap": "^4.5.0",
