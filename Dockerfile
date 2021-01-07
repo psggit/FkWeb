@@ -1,4 +1,4 @@
-FROM node:14.11.0-stretch
+FROM node:15.5.1-stretch
 COPY . .
 
 ARG SENTRY_ENV=dev
