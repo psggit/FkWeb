@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { IframeComponent } from "./iframe";
 import { UPIVerifyContainer } from "./payment/upiVerifyContainer";
 import { AgreeAndContinueContainer } from "./agreeAndContinue";
+import { ExternalPaymentsContainer } from "./ext-payments";
+import { PaymentStatusContainer } from "./ext-payments/verifyWebPayment/paymentStatusContainer";
 import config from "../config";
 import { Loading } from "../utils";
 
@@ -239,7 +241,22 @@ function App() {
             path="/payment"
             component={(props) => <ProcessPaymentContainer {...props} />}
           />
-          <Route path="/tandc/:redirect" component={AgreeAndContinueContainer} />
+          <Route
+            path="/order/payment/:orderId"
+            component={(props) => <ExternalPaymentsContainer {...props} />}
+          />
+          <Route
+            path="/order/payment/:orderId/new"
+            component={(props) => <ExternalPaymentsContainer {...props} />}
+          />
+          <Route
+            path="/order/webpayment/verify/:order_id"
+            component={(props) => <PaymentStatusContainer {...props} />}
+          />
+          <Route
+            path="/tandc/:redirect"
+            component={AgreeAndContinueContainer}
+          />
           <Route path="/" component={AgreeAndContinueContainer} />
         </Switch>
       </Router>

@@ -29,6 +29,7 @@ const onError = (dispatch) => {
 };
 
 const verifyPayment = (oid) => {
+  console.info("verifyPayment");
   return (dispatch) => {
     verifyPaymentAPI(
       oid,

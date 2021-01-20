@@ -4,21 +4,19 @@ import CommonHeaders from "./common";
 const URL =
   "https://api." +
   config.BASE_DOMAIN +
-  "/orderman/api/1/consumer/order/create/fk/delivery";
+  "/orderman/api/1/order/paymentamount/details/";
 
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 
-const createOrderAPI = (reqBody, process, onSuccess, onError) => {
-  console.log("createOrderAPI");
-  fetch(URL, {
-    method: "POST",
+const webPaymentAmtDetailsAPI = (reqBody, process, onSuccess, onError) => {
+  fetch(URL + reqBody, {
+    method: "GET",
     credentials: "include",
     headers: headers,
-    body: JSON.stringify(reqBody),
   })
     .then((res) => process(res))
     .then((data) => onSuccess(data))
     .catch((err) => onError(err));
 };
 
-export { createOrderAPI };
+export { webPaymentAmtDetailsAPI };

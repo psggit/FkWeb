@@ -57,8 +57,7 @@ function AgreeAndContinueComponent(props) {
   }
   return <VisitHipBarComponent />;*/
   if (FKPlatform.isPlatformAvailable()) {
-
-    const redirectURL = (!redirect) ? `/user/login/` : `/user/login/${redirect}`;
+    const redirectURL = !redirect ? `/user/login/` : `/user/login/${redirect}`;
     if (showTC) {
       return <TcComponent {...props} />;
     } else if (showModal) {

@@ -169,7 +169,11 @@ function PaymentOptions(props) {
           )}
 
           {payment.is_cards_enabled && (
-            <CreditDebitCardsComponent {...props} jpLoaded={jpLoaded} />
+            <CreditDebitCardsComponent
+              {...props}
+              jpLoaded={jpLoaded}
+              linkto="/payment/options/card/new"
+            />
           )}
           {payment.is_jp_wallets_enabled && (
             <WalletComponent {...props} jpLoaded={jpLoaded} />

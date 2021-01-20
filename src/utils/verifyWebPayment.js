@@ -1,15 +1,13 @@
-import config from "../config";
 import CommonHeaders from "./common";
-
+import config from "../config";
 const URL =
   "https://api." +
   config.BASE_DOMAIN +
-  "/orderman/api/1/consumer/order/create/fk/delivery";
+  "/orderman/api/1/order/modify/status/check";
 
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 
-const createOrderAPI = (reqBody, process, onSuccess, onError) => {
-  console.log("createOrderAPI");
+function verifyWebPaymentAPI(reqBody, process, onSuccess, onError) {
   fetch(URL, {
     method: "POST",
     credentials: "include",
@@ -19,6 +17,6 @@ const createOrderAPI = (reqBody, process, onSuccess, onError) => {
     .then((res) => process(res))
     .then((data) => onSuccess(data))
     .catch((err) => onError(err));
-};
+}
 
-export { createOrderAPI };
+export { verifyWebPaymentAPI };

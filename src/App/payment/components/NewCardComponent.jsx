@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import "../style.scss";
 import { nextIcon, newCardIcon } from "../../../assets/images";
 
-function NewCardComponent() {
+function NewCardComponent(props) {
   return (
-    <Link to="/payment/options/card/new">
+    <Link to={props.linkto}>
       <div className="new-card-container">
         <img src={newCardIcon} className="new-card-image" />
         <div className="new-card-msg">Add card & proceed to payment</div>

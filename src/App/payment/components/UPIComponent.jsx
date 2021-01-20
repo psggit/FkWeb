@@ -40,6 +40,7 @@ function UPIComponent(props) {
   };
 
   function chooseVpa(vpa) {
+    console.log("[chooseVpa]");
     props.createUPIPayment(props, vpa.trim());
   }
 

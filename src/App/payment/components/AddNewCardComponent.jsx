@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import "../style.scss";
 import { addAddressIcon } from "../../../assets/images";
 
-function AddNewCardComponent() {
+function AddNewCardComponent(props) {
   return (
-    <Link to={"/payment/options/card/new"}>
+    <Link to={props.linkto}>
       <div className="add-new-container" onClick={onclick}>
         <div className="label">Add New Card</div>
         <img className="image" src={addAddressIcon} />

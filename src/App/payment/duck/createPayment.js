@@ -4,7 +4,7 @@ import {
   createPaymentFailed,
 } from "./actions";
 
-import { createPaymentAPI } from "../../../utils";
+import { createPaymentAPI, createWebPaymentAPI } from "../../../utils";
 const reqBodyFromState = (paymentState) => {
   let products = [];
   for (let prod of Object.values(paymentState.products)) {
@@ -24,6 +24,19 @@ const reqBodyFromState = (paymentState) => {
     retailer_id: paymentState.retailer.id,
     order_id: paymentState.payment.orderDetails.order_id,
     amount: paymentState.payment.orderDetails.balance,
+  };
+};
+
+const reqBodyFromWeb = (state) => {
+  // let orderId = state.order_id.substr(0, state.order_id.length - 2);
+  return {
+    device_type: "web",
+    mode: "NB/UPI/card",
+    city_id: state.city_id,
+    state_id: state.state_id,
+    retailer_id: state.retailer_id,
+    order_id: state.order_id,
+    amount: state.amount,
   };
 };
 
@@ -54,15 +67,29 @@ const onError = (dispatch) => {
 };
 
 const createPayment = (paymentState) => {
-  let reqBody = reqBodyFromState(paymentState);
+  let reqBody = {};
+  if (localStorage.getItem("mode") === "web") {
+    reqBody = reqBodyFromWeb(paymentState);
+  } else {
+    reqBody = reqBodyFromState(paymentState);
+  }
   return (dispatch) => {
     dispatch(createPaymentInProgress());
-    createPaymentAPI(
-      reqBody,
-      processResponse(dispatch),
-      onSuccess(dispatch),
-      onError(dispatch)
-    );
+    if (localStorage.getItem("mode") === "web") {
+      createWebPaymentAPI(
+        reqBody,
+        processResponse(dispatch),
+        onSuccess(dispatch),
+        onError(dispatch)
+      );
+    } else {
+      createPaymentAPI(
+        reqBody,
+        processResponse(dispatch),
+        onSuccess(dispatch),
+        onError(dispatch)
+      );
+    }
   };
 };
 

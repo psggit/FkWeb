@@ -9,6 +9,7 @@ const URL =
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 
 const fetchSummaryAPI = (reqBody, process, onSuccess, onError) => {
+  console.log("fetchSummaryAPI");
   fetch(URL, {
     method: "POST",
     credentials: "include",

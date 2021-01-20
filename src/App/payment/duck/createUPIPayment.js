@@ -19,6 +19,24 @@ const reqBodyFromState = (paymentState, vpa) => {
   };
 };
 
+const reqBodyFromWeb = (state, vpa) => {
+  // console.log("state ", state);
+  let paymentState = state.webPayment.summaryDetails;
+  let orderId = paymentState.order_id.substr(
+    0,
+    paymentState.order_id.length - 2
+  );
+  return {
+    device_type: "web",
+    amount: paymentState.amount,
+    vpa: vpa,
+    order_id: orderId,
+    city_id: paymentState.city_id,
+    state_id: paymentState.state_id,
+    retailer_id: paymentState.retailer_id,
+  };
+};
+
 const processResponse = () => {
   return (res) => {
     if (res.ok) {
@@ -45,7 +63,15 @@ const onError = (dispatch) => {
 };
 
 const createUPIPayment = (paymentState, vpa) => {
-  let reqBody = reqBodyFromState(paymentState, vpa);
+  // let reqBody = reqBodyFromState(paymentState, vpa);
+  console.log("[createUPIPayment]");
+  let reqBody = {};
+  if (localStorage.getItem("mode") === "web") {
+    reqBody = reqBodyFromWeb(paymentState, vpa);
+  } else {
+    reqBody = reqBodyFromState(paymentState, vpa);
+  }
+  console.log("[createUPIPayment] ", reqBody);
   return (dispatch) => {
     dispatch(createUPIPaymentInProgress());
     createUPIOrderAPI(

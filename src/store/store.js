@@ -18,6 +18,7 @@ import { orderDetailReducer } from "../App/order";
 import { stateCityReducer } from "../App/stateCity";
 import { summaryReducer } from "../App/summary";
 import { paymentReducer } from "../App/payment";
+import { webPayReducer } from "../App/ext-payments";
 
 import { localStorageManager } from "./localStorageManager";
 
@@ -39,6 +40,7 @@ const store = configureStore({
     stateCity: stateCityReducer,
     summaryDetails: summaryReducer,
     payment: paymentReducer,
+    webPayments: webPayReducer,
   }),
 
   middleware: [thunk, localStorageManager],

@@ -38,3 +38,5 @@ export const exitIcon = require("./exit.svg");
 export const playStore = require("./play_store.svg");
 export const appStore = require("./app_store.svg");
 export const appImage = require("./app_img.svg");
+export const crossRed = require("./crossRed.svg");
+export const successIconOrange = require("./successIcon.svg");

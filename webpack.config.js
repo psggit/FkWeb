@@ -13,6 +13,45 @@ module.exports = (env, argv) => {
   const ARGS_SENTRY_RELEASE = JSON.stringify(env.SENTRY_RELEASE || "local");
   const ARGS_BUILD_ENV = JSON.stringify(env.BUILD_ENV || "local");
   const ARGS_BASE_DOMAIN = JSON.stringify(env.BASE_DOMAIN || "hipbar-dev.com");
+  var plugins = [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].css",
+      chunkFilename: "[id].[contenthash].css",
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "src/index.html" }],
+    }),
+    new HtmlWebpackPlugin({
+      template: "src/index.html",
+      filename: "index.html",
+    }),
+    new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      ARGS_SENTRY_ENV: ARGS_SENTRY_ENV,
+      ARGS_SENTRY_RELEASE: ARGS_SENTRY_RELEASE,
+      ARGS_BUILD_ENV: ARGS_BUILD_ENV,
+      ARGS_BASE_DOMAIN: ARGS_BASE_DOMAIN,
+    }),
+  ];
+  // Removing Sentry on Hot Reload
+  if (!argv.hot) {
+    //Must always be the last plugin to run
+    plugins.push(
+      new SentryWebpackPlugin({
+        url: "https://sty.hipbar.com/",
+        // sentry-cli configuration
+        authToken: env.SENTRY_AUTH_TOKEN,
+        org: "hipbar",
+        project: "fk-web",
+        release: env.SENTRY_RELEASE,
+        // webpack specific configuration
+        include: ".",
+        ignore: ["node_modules", "webpack.config.js"],
+      })
+    );
+  }
   const config = {
     entry: ["react-hot-loader/patch", "./src/index.js"],
     output: {
@@ -80,41 +119,7 @@ module.exports = (env, argv) => {
         index: "/",
       },
     },
-    plugins: [
-      new MiniCssExtractPlugin({
-        // Options similar to the same options in webpackOptions.output
-        // both options are optional
-        filename: "[name].css",
-        chunkFilename: "[id].[contenthash].css",
-      }),
-      new CopyPlugin({
-        patterns: [{ from: "src/index.html" }],
-      }),
-      new HtmlWebpackPlugin({
-        template: "src/index.html",
-        filename: "index.html",
-      }),
-      new CleanWebpackPlugin(),
-      new webpack.DefinePlugin({
-        ARGS_SENTRY_ENV: ARGS_SENTRY_ENV,
-        ARGS_SENTRY_RELEASE: ARGS_SENTRY_RELEASE,
-        ARGS_BUILD_ENV: ARGS_BUILD_ENV,
-        ARGS_BASE_DOMAIN: ARGS_BASE_DOMAIN,
-      }),
-
-      //Must always be the last plugin to run
-      new SentryWebpackPlugin({
-        url: "https://sty.hipbar.com/",
-        // sentry-cli configuration
-        authToken: env.SENTRY_AUTH_TOKEN,
-        org: "hipbar",
-        project: "fk-web",
-        release: env.SENTRY_RELEASE,
-        // webpack specific configuration
-        include: ".",
-        ignore: ["node_modules", "webpack.config.js"],
-      }),
-    ],
+    plugins: plugins,
     optimization: {
       minimize: true,
       minimizer: [

@@ -16,16 +16,17 @@ CreditDebitCardsComponent.propTypes = {
 function CreditDebitCardsComponent(props) {
   const payment = props.payment.paymentOptionsDetails;
   const jpLoaded = props.jpLoaded;
+  const linkto = props.linkto;
 
   return (
     <div className="card-container">
       <div className="card-title">Credit/Debit Cards</div>
       {payment.cards.length === 0 ? (
-        <NewCardComponent />
+        <NewCardComponent linkto={linkto} />
       ) : (
         <div>
           <SavedCardComponent {...props} jpLoaded={jpLoaded} />
-          <AddNewCardComponent />
+          <AddNewCardComponent linkto={linkto}/>
         </div>
       )}
     </div>

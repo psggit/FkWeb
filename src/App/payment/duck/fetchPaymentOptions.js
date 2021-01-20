@@ -14,6 +14,14 @@ const reqBodyFromState = (paymentState) => {
   };
 };
 
+const reqBodyFromWeb = (state) => {
+  return {
+    city_id: state.city_id,
+    state_id: state.state_id,
+    retailer_id: state.retailer_id,
+  };
+};
+
 const processResponse = () => {
   return (res) => {
     if (res.ok) {
@@ -41,7 +49,14 @@ const onError = (dispatch) => {
 };
 
 export const fetchPaymentOptions = (paymentState) => {
-  let reqBody = reqBodyFromState(paymentState);
+  console.log("[fetchPaymentOptions]");
+  let reqBody = {};
+  if (localStorage.getItem("mode") === "web") {
+    reqBody = reqBodyFromWeb(paymentState);
+  } else {
+    reqBody = reqBodyFromState(paymentState);
+  }
+  console.log("[fetchPaymentOptions]", reqBody);
   return (dispatch) => {
     dispatch(fetchPaymentOptionsInProgress());
     fetchPaymentOptionsAPI(

@@ -9,6 +9,7 @@ const URL =
 const headers = { ...CommonHeaders, "Content-Type": "application/json" };
 
 const finalizeOrderAPI = (reqBody, process, onSuccess, onError) => {
+  console.log("finalizeOrderAPI");
   fetch(URL, {
     method: "POST",
     credentials: "include",

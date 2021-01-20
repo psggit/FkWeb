@@ -104,6 +104,7 @@ let triggerVerifyPayment = (props, oid, txn_id) => {
       payment.paymentRetryCount,
       props.verifyPaymentInProgress,
       () => {
+        console.info("triggerVerifyPayment");
         props.verifyPayment(txn_id);
       },
       props.verifyPaymentError
@@ -172,9 +173,11 @@ function VerifyComponent(props) {
   useEffect(() => {
     triggerVerifyPayment(props, oid, txn_id);
     triggerPlaceOrder(props, oid, txn_id);
+    // alert("triggerVerifyPayment");
   });
 
   if (payment.verifyPaymentInProgress || payment.placeOrderInProgress) {
+    console.log("payment verify in progress");
     return (
       <SplashLoadingComponent motion={true} icon={drinksIcon} text="Loading" />
     );
