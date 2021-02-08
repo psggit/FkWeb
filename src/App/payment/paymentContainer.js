@@ -35,6 +35,10 @@ const mapStateToProps = (state) => {
     products: state.cart.products,
     selectedAddress: state.addressStore.selectedAddress,
     payment: state.payment,
+    promoName:
+      state.voucherDetails.searchVoucherData !== null
+        ? state.voucherDetails.searchVoucherData.data[0].value
+        : null,
     //summaryDetails: state.summaryDetails,
   };
 };

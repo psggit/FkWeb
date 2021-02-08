@@ -22,6 +22,7 @@ const reqBodyFromState = (paymentState) => {
     products: products,
     is_validation: false,
     order_type: "delivery",
+    promo_code: paymentState.promoName,
   };
 };
 

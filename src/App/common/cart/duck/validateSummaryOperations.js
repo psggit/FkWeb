@@ -15,15 +15,39 @@ const reqBodyFromState = (summaryState) => {
     };
     products.push(p);
   }
-  return {
-    address_id: summaryState.selectedAddress.address_id,
-    city_id: summaryState.selectedAddress.city.id,
-    state_id: summaryState.selectedAddress.state.id,
-    retailer_id: summaryState.retailer.id,
-    products: products,
-    is_validation: false,
-    order_type: "delivery",
-  };
+  if (summaryState.fetchSummaryError === true) {
+    return {
+      address_id: summaryState.selectedAddress.address_id,
+      city_id: summaryState.selectedAddress.city.id,
+      state_id: summaryState.selectedAddress.state.id,
+      retailer_id: summaryState.retailer.id,
+      products: products,
+      is_validation: false,
+      order_type: "delivery",
+      promo_code: null,
+    };
+  } else {
+    return {
+      address_id: summaryState.selectedAddress.address_id,
+      city_id: summaryState.selectedAddress.city.id,
+      state_id: summaryState.selectedAddress.state.id,
+      retailer_id: summaryState.retailer.id,
+      products: products,
+      is_validation: false,
+      order_type: "delivery",
+      promo_code: summaryState.promoName,
+    };
+  }
+  // return {
+  //   address_id: summaryState.selectedAddress.address_id,
+  //   city_id: summaryState.selectedAddress.city.id,
+  //   state_id: summaryState.selectedAddress.state.id,
+  //   retailer_id: summaryState.retailer.id,
+  //   products: products,
+  //   is_validation: false,
+  //   order_type: "delivery",
+  //   promo_code: summaryState.promoName,
+  // };
 };
 
 const processResponse = () => {

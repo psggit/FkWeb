@@ -18,6 +18,7 @@ import { orderDetailReducer } from "../App/order";
 import { stateCityReducer } from "../App/stateCity";
 import { summaryReducer } from "../App/summary";
 import { paymentReducer } from "../App/payment";
+import { voucherCodesReducer } from "../App/voucherCode";
 import { webPayReducer } from "../App/ext-payments";
 
 import { localStorageManager } from "./localStorageManager";
@@ -40,6 +41,7 @@ const store = configureStore({
     stateCity: stateCityReducer,
     summaryDetails: summaryReducer,
     payment: paymentReducer,
+    voucherDetails: voucherCodesReducer,
     webPayments: webPayReducer,
   }),
 

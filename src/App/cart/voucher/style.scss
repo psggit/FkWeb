@@ -1,0 +1,46 @@
+@import "../../../colors.scss";
+
+.voucher-main {
+  width: 100%;
+  background-color: $container-bg;
+  padding: 18px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 24px;
+
+  .section-1 {
+    display: flex;
+    .apply-promo {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    color: $primary-color;
+  }
+  .applied-promo {
+    .promo-name {
+      font-size: 12px;
+      line-height: 20px;
+    }
+    .promo-message {
+      font-size: 10px;
+      line-height: 12px;
+      font-weight: 400;
+      color: #5F5F6E;;
+    }
+  }
+  .promo {
+    margin-right: 18px;
+  }
+  }
+}
+  .cashback-message {
+    font-size: 10px;
+    line-height: 12px;
+    color: $edit-color;
+    margin-top: 10px;
+  }

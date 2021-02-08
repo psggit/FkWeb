@@ -29,6 +29,8 @@ export { userStatusAPI } from "./userStatus";
 export { Loading } from "./simpleLoadable";
 export { createUPIOrderAPI } from "./createUPIOrder";
 export { createCollectRequestAPI } from "./createCollectRequest";
+export { fetchAvailVoucherCodeAPI } from "./fetchAvailVoucherCode";
+export { searchVoucherCodeAPI } from "./searchVoucherCode";
 export { webPaymentAmtDetailsAPI } from "./webPaymentAmtDetails";
 export { verifyWebPaymentAPI } from "./verifyWebPayment";
 export { createWebPaymentAPI } from "./createWebPayment";

@@ -11,6 +11,8 @@ import { ExternalPaymentsContainer } from "./ext-payments";
 import { PaymentStatusContainer } from "./ext-payments/verifyWebPayment/paymentStatusContainer";
 import config from "../config";
 import { Loading } from "../utils";
+import VoucherCodeContainer from "./voucherCode/VoucherCodeContainer";
+import VoucherTerms from "./voucherCode/VoucherTerms";
 
 const OrderInfoContainer = Loadable({
   loader: () =>
@@ -240,6 +242,14 @@ function App() {
           <Route
             path="/payment"
             component={(props) => <ProcessPaymentContainer {...props} />}
+          />
+          <Route
+            path="/vouchers"
+            component={(props) => <VoucherCodeContainer {...props} />}
+          />
+          <Route
+            path="/voucher/terms"
+            component={(props) => <VoucherTerms {...props} />}
           />
           <Route
             path="/order/payment/:orderId"

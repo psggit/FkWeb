@@ -1,0 +1,1 @@
+export { CartVoucherComponent } from "./CartVoucherComponent";

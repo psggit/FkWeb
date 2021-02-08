@@ -9,6 +9,7 @@ import {
   resetOnUnmount,
   fetchSummary,
 } from "../common/cart";
+import { resetPromo } from "../voucherCode/duck/action";
 
 const mapStateToProps = (state, props) => {
   return {
@@ -26,6 +27,10 @@ const mapStateToProps = (state, props) => {
     selectedAddress: state.addressStore.selectedAddress,
     cartUpdate: state.cart.cartUpdate,
     redirect: props.match.params.redirect,
+    promoName:
+      state.voucherDetails.searchVoucherData !== null
+        ? state.voucherDetails.searchVoucherData.data[0].value
+        : null,
   };
 };
 
@@ -37,6 +42,7 @@ const mapDispatchToProps = (dispatch) => {
     closeSummaryAlert: () => dispatch(closeSummaryAlert()),
     resetOnUnmount: () => dispatch(resetOnUnmount()),
     fetchSummary: (ss) => dispatch(fetchSummary(ss)),
+    resetPromo: () => dispatch(resetPromo()),
   };
 };
 

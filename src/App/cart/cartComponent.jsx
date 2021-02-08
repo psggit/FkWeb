@@ -14,6 +14,7 @@ import { BottomNavigationContainer } from "../common/bottomNavigation";
 import { OrderSummaryComponent } from "../summary/components";
 import { BottomAddressComponent } from "../address/components";
 import { LoadingComponent } from "../common/loading";
+import { CartVoucherComponent } from "./voucher";
 
 RetryValidationComponent.propTypes = {
   products: PropTypes.object,
@@ -195,6 +196,12 @@ function CartComponent(props) {
   );
 
   useEffect(() => {
+    if(props.fetchSummaryError === true) {
+      props.resetPromo();
+    }
+  },[]);
+
+  useEffect(() => {
     if (trigger) {
       props.fetchSummary(props);
       // props.closeValidationErrorMessage();
@@ -213,8 +220,9 @@ function CartComponent(props) {
   }, []);
 
   useEffect(() => {
+    props.fetchSummary(props)
     console.log("[PROPS]", props);
-  });
+  },[]);
 
   const history = useHistory();
   let isEmpty = props.isEmpty;
@@ -249,6 +257,7 @@ function CartComponent(props) {
         <div className="padding-24">
           <CartHeaderComponent {...props} />
           <CartItems {...props} />
+          <CartVoucherComponent {...props} />
           {fetchSummaryInProgress && <LoadingComponent />}
           {fetchSummaryError && fetchErrorMessageCount === 0 && (
             <SummaryFailedComponent {...props} />

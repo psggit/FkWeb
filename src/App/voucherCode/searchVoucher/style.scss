@@ -1,0 +1,33 @@
+@import "../../../colors.scss";
+.voucher-text-container {
+  display:flex;
+  flex-direction:row;
+  align-items: baseline;
+  border-bottom: 1px solid #5f5f6e;
+}
+
+.voucher-code {
+ flex-grow:2;
+}
+
+#apply {
+  // border-bottom: .5px solid #d1d2dd;
+  //border-bottom:  1px solid #2C2C33;
+ // border-bottom: .65px solid #979797;
+  padding: 6.5px;
+  cursor: pointer;
+}
+
+.disabled {
+  color: #2C2C33;
+}
+
+.active {
+  color:$orange-color;
+}
+
+#voucherCode {
+  border: none;
+}
+
+
