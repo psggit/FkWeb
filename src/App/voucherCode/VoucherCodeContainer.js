@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { VoucherCode } from "./VoucherCode";
-import { voucherCode } from "./availableVoucher/mock-data";
 import { fetchAvailableVoucher, searchVoucherCode } from "./duck/operations";
 import { resetOnUnmount, resetPromo } from "./duck/action";
 import { fetchSummary } from "../common/cart";
@@ -10,7 +9,6 @@ const mapStateToProps = (state) => {
     //products: state.cart,
     products: state.cart.products,
     selectedAddress: state.addressStore.selectedAddress,
-    voucherList: voucherCode,
     voucherData: state.voucherDetails.availableVoucherList,
     searchVoucherFailed: state.voucherDetails.searchVoucherFailed,
     searchVoucherSuccess: state.voucherDetails.searchVoucherSuccess,
