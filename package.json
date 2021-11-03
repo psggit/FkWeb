@@ -20,7 +20,7 @@
     "@babel/runtime": "^7.12.5",
     "@react-google-maps/api": "^2.1.0",
     "@reduxjs/toolkit": "^1.5.0",
-    "@sentry/react": "^5.29.2",
+    "@sentry/react": "^6.14.0",
     "bootstrap": "^4.5.3",
     "fk-platform-sdk": "^1.0.18",
     "node-forge": "^0.10.0",
