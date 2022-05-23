@@ -1022,12 +1022,20 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@googlemaps/js-api-loader@1.11.1":
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.11.1.tgz#b7f02c04d8d8602fb4bd873b03685fccefce1c6f"
-  integrity sha512-2ug4uBu0onRXTAo7Yxkay5N7pdNIz3XpTElMTLdCtEfQDxikbjeR6GS8atVhblX+ubFBNlXvDzz7VtuXv0vMRQ==
+"@googlemaps/js-api-loader@1.14.3":
+  version "1.14.3"
+  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.14.3.tgz#d7a161cd547be04ad46a1cb176e6c2647f6d74a7"
+  integrity sha512-6iIb+qpGgQpgIHmIFO44WhE1rDUxPVHuezNFL30wRJnkvhwFm94tD291UvNg9L05hLDSoL16jd0lbqqmdy4C5g==
   dependencies:
     fast-deep-equal "^3.1.3"
+
+"@googlemaps/markerclusterer@2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@googlemaps/markerclusterer/-/markerclusterer-2.0.7.tgz#de27b9853fafa58c30420b82a9bb9d28a0de0ee7"
+  integrity sha512-/xADL31ERrNoVsF+O2A+H+obxOki4DHPQkU/STS5gFG6ZZVpvNV4WLisW2aOlOsH3rUXSq3MFjqFOEDXSQcvog==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    supercluster "^7.1.3"
 
 "@hapi/hoek@^9.0.0":
   version "9.1.0"
@@ -1303,25 +1311,27 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.5.2.tgz#d3217d5f630766c0c92fbd55cf285ba64de0578b"
   integrity sha512-tVkIU9JQw5fYPxLQgok/a7I6J1eEZ79svwQGpe2mb3jlVsPADOleefOnQBiS/takK7jQuNeswCUicMH1VWVziA==
 
-"@react-google-maps/api@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@react-google-maps/api/-/api-2.1.0.tgz#b62f8cf5aa59f166fffb5285d9549a42bcc84e0b"
-  integrity sha512-lpN6gzLeSoERbgSzgw5ZC8JN0QFJZsSJs8newntQVn5A56mhdSY0BVwdLKXEWIIOTTv1WDimAgWB0seagcLymg==
+"@react-google-maps/api@^2.11.8":
+  version "2.11.8"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/api/-/api-2.11.8.tgz#b8cdde7765546b145f18f39030d23a2115fb87b6"
+  integrity sha512-Tf/BQ6deNQaYeziL9cysbwO90TJKU6GF6VMu0GlyGRO90Yesty4WJnnqM5a8Hdk9bmMYtQCqZwmrtjhWE9ql8Q==
   dependencies:
-    "@googlemaps/js-api-loader" "1.11.1"
-    "@react-google-maps/infobox" "2.1.0"
-    "@react-google-maps/marker-clusterer" "2.1.0"
+    "@googlemaps/js-api-loader" "1.14.3"
+    "@googlemaps/markerclusterer" "2.0.7"
+    "@react-google-maps/infobox" "2.11.8"
+    "@react-google-maps/marker-clusterer" "2.11.8"
+    "@types/google.maps" "3.49.0"
     invariant "2.2.4"
 
-"@react-google-maps/infobox@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@react-google-maps/infobox/-/infobox-2.1.0.tgz#17d7b2d4bd381333a064ac1cec9cd4d438050216"
-  integrity sha512-rs1UqDWkkLMgoQsFfo72h3vpAQfMnsN0A1H0ZyiQNWyZ2fvqHhRPP40EhmChVsGlyC9L8zoOvplc41eCnylysA==
+"@react-google-maps/infobox@2.11.8":
+  version "2.11.8"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/infobox/-/infobox-2.11.8.tgz#8f1f6c4373ab4b1c5b69747c5f3bc1ea21d7045f"
+  integrity sha512-15y3dniys1Op5HREyLwiJI2pAdeeHRJT5b4WPrS+vyL5KF6iXK1P3y/9bXtnxHiKe2v6iPreaEhR3VgvfRA50Q==
 
-"@react-google-maps/marker-clusterer@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@react-google-maps/marker-clusterer/-/marker-clusterer-2.1.0.tgz#01ef2b42512ac2a7ac74ac0ca8afc43cac2f32c9"
-  integrity sha512-50IuHUxssJocP2+oPnkxAfjjR1Gw14vgREofYBWAi9l8qgizRO5G432SMFR1gEhgRyDcUph7HWOYZJXAT9mMdQ==
+"@react-google-maps/marker-clusterer@2.11.8":
+  version "2.11.8"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/marker-clusterer/-/marker-clusterer-2.11.8.tgz#9b830b405cc203b305ac6f771da2e307ad30515e"
+  integrity sha512-OEcdbTXEgPwdpGvVuSrhIhjcZPhlzPz2TvaKCBLraf1PKiDyLOPhlTVRlbIziLiu0xN89pJcill1w9UVIVFF+Q==
 
 "@reduxjs/toolkit@^1.5.0":
   version "1.5.0"
@@ -1528,6 +1538,11 @@
   dependencies:
     "@types/minimatch" "*"
     "@types/node" "*"
+
+"@types/google.maps@3.49.0":
+  version "3.49.0"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.49.0.tgz#26fcf3d86ecbc6545db0e6691a434ec8132df48b"
+  integrity sha512-hFGEX4srYvWf2+WiJ7OX2ehgEzx88HcXMBa+RIW8vF3oyPShZ9pcU2ZZAM9oIlomWdJ0pC89ibalJ77ioTGVEA==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.3"
@@ -6667,6 +6682,11 @@ jsprim@^1.2.2:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
+kdbush@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/kdbush/-/kdbush-3.0.0.tgz#f8484794d47004cc2d85ed3a79353dbe0abc2bf0"
+  integrity sha512-hRkd6/XW4HTsA9vjVpY9tuXJYLSlelnkTmVFu4M9/7MIYQtFcHpbugAU7UbOfjOiVSVYl2fqgBuJ32JUmRo5Ew==
+
 killable@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/killable/-/killable-1.0.1.tgz#4c8ce441187a061c7474fb87ca08e2a638194892"
@@ -10023,6 +10043,13 @@ stylehacks@^4.0.0:
     browserslist "^4.0.0"
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
+
+supercluster@^7.1.3:
+  version "7.1.5"
+  resolved "https://registry.yarnpkg.com/supercluster/-/supercluster-7.1.5.tgz#65a6ce4a037a972767740614c19051b64b8be5a3"
+  integrity sha512-EulshI3pGUM66o6ZdH3ReiFcvHpM3vAigyK+vcxdjpJyEbIIrtbmBdY23mGgnI24uXiGFvrGq9Gkum/8U7vJWg==
+  dependencies:
+    kdbush "^3.0.0"
 
 supports-color@^2.0.0:
   version "2.0.0"
