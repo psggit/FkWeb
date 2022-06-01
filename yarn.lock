@@ -4853,10 +4853,10 @@ find-up@^4.0.0, find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-fk-platform-sdk@^1.0.18:
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/fk-platform-sdk/-/fk-platform-sdk-1.0.18.tgz#9fa16bcfdf0b900dbdb91da951a1ce88acb5e8c4"
-  integrity sha512-eyOffqqwdThIUtDaRvWOIJf0ySRPp5zkunFacAebEU78cBGbJOsQ3fmBnaqOCzooEkG/vY8384elrF5/zrBQ+A==
+fk-platform-sdk@^1.0.20:
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/fk-platform-sdk/-/fk-platform-sdk-1.0.20.tgz#31bd7cdbf865e0c6659927977e18987324b74738"
+  integrity sha512-D4XD1QykYFRZ/C+kUAgrhWmFd15+0a2RlAnchXUorU8w1lhgyi6auQc5LMUnCV2DM3Wuu4kBQz5cO/CTFcmByQ==
   dependencies:
     tcs-instanceqm "1.0.3"
 
